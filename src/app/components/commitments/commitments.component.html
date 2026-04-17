@@ -1,0 +1,403 @@
+<!-- commitments.component.html - Enhanced Modern Design -->
+<div class="container-fluid" dir="rtl">
+  <!-- Main Commitments Section -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card text-white mb-4">
+        <div class="card-body alert alert-primary">
+          <div class="card-header">
+            <span>
+              <i class="bi bi-credit-card me-3"></i>
+              חובות והתחייבויות
+            </span>
+            <i class="fs-1 text-success fa fa-plus" (click)="AddRow()" title="הוסף חוב חדש"></i>
+          </div>
+          
+          <div class="table-responsive table-striped">
+            <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-center text-success col-md-2 blockquote fw-bold fs-5">
+                    <i class="bi bi-person-fill me-2"></i>
+                    מי המלווה?
+                  </th>
+                  <th scope="col" class="text-center text-success col-md-2 blockquote fw-bold fs-5"
+                      data-bs-toggle="tooltip" 
+                      data-bs-custom-class="custom-tooltip" 
+                      autocomplete="off"
+                      data-bs-title="מתי נלקחה ההלוואה" 
+                      data-bs-placement="right">
+                    <i class="bi bi-calendar3 me-2 mx-1"></i>
+                    תאריך ביצוע
+                  </th>
+                  <th scope="col" class="text-center text-success col-md-1 blockquote fw-bold fs-5">
+                    <i class="bi bi-cash-stack me-2"></i>
+                    סכום מקורי
+                  </th>
+                  <th scope="col" class="text-center text-success col-md-1 blockquote fw-bold fs-5">
+                    <i class="bi bi-currency-dollar me-2"></i>
+                    סכום עדכני
+                  </th>
+                  <th scope="col" class="text-center text-success col-md-1 blockquote fw-bold fs-5">
+                    <i class="bi bi-arrow-repeat me-2"></i>
+                    תשלום חודשי
+                  </th>
+                  <th scope="col" class="text-center text-success col-md-2 blockquote fw-bold fs-5">
+                    <i class="bi bi-calendar-check me-2"></i>
+                    מועד סיום
+                  </th>
+                  <th scope="col" class="text-center text-success col-md-1 blockquote fw-bold fs-5"
+                      data-bs-toggle="tooltip" 
+                      data-bs-custom-class="custom-tooltip" 
+                      autocomplete="off"
+                      data-bs-title="הריבית האפקטיבית על ההלוואה" 
+                      data-bs-placement="right">
+                    <i class="bi bi-percent me-2 mx-1"></i>
+                    % ריבית
+                  </th>
+                  <th scope="col" class="text-center text-success col-md-2 blockquote fw-bold fs-5">
+                    <i class="bi bi-chat-text me-2"></i>
+                    הערות
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor='let commitment of this.generalInfoService.AllInfo.CommitmentsViewInfo.CommitmentsRows; let i = index'>
+                  <tr>
+                    <!-- Lender -->
+                    <td>
+                      <input type="text" 
+                             name="lender-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold fs-5 text-info" 
+                             id="lender-{{i+1}}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.CommitmentsViewInfo.CommitmentsRows[i].TheLender"
+                             placeholder="שם המלווה">
+                    </td>
+                    
+                    <!-- Execution Date -->
+                    <td>
+                      <input type="text" 
+                             name="execution-date-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-center fs-5 custom-red-text" 
+                             id="execution-date-{{i+1}}"
+                             style="color: limegreen"
+                             [(ngModel)]="this.generalInfoService.AllInfo.CommitmentsViewInfo.CommitmentsRows[i].ExecutionDate"
+                             placeholder="תאריך">
+                    </td>
+                    
+                    <!-- Original Amount -->
+                    <td>
+                      <input type="text" 
+                             name="original-amount-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-center fs-5 custom-red-text" 
+                             numbersOnly
+                             id="original-amount-{{i+1}}"
+                             style="color: limegreen"
+                             [(ngModel)]="this.generalInfoService.AllInfo.CommitmentsViewInfo.CommitmentsRows[i].OriginalAmount"
+                             placeholder="0">
+                    </td>
+                    
+                    <!-- Current Amount -->
+                    <td>
+                      <input type="text" 
+                             name="current-amount-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-center fs-5 custom-red-text" 
+                             numbersOnly
+                             id="current-amount-{{i+1}}"
+                             style="color: limegreen"
+                             [(ngModel)]="this.generalInfoService.AllInfo.CommitmentsViewInfo.CommitmentsRows[i].CurrAmount"
+                             placeholder="0">
+                    </td>
+                    
+                    <!-- Monthly Payment -->
+                    <td>
+                      <input type="text" 
+                             name="monthly-payment-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-center fs-5 custom-red-text" 
+                             numbersOnly
+                             id="monthly-payment-{{i+1}}"
+                             style="color: limegreen"
+                             [(ngModel)]="this.generalInfoService.AllInfo.CommitmentsViewInfo.CommitmentsRows[i].MonthlyPayment"
+                             placeholder="0">
+                    </td>
+                    
+                    <!-- End Date (Calculated) -->
+                    <td>
+                      <input type="text" 
+                             name="end-date-{{i+1}}" 
+                             autocomplete="off" 
+                             disabled
+                             class="form-control fw-bold custom-red-bg text-white text-center fs-5"
+                             id="end-date-{{i+1}}" 
+                             style="color: limegreen"
+                             [value]="this.generalInfoService.AllInfo.CommitmentsViewInfo.CommitmentsRows[i].CalcEndDate()">
+                    </td>
+                    
+                    <!-- Interest Rate -->
+                    <td>
+                      <input type="text" 
+                             name="interest-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-center fs-5 custom-red-text" 
+                             numbersOnly
+                             [field]="this.generalInfoService.AllInfo.CommitmentsViewInfo.CommitmentsRows[i].Interest"
+                             id="interest-{{i+1}}"
+                             style="color: limegreen"
+                             [(ngModel)]="this.generalInfoService.AllInfo.CommitmentsViewInfo.CommitmentsRows[i].Interest"
+                             placeholder="0">
+                    </td>
+                    
+                    <!-- Comments -->
+                    <td>
+                      <input type="text" 
+                             name="comment-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-info align-middle fs-5" 
+                             id="comment-{{i+1}}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.CommitmentsViewInfo.CommitmentsRows[i].Comment"
+                             placeholder="הערות נוספות">
+                    </td>
+                  </tr>
+                </ng-container>
+                
+                <!-- Summary Row -->
+                <tr class="summary-row">
+                  <td>
+                    <input type="text" 
+                           disabled 
+                           class="form-control fw-bold  fw-bold fs-5"
+                           value="סיכום ביניים"
+                           style="background-color: red; color: white;">
+                  </td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <input type="text" 
+                           disabled
+                           class="form-control fw-bold text-center fs-5"
+                           style="background-color: red; color: white;"
+                           [value]="CalcAmounts() | currency:'ILS':'symbol':'.0'">
+                  </td>
+                  <td>
+                    <input type="text" 
+                           disabled
+                           class="form-control fw-bold text-center fs-5"
+                           style="background-color: red; color: white;"
+                           [value]="CalcMonthlyPayments() | currency:'ILS':'symbol':'.0'">
+                  </td>
+                  <td>
+                    <input type="text" 
+                           disabled
+                           class="form-control fw-bold text-center fs-5"
+                           style="background-color: red; color: white;"
+                           [value]="CalcMaxYearsPayments()">
+                  </td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <!-- Liquidation Strategy Cards -->
+          <ng-container *ngFor='let step of [].constructor(this.generalInfoService.AllInfo.CommitmentsViewInfo.GetNumOfCommitments()); let i = index'>
+            <div class="card text-white mb-3 mt-3 mx-3 col-xl-6 alert alert-primary liquidation-card">
+              <div class="card-body alert alert-info">
+                <div class="card-header fs-1 blockquote fw-bold" style="text-align: right;">
+                  <i class="bi bi-diagram-3 me-2"></i>
+                  שלב {{i + 1}} - אסטרטגיית פירוק
+                  <div class="row">
+                    <div class="col-xl-12">
+                      <div class="table-responsive table-striped">
+                        <table class="table table-borderless">
+                          <thead>
+                            <tr>
+                              <th scope="col" class="text-center text-success col-md-3 blockquote fw-bold fs-5">
+                                <i class="bi bi-person-fill me-2"></i>
+                                מי המלווה?
+                              </th>
+                              <th scope="col" class="text-center text-success col-md-3 blockquote fw-bold fs-5">
+                                <i class="bi bi-currency-dollar me-2"></i>
+                                סכום עדכני
+                              </th>
+                              <th scope="col" class="text-center text-success col-md-3 blockquote fw-bold fs-5">
+                                <i class="bi bi-arrow-repeat me-2"></i>
+                                תשלום חודשי
+                              </th>
+                              <th scope="col" class="text-center text-success col-md-3 blockquote fw-bold fs-5">
+                                <i class="bi bi-calendar-check me-2"></i>
+                                מועד סיום
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <ng-container *ngFor='let commitment of [].constructor(this.generalInfoService.AllInfo.CommitmentsViewInfo.GetNumOfCommitments()); let j = index'>
+                              <tr>
+                                <td>
+                                  <input type="text" 
+                                         name="liquidation-lender-{{i+1}}-{{j+1}}" 
+                                         autocomplete="off"
+                                         class="form-control fw-bold fs-5 col-xl-3 text-info blockquote"
+                                         id="liquidation-lender-{{i+1}}-{{j+1}}"
+                                         [(ngModel)]="this.generalInfoService.AllInfo.CommitmentsViewInfo.LiquidationOfCommitments.LiquidationOfCommitmentsRows[i][j].TheLender"
+                                         placeholder="שם המלווה">
+                                </td>
+                                <td>
+                                  <input type="text" 
+                                         name="liquidation-amount-{{i+1}}-{{j+1}}" 
+                                         autocomplete="off"
+                                         class="form-control fw-bold text-center col-xl-3 fs-5 blockquote text-primary"
+                                         numbersOnly 
+                                         id="liquidation-amount-{{i+1}}-{{j+1}}"
+                                         [(ngModel)]="this.generalInfoService.AllInfo.CommitmentsViewInfo.LiquidationOfCommitments.LiquidationOfCommitmentsRows[i][j].CurrAmount"
+                                         placeholder="0">
+                                </td>
+                                <td>
+                                  <input type="text" 
+                                         name="liquidation-payment-{{i+1}}-{{j+1}}" 
+                                         autocomplete="off"
+                                         class="form-control fw-bold text-center fs-5 col-xl-3 blockquote text-primary"
+                                         numbersOnly 
+                                         id="liquidation-payment-{{i+1}}-{{j+1}}"
+                                         [(ngModel)]="this.generalInfoService.AllInfo.CommitmentsViewInfo.LiquidationOfCommitments.LiquidationOfCommitmentsRows[i][j].MonthlyPayment"
+                                         placeholder="0">
+                                </td>
+                                <td>
+                                  <input type="text" 
+                                         name="liquidation-end-date-{{i+1}}-{{j+1}}" 
+                                         autocomplete="off"
+                                         class="form-control fw-bold text-primary text-center col-xl-3 blockquote align-middle fs-5"
+                                         id="liquidation-end-date-{{i+1}}-{{j+1}}"
+                                         [(ngModel)]="this.generalInfoService.AllInfo.CommitmentsViewInfo.LiquidationOfCommitments.LiquidationOfCommitmentsRows[i][j].EndDate"
+                                         placeholder="תאריך סיום">
+                                </td>
+                              </tr>
+                            </ng-container>
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Input Section for Additional Payment -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="input-section">
+        <div class="row align-items-center">
+          <div class="col-xl-6 col-md-8">
+            <h3 class="input-title">
+              <i class="bi bi-plus-circle-fill me-3"></i>
+              סכום רצוי להחזר החודשי
+            </h3>
+          </div>
+          <div class="col-xl-3 col-md-4">
+            <input type="text" 
+                   name="additional-payment" 
+                   autocomplete="off"
+                   class="form-control fw-bold text-center fs-5 blockquote text-primary" 
+                   numbersOnly
+                   id="additional-payment"
+                   [(ngModel)]="this.generalInfoService.AllInfo.CommitmentsViewInfo.LiquidationOfCommitments.Add2Payment"
+                   placeholder="סכום נוסף">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary Sections -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="summary-section">
+        <h1 class="summary-title">
+          <i class="bi bi-exclamation-triangle me-3"></i>
+          סה"כ חובות
+        </h1>
+        <div class="summary-value">
+          <span class="badge custom-red-bg">
+            <i class="bi bi-currency-shekel me-2"></i>
+            {{CalcAmounts() | currency:'ILS':'symbol':'.0'}}
+          </span>
+        </div>
+        
+        <!-- Additional Info Cards -->
+        <div class="info-cards-grid">
+          <div class="info-card-small">
+            <div class="info-icon debt-icon">
+              <i class="bi bi-credit-card"></i>
+            </div>
+            <div class="info-content">
+              <h4>סה"כ חובות נוכחיים</h4>
+              <p class="debt-amount">{{CalcAmounts() | currency:'ILS':'symbol':'.0'}}</p>
+            </div>
+          </div>
+          
+          <div class="info-card-small">
+            <div class="info-icon payment-icon">
+              <i class="bi bi-arrow-repeat"></i>
+            </div>
+            <div class="info-content">
+              <h4>תשלום חודשי כולל</h4>
+              <p class="payment-amount">{{CalcMonthlyPayments() | currency:'ILS':'symbol':'.0'}}</p>
+            </div>
+          </div>
+          
+          <div class="info-card-small">
+            <div class="info-icon debt-icon">
+              <i class="bi bi-calendar-x"></i>
+            </div>
+            <div class="info-content">
+              <h4>תקופת החזר מקסימלית</h4>
+              <p class="debt-amount">{{CalcMaxYearsPayments()}} שנים</p>
+            </div>
+          </div>
+          
+          <div class="info-card-small">
+            <div class="info-icon optimization-icon">
+              <i class="bi bi-graph-down-arrow"></i>
+            </div>
+            <div class="info-content">
+              <h4>חיסכון לאחר התייעלות</h4>
+              <p class="optimization-amount">{{this.generalInfoService.AllInfo.CommitmentsViewInfo.BuildingASstrategyOfLiquidationOfCommitments() | currency:'ILS':'symbol':'.0'}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Optimization Result Section -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="input-section">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-xl-6 col-md-8 text-center">
+            <h3 class="input-title">
+              <i class="bi bi-check-circle-fill me-3"></i>
+              סיום חובות לאחר התייעלות
+            </h3>
+          </div>
+          <div class="col-xl-4 col-md-4 text-center">
+            <span class="fs-2 badge bg-lim-success">
+              <i class="bi bi-currency-shekel me-2"></i>
+              {{this.generalInfoService.AllInfo.CommitmentsViewInfo.BuildingASstrategyOfLiquidationOfCommitments() | currency:'ILS':'symbol':'.0'}}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <system.webServer>
+
+    <rewrite>
+
+      <!-- Outbound Rule: מוסיף HSTS רק ב־HTTPS:8443 -->
+      <outboundRules>
+        <rule name="Add HSTS on HTTPS:8443 only" preCondition="IsHttps8443">
+          <match serverVariable="RESPONSE_Strict-Transport-Security" pattern=".*" />
+          <!-- שנה max-age לפי הצורך (כאן: שנה) -->
+          <action type="Rewrite" value="max-age=31536000" />
+        </rule>
+        <preConditions>
+          <preCondition name="IsHttps8443">
+            <add input="{HTTPS}" pattern="on" />
+            <add input="{SERVER_PORT}" pattern="^8443$" />
+          </preCondition>
+        </preConditions>
+      </outboundRules>
+
+      <rules>
+
+        <!-- ACME HTTP-01 (Let's Encrypt) -->
+        <rule name="ACME HTTP-01" stopProcessing="true">
+          <match url="^\.well-known/acme-challenge/.*$" />
+          <action type="None" />
+        </rule>
+
+        <!-- 1) הפניה מכל HTTP ל־HTTPS:8443 -->
+        <rule name="Redirect HTTP to HTTPS:8443" stopProcessing="true">
+          <match url="(.*)" />
+          <conditions logicalGrouping="MatchAll">
+            <add input="{HTTPS}" pattern="off" ignoreCase="true" />
+          </conditions>
+          <!-- בפרודקשן מומלץ redirectType="Permanent" או 308 -->
+          <action type="Redirect"
+                  url="https://shilmanlior2608.ddns.net:8443/{R:1}"
+                  redirectType="Permanent"
+                  appendQueryString="true" />
+        </rule>
+
+        <!-- 2) API Proxy -->
+        <rule name="API Proxy" stopProcessing="true">
+          <match url="^api/(.*)$" />
+          <action type="Rewrite" url="http://127.0.0.1:8000/api/{R:1}" />
+        </rule>
+
+        <!-- 3) אם מישהו מגיע ב־HTTPS לא בפורט 8443 → ננתב ל־8443 -->
+        <rule name="Enforce HTTPS 8443" stopProcessing="true">
+          <match url="(.*)" />
+          <conditions logicalGrouping="MatchAll">
+            <add input="{HTTPS}" pattern="on" ignoreCase="true" />
+            <add input="{SERVER_PORT}" pattern="^8443$" negate="true" />
+          </conditions>
+          <action type="Redirect"
+                  url="https://shilmanlior2608.ddns.net:8443/{R:1}"
+                  redirectType="Permanent"
+                  appendQueryString="true" />
+        </rule>
+
+        <!-- 4) Angular SPA fallback -->
+        <rule name="Angular SPA Routes" stopProcessing="true">
+          <match url=".*" />
+          <conditions logicalGrouping="MatchAll">
+            <add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true" />
+            <add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true" />
+          </conditions>
+          <action type="Rewrite" url="index.html" />
+        </rule>
+
+      </rules>
+    </rewrite>
+
+    <!-- כותרות אבטחה -->
+    <httpProtocol>
+      <customHeaders>
+        <!-- אל תשלח HSTS מכאן, זה נעשה ע״י Outbound Rule -->
+        <remove name="Strict-Transport-Security" />
+
+        <!-- CSP – בפרודקשן שקול לעבור מ־Report-Only ל־ENFORCE -->
+        <add name="Content-Security-Policy"
+             value="default-src 'self';
+                    script-src 'self';
+                    style-src 'self' 'unsafe-inline';
+                    img-src 'self' data:;
+                    font-src 'self';
+                    connect-src 'self' https:;
+                    frame-ancestors 'self' https://portal.shilmanlior2608.ddns.net;
+                    object-src 'none';
+                    base-uri 'self';
+                    form-action 'self';
+                    upgrade-insecure-requests;" />
+
+        <add name="X-Content-Type-Options" value="nosniff" />
+        <add name="Referrer-Policy" value="strict-origin-when-cross-origin" />
+        <add name="Permissions-Policy"
+             value="geolocation=(), microphone=(), camera=(), fullscreen=(self)" />
+        <remove name="X-Frame-Options" />
+      </customHeaders>
+    </httpProtocol>
+
+    <!-- MIME types -->
+    <staticContent>
+      <remove fileExtension=".json" />
+      <mimeMap fileExtension=".json" mimeType="application/json" />
+      <remove fileExtension=".webmanifest" />
+      <mimeMap fileExtension=".webmanifest" mimeType="application/manifest+json" />
+      <remove fileExtension=".wasm" />
+      <mimeMap fileExtension=".wasm" mimeType="application/wasm" />
+      <remove fileExtension=".mjs" />
+      <mimeMap fileExtension=".mjs" mimeType="application/javascript" />
+    </staticContent>
+
+    <!-- דחיסה -->
+    <httpCompression>
+      <dynamicTypes>
+        <add mimeType="application/javascript" enabled="true" />
+        <add mimeType="text/css" enabled="true" />
+        <add mimeType="application/json" enabled="true" />
+        <add mimeType="image/svg+xml" enabled="true" />
+      </dynamicTypes>
+      <staticTypes>
+        <add mimeType="application/javascript" enabled="true" />
+        <add mimeType="text/css" enabled="true" />
+        <add mimeType="application/json" enabled="true" />
+        <add mimeType="image/svg+xml" enabled="true" />
+      </staticTypes>
+    </httpCompression>
+    <urlCompression doStaticCompression="true" doDynamicCompression="true" />
+
+    <!-- דף ברירת מחדל -->
+    <defaultDocument>
+      <files>
+        <clear />
+        <add value="index.html" />
+      </files>
+    </defaultDocument>
+
+    <directoryBrowse enabled="false" />
+  </system.webServer>
+</configuration>

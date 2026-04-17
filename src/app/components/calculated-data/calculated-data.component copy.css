@@ -1,0 +1,425 @@
+/* calculated-data.component.css - Simple and Effective */
+
+/* ===== Container Base ===== */
+.container-fluid {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 30%, #334155 60%, #475569 100%) !important;
+    min-height: 100vh;
+    padding: 2rem;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    direction: rtl;
+}
+
+/* ===== Row Styling ===== */
+.row {
+    background: transparent !important;
+    margin-bottom: 2rem;
+}
+
+/* ===== Column Styling ===== */
+.col-xl-12,
+.col-xl-8,
+.col-xl-4,
+.col-xl-2,
+.col-xl-1 {
+    background: transparent !important;
+}
+
+/* ===== Card Base Styling ===== */
+.card {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.9) 50%, rgba(71, 85, 105, 0.85) 100%) !important;
+    border: 2px solid rgba(59, 130, 246, 0.3) !important;
+    border-radius: 20px !important;
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.15),
+        0 8px 32px rgba(59, 130, 246, 0.15),
+        0 16px 64px rgba(37, 99, 235, 0.1) !important;
+    backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-bottom: 2rem;
+}
+
+.card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(59, 130, 246, 0.4) !important;
+    box-shadow:
+        0 0 20px rgba(59, 130, 246, 0.3),
+        0 25px 50px -12px rgba(0, 0, 0, 0.7),
+        0 0 40px rgba(37, 99, 235, 0.2) !important;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 30%, #1d4ed8 70%, #1e40af 100%);
+    opacity: 0.08;
+    border-radius: 20px;
+    z-index: -1;
+}
+
+.card-body {
+    background: transparent !important;
+    padding: 2.5rem !important;
+    position: relative;
+    z-index: 1;
+}
+
+/* ===== Header Styling ===== */
+.card-header {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.12) 0%, rgba(37, 99, 235, 0.08) 100%) !important;
+    border-bottom: 2px solid rgba(59, 130, 246, 0.3) !important;
+    color: #f8fafc !important;
+    font-weight: 800 !important;
+    font-size: 2.2rem !important;
+    text-align: center;
+    padding: 1.8rem;
+    margin-bottom: 2rem;
+    border-radius: 16px;
+    backdrop-filter: blur(20px);
+    position: relative;
+    background-clip: padding-box;
+    text-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
+    border: 2px solid rgba(59, 130, 246, 0.3) !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.card-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 30%, #1d4ed8 70%, #1e40af 100%);
+    opacity: 0.1;
+    border-radius: 16px;
+    z-index: -1;
+}
+
+/* ===== Table Styling ===== */
+.table {
+    background: transparent !important;
+    color: #f8fafc !important;
+    border-collapse: separate;
+    border-spacing: 0;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 0 !important;
+}
+
+.table-bordered {
+    border: 2px solid rgba(59, 130, 246, 0.3) !important;
+    border-radius: 16px !important;
+    overflow: hidden;
+}
+
+/* ===== Table Body ===== */
+.table tbody {
+    background: transparent !important;
+}
+
+.table tbody tr {
+    background: transparent !important;
+    border: none !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.table tbody tr:hover {
+    background: rgba(59, 130, 246, 0.1) !important;
+    transform: translateX(3px);
+}
+
+.table tbody td {
+    background: transparent !important;
+    color: #f8fafc !important;
+    font-weight: 600 !important;
+    padding: 1rem !important;
+    border: 1px solid rgba(59, 130, 246, 0.2) !important;
+    vertical-align: middle;
+    position: relative;
+    font-size: 1rem !important;
+}
+
+/* ===== LET ngStyle DO ITS WORK - No CSS Override ===== */
+/* רק נוסיף אפקטים עדינים ללא דריסה של צבעים */
+
+/* עבור טקסט ירוק - נשאיר אותו כמו שהוא רק נוסיף זוהר */
+.table tbody td[style*="limegreen"] {
+    text-shadow: 0 0 8px rgba(50, 205, 50, 0.6) !important;
+    font-weight: 700 !important;
+}
+
+/* עבור רקע ירוק - נשאיר אותו כמו שהוא */
+.table tbody td[style*="background-color: seagreen"] {
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5) !important;
+    font-weight: 800 !important;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(46, 139, 87, 0.3);
+}
+
+/* עבור טקסט לבן - רק נוסיף זוהר עדין */
+.table tbody td[style*="color: white"],
+.table tbody td.text-white {
+    text-shadow: 0 0 8px rgba(248, 250, 252, 0.4) !important;
+}
+
+/* עבור צבעים אחרים - רק נוסיף זוהר עדין */
+.table tbody td.text-warning {
+    text-shadow: 0 0 8px rgba(251, 191, 36, 0.4) !important;
+    font-weight: 700 !important;
+}
+
+.table tbody td.custom-red-text {
+    text-shadow: 0 0 8px rgba(239, 68, 68, 0.4) !important;
+    font-weight: 700 !important;
+}
+
+/* ===== Chart Container ===== */
+.chart-container,
+highcharts-chart {
+    background: transparent !important;
+    border-radius: 16px;
+    padding: 1rem;
+    margin: 1rem 0;
+}
+
+/* ===== Textarea Styling ===== */
+.form-control {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(51, 65, 85, 0.8) 100%) !important;
+    border: 2px solid rgba(59, 130, 246, 0.3) !important;
+    border-radius: 10px !important;
+    color: #f8fafc !important;
+    font-weight: 600 !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    font-size: 0.9rem !important;
+    padding: 1rem !important;
+    line-height: 1.6;
+}
+
+.form-control:focus {
+    border-color: rgba(59, 130, 246, 0.6) !important;
+    box-shadow:
+        0 0 0 3px rgba(59, 130, 246, 0.2),
+        0 0 20px rgba(59, 130, 246, 0.4) !important;
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.9) 100%) !important;
+    outline: none;
+}
+
+textarea.form-control {
+    resize: vertical;
+    min-height: 200px;
+}
+
+/* ===== Enhanced Animations ===== */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes pulseBlue {
+    0%, 100% {
+        box-shadow: 0 4px 20px rgba(59, 130, 246, 0.3), 0 0 30px rgba(59, 130, 246, 0.2);
+    }
+    50% {
+        box-shadow: 0 4px 20px rgba(59, 130, 246, 0.5), 0 0 40px rgba(59, 130, 246, 0.4);
+    }
+}
+
+/* ===== Apply Animations ===== */
+.card {
+    animation: slideInLeft 0.6s ease-out;
+}
+
+.card-header {
+    animation: pulseBlue 4s ease-in-out infinite;
+}
+
+.table {
+    animation: fadeInScale 0.7s ease-out;
+    animation-delay: 0.2s;
+    animation-fill-mode: both;
+}
+
+.table tbody tr {
+    animation: slideInLeft 0.5s ease-out;
+    animation-fill-mode: both;
+}
+
+.table tbody tr:nth-child(1) { animation-delay: 0.1s; }
+.table tbody tr:nth-child(2) { animation-delay: 0.15s; }
+.table tbody tr:nth-child(3) { animation-delay: 0.2s; }
+.table tbody tr:nth-child(4) { animation-delay: 0.25s; }
+.table tbody tr:nth-child(5) { animation-delay: 0.3s; }
+.table tbody tr:nth-child(6) { animation-delay: 0.35s; }
+.table tbody tr:nth-child(7) { animation-delay: 0.4s; }
+.table tbody tr:nth-child(8) { animation-delay: 0.45s; }
+.table tbody tr:nth-child(9) { animation-delay: 0.5s; }
+.table tbody tr:nth-child(10) { animation-delay: 0.55s; }
+
+/* ===== Highcharts Custom Styling ===== */
+.highcharts-container {
+    background: transparent !important;
+}
+
+.highcharts-background {
+    fill: transparent !important;
+}
+
+.highcharts-title {
+    fill: #f8fafc !important;
+}
+
+.highcharts-axis-labels text {
+    fill: #f8fafc !important;
+}
+
+.highcharts-legend-item text {
+    fill: #f8fafc !important;
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 768px) {
+    .container-fluid {
+        padding: 1rem;
+    }
+    
+    .card-header {
+        font-size: 1.8rem !important;
+        padding: 1.5rem;
+    }
+    
+    .table tbody td {
+        font-size: 0.8rem !important;
+        padding: 0.5rem !important;
+    }
+    
+    .form-control {
+        font-size: 0.8rem !important;
+        padding: 0.8rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .card-header {
+        font-size: 1.5rem !important;
+        padding: 1rem;
+    }
+    
+    .table {
+        font-size: 0.7rem !important;
+    }
+    
+    .table tbody td {
+        font-size: 0.7rem !important;
+        padding: 0.3rem !important;
+    }
+}
+
+/* ===== Chart Diagram Styling ===== */
+#diagramChart {
+    background: transparent !important;
+    border-radius: 16px;
+    padding: 1rem;
+}
+
+/* ===== Special Section Highlighting ===== */
+.table tbody tr:has(td[style*="background-color: seagreen"]) {
+    border: 2px solid rgba(34, 197, 94, 0.4) !important;
+    border-radius: 10px !important;
+    box-shadow: 0 0 15px rgba(34, 197, 94, 0.2);
+}
+
+/* ===== Accessibility Enhancements ===== */
+@media (prefers-reduced-motion: reduce) {
+    .card,
+    .card-header,
+    .table,
+    .table tbody tr {
+        animation: none !important;
+    }
+}
+
+@media (prefers-contrast: high) {
+    .table tbody td {
+        border-color: rgba(255, 255, 255, 0.7) !important;
+        color: #E0E0E0 !important;
+    }
+    
+    .card {
+        border-color: rgba(255, 255, 255, 0.5) !important;
+    }
+}
+
+/* ===== Print Styles ===== */
+@media print {
+    .container-fluid {
+        background: white !important;
+        color: black !important;
+    }
+    
+    .card,
+    .table {
+        background: white !important;
+        border: 1px solid #ccc !important;
+        box-shadow: none !important;
+        break-inside: avoid;
+    }
+    
+    .table tbody td {
+        background: white !important;
+        color: black !important;
+        border: 1px solid #ccc !important;
+    }
+    
+    .form-control {
+        background: white !important;
+        color: black !important;
+        border: 1px solid #ccc !important;
+    }
+}
+
+/* ===== Table Enhancements ===== */
+.table tbody td:first-child {
+    border-right: 3px solid rgba(59, 130, 246, 0.4) !important;
+    padding-right: 1.5rem !important;
+}
+
+.table tbody td:last-child {
+    border-left: 3px solid rgba(59, 130, 246, 0.4) !important;
+    padding-left: 1.5rem !important;
+    text-align: left !important;
+}
+
+/* ===== Special Focus States ===== */
+.form-control:focus-visible {
+    outline: 2px solid #3b82f6;
+    outline-offset: 2px;
+}

@@ -1,0 +1,310 @@
+<!-- vehicles.component.html - Enhanced Modern Design -->
+<div class="container-fluid" dir="rtl">
+  <!-- Main Vehicles Section -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card text-white mb-4">
+        <div class="card-body alert alert-primary">
+          <div class="card-header">
+            <span>
+              <i class="bi bi-car-front me-3"></i>
+              נכסים - רכבים
+            </span>
+            <i class="fs-1 text-success fa fa-plus" (click)="AddRow()" title="הוסף רכב חדש"></i>
+          </div>
+          
+          <div class="table-responsive table-striped tbody_div">
+            <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-center text-success col-xl-2 blockquote fw-bold fs-5">
+                    <i class="bi bi-car-front-fill me-2"></i>
+                    סוג הרכב
+                  </th>
+                  <th scope="col" class="text-center text-success col-xl-1 blockquote fw-bold fs-5">
+                    <i class="bi bi-calendar3 me-2"></i>
+                    שנת ייצור
+                  </th>
+                  <th scope="col" class="text-center text-success col-xl-1 blockquote fw-bold fs-5"
+                      data-bs-toggle="tooltip" 
+                      data-bs-custom-class="custom-tooltip" 
+                      autocomplete="off"
+                      data-bs-title="ניתן לקבל לפי מחירון לוי יצחק" 
+                      data-bs-placement="right">
+                    <i class="bi bi-cash-stack me-2"></i>
+                    שווי הרכב
+                  </th>
+                  <th scope="col" class="text-center text-success col-xl-1 blockquote fw-bold fs-5">
+                    <i class="bi bi-speedometer2 me-2"></i>
+                    ק"מ בשנה
+                  </th>
+                  <th scope="col" class="text-center text-success col-xl-1 blockquote fw-bold fs-5">
+                    <i class="bi bi-fuel-pump me-2"></i>
+                    צריכת דלק
+                  </th>
+                  <th scope="col" class="text-center text-success col-xl-1 blockquote fw-bold fs-5">
+                    <i class="bi bi-clipboard-check me-2"></i>
+                    טסט
+                  </th>
+                  <th scope="col" class="text-center text-success col-xl-1 blockquote fw-bold fs-5">
+                    <i class="bi bi-shield-check me-2"></i>
+                    ביטוח
+                  </th>
+                  <th scope="col" class="text-center text-success col-xl-1 blockquote fw-bold fs-5">
+                    <i class="bi bi-wrench me-2"></i>
+                    טיפולים
+                  </th>
+                  <th scope="col" class="text-center text-success col-xl-3 blockquote fw-bold fs-5">
+                    <i class="bi bi-calculator me-2"></i>
+                    ניתוח עלות החזקה
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor='let vehicle of this.generalInfoService.AllInfo.VehiclesViewInfo.VehiclesRows; let i = index'>
+                  <tr>
+                    <!-- Vehicle Type -->
+                    <td>
+                      <input type="text" 
+                             name="vehicle-type-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold fs-5 text-info" 
+                             id="vehicle-type-{{i+1}}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.VehiclesViewInfo.VehiclesRows[i].Description"
+                             placeholder="סוג הרכב (פרטי, מסחרי)">
+                    </td>
+                    
+                    <!-- Year of Production -->
+                    <td>
+                      <input type="text" 
+                             name="vehicle-year-{{i+1}}" 
+                             autocomplete="off"
+                             [field]="this.generalInfoService.AllInfo.VehiclesViewInfo.VehiclesRows[i].YearOfProduction"
+                             class="form-control fw-bold text-center fs-5" 
+                             numbersOnly 
+                             id="vehicle-year-{{i+1}}"
+                             style="color: limegreen"
+                             [(ngModel)]="this.generalInfoService.AllInfo.VehiclesViewInfo.VehiclesRows[i].YearOfProduction"
+                             placeholder="שנה">
+                    </td>
+                    
+                    <!-- Vehicle Worth -->
+                    <td>
+                      <input type="text" 
+                             name="vehicle-worth-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-center fs-5" 
+                             numbersOnly
+                             [field]="this.generalInfoService.AllInfo.VehiclesViewInfo.VehiclesRows[i].VehicleWorth"
+                             id="vehicle-worth-{{i+1}}"
+                             style="color: limegreen"
+                             [(ngModel)]="this.generalInfoService.AllInfo.VehiclesViewInfo.VehiclesRows[i].VehicleWorth"
+                             placeholder="0">
+                    </td>
+                    
+                    <!-- KM Per Year -->
+                    <td>
+                      <input type="text" 
+                             name="vehicle-km-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-center fs-5" 
+                             numbersOnly
+                             [field]="this.generalInfoService.AllInfo.VehiclesViewInfo.VehiclesRows[i].KmPerYear"
+                             id="vehicle-km-{{i+1}}"
+                             style="color: limegreen"
+                             [(ngModel)]="this.generalInfoService.AllInfo.VehiclesViewInfo.VehiclesRows[i].KmPerYear"
+                             placeholder="0">
+                    </td>
+                    
+                    <!-- Fuel Consumption -->
+                    <td>
+                      <input type="text" 
+                             name="vehicle-fuel-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-center fs-5" 
+                             numbersOnly
+                             [field]="this.generalInfoService.AllInfo.VehiclesViewInfo.VehiclesRows[i].FuelConsumption"
+                             id="vehicle-fuel-{{i+1}}"
+                             style="color: limegreen"
+                             [(ngModel)]="this.generalInfoService.AllInfo.VehiclesViewInfo.VehiclesRows[i].FuelConsumption"
+                             placeholder="0">
+                    </td>
+                    
+                    <!-- Test Cost -->
+                    <td>
+                      <input type="text" 
+                             name="vehicle-test-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-center fs-5" 
+                             numbersOnly
+                             [field]="this.generalInfoService.AllInfo.VehiclesViewInfo.VehiclesRows[i].Test"
+                             id="vehicle-test-{{i+1}}"
+                             style="color: limegreen"
+                             [(ngModel)]="this.generalInfoService.AllInfo.VehiclesViewInfo.VehiclesRows[i].Test"
+                             placeholder="0">
+                    </td>
+                    
+                    <!-- Insurance Cost -->
+                    <td>
+                      <input type="text" 
+                             name="vehicle-insurance-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-center fs-5" 
+                             numbersOnly
+                             [field]="this.generalInfoService.AllInfo.VehiclesViewInfo.VehiclesRows[i].Insurance"
+                             id="vehicle-insurance-{{i+1}}"
+                             style="color: limegreen"
+                             [(ngModel)]="this.generalInfoService.AllInfo.VehiclesViewInfo.VehiclesRows[i].Insurance"
+                             placeholder="0">
+                    </td>
+                    
+                    <!-- Maintenance Cost -->
+                    <td>
+                      <input type="text" 
+                             name="vehicle-maintenance-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-center fs-5" 
+                             numbersOnly
+                             [field]="this.generalInfoService.AllInfo.VehiclesViewInfo.VehiclesRows[i].Treatments"
+                             id="vehicle-maintenance-{{i+1}}"
+                             style="color: limegreen"
+                             [(ngModel)]="this.generalInfoService.AllInfo.VehiclesViewInfo.VehiclesRows[i].Treatments"
+                             placeholder="0">
+                    </td>
+                    
+                    <!-- Cost Analysis -->
+                    <td>
+                      <input type="text" 
+                             name="vehicle-analysis-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-info align-middle fs-5" 
+                             id="vehicle-analysis-{{i+1}}"
+                             disabled
+                             [value]="this.generalInfoService.AllInfo.VehiclesViewInfo.VehiclesRows[i].CalcAnalysis(this.generalInfoService.AllInfo.VehiclesViewInfo.PriceOfFuel)"
+                             placeholder="ניתוח עלויות">
+                    </td>
+                  </tr>
+                </ng-container>
+                
+                <!-- Summary Row -->
+                <tr class="summary-row">
+                  <td>
+                    <input type="text" 
+                           disabled 
+                           class="form-control fw-bold  fw-bold fs-5"
+                           value="סיכום ביניים"
+                           [ngClass]="this.generalInfoService.AllInfo.VehiclesViewInfo.VehicleWorths >= 0 ? 'bg-lim-success' : 'custom-red-bg'">
+                  </td>
+                  <td></td>
+                  <td>
+                    <input type="text" 
+                           disabled
+                           class="form-control fw-bold text-center fs-5"
+                           [value]="CalcNetWorths() | currency:'ILS':'symbol':'.0'"
+                           [ngClass]="this.generalInfoService.AllInfo.VehiclesViewInfo.VehicleWorths > 0 ? 'bg-lim-success' : this.generalInfoService.AllInfo.VehiclesViewInfo.VehicleWorths == 0 ? 'bg-dark' : 'custom-red-bg'">
+                  </td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fuel Price Section -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="fuel-price-section">
+        <div class="row align-items-center">
+          <div class="col-xl-6 col-lg-8">
+            <h3 class="fuel-price-title">
+              <i class="bi bi-fuel-pump-fill me-3"></i>
+              מחיר לליטר דלק
+            </h3>
+          </div>
+          <div class="col-xl-2 col-lg-4">
+            <input type="text" 
+                   name="fuel-price" 
+                   autocomplete="off"
+                   class="form-control fw-bold text-center fs-5 fuel-price-input" 
+                   numbersOnly
+                   [field]="this.generalInfoService.AllInfo.VehiclesViewInfo.PriceOfFuel"
+                   id="fuel-price"
+                   style="color: limegreen"
+                   [(ngModel)]="this.generalInfoService.AllInfo.VehiclesViewInfo.PriceOfFuel"
+                   placeholder="מחיר בש״ח">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Final Summary Section -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="summary-section">
+        <h1 class="summary-title">
+          <i class="bi bi-car-front-fill me-3"></i>
+          סה"כ שווי רכבים
+        </h1>
+        <div class="summary-value">
+          <span class="badge" 
+                [ngClass]="this.generalInfoService.AllInfo.VehiclesViewInfo.VehicleWorths >= 0 ? 'bg-lim-success' : 'custom-red-bg'">
+            <i class="bi bi-currency-shekel me-2"></i>
+            {{this.generalInfoService.AllInfo.VehiclesViewInfo.VehicleWorths | currency:'ILS':'symbol':'.0'}}
+          </span>
+        </div>
+        
+        <!-- Additional Info Cards -->
+        <div class="info-cards-grid">
+          <div class="info-card-small">
+            <div class="info-icon vehicle-icon">
+              <i class="bi bi-graph-up"></i>
+            </div>
+            <div class="info-content">
+              <h4>סה"כ שווי רכבים</h4>
+              <p class="vehicle-value">{{CalcNetWorths() | currency:'ILS':'symbol':'.0'}}</p>
+            </div>
+          </div>
+          
+          <div class="info-card-small">
+            <div class="info-icon cost-icon">
+              <i class="bi bi-credit-card"></i>
+            </div>
+            <div class="info-content">
+              <h4>עלות החזקה שנתית</h4>
+              <p class="cost-text">מחושב לפי נתונים</p>
+            </div>
+          </div>
+          
+          <div class="info-card-small">
+            <div class="info-icon vehicle-icon">
+              <i class="bi bi-fuel-pump"></i>
+            </div>
+            <div class="info-content">
+              <h4>מחיר דלק נוכחי</h4>
+              <p class="vehicle-value">{{this.generalInfoService.AllInfo.VehiclesViewInfo.PriceOfFuel | currency:'ILS':'symbol':'.2'}} לליטר</p>
+            </div>
+          </div>
+          
+          <div class="info-card-small">
+            <div class="info-icon vehicle-icon">
+              <i class="bi bi-car-front"></i>
+            </div>
+            <div class="info-content">
+              <h4>מספר רכבים</h4>
+              <p class="vehicle-value">{{this.generalInfoService.AllInfo.VehiclesViewInfo.VehiclesRows.length || 0}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

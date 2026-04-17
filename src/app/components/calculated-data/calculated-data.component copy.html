@@ -1,0 +1,509 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card text-white mb-3">
+        <div class="card-body">
+          <div class="card-header fs-1 text-center blockquote fw-bold">
+            <i class="bi bi-graph-up-arrow me-3" style="color: #60a5fa; filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.5));"></i>
+            לאן זורם הכסף
+          </div>
+          
+          <div class="container-fluid">
+            <div class="row">
+              <div class="card-body">
+                <table class="table table-bordered fs-4">
+                  <tbody>
+                    <tr>
+                      <td colspan="3" class="fs-2 fw-bold col-xl-12" style="text-align: center !important;">
+                        <div style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(51, 65, 85, 0.8) 100%); border-radius: 16px; padding: 1rem; border: 2px solid rgba(59, 130, 246, 0.3);">
+                          <highcharts-chart [Highcharts]="highcharts" [(update)]="updateFlag"
+                            style="width: 100%; height: 550px; display: block;"
+                            [options]="chartOptions"></highcharts-chart>
+                        </div>
+                      </td>
+                    </tr>
+                    
+                    <tr>
+                      <td colspan="3" class="fs-2 fw-bold col-xl-12"
+                        style="text-align: center !important;background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); color: #f8fafc;">
+                        <i class="bi bi-info-circle me-2"></i>
+                        כללי
+                      </td>
+                    </tr>
+                    
+                    <tr *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1 != '' && this.generalInfoService.AllInfo.PersonalDataViewInfo.Age1 != '' && this.generalInfoService.AllInfo.PersonalDataViewInfo.RetirementAge1 != ''">
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-calendar-minus me-2" style="color: #60a5fa;"></i>
+                        שנים שנותרו לפנסיה ({{this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1}})
+                      </td>
+                      <td colspan="2" class="text-white col-xl-4" style="text-align: start;">
+                        {{CalcYearsLeftForRetirement1()}}
+                      </td>
+                    </tr>
+                    
+                    <tr *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Marride && this.generalInfoService.AllInfo.PersonalDataViewInfo.Name2 != '' && this.generalInfoService.AllInfo.PersonalDataViewInfo.Age2 != '' && this.generalInfoService.AllInfo.PersonalDataViewInfo.RetirementAge2 != ''">
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-calendar-minus me-2" style="color: #60a5fa;"></i>
+                        שנים שנותרו לפנסיה ({{this.generalInfoService.AllInfo.PersonalDataViewInfo.Name2}})
+                      </td>
+                      <td colspan="2" class="text-white col-xl-4" style="text-align: start;">
+                        {{CalcYearsLeftForRetirement2()}}
+                      </td>
+                    </tr>
+                    
+                    <tr *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Marride && this.generalInfoService.AllInfo.PersonalDataViewInfo.Name2 != '' && this.generalInfoService.AllInfo.PersonalDataViewInfo.Age2 != ''">
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-hourglass-split me-2" style="color: #60a5fa;"></i>
+                        שנים שנותרו עד גיל 90 של {{this.generalInfoService.AllInfo.PersonalDataViewInfo.Name2}}
+                      </td>
+                      <td colspan="2" class="text-white col-xl-4" style="text-align: start;">
+                        {{CalcYearsLeftFor90Retirement2()}}
+                      </td>
+                    </tr>
+                    
+                    <tr *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1 != '' && this.generalInfoService.AllInfo.PersonalDataViewInfo.Age1 != ''">
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-hourglass-split me-2" style="color: #60a5fa;"></i>
+                        שנים שנותרו עד גיל 90 של {{this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1}}
+                      </td>
+                      <td colspan="2" class="text-white col-xl-4" style="text-align: start;">
+                        {{CalcYearsLeftFor90Retirement1()}}
+                      </td>
+                    </tr>
+                    
+                    <tr>
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-percent me-2" style="color: #60a5fa;"></i>
+                        ריבית חודשית לביטוחים
+                      </td>
+                      <td colspan="2" class="text-white col-xl-4" style="text-align: start;">
+                        {{CalcYearlyInterestRate() | percent:'.2'}}
+                      </td>
+                    </tr>
+                    
+                    <tr>
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-graph-up me-2" style="color: #60a5fa;"></i>
+                        דירוג אשראי
+                      </td>
+                      <td colspan="2" class="col-xl-4" style="text-align: start;" [ngStyle]="{'color': this.getStyleFromVal(this.generalInfoService.AllInfo.PersonalDataViewInfo.CreditRating)}">
+                        {{this.generalInfoService.AllInfo.PersonalDataViewInfo.CreditRating}}
+                      </td>
+                    </tr>
+
+                    <!-- הכנסות -->
+                    <tr>
+                      <td colspan="3" class="fs-2 fw-bold col-xl-12"
+                        style="text-align: center !important;background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%); color: #f8fafc;">
+                        <i class="bi bi-cash-stack me-2"></i>
+                        הכנסות
+                      </td>
+                    </tr>
+                    
+                    <tr *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1 != '' && this.generalInfoService.AllInfo.IncomesViewInfo.Income[0] != ''">
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-wallet2 me-2" style="color: #22c55e;"></i>
+                        נטו אמיתי
+                      </td>
+                      <td colspan="2" class="fw-bold col-xl-4" style="color: limegreen;text-align: start;">
+                        {{CalcSumIncomes() | currency:'ILS':'symbol':'.0'}}
+                      </td>
+                    </tr>
+                    
+                    <tr *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1 != '' && this.generalInfoService.AllInfo.IncomesViewInfo.Income[0] == ''">
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-wallet2 me-2" style="color: #94a3b8;"></i>
+                        נטו אמיתי
+                      </td>
+                      <td colspan="2" class="fw-bold text-white col-xl-4" style="text-align: start;">אין</td>
+                    </tr>
+                    
+                    <tr *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1 != '' && CalcPensionProvisions() != 0">
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-piggy-bank me-2" style="color: #f59e0b;"></i>
+                        הפרשות פנסיוניות
+                      </td>
+                      <td colspan="2" class="text-warning fw-bold col-xl-4" style="text-align: start;">
+                        {{CalcPensionProvisions() | currency:'ILS':'symbol':'.0'}}
+                      </td>
+                    </tr>
+                    
+                    <tr *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1 != '' && CalcPensionProvisions() == 0">
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-piggy-bank me-2" style="color: #94a3b8;"></i>
+                        הפרשות פנסיוניות
+                      </td>
+                      <td colspan="2" class="fw-bold text-white col-xl-4" style="text-align: start;">אין</td>
+                    </tr>
+                    
+                    <tr *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1 != '' && CalcProvisionsForFunds() != 0">
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-bank2 me-2" style="color: #f59e0b;"></i>
+                        הפרשות לקרנות
+                      </td>
+                      <td colspan="2" class="text-warning fw-bold col-xl-4" style="text-align: start;">
+                        {{CalcProvisionsForFunds() | currency:'ILS':'symbol':'.0'}}
+                      </td>
+                    </tr>
+                    
+                    <tr *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1 != '' && CalcProvisionsForFunds() == 0">
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-bank2 me-2" style="color: #94a3b8;"></i>
+                        הפרשות לקרנות
+                      </td>
+                      <td colspan="2" class="fw-bold col-xl-4" style="text-align: start;">אין</td>
+                    </tr>
+                    
+                    <tr *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1 != '' && this.generalInfoService.AllInfo.IncomesViewInfo.Income[0] != '0'">
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-bank me-2" style="color: #22c55e;"></i>
+                        נטו לבנק
+                      </td>
+                      <td colspan="2" class="fw-bold col-xl-4" style="color: limegreen;text-align: start;">
+                        {{CalcSumNetIncomes() | currency:'ILS':'symbol':'.0'}}
+                      </td>
+                    </tr>
+                    
+                    <tr *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1 != '' && this.generalInfoService.AllInfo.IncomesViewInfo.Income[0] == '0'">
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-bank me-2" style="color: #94a3b8;"></i>
+                        נטו לבנק
+                      </td>
+                      <td colspan="2" class="fw-bold text-white col-xl-4" style="text-align: start;">אין</td>
+                    </tr>
+                    
+                    <tr *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1 != '' && CalcIncomesEx() != '0'">
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-plus-circle me-2" style="color: #22c55e;"></i>
+                        הכנסות נוספות
+                      </td>
+                      <td colspan="2" class="fw-bold col-xl-4" style="color: limegreen;text-align: start;">
+                        {{CalcIncomesEx() | currency:'ILS':'symbol':'.0'}}
+                      </td>
+                    </tr>
+                    
+                    <!-- Continue pattern for remaining rows... -->
+                    
+                    <tr>
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-calculator me-2" style="color: #22c55e;"></i>
+                        סה"כ הכנסות
+                      </td>
+                      <td colspan="2" class="financial-positive fw-bold col-xl-4" style="text-align: start;">
+                        {{CalcSumAllIncomes() | currency:'ILS':'symbol':'.0'}}
+                      </td>
+                    </tr>
+
+                    
+                    <tr *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1 != '' && this.generalInfoService.AllInfo.FixedExpensesViewInfo.Expenses != ''">
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-receipt me-2" style="color: #ef4444;"></i>
+                        קבועות
+                      </td>
+                      <td colspan="2" class="financial-negative fw-bold col-xl-4" style="text-align: start;">
+                        {{CalcSumExpenses() | currency:'ILS':'symbol':'.0'}}
+                      </td>
+                    </tr>
+                    
+                    <tr *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1 != '' && this.generalInfoService.AllInfo.FixedExpensesViewInfo.Expenses == ''">
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-receipt me-2" style="color: #94a3b8;"></i>
+                        קבועות
+                      </td>
+                      <td colspan="2" class="financial-neutral fw-bold col-xl-4" style="text-align: start;">אין</td>
+                    </tr>
+                    
+                    <tr *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1 != '' && this.generalInfoService.AllInfo.VariableExpensesViewInfo.DiffExpenses.toFixed(0).toString() != ''">
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-cart me-2" style="color: #ef4444;"></i>
+                        שוטפות
+                      </td>
+                      <td colspan="2" class="financial-negative fw-bold col-xl-4" style="text-align: start;">
+                        {{CalcSumVariableExpenses() | currency:'ILS':'symbol':'.0'}}
+                      </td>
+                    </tr>
+                    
+                    <tr *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1 != '' && this.generalInfoService.AllInfo.VariableExpensesViewInfo.DiffExpenses.toFixed(0).toString() == ''">
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-cart me-2" style="color: #94a3b8;"></i>
+                        שוטפות
+                      </td>
+                      <td colspan="2" class="financial-neutral fw-bold col-xl-4" style="text-align: start;">אין</td>
+                    </tr>
+                    
+                    <tr>
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-calculator me-2" style="color: #ef4444;"></i>
+                        סה"כ הוצאות
+                      </td>
+                      <td dir="rtl" class="financial-negative fw-bold col-xl-2" style="text-align: start;">
+                        {{CalcSumAllExpenses() | currency:'ILS':'symbol':'.0'}}
+                      </td>
+                      <td dir="rtl" class="financial-negative fw-bold col-xl-2" style="text-align: start;">
+                        {{CalcSumExpensesPercents() | percent:'2.2-2'}}
+                      </td>
+                    </tr>
+
+                    <!-- פנסיה -->
+                    <tr>
+                      <td colspan="3" class="fs-2 fw-bold col-xl-12"
+                        style="text-align: center !important;background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%); color: #f8fafc;">
+                        <i class="bi bi-shield-check me-2"></i>
+                        פנסיה
+                      </td>
+                    </tr>
+                    
+                    <tr *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1 != '' && CalcManagerInsurance() != 0">
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-briefcase me-2" style="color: #22c55e;"></i>
+                        ביטוחי מנהלים
+                      </td>
+                      <td colspan="2" class="financial-positive fw-bold col-xl-4" style="text-align: start;">
+                        {{CalcManagerInsurance() | currency:'ILS':'symbol':'.0'}}
+                      </td>
+                    </tr>
+                    
+                    <tr *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1 != '' && CalcManagerInsurance() == 0">
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-briefcase me-2" style="color: #94a3b8;"></i>
+                        ביטוחי מנהלים
+                      </td>
+                      <td colspan="2" class="financial-neutral fw-bold col-xl-4" style="text-align: start;">אין</td>
+                    </tr>
+                    
+                    <tr *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1 != '' && CalcPensia() != 0">
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-bank me-2" style="color: #22c55e;"></i>
+                        קרנות פנסיה
+                      </td>
+                      <td colspan="2" class="financial-positive fw-bold col-xl-4" style="text-align: start;">
+                        {{CalcPensia() | currency:'ILS':'symbol':'.0'}}
+                      </td>
+                    </tr>
+                    
+                    <tr *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1 != '' && CalcPensia() == 0">
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-bank me-2" style="color: #94a3b8;"></i>
+                        קרנות פנסיה
+                      </td>
+                      <td colspan="2" class="financial-neutral fw-bold col-xl-4" style="text-align: start;">אין</td>
+                    </tr>
+
+                    <!-- חובות -->
+                    <tr>
+                      <td colspan="3" class="fs-2 fw-bold col-xl-12"
+                        style="text-align: center !important;background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); color: #f8fafc;">
+                        <i class="bi bi-exclamation-triangle me-2"></i>
+                        חובות
+                      </td>
+                    </tr>
+                    
+                    <tr *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1 != '' && this.generalInfoService.AllInfo.FixedExpensesViewInfo.Expenses != '' && CalcAmounts() !='0'">
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-credit-card-2-back me-2" style="color: #ef4444;"></i>
+                        סה"כ חובות
+                      </td>
+                      <td colspan="2" class="financial-negative fw-bold col-xl-4" style="text-align: start;">
+                        {{CalcAmounts() | currency:'ILS':'symbol':'.0'}}
+                      </td>
+                    </tr>
+                    
+                    <tr *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1 != '' && this.generalInfoService.AllInfo.FixedExpensesViewInfo.Expenses != '' && CalcAmounts() == '0'">
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-credit-card-2-back me-2" style="color: #94a3b8;"></i>
+                        סה"כ חובות
+                      </td>
+                      <td colspan="2" class="financial-neutral fw-bold col-xl-4" style="text-align: start;">אין</td>
+                    </tr>
+
+                    <!-- משכנתה / שכר דירה -->
+                    <tr>
+                      <td colspan="3" class="fs-2 fw-bold col-xl-12"
+                        style="text-align: center !important;background: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%); color: #f8fafc;">
+                        <i class="bi bi-house me-2"></i>
+                        משכנתה / שכר דירה
+                      </td>
+                    </tr>
+                    
+                    <tr *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1 != '' && this.generalInfoService.AllInfo.MortgagesViewInfo.RemainingMortgages != 0">
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-house-door me-2" style="color: #ef4444;"></i>
+                        משכנתה
+                      </td>
+                      <td colspan="2" class="financial-negative fw-bold col-xl-4" style="text-align: start;">
+                        {{CalcSumMortgages() | currency:'ILS':'symbol':'.0'}}
+                      </td>
+                    </tr>
+                    
+                    <tr *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1 != '' && this.generalInfoService.AllInfo.MortgagesViewInfo.RemainingMortgages == 0">
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-house-door me-2" style="color: #94a3b8;"></i>
+                        משכנתה
+                      </td>
+                      <td colspan="2" class="financial-neutral fw-bold col-xl-4" style="text-align: start;">אין</td>
+                    </tr>
+                    
+                    <tr *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1 != '' && GetRentCost() != 0">
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-key me-2" style="color: #ef4444;"></i>
+                        שכר דירה
+                      </td>
+                      <td colspan="2" class="financial-negative fw-bold col-xl-4" style="text-align: start;">
+                        {{GetRentCost() | currency:'ILS':'symbol':'.0'}}
+                      </td>
+                    </tr>
+                    
+                    <tr *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1 != '' && GetRentCost() == 0">
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-key me-2" style="color: #94a3b8;"></i>
+                        שכר דירה
+                      </td>
+                      <td colspan="2" class="financial-neutral fw-bold col-xl-4" style="text-align: start;">אין</td>
+                    </tr>
+
+                    <!-- חסכונות והשקעות -->
+                    <tr>
+                      <td colspan="3" class="fs-2 fw-bold col-xl-12"
+                        style="text-align: center !important;background: linear-gradient(135deg, #10b981 0%, #059669 100%); color: #f8fafc;">
+                        <i class="bi bi-piggy-bank me-2"></i>
+                        חסכונות והשקעות
+                      </td>
+                    </tr>
+                    
+                    <tr>
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-calculator me-2" style="color: #22c55e;"></i>
+                        סה"כ הכנסות
+                      </td>
+                      <td colspan="2" class="fw-bold col-xl-4" style="color: limegreen;text-align: start;">
+                        {{CalcSumAllIncomes() | currency:'ILS':'symbol':'.0'}}
+                      </td>
+                    </tr>
+
+                    <!-- הוצאות -->
+                    <tr>
+                      <td colspan="3" class="fs-2 fw-bold col-xl-12"
+                        style="text-align: center !important;background-color: seagreen;color: black;">
+                        <i class="bi bi-credit-card me-2"></i>
+                        הוצאות
+                      </td>
+                    </tr>
+                    
+                    <tr *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1 != '' && this.generalInfoService.AllInfo.FixedExpensesViewInfo.Expenses != ''">
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-receipt me-2" style="color: #ef4444;"></i>
+                        קבועות
+                      </td>
+                      <td colspan="2" class="custom-red-text fw-bold col-xl-4" style="text-align: start;">
+                        {{CalcSumExpenses() | currency:'ILS':'symbol':'.0'}}
+                      </td>
+                    </tr>
+                    
+                    <tr *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1 != '' && this.generalInfoService.AllInfo.FixedExpensesViewInfo.Expenses == ''">
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-receipt me-2" style="color: #94a3b8;"></i>
+                        קבועות
+                      </td>
+                      <td colspan="2" class="fw-bold text-white col-xl-4" style="text-align: start;">אין</td>
+                    </tr>
+                    
+                    <tr *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1 != '' && this.generalInfoService.AllInfo.VariableExpensesViewInfo.DiffExpenses.toFixed(0).toString() != ''">
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-cart me-2" style="color: #ef4444;"></i>
+                        שוטפות
+                      </td>
+                      <td colspan="2" class="custom-red-text fw-bold col-xl-4" style="text-align: start;">
+                        {{CalcSumVariableExpenses() | currency:'ILS':'symbol':'.0'}}
+                      </td>
+                    </tr>
+                    
+                    <tr *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1 != '' && this.generalInfoService.AllInfo.VariableExpensesViewInfo.DiffExpenses.toFixed(0).toString() == ''">
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-cart me-2" style="color: #94a3b8;"></i>
+                        שוטפות
+                      </td>
+                      <td colspan="2" class="fw-bold text-white col-xl-4" style="text-align: start;">אין</td>
+                    </tr>
+                    
+                    <tr>
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-calculator me-2" style="color: #ef4444;"></i>
+                        סה"כ הוצאות
+                      </td>
+                      <td dir="rtl" class="fw-bold col-xl-2 custom-red-text " style="text-align: start;">
+                        {{CalcSumAllExpenses() | currency:'ILS':'symbol':'.0'}}
+                      </td>
+                      <td dir="rtl" class="fw-bold col-xl-2 custom-red-text " style="text-align: start;">
+                        {{CalcSumExpensesPercents() | percent:'2.2-2'}}
+                      </td>
+                    </tr>
+
+                    <!-- פנסיה -->
+                    <tr>
+                      <td colspan="3" class="fs-2 fw-bold col-xl-12"
+                        style="text-align: center !important;background-color: seagreen;color: black;">
+                        <i class="bi bi-shield-check me-2"></i>
+                        פנסיה
+                      </td>
+                    </tr>
+                    
+                    <tr *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1 != '' && CalcManagerInsurance() != 0">
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-briefcase me-2" style="color: #22c55e;"></i>
+                        ביטוחי מנהלים
+                      </td>
+                      <td colspan="2" class="fw-bold col-xl-4" style="color: limegreen;text-align: start;">
+                        {{CalcManagerInsurance() | currency:'ILS':'symbol':'.0'}}
+                      </td>
+                    </tr>
+                    
+                    <tr *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1 != '' && CalcManagerInsurance() == 0">
+                      <td class="fw-bold text-white col-xl-8" style="text-align: start !important;">
+                        <i class="bi bi-briefcase me-2" style="color: #94a3b8;"></i>
+                        ביטוחי מנהלים
+                      </td>
+                      <td colspan="2" class="fw-bold text-white col-xl-4" style="text-align: start;">אין</td>
+                    </tr>
+                    
+                    <!-- Diagram Chart -->
+                    <tr>
+                      <td colspan="3" class="fs-2 fw-bold col-xl-12" style="text-align: center !important;">
+                        <div style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(51, 65, 85, 0.8) 100%); border-radius: 16px; padding: 2rem; border: 2px solid rgba(59, 130, 246, 0.3); margin: 1rem 0;">
+                          <h3 class="text-white mb-3">
+                            <i class="bi bi-diagram-3 me-2" style="color: #60a5fa;"></i>
+                            אסטרטגיה פיננסית
+                          </h3>
+                          <div style="display: flex; justify-content: center; align-items: center; height: 100%;">
+                            <highcharts-chart [Highcharts]="diagramHighcharts" [(update)]="updateDiagramFlag" id="diagramChart"
+                              style="width: 70%; height: 250px; display: block;"
+                              [options]="diagramChartOptions"
+                              [runOutsideAngular]=true></highcharts-chart>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                    
+                    <!-- AI Analysis Results -->
+                    <tr class="mt-3">
+                      <td colspan="3" dir="ltr">
+                        <div style="background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(51, 65, 85, 0.8) 100%); border-radius: 16px; padding: 2rem; border: 2px solid rgba(59, 130, 246, 0.3); margin-top: 2rem;">
+                          <h3 class="text-white mb-3" dir="rtl">
+                            <i class="bi bi-robot me-2" style="color: #60a5fa;"></i>
+                            ניתוח פיננסי מתקדם
+                          </h3>
+                          <textarea dir="rtl" class="fs-3 form-control" placeholder="כאן יופיע הניתוח הפיננסי המתקדם..."
+                            style="height: 400px; color: white; background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(30, 41, 59, 0.8) 100%);"
+                            id="floatingTextarea">{{this.generalInfoService.AllInfo.GptAIQuestion}}</textarea>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

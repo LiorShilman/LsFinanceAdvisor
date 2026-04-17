@@ -1,0 +1,340 @@
+<!-- חלק ראשון - נתונים אישיים ומשפחתיים -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card bg-gradient-to-br from-slate-800 to-slate-900 shadow-xl mb-4">
+        <div class="card-body p-6">
+          <div class="card-header fs-1 text-center text-white font-bold mb-6">
+            נתונים משפחתיים
+            <div class="h-1 w-32 bg-blue-500 mx-auto mt-2 rounded-full"></div>
+          </div>
+          
+          <form name="personalDataForm" autocomplete="off" #personalDataForm="ngForm">
+            <div class="mb-6 row">
+              <!-- פרטי זיהוי -->
+              <legend class="mt-3 text-xl text-white font-semibold mb-4">פרטי זיהוי</legend>
+              
+              <div class="col-md-12 col-xl-4 position-relative">
+                <label for="personal-data1-mail" class="form-label text-gray-300">מייל אישי</label>
+                <input type="text" name="mail" #partnerName1="ngModel" autocomplete="off"
+                  class="form-control bg-slate-700 text-yellow-400 border-slate-600 rounded-lg p-3 focus:border-blue-500 focus:ring-1"
+                  [ngClass]="GetClassValidation('Mail')" id="personal-data1-mail"
+                  [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.Mail" required>
+                <div class="invalid-tooltip text-red-500 text-sm mt-1">
+                  כתובת הדואר האלקטרוני לא תקינה!
+                </div>
+              </div>
+
+              <div class="col-md-12 col-xl-4 position-relative">
+                <label for="personal-data1-id" class="form-label text-gray-300">ת.ז</label>
+                <input type="text" name="id" 
+                  class="form-control bg-slate-700 text-yellow-400 border-slate-600 rounded-lg p-3 focus:border-blue-500 focus:ring-1"
+                  [ngClass]="GetClassValidation('Id')" autocomplete="off" id="personal-data1-id"
+                  [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.Id" required>
+                <div class="invalid-tooltip text-red-500 text-sm mt-1">
+                  מספר תעודת הזהות שגוי!
+                </div>
+              </div>
+
+              <!-- פרטי בן/בת זוג -->
+              <legend class="mt-5 text-lg text-white font-semibold mb-4">פרטי בן / בת הזוג</legend>
+              
+              <div class="col-md-6 col-xl-2 position-relative">
+                <label for="personal-data1-name" class="form-label text-gray-300">בן / בת זוג 1</label>
+                <input type="text" name="partnerName1" #partnerName1="ngModel" autocomplete="off"
+                  class="form-control bg-slate-700 text-yellow-400 border-slate-600 rounded-lg p-2 focus:border-blue-500 focus:ring-1"
+                  [ngClass]="GetClassValidation('Name1')" id="personal-data1-name"
+                  [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1" required>
+                <div class="invalid-tooltip text-red-500 text-sm mt-1">
+                  שדה חובה!
+                </div>
+              </div>
+
+              <div class="col-md-6 col-xl-2 position-relative">
+                <label for="personal-data1-sex" class="form-label text-gray-300">מין</label>
+                <select [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.SelectedSex1" name="sex"
+                  class="form-select bg-slate-700 text-blue-400 border-slate-600 rounded-lg p-2 focus:border-blue-500 focus:ring-1"
+                  [ngClass]="GetClassValidation('Sex1')" id="personal-data1-sex" required>
+                  <option selected>בחר ...</option>
+                  <option *ngFor="let sex of ['זכר','נקבה']" [value]="sex">{{sex}}</option>
+                </select>
+                <div class="invalid-tooltip text-red-500 text-sm mt-1">
+                  שדה חובה!
+                </div>
+              </div>
+
+              <div class="w-100 mb-3"></div>
+
+              <div class="col-md-6 col-xl-2 position-relative">
+                <label for="personal-data1-age" class="form-label text-gray-300">גיל</label>
+                <input type="text" name="age" 
+                  class="form-control bg-slate-700 text-blue-400 border-slate-600 rounded-lg p-2 focus:border-blue-500 focus:ring-1"
+                  [ngClass]="GetClassValidation('Age1')" autocomplete="off" id="personal-data1-age"
+                  [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.Age1" required>
+                <div class="invalid-tooltip text-red-500 text-sm mt-1">
+                  שדה חובה!
+                </div>
+              </div>
+
+              <div class="col-md-6 col-xl-2 position-relative">
+                <label for="personal-data1-status" class="form-label text-gray-300">מצב משפחתי</label>
+                <select [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.SelectedStatus1" name="status"
+                  class="form-select bg-slate-700 text-blue-400 border-slate-600 rounded-lg p-2 focus:border-blue-500 focus:ring-1"
+                  [ngClass]="GetClassValidation('Status1')" id="personal-data1-status" required
+                  (ngModelChange)="onStatusOfPartner1Change($event)">
+                  <option selected>בחר ...</option>
+                  <option *ngFor="let status of ['רווק','נשוי','גרוש','אלמן']" [value]="status">{{status}}</option>
+                </select>
+                <div class="invalid-tooltip text-red-500 text-sm mt-1">
+                  שדה חובה!
+                </div>
+              </div>
+
+              <!-- רשימת ילדים -->
+              <legend class="mt-5 text-lg text-white font-semibold mb-4">רשימת ילדים</legend>
+              
+              <div class="col-md-3 col-xl-2 position-relative">
+                <label class="form-label text-gray-300">
+                  מספר הילדים - {{this.generalInfoService.AllInfo.PersonalDataViewInfo.NumberOfChildren1}}
+                </label>
+                <input type="range" class="form-range w-full h-2 bg-slate-600 rounded-lg appearance-none cursor-pointer" 
+                  min="0" max="10" step="1" autocomplete="off" name="number-of-children" 
+                  id="personal-data1-number-of-children"
+                  [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.NumberOfChildren1"
+                  (ngModelChange)="onNumberOfChildrenChange($event)" required>
+              </div>
+
+              <ng-container *ngFor="let column of this.generalInfoService.AllInfo.PersonalDataViewInfo.Child; let i = index">
+                <div class="row mt-4">
+                  <div class="col-md-4 col-xl-2 position-relative">
+                    <label [for]="'child-name' + (i+1)" class="form-label text-gray-300">ילד {{i + 1}}</label>
+                    <input type="text" [id]="'child-name' + (i+1)" [name]="'child-name' + (i+1)"
+                      class="form-control bg-slate-700 text-blue-400 border-slate-600 rounded-lg p-2 focus:border-blue-500 focus:ring-1"
+                      [ngClass]="this.generalInfoService.AllInfo.PersonalDataViewInfo.Child[i].GetClassValidation('Name')"
+                      [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.Child[i].Name" required>
+                    <div class="invalid-tooltip text-red-500 text-sm mt-1">
+                      שדה חובה!
+                    </div>
+                  </div>
+
+                  <div class="col-md-4 col-xl-2 position-relative">
+                    <label [for]="'child-sex' + (i+1)" class="form-label text-gray-300">מין</label>
+                    <select [id]="'child-sex' + (i+1)" [name]="'child-sex' + (i+1)"
+                      class="form-select bg-slate-700 text-blue-400 border-slate-600 rounded-lg p-2 focus:border-blue-500 focus:ring-1"
+                      [ngClass]="this.generalInfoService.AllInfo.PersonalDataViewInfo.Child[i].GetClassValidation('Sex')"
+                      [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.Child[i].SelectedSex" required>
+                      <option selected>בחר ...</option>
+                      <option *ngFor="let sex of ['זכר','נקבה']" [value]="sex">{{sex}}</option>
+                    </select>
+                    <div class="invalid-tooltip text-red-500 text-sm mt-1">
+                      שדה חובה!
+                    </div>
+                  </div>
+
+                  <div class="col-md-4 col-xl-2 position-relative">
+                    <label [for]="'child-age' + (i+1)" class="form-label text-gray-300">גיל</label>
+                    <input type="text" [id]="'child-age' + (i+1)" [name]="'child-age' + (i+1)"
+                      class="form-control bg-slate-700 text-blue-400 border-slate-600 rounded-lg p-2 focus:border-blue-500 focus:ring-1"
+                      [ngClass]="this.generalInfoService.AllInfo.PersonalDataViewInfo.Child[i].GetClassValidation('Age')"
+                      [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.Child[i].Age" required>
+                    <div class="invalid-tooltip text-red-500 text-sm mt-1">
+                      שדה חובה!
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- חלק שני - נתונים נוספים -->
+<div class="col-xl-12">
+  <div class="card bg-gradient-to-br from-slate-800 to-slate-900 shadow-xl mb-4">
+    <div class="card-body p-6">
+      <div class="card-header fs-1 text-center text-white font-bold mb-6">
+        נתונים נוספים לחישוב המערכת
+        <div class="h-1 w-32 bg-blue-500 mx-auto mt-2 rounded-full"></div>
+      </div>
+
+      <form name="personalDataForm" autocomplete="off" #personalDataForm="ngForm">
+        <!-- גיל יציאה לפנסיה -->
+        <legend class="mt-3 text-lg text-white font-semibold mb-4">גיל יציאה לפנסיה</legend>
+        <div class="mt-3 mb-6 row position-relative">
+          <div [ngClass]="this.generalInfoService.AllInfo.PersonalDataViewInfo.Marride ? 'col-xl-2' : 'col-xl-6'">
+            <label for="personal-data1-retirement-age" class="form-label text-gray-300">גיל יציאה לפנסיה</label>
+            <input type="text" 
+                   class="form-control bg-slate-700 text-blue-400 border-slate-600 rounded-lg p-2 focus:border-blue-500 focus:ring-1"
+                   id="personal-data1-retirement-age" 
+                   name="personal-data1-retirement-age"
+                   [ngClass]="GetClassValidation('RetirementAge1')"
+                   [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.RetirementAge1" 
+                   required>
+            <div class="invalid-tooltip text-red-500 text-sm mt-1">שדה חובה!</div>
+          </div>
+
+          <!-- Partner 2 fields (when married) -->
+          <div *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Marride" class="grid grid-cols-4 gap-4">
+            <div class="col-xl-2 col-md-6 position-relative">
+              <label for="personal-data2-name" class="form-label text-gray-300">בן / בת זוג 2</label>
+              <input type="text" name="partnerName2" #partnerName2="ngModel"
+                     class="form-control bg-slate-700 text-blue-400 border-slate-600 rounded-lg p-2 focus:border-blue-500 focus:ring-1"
+                     id="personal-data2-name" 
+                     [ngClass]="GetClassValidation('Name2')"
+                     [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name2" 
+                     required>
+              <div class="invalid-tooltip text-red-500 text-sm mt-1">שדה חובה!</div>
+            </div>
+
+            <div class="col-xl-2 col-md-6 position-relative">
+              <label for="personal-data2-sex" class="form-label text-gray-300">מין</label>
+              <select [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.SelectedSex2" 
+                      name="sex"
+                      class="form-select bg-slate-700 text-blue-400 border-slate-600 rounded-lg p-2 focus:border-blue-500 focus:ring-1"
+                      [ngClass]="GetClassValidation('Sex2')" 
+                      id="persona2-data1-sex" 
+                      required>
+                <option selected>בחר ...</option>
+                <option *ngFor="let sex of ['זכר','נקבה']" [value]="sex">{{sex}}</option>
+              </select>
+              <div class="invalid-tooltip text-red-500 text-sm mt-1">שדה חובה!</div>
+            </div>
+
+            <div class="col-xl-2 col-md-6 position-relative">
+              <label for="persona2-data1-age" class="form-label text-gray-300">גיל</label>
+              <input type="text" name="persona2-data1-age"
+                     class="form-control bg-slate-700 text-blue-400 border-slate-600 rounded-lg p-2 focus:border-blue-500 focus:ring-1"
+                     id="persona2-data1-age"
+                     [ngClass]="GetClassValidation('Age2')"
+                     [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.Age2" 
+                     required>
+              <div class="invalid-tooltip text-red-500 text-sm mt-1">שדה חובה!</div>
+            </div>
+
+            <div class="col-xl-2 col-md-6 position-relative">
+              <label for="personal-data2-retirement-age" class="form-label text-gray-300">גיל בת הזוג יציאה לפנסיה</label>
+              <input type="text" 
+                     class="form-control bg-slate-700 text-blue-400 border-slate-600 rounded-lg p-2 focus:border-blue-500 focus:ring-1"
+                     id="personal-data2-retirement-age" 
+                     name="personal-data2-retirement-age"
+                     [ngClass]="GetClassValidation('RetirementAge2')"
+                     [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.RetirementAge2" 
+                     required>
+              <div class="invalid-tooltip text-red-500 text-sm mt-1">שדה חובה!</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ביטוח סעודי -->
+        <legend class="mt-5 text-lg text-white font-semibold mb-4">ביטוח סעודי</legend>
+        <div class="mt-3 mb-6 row">
+          <div class="col-xl-2 col-md-6 position-relative">
+            <label for="SaudiInsuranceInHome" class="form-label text-gray-300">נדרש אשפוז בבית</label>
+            <input type="text" 
+                   class="form-control bg-slate-700 text-blue-400 border-slate-600 rounded-lg p-2 focus:border-blue-500 focus:ring-1"
+                   id="SaudiInsuranceInHome" 
+                   name="SaudiInsuranceInHome"
+                   [ngClass]="GetClassValidation('SaudiInsuranceInHome')"
+                   [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.SaudiInsuranceInHome" 
+                   required>
+            <div class="invalid-tooltip text-red-500 text-sm mt-1">שדה חובה!</div>
+          </div>
+
+          <div class="col-xl-2 col-md-6 position-relative">
+            <label for="SaudiinsuranceInMossad" class="form-label text-gray-300">נדרש לאשפוז במוסד</label>
+            <input type="text" 
+                   class="form-control bg-slate-700 text-blue-400 border-slate-600 rounded-lg p-2 focus:border-blue-500 focus:ring-1"
+                   id="SaudiinsuranceInMossad" 
+                   name="SaudiinsuranceInMossad"
+                   [ngClass]="GetClassValidation('SaudiinsuranceInMossad')"
+                   [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.SaudiinsuranceInMossad" 
+                   required>
+            <div class="invalid-tooltip text-red-500 text-sm mt-1">שדה חובה!</div>
+          </div>
+        </div>
+
+        <!-- ריביות -->
+        <legend class="mt-5 text-lg text-white font-semibold mb-4">ריביות</legend>
+        <div class="mt-3 mb-6 row">
+          <div class="col-xl-2 col-md-6 position-relative">
+            <label for="AnnualInterest" class="form-label text-gray-300">ריבית שנתית לחישוב ביטוחים</label>
+            <input data-bs-toggle="tooltip" 
+                   data-bs-custom-class="custom-tooltip"
+                   data-bs-title="ריבית ארוכת הטווח המקובלת בשוק הביטוח והפנסיה"
+                   type="text" 
+                   class="form-control bg-slate-700 text-blue-400 border-slate-600 rounded-lg p-2 focus:border-blue-500 focus:ring-1"
+                   id="AnnualInterest" 
+                   name="AnnualInterest"
+                   [ngClass]="GetClassValidation('AnnualInterest')"
+                   [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.AnnualInterest" 
+                   required>
+            <div class="invalid-tooltip text-red-500 text-sm mt-1">שדה חובה!</div>
+          </div>
+        </div>
+
+        <!-- בלת"מ -->
+        <legend class="mt-5 text-lg text-white font-semibold mb-4">בלת"מ</legend>
+        <div class="mt-3 mb-6 row">
+          <div class="col-xl-2 col-md-6 position-relative">
+            <label for="Unplanned" class="form-label text-gray-300">אחוז נדרש להפרשה לבל"מ</label>
+            <input data-bs-toggle="tooltip" 
+                   data-bs-custom-class="custom-tooltip"
+                   data-bs-title='אחוז מההכנסה המשפחתית לטובת בלת"מ'
+                   type="text" 
+                   class="form-control bg-slate-700 text-blue-400 border-slate-600 rounded-lg p-2 focus:border-blue-500 focus:ring-1"
+                   id="Unplanned" 
+                   name="Unplanned"
+                   [ngClass]="GetClassValidation('Unplanned')"
+                   [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.Unplanned" 
+                   required>
+            <div class="invalid-tooltip text-red-500 text-sm mt-1">שדה חובה!</div>
+          </div>
+        </div>
+
+        <!-- דירוג אשראי -->
+        <legend class="mt-5 text-lg text-white font-semibold mb-4">דירוג אשראי</legend>
+        <div class="mt-3 mb-6 row">
+          <div class="col-xl-2 col-md-6 position-relative">
+            <input data-bs-toggle="tooltip" 
+                   data-bs-custom-class="custom-tooltip"
+                   data-bs-title='דירוג אשראי לפי אפליקציית קפטן כרדיט'
+                   type="text" 
+                   class="form-control bg-slate-700 text-blue-400 border-slate-600 rounded-lg p-2 focus:border-blue-500 focus:ring-1"
+                   id="CreditRating" 
+                   name="CreditRating"
+                   [ngClass]="GetClassValidation('CreditRating')"
+                   [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.CreditRating"
+                   (ngModelChange)="OnModelChange($event,'CreditRating')" 
+                   required>
+            <div class="invalid-tooltip text-red-500 text-sm mt-1">שדה חובה!</div>
+          </div>
+        </div>
+
+        <!-- גרף -->
+        <div class="mt-3" style="height: 20px;"></div>
+        <highcharts-chart class="mb-6 mt-3 w-1/2 h-96" 
+                         [Highcharts]="highcharts" 
+                         [(update)]="updateFlag"
+                         [options]="chartOptions">
+        </highcharts-chart>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- תצוגת דירוג אשראי -->
+<div class="row mt-4">
+  <div class="col-xl-2 d-flex align-items-center">
+    <p class="text-2xl text-white font-bold">דירוג אשראי</p>
+  </div>
+  <div class="col-xl-5 px-0 d-flex align-items-center">
+    <input type="text" 
+           name="credit-rating-display"
+           class="form-control bg-slate-700 text-center text-xl border-white rounded-lg p-2"
+           [ngStyle]="{'color': getStyleFromVal(generalInfoService.AllInfo.PersonalDataViewInfo.CreditRating)}"
+           [value]="BDIDescription()"
+           readonly>
+  </div>
+</div>

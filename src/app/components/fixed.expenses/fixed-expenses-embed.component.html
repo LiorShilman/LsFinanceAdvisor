@@ -1,0 +1,10 @@
+<div class="formFixedExpenses-embed">
+  <iframe
+    *ngIf="safeSrc"
+    #frame
+    class="formFixedExpenses-frame"
+    [src]="safeSrc"
+    title="מחיר ההרגל והמנויים"
+    loading="lazy">
+  </iframe>
+</div>

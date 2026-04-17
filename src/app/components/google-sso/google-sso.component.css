@@ -1,0 +1,588 @@
+/* Google SSO Component - Enhanced Dark Mode to Match Users List */
+
+/* ===== Hidden Google Button (used for auth flow only) ===== */
+.hidden-google-btn {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+/* ===== Container Styling ===== */
+.google-sso-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 1rem;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  
+  /* ===== Header Styling ===== */
+  .sso-header {
+    margin-bottom: 1.5rem;
+    
+    .sso-title {
+      color: #e2e8f0 !important;
+      font-weight: 800 !important;
+      font-size: clamp(1.1rem, 3vw, 1.4rem) !important;
+      text-shadow: 0 2px 8px rgba(59, 130, 246, 0.3);
+      background: linear-gradient(135deg, #e2e8f0 0%, #93c5fd 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 0.75rem;
+      text-align: center;
+    }
+  
+    .sso-subtitle {
+      color: #94a3b8 !important;
+      font-weight: 600;
+      font-size: clamp(0.85rem, 2vw, 0.95rem);
+      line-height: 1.5;
+      text-align: center;
+    }
+  }
+  
+  /* ===== Button Container ===== */
+  .sso-button-container {
+    position: relative;
+    
+    .google-sso-btn {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700 !important;
+      border-radius: 12px !important;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(15px);
+      border: 2px solid transparent !important;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-size: clamp(0.9rem, 2.5vw, 1rem) !important;
+      padding: 0.875rem 1.5rem !important;
+      width: 100%;
+      overflow: hidden;
+      box-shadow: 
+        0 4px 15px rgba(0, 0, 0, 0.2),
+        0 2px 8px rgba(59, 130, 246, 0.1);
+  
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+        border-radius: inherit;
+        z-index: -1;
+      }
+  
+      &:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 
+          0 8px 25px rgba(0, 0, 0, 0.3),
+          0 4px 12px rgba(59, 130, 246, 0.2);
+      }
+  
+      &:active {
+        transform: translateY(0);
+      }
+  
+      &:disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+        transform: none;
+        box-shadow: 
+          0 2px 8px rgba(0, 0, 0, 0.1),
+          0 1px 4px rgba(59, 130, 246, 0.05);
+      }
+  
+      /* ===== Button Variants ===== */
+      &.btn-outline-primary {
+        background: rgba(30, 41, 59, 0.8) !important;
+        border-color: rgba(59, 130, 246, 0.3) !important;
+        color: #93c5fd !important;
+  
+        &:hover:not(:disabled) {
+          background: linear-gradient(135deg, #3b82f6 0%, #2563eb 30%, #1d4ed8 70%, #1e40af 100%) !important;
+          color: white !important;
+          border-color: rgba(59, 130, 246, 0.5) !important;
+          box-shadow: 
+            0 8px 25px rgba(59, 130, 246, 0.4),
+            0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+      }
+  
+      &.btn-light {
+        background: rgba(51, 65, 85, 0.8) !important;
+        border-color: rgba(59, 130, 246, 0.2) !important;
+        color: #e2e8f0 !important;
+  
+        &:hover:not(:disabled) {
+          background: rgba(30, 41, 59, 0.9) !important;
+          border-color: rgba(59, 130, 246, 0.4) !important;
+          color: #f1f5f9 !important;
+        }
+      }
+  
+      /* ===== Button Sizes ===== */
+      &.btn-sm {
+        padding: 0.65rem 1.25rem !important;
+        font-size: clamp(0.8rem, 2vw, 0.9rem) !important;
+        
+        .google-icon {
+          width: 16px;
+          height: 16px;
+        }
+      }
+  
+      &.btn-lg {
+        padding: 1rem 2rem !important;
+        font-size: clamp(1rem, 2.5vw, 1.2rem) !important;
+        
+        .google-icon {
+          width: 22px;
+          height: 22px;
+        }
+      }
+    }
+  
+    .google-icon {
+      flex-shrink: 0;
+      filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.3));
+      transition: all 0.3s ease;
+    }
+  
+    /* ===== Loading State ===== */
+    .spinner-border-sm {
+      width: 1rem;
+      height: 1rem;
+      border-width: 0.15em;
+      border-color: rgba(255, 255, 255, 0.3);
+      border-right-color: white;
+    }
+  }
+  
+  /* ===== Status Messages ===== */
+  .text-center .text-muted {
+    color: #94a3b8 !important;
+    font-weight: 600;
+    font-size: 0.85rem;
+    
+    .spinner-border-sm {
+      border-color: rgba(148, 163, 184, 0.3);
+      border-right-color: #94a3b8;
+    }
+  }
+  
+  /* ===== Error Alert ===== */
+  .alert-danger {
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.15) 0%, rgba(185, 28, 28, 0.12) 100%) !important;
+    border: 2px solid rgba(220, 38, 38, 0.3) !important;
+    border-radius: 12px !important;
+    color: #fca5a5 !important;
+    backdrop-filter: blur(10px);
+    font-weight: 600;
+    padding: 1rem 1.25rem;
+    
+    svg {
+      color: #ef4444 !important;
+      filter: drop-shadow(0 1px 3px rgba(239, 68, 68, 0.3));
+    }
+    
+    .btn-close {
+      background: none;
+      border: none;
+      opacity: 0.8;
+      filter: invert(1);
+      transition: all 0.3s ease;
+      
+      &:hover {
+        opacity: 1;
+        transform: scale(1.1);
+      }
+    }
+  }
+  
+  /* ===== Security Info ===== */
+  .sso-security-info {
+    margin-top: 1.5rem;
+    text-align: center;
+    
+    small {
+      color: #94a3b8 !important;
+      font-weight: 600;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+    
+    svg {
+      opacity: 0.8;
+      color: #34d399 !important;
+      filter: drop-shadow(0 1px 3px rgba(52, 211, 153, 0.3));
+      transition: all 0.3s ease;
+    }
+    
+    &:hover svg {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+  }
+  
+  /* ===== Responsive Design ===== */
+  
+  /* Large Tablets and Small Desktops: 992px - 1199px */
+  @media (min-width: 992px) and (max-width: 1199px) {
+    .google-sso-container {
+      padding: 1.25rem;
+    }
+    
+    .google-sso-btn {
+      padding: 0.9rem 1.75rem !important;
+      font-size: 1.05rem !important;
+    }
+  }
+  
+  /* Tablets: 768px - 991px */
+  @media (min-width: 768px) and (max-width: 991px) {
+    .google-sso-container {
+      padding: 1rem;
+    }
+  
+    .sso-header .sso-title {
+      font-size: 1.25rem !important;
+    }
+  
+    .google-sso-btn {
+      padding: 0.85rem 1.5rem !important;
+      font-size: 1rem !important;
+    }
+  
+    .google-icon {
+      width: 19px !important;
+      height: 19px !important;
+    }
+  }
+  
+  /* Small Tablets: 576px - 767px */
+  @media (min-width: 576px) and (max-width: 767px) {
+    .google-sso-container {
+      padding: 0.875rem;
+    }
+  
+    .sso-header .sso-title {
+      font-size:1.15rem !important;
+    }
+  
+    .sso-header .sso-subtitle {
+      font-size: 0.9rem;
+    }
+  
+    .google-sso-btn {
+      padding: 0.8rem 1.25rem !important;
+      font-size: 0.95rem !important;
+    }
+  
+    .google-icon {
+      width: 18px !important;
+      height: 18px !important;
+    }
+  }
+  
+  /* Mobile Phones: up to 575px */
+  @media (max-width: 575px) {
+    .google-sso-container {
+      padding: 0.75rem;
+    }
+  
+    .sso-header .sso-title {
+      font-size: 1.1rem !important;
+      margin-bottom: 0.5rem;
+    }
+  
+    .sso-header .sso-subtitle {
+      font-size: 0.85rem;
+      line-height: 1.4;
+    }
+  
+    .google-sso-btn {
+      padding: 0.75rem 1rem !important;
+      font-size: 0.9rem !important;
+      letter-spacing: 0.3px;
+    }
+  
+    .google-icon {
+      width: 17px !important;
+      height: 17px !important;
+    }
+  
+    .alert-danger {
+      padding: 0.875rem 1rem;
+      font-size: 0.85rem;
+    }
+  
+    .sso-security-info small {
+      font-size: 0.8rem;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+  }
+  
+  /* Extra Small Mobile: up to 375px */
+  @media (max-width: 375px) {
+    .google-sso-container {
+      padding: 0.5rem;
+    }
+  
+    .sso-header .sso-title {
+      font-size: 1rem !important;
+    }
+  
+    .sso-header .sso-subtitle {
+      font-size: 0.8rem;
+    }
+  
+    .google-sso-btn {
+      padding: 0.7rem 0.875rem !important;
+      font-size: 0.85rem !important;
+    }
+  
+    .google-icon {
+      width: 16px !important;
+      height: 16px !important;
+    }
+  }
+  
+  /* ===== RTL Support ===== */
+  [dir="rtl"] {
+    .google-sso-btn {
+      .google-icon {
+        margin-right: 0;
+        margin-left: 0.5rem;
+      }
+    }
+  
+    .sso-security-info svg {
+      margin-right: 0;
+      margin-left: 0.5rem;
+    }
+  
+    .alert-danger svg {
+      margin-right: 0;
+      margin-left: 0.5rem;
+    }
+  }
+  
+  /* ===== Animation Classes ===== */
+  @keyframes fadeInScale {
+    from {
+      opacity: 0;
+      transform: scale(0.9);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  @keyframes slideInFromBottom {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .google-sso-container {
+    animation: fadeInScale 0.6s ease-out 0.3s both;
+  }
+  
+  .sso-header {
+    animation: slideInFromBottom 0.5s ease-out 0.4s both;
+  }
+  
+  .google-sso-btn {
+    animation: slideInFromBottom 0.5s ease-out 0.5s both;
+  }
+  
+  .sso-security-info {
+    animation: fadeInScale 0.4s ease-out 0.6s both;
+  }
+  
+  /* ===== Focus States ===== */
+  .google-sso-btn:focus-visible {
+    outline: 2px solid #60a5fa;
+    outline-offset: 3px;
+    z-index: 10;
+  }
+  
+  .btn-close:focus-visible {
+    outline: 2px solid #ef4444;
+    outline-offset: 2px;
+  }
+  
+  /* ===== High Contrast Mode Support ===== */
+  @media (prefers-contrast: high) {
+    .google-sso-btn,
+    .alert-danger {
+      border-color: rgba(59, 130, 246, 0.6) !important;
+    }
+  
+    .sso-header .sso-title,
+    .google-sso-btn {
+      color: #f1f5f9 !important;
+    }
+  
+    .alert-danger {
+      border-color: rgba(220, 38, 38, 0.6) !important;
+      color: #fecaca !important;
+    }
+  }
+  
+  /* ===== Reduced Motion Support ===== */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  
+    .google-sso-btn:hover {
+      transform: none;
+    }
+  }
+  
+  /* ===== Touch Device Optimizations ===== */
+  @media (hover: none) and (pointer: coarse) {
+    .google-sso-btn {
+      min-height: 44px;
+      min-width: 44px;
+    }
+  
+    .google-sso-btn:hover {
+      transform: none;
+    }
+  
+    .btn-close {
+      min-width: 44px;
+      min-height: 44px;
+    }
+  }
+  
+  /* ===== Loading State Enhancements ===== */
+  .google-sso-btn:disabled .spinner-border-sm {
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  /* ===== Print Styles ===== */
+  @media print {
+    .google-sso-container {
+      background: white !important;
+    }
+  
+    .google-sso-btn,
+    .alert-danger {
+      background: white !important;
+      border: 1px solid #ccc !important;
+      box-shadow: none !important;
+      color: black !important;
+    }
+  
+    .sso-header .sso-title {
+      color: black !important;
+      background: white !important;
+    }
+  }
+  
+  /* ===== Accessibility Enhancements ===== */
+  .visually-hidden {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    padding: 0 !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+    border: 0 !important;
+  }
+  
+  /* ===== Enhanced Button States ===== */
+  .google-sso-btn:not(:disabled) {
+    cursor: pointer;
+  }
+  
+  .google-sso-btn:disabled .google-icon {
+    opacity: 0.5;
+    filter: grayscale(100%);
+  }
+  
+  /* ===== Error State Enhancements ===== */
+  .alert-danger {
+    animation: slideInFromBottom 0.3s ease-out;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .alert-danger::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.1) 0%, rgba(185, 28, 28, 0.05) 100%);
+    z-index: -1;
+  }
+  
+  /* ===== Success State (if needed) ===== */
+  .alert-success {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(22, 163, 74, 0.12) 100%) !important;
+    border: 2px solid rgba(34, 197, 94, 0.3) !important;
+    border-radius: 12px !important;
+    color: #86efac !important;
+    backdrop-filter: blur(10px);
+    font-weight: 600;
+    padding: 1rem 1.25rem;
+    
+    svg {
+      color: #22c55e !important;
+      filter: drop-shadow(0 1px 3px rgba(34, 197, 94, 0.3));
+    }
+  }
+  
+  /* ===== Custom Scrollbar (if container scrolls) ===== */
+  .google-sso-container::-webkit-scrollbar {
+    width: 6px;
+  }
+  
+  .google-sso-container::-webkit-scrollbar-track {
+    background: rgba(30, 41, 59, 0.5);
+    border-radius: 3px;
+  }
+  
+  .google-sso-container::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+  
+  .google-sso-container::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+  }

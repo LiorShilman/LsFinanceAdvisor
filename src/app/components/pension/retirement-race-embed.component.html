@@ -1,0 +1,11 @@
+<div class="formRetirementRace-embed">
+  <iframe
+    *ngIf="safeSrc"
+    #frame
+    class="formRetirementRace-frame"
+    [src]="safeSrc"
+    title="מרוץ לפנסיה"
+    loading="lazy"
+    (load)="onFrameLoad()">
+  </iframe>
+</div>

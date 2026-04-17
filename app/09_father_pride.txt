@@ -1,0 +1,3 @@
+cinematic realistic close-up, father watching his sons with quiet pride, emotional depth, slow motion feeling, soft light, shallow depth of field --ar 16:9
+--cref URL_FATHER
+--sref URL_STYLE

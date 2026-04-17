@@ -1,0 +1,227 @@
+<!-- pension-joint.component.html - Enhanced Modern Design -->
+<div class="container-fluid" dir="rtl">
+  
+  <!-- Joint Pension Section -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card text-white mb-4">
+        <div class="card-body alert alert-primary">
+          <div class="card-header">
+            <span>
+              <i class="bi bi-people-fill me-3"></i>
+              נתוני פנסיה משותפים
+            </span>
+          </div>
+          
+          <!-- Joint Pension Fund Section -->
+          <div class="card-body alert alert-success pension-fund-card">
+            <div class="card-header fs-1 blockquote fw-bold" style="text-align: right;">
+              <span>
+                <i class="bi bi-piggy-bank-fill me-2"></i>
+                קרנות פנסיה משותפות
+              </span>
+              <i class="fs-1 text-success fa fa-plus" (click)="AddRow()"></i>
+            </div>
+            
+            <div class="table-responsive table-striped">
+              <table class="table table-borderless">
+                <thead>
+                  <tr>
+                    <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-6">
+                      <i class="bi bi-card-text me-2"></i>
+                      שם הביטוח
+                    </th>
+                    <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-6"
+                        data-bs-toggle="tooltip"
+                        data-bs-custom-class="custom-tooltip" 
+                        data-bs-title='יתרת הכספים בקרן המשותפת'
+                        data-bs-placement="right">
+                      <i class="bi bi-cash-stack me-2 mx-1"></i>
+                      סכום
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor='let income of this.generalInfoService.AllInfo.PensiaViewInfo.PensionJoint.PensionJointRows; let i = index'>
+                    <tr>
+                      <td>
+                        <input type="text" 
+                               name="joint-pension-name-{{i+1}}" 
+                               numbersOnly 
+                               autocomplete="off"
+                               class="form-control fw-bold fs-5 text-info blockquote" 
+                               id="joint-pension-name-{{i+1}}"
+                               [(ngModel)]="this.generalInfoService.AllInfo.PensiaViewInfo.PensionJoint.PensionJointRows[i].NameOfInsurance"
+                               placeholder="שם הביטוח המשותף">
+                      </td>
+                      <td>
+                        <input type="text" 
+                               name="joint-pension-amount-{{i+1}}" 
+                               autocomplete="off"
+                               class="form-control fw-bold text-center fs-5 blockquote text-primary" 
+                               numbersOnly
+                               id="joint-pension-amount-{{i+1}}"
+                               [(ngModel)]="this.generalInfoService.AllInfo.PensiaViewInfo.PensionJoint.PensionJointRows[i].Amount"
+                               placeholder="0">
+                      </td>
+                    </tr>
+                  </ng-container>
+                  
+                  <!-- Joint Pension Summary Row -->
+                  <tr>
+                    <td>
+                      <input type="text" 
+                             name="joint-pension-summary" 
+                             disabled 
+                             class="pension-summary-input"
+                             id="joint-pension-summary"
+                             value="סיכום כולל">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="joint-pension-summary-amount"
+                             class="pension-summary-input" 
+                             id="joint-pension-summary-amount" 
+                             disabled
+                             [value]="CalcAmounts() | currency:'ILS':'symbol':'.0'">
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <!-- Additional Information Section -->
+          <div class="card-body alert alert-info">
+            <div class="card-header fs-1 blockquote fw-bold" style="text-align: right;">
+              <span>
+                <i class="bi bi-info-circle-fill me-2"></i>
+                מידע נוסף
+              </span>
+            </div>
+            
+            <div class="pension-summary-section">
+              <div class="row">
+                <div class="col-xl-6">
+                  <h4 class="text-white mb-3">
+                    <i class="bi bi-shield-check me-2"></i>
+                    זכויות משותפות
+                  </h4>
+                  <ul class="text-primary list-unstyled">
+                    <li class="mb-2">
+                      <i class="bi bi-check-circle me-2 text-success"></i>
+                      זכויות פנסיה צבורות
+                    </li>
+                    <li class="mb-2">
+                      <i class="bi bi-check-circle me-2 text-success"></i>
+                      זכויות שאירים
+                    </li>
+                    <li class="mb-2">
+                      <i class="bi bi-check-circle me-2 text-success"></i>
+                      זכויות נכות
+                    </li>
+                  </ul>
+                </div>
+                
+                <div class="col-xl-6">
+                  <h4 class="text-white mb-3">
+                    <i class="bi bi-calculator me-2"></i>
+                    חישובים משותפים
+                  </h4>
+                  <div class="text-center">
+                    <div class="pension-summary-input bg-info text-white mb-2">
+                      <i class="bi bi-cash me-2"></i>
+                      סה"כ זכויות משותפות
+                    </div>
+                    <input type="text" 
+                           name="joint-total-summary"
+                           class="pension-summary-input" 
+                           id="joint-total-summary" 
+                           disabled
+                           [value]="CalcAmounts() | currency:'ILS':'symbol':'.0'"
+                           style="font-size: 1.5rem; background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%) !important;">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Important Notes Section -->
+          <div class="card-body alert alert-warning">
+            <div class="card-header fs-1 blockquote fw-bold" style="text-align: right;">
+              <span>
+                <i class="bi bi-exclamation-triangle-fill me-2"></i>
+                הערות חשובות
+              </span>
+            </div>
+            
+            <div class="pension-summary-section">
+              <div class="text-white">
+                <div class="row">
+                  <div class="col-xl-4 mb-3">
+                    <div class="alert alert-warning text-center">
+                      <i class="bi bi-clock-history display-6 mb-2"></i>
+                      <h5>עדכון נתונים</h5>
+                      <p class="mb-0">יש לעדכן את הנתונים באופן תקופתי</p>
+                    </div>
+                  </div>
+                  
+                  <div class="col-xl-4 mb-3">
+                    <div class="alert alert-info text-center">
+                      <i class="bi bi-file-earmark-text display-6 mb-2"></i>
+                      <h5>תיעוד</h5>
+                      <p class="mb-0">שמור עותקים של כל המסמכים הרלוונטיים</p>
+                    </div>
+                  </div>
+                  
+                  <div class="col-xl-4 mb-3">
+                    <div class="alert alert-success text-center">
+                      <i class="bi bi-telephone display-6 mb-2"></i>
+                      <h5>יעוץ מקצועי</h5>
+                      <p class="mb-0">התייעץ עם יועץ פנסיה מוסמך</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Final Summary Section -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="pension-summary-section">
+        <div class="text-center">
+          <h2 class="h1 text-white mb-4">
+            <i class="bi bi-award-fill me-3"></i>
+            סיכום כולל - נתוני פנסיה משותפים
+          </h2>
+          
+          <div class="row">
+            <div class="col-xl-4 offset-xl-4">
+              <div class="pension-summary-input text-center" style="font-size: 2rem; padding: 1.5rem;">
+                <div class="mb-2">
+                  <i class="bi bi-piggy-bank display-4 text-success"></i>
+                </div>
+                <div class="text-white mb-2">סה"כ נכסי פנסיה משותפים</div>
+                <div class="text-success fw-bold" style="font-size: 2.5rem;">
+                  {{CalcAmounts() | currency:'ILS':'symbol':'.0'}}
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-4">
+            <p class="text-primary fs-5">
+              <i class="bi bi-info-circle me-2"></i>
+              הנתונים מוצגים על בסיס המידע שהוזן ועשויים להשתנות בהתאם לעדכונים עתידיים
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

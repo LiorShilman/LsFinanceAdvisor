@@ -1,0 +1,58 @@
+<div class="container-fluid">
+  <!-- First Relative -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="relatives-wrapper">
+        <app-relative [Num]=1 [(Name)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1"
+          [(FatherAge)]="this.generalInfoService.AllInfo.RelativeViewInfo.FatherAge1"
+          [(MotherAge)]="this.generalInfoService.AllInfo.RelativeViewInfo.MotherAge1"
+          [(FatherCanHelp)]="this.generalInfoService.AllInfo.RelativeViewInfo.FatherCanHelp1"
+          [(MotherCanHelp)]="this.generalInfoService.AllInfo.RelativeViewInfo.MotherCanHelp1"
+          [(FatherNeedHelp)]="this.generalInfoService.AllInfo.RelativeViewInfo.FatherNeedHelp1"
+          [(MotherNeedHelp)]="this.generalInfoService.AllInfo.RelativeViewInfo.MotherNeedHelp1"
+          [(FatherGetF)]="this.generalInfoService.AllInfo.RelativeViewInfo.FatherGetF1"
+          [(MotherGetF)]="this.generalInfoService.AllInfo.RelativeViewInfo.MotherGetF1"
+          [(CommentFather)]="this.generalInfoService.AllInfo.RelativeViewInfo.CommentFather1"
+          [(CommentMother)]="this.generalInfoService.AllInfo.RelativeViewInfo.CommentMother1" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Section Divider -->
+  <div class="section-divider" *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Marride"></div>
+
+  <!-- Second Relative (if married) -->
+  <div class="row" *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Marride">
+    <div class="col-xl-12">
+      <div class="relatives-wrapper">
+        <app-relative [Num]=2 [(Name)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name2"
+          [(FatherAge)]="this.generalInfoService.AllInfo.RelativeViewInfo.FatherAge2"
+          [(MotherAge)]="this.generalInfoService.AllInfo.RelativeViewInfo.MotherAge2"
+          [(FatherCanHelp)]="this.generalInfoService.AllInfo.RelativeViewInfo.FatherCanHelp2"
+          [(MotherCanHelp)]="this.generalInfoService.AllInfo.RelativeViewInfo.MotherCanHelp2"
+          [(FatherNeedHelp)]="this.generalInfoService.AllInfo.RelativeViewInfo.FatherNeedHelp2"
+          [(MotherNeedHelp)]="this.generalInfoService.AllInfo.RelativeViewInfo.MotherNeedHelp2"
+          [(FatherGetF)]="this.generalInfoService.AllInfo.RelativeViewInfo.FatherGetF2"
+          [(MotherGetF)]="this.generalInfoService.AllInfo.RelativeViewInfo.MotherGetF2"
+          [(CommentFather)]="this.generalInfoService.AllInfo.RelativeViewInfo.CommentFather2"
+          [(CommentMother)]="this.generalInfoService.AllInfo.RelativeViewInfo.CommentMother2" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary Section -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="summary-section">
+        <h1 class="summary-title">
+          <i class="bi bi-gift me-3"></i>
+          סה"כ ירושות
+        </h1>
+        <span class="inheritance-badge">
+          <i class="bi bi-currency-shekel me-2"></i>
+          {{CalcGetF() | currency:'ILS':'symbol':'.0'}}
+        </span>
+      </div>
+    </div>
+  </div>
+</div>

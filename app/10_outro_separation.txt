@@ -1,0 +1,3 @@
+cinematic realistic wide shot, divorced parents walking out from the same place in opposite directions, calm acceptance, slow cinematic motion, warm sunset light --ar 16:9
+--cref URL_FATHER URL_MOTHER
+--sref URL_STYLE

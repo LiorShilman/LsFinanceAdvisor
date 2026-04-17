@@ -1,0 +1,637 @@
+/* GPT API Component - CSS מעודכן מלא */
+
+/* ===== מניעת scroll על העמוד ===== */
+body,
+html {
+  overflow: hidden !important;
+  height: 100vh !important;
+  margin: 0;
+  padding: 0;
+}
+
+/* ===== Container Styling ===== */
+.container-fluid {
+  height: 100vh !important;
+  overflow: hidden !important;
+  padding: 1rem !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  direction: rtl;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* ===== Card Styling ===== */
+.card {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.9) 50%, rgba(71, 85, 105, 0.9) 100%) !important;
+  border: 2px solid rgba(139, 92, 246, 0.3) !important;
+  border-radius: 20px !important;
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.15),
+    0 8px 32px rgba(139, 92, 246, 0.15),
+    0 16px 64px rgba(168, 85, 247, 0.1) !important;
+  backdrop-filter: blur(20px);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-bottom: 0 !important;
+  height: 100vh !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 30%, #a855f7 70%, #9333ea 100%);
+  opacity: 0.08;
+  border-radius: 20px;
+  z-index: -1;
+}
+
+.card-body {
+  background: transparent !important;
+  padding: 1rem !important;
+  position: relative;
+  z-index: 1;
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+}
+
+/* ===== Header Styling ===== */
+.card-header {
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.12) 0%, rgba(168, 85, 247, 0.08) 100%) !important;
+  border-bottom: 2px solid rgba(139, 92, 246, 0.3) !important;
+  color: #f8fafc !important;
+  font-weight: 800 !important;
+  font-size: 2rem !important;
+  text-align: center;
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  border-radius: 16px;
+  backdrop-filter: blur(20px);
+  position: relative;
+  background-clip: padding-box;
+  text-shadow: 0 0 20px rgba(139, 92, 246, 0.4);
+  border: 2px solid rgba(139, 92, 246, 0.3) !important;
+  flex-shrink: 0 !important;
+}
+
+/* ===== תיקון סרגל הכפתורים ===== */
+.control-bar {
+  display: flex;
+  justify-content: flex-end !important;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(51, 65, 85, 0.7) 100%);
+  border-radius: 12px;
+  border: 2px solid rgba(139, 92, 246, 0.2);
+  flex-wrap: wrap;
+  direction: rtl !important;
+  flex-shrink: 0 !important;
+}
+
+.control-bar .d-flex {
+  flex-direction: row-reverse !important;
+  justify-content: flex-end !important;
+  width: 100%;
+}
+
+/* ===== Button Styling ===== */
+.btn {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%) !important;
+  color: white !important;
+  font-weight: 800 !important;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+  border: 2px solid rgba(139, 92, 246, 0.3) !important;
+  border-radius: 12px !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow:
+    0 4px 15px rgba(139, 92, 246, 0.3),
+    0 0 20px rgba(139, 92, 246, 0.2);
+  backdrop-filter: blur(10px);
+  position: relative;
+  overflow: hidden;
+  padding: 0.75rem 1.5rem;
+  margin: 0 0.25rem;
+}
+
+.btn:hover {
+  transform: translateY(-3px) scale(1.05);
+  box-shadow:
+    0 0 25px rgba(139, 92, 246, 0.5),
+    0 8px 30px rgba(139, 92, 246, 0.4);
+  border-color: rgba(139, 92, 246, 0.5) !important;
+  background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%) !important;
+}
+
+/* ===== Select Dropdown ===== */
+.bstyle {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(51, 65, 85, 0.8) 100%) !important;
+  border: 2px solid rgba(139, 92, 246, 0.3) !important;
+  border-radius: 8px !important;
+  color: #f8fafc !important;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  padding: 0.5rem 1rem;
+  margin: 0 0.25rem;
+}
+
+/* ===== אזור התוכן והקונטיינר ===== */
+.col-xl-12 {
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  position: relative !important;
+}
+
+/* ===== Chat Container עם scroll נפרד ===== */
+.frame-box {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(51, 65, 85, 0.8) 100%) !important;
+  border-radius: 16px;
+  padding: 1.5rem;
+  padding-bottom: 0 !important;
+  border: 2px solid rgba(139, 92, 246, 0.3);
+  backdrop-filter: blur(20px);
+  box-shadow:
+    0 4px 20px rgba(0, 0, 0, 0.15),
+    0 8px 32px rgba(139, 92, 246, 0.15);
+  position: relative;
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  flex: 1 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  width: 100% !important;
+}
+
+/* ===== Chat Messages Container ===== */
+.frame-box > div:first-child {
+  flex: 1 !important;
+  overflow-y: auto !important;
+  padding-bottom: 1rem !important;
+}
+
+/* ===== Chat Bubbles ===== */
+.talk-bubble-system {
+  margin: 2rem auto;
+  display: block !important;
+  position: relative;
+  width: 95%;
+  max-width: 1500px;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(99, 102, 241, 0.1) 100%) !important;
+  border: 2px solid rgba(59, 130, 246, 0.3) !important;
+  border-radius: 16px;
+  box-shadow:
+    0 4px 15px rgba(59, 130, 246, 0.2),
+    0 0 25px rgba(59, 130, 246, 0.1);
+  backdrop-filter: blur(10px);
+  font-size: 1.1rem !important;
+  transition: all 0.3s ease;
+}
+
+.talk-bubble-assistant {
+  margin: 2rem 1rem 2rem auto;
+  display: block !important;
+  position: relative;
+  width: 85%;
+  max-width: 800px;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.1) 100%) !important;
+  border: 2px solid rgba(16, 185, 129, 0.3) !important;
+  border-radius: 20px;
+  box-shadow:
+    0 4px 15px rgba(16, 185, 129, 0.2),
+    0 0 25px rgba(16, 185, 129, 0.1);
+  backdrop-filter: blur(10px);
+  font-size: 1rem !important;
+  transition: all 0.3s ease;
+}
+
+.talk-bubble-user {
+  margin: 2rem auto 2rem 1rem;
+  display: block !important;
+  position: relative;
+  width: 85%;
+  max-width: 800px;
+  background: linear-gradient(135deg, rgba(168, 85, 247, 0.15) 0%, rgba(147, 51, 234, 0.1) 100%) !important;
+  border: 2px solid rgba(168, 85, 247, 0.3) !important;
+  border-radius: 20px;
+  box-shadow:
+    0 4px 15px rgba(168, 85, 247, 0.2),
+    0 0 25px rgba(168, 85, 247, 0.1);
+  backdrop-filter: blur(10px);
+  font-size: 1rem !important;
+  transition: all 0.3s ease;
+}
+
+/* ===== Chat Icons ===== */
+.assistant-icon,
+.user-icon {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  box-shadow:
+    0 4px 15px rgba(0, 0, 0, 0.2),
+    0 0 20px rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+  z-index: 10;
+}
+
+.assistant-icon {
+  top: 15px;
+  left: -25px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.user-icon {
+  top: 15px;
+  right: -25px;
+  background: linear-gradient(135deg, #a855f7 0%, #9333ea 100%);
+}
+
+/* ===== Chat Text Content ===== */
+.talktext {
+  padding: 1.5rem;
+  text-align: right;
+  line-height: 1.6;
+  color: #f8fafc;
+  direction: rtl;
+}
+
+.talktext pre {
+  font-family: inherit !important;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  color: inherit;
+  background: transparent;
+  border: none;
+  margin: 0;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* ===== אזור הקלט - Fixed Bottom ===== */
+.fixed-bottom-bar {
+  position: sticky !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.98) 0%, rgba(51, 65, 85, 0.95) 100%) !important;
+  padding: 1rem !important;
+  box-shadow:
+    0 -4px 20px rgba(0, 0, 0, 0.3),
+    0 -8px 32px rgba(139, 92, 246, 0.15);
+  z-index: 1000 !important;
+  border-top: 2px solid rgba(139, 92, 246, 0.3);
+  border-radius: 16px 16px 0 0;
+  backdrop-filter: blur(20px);
+  direction: rtl;
+  flex-shrink: 0 !important;
+  margin-top: auto !important;
+}
+
+/* ===== Input Container ===== */
+.input-container {
+  display: flex !important;
+  gap: 1rem !important;
+  align-items: center !important;
+  direction: rtl !important;
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  width: 100% !important;
+}
+
+/* ===== Textarea ===== */
+.gpt-textarea {
+  flex: 1 !important;
+  min-height: 50px !important;
+  max-height: 80px !important;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(51, 65, 85, 0.8) 100%) !important;
+  border: 2px solid rgba(139, 92, 246, 0.3) !important;
+  border-radius: 12px !important;
+  color: #10b981 !important;
+  font-weight: 700;
+  font-size: 1rem !important;
+  padding: 0.75rem !important;
+  resize: none !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  backdrop-filter: blur(10px);
+  direction: rtl !important;
+  text-align: right !important;
+}
+
+.gpt-textarea:focus {
+  border-color: rgba(139, 92, 246, 0.6) !important;
+  box-shadow:
+    0 0 0 3px rgba(139, 92, 246, 0.2),
+    0 0 20px rgba(139, 92, 246, 0.4) !important;
+  outline: none;
+  transform: translateY(-2px);
+}
+
+.gpt-textarea::placeholder {
+  color: rgba(248, 250, 252, 0.6);
+  font-style: italic;
+}
+
+/* ===== Send Button ===== */
+.send-btn-container {
+  flex-shrink: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.send-btn-container .btn {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%) !important;
+  color: white !important;
+  font-weight: 800 !important;
+  border: 2px solid rgba(139, 92, 246, 0.3) !important;
+  border-radius: 12px !important;
+  padding: 0.75rem 1.25rem !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow:
+    0 4px 15px rgba(139, 92, 246, 0.3),
+    0 0 20px rgba(139, 92, 246, 0.2);
+  white-space: nowrap !important;
+  font-size: 0.9rem !important;
+}
+
+.send-btn-container .btn:hover {
+  transform: translateY(-3px) scale(1.05) !important;
+  box-shadow:
+    0 0 25px rgba(139, 92, 246, 0.5),
+    0 8px 30px rgba(139, 92, 246, 0.4) !important;
+}
+
+/* ===== Text Styling ===== */
+.system {
+  color: #60a5fa !important;
+  font-weight: 700;
+  text-shadow: 0 0 10px rgba(96, 165, 250, 0.3);
+}
+
+.user {
+  color: #f8fafc !important;
+  font-weight: 600;
+  text-shadow: 0 0 8px rgba(248, 250, 252, 0.3);
+}
+
+.assistant {
+  color: #f8fafc !important;
+  font-weight: 600;
+  text-shadow: 0 0 8px rgba(248, 250, 252, 0.3);
+}
+
+/* ===== Alert Styling ===== */
+.alert-primary {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* ===== Enhanced Text Formatting ===== */
+.talktext strong {
+  color: #fbbf24;
+  font-weight: 800;
+  text-shadow: 0 0 8px rgba(251, 191, 36, 0.4);
+}
+
+/* ===== תיקונים ממוקדים ===== */
+.card-header > div[dir="ltr"] {
+  direction: rtl !important;
+  text-align: right !important;
+  display: flex !important;
+  justify-content: flex-start !important;
+  flex-wrap: wrap !important;
+  gap: 1rem !important;
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 1200px) {
+  .container-fluid {
+    padding: 1rem;
+  }
+
+  .card-header {
+    font-size: 1.8rem !important;
+    padding: 1.25rem;
+  }
+
+  .control-bar {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .container-fluid {
+    padding: 0.75rem;
+  }
+
+  .card-body {
+    padding: 0.75rem !important;
+  }
+
+  .card-header {
+    font-size: 1.5rem !important;
+    padding: 1rem;
+  }
+
+  .frame-box {
+    padding: 1rem;
+  }
+
+  .talk-bubble-system,
+  .talk-bubble-assistant,
+  .talk-bubble-user {
+    width: 95%;
+    margin: 1rem auto;
+    font-size: 0.9rem !important;
+  }
+
+  .talktext {
+    padding: 1rem;
+  }
+
+  .assistant-icon,
+  .user-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .assistant-icon {
+    left: -20px;
+  }
+
+  .user-icon {
+    right: -20px;
+  }
+
+  .fixed-bottom-bar {
+    padding: 0.75rem !important;
+  }
+
+  .input-container {
+    gap: 0.75rem !important;
+  }
+
+  .gpt-textarea {
+    min-height: 45px !important;
+    max-height: 65px !important;
+    font-size: 0.9rem !important;
+    padding: 0.6rem !important;
+  }
+
+  .btn {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .control-bar .d-flex {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .control-bar .btn,
+  .control-bar .bstyle {
+    width: 100%;
+    margin: 0.25rem 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .card-header {
+    font-size: 1.2rem !important;
+  }
+
+  .talk-bubble-system,
+  .talk-bubble-assistant,
+  .talk-bubble-user {
+    font-size: 0.8rem !important;
+    margin: 0.75rem auto;
+  }
+
+  .talktext {
+    padding: 0.75rem;
+  }
+
+  .assistant-icon,
+  .user-icon {
+    width: 35px;
+    height: 35px;
+  }
+
+  .gpt-textarea {
+    min-height: 40px !important;
+    max-height: 60px !important;
+    font-size: 0.85rem !important;
+  }
+
+  .fixed-bottom-bar {
+    padding: 0.5rem !important;
+  }
+}
+
+/* ===== Animation Classes ===== */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInRight {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.card {
+  animation: slideInUp 0.6s ease-out;
+}
+
+.talk-bubble-assistant {
+  animation: fadeInRight 0.5s ease-out;
+}
+
+.talk-bubble-user {
+  animation: fadeInLeft 0.5s ease-out;
+}
+
+.talk-bubble-system {
+  animation: slideInUp 0.5s ease-out;
+}
+
+
+/* תיקון חזק למיקום הבר התחתון - דריסה של כל הכללים הקיימים */
+
+/* דריסה מלאה של fixed-bottom-bar */
+body .container-fluid .card .card-body .fixed-bottom-bar {
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100vw !important;
+  height: auto !important;
+  margin: 0 !important;
+  transform: none !important;
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.9) 100%) !important;
+  padding: 1.5rem !important;
+  box-shadow:
+    0 -4px 20px rgba(0, 0, 0, 0.3),
+    0 -8px 32px rgba(139, 92, 246, 0.15) !important;
+  z-index: 9999 !important;
+  border-top: 2px solid rgba(139, 92, 246, 0.3) !important;
+  border-radius: 16px 16px 0 0 !important;
+  backdrop-filter: blur(20px) !important;
+  direction: rtl !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1rem !important;
+}
+
+/* ביטול sticky אם קיים */
+.fixed-bottom-bar {
+  position: fixed !important;
+  bottom: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100vw !important;
+  z-index: 9999 !important;
+}
+
+/* מקום עבור הבר התחתון */
+.frame-box {
+  padding-bottom: 120px !important;
+  margin-bottom: 0 !important;
+}

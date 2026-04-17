@@ -1,0 +1,1903 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מדריך מקיף: מבצעי 15-85 ו-20-80 לרכישת דירה מקבלן</title>
+    
+    <!-- KaTeX Support for Mathematical Formulas -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    
+    <!-- Chart.js for visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460);
+            color: #e0e6ed;
+            line-height: 1.7;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(45deg, #4a90e2, #7b68ee);
+            padding: 40px 30px;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(74, 144, 226, 0.3);
+        }
+
+        .header h1 {
+            font-size: 3.5em;
+            margin-bottom: 15px;
+            background: linear-gradient(45deg, #ffffff, #f0f8ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header-subtitle {
+            font-size: 1.3em;
+            color: #e8f4f8;
+            margin-bottom: 25px;
+        }
+
+        .classification-box {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #4a90e2;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 30px auto;
+            max-width: 800px;
+            backdrop-filter: blur(10px);
+        }
+
+        .classification-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+        }
+
+        .classification-item .icon {
+            font-size: 1.5em;
+            margin-left: 15px;
+            color: #4a90e2;
+        }
+
+        .content-section {
+            background: rgba(255, 255, 255, 0.08);
+            margin: 30px 0;
+            padding: 35px;
+            border-radius: 20px;
+            border: 1px solid rgba(74, 144, 226, 0.3);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(5px);
+        }
+
+        .section-title {
+            font-size: 2.8em;
+            color: #4a90e2;
+            margin-bottom: 25px;
+            text-align: center;
+            background: linear-gradient(45deg, #4a90e2, #7b68ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .subsection-title {
+            font-size: 2.2em;
+            color: #66d9ef;
+            margin: 25px 0 15px 0;
+            border-bottom: 3px solid #66d9ef;
+            padding-bottom: 10px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 25px 0;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        .comparison-table th {
+            background: linear-gradient(45deg, #4a90e2, #7b68ee);
+            color: white;
+            padding: 20px 15px;
+            text-align: center;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+
+        .comparison-table td {
+            padding: 18px 15px;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 1.05em;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .comparison-table tr:hover {
+            background: rgba(74, 144, 226, 0.1);
+            transform: scale(1.01);
+            transition: all 0.3s ease;
+        }
+
+        .positive {
+            color: #4ade80;
+            font-weight: bold;
+        }
+
+        .negative {
+            color: #f87171;
+            font-weight: bold;
+        }
+
+        .neutral {
+            color: #fbbf24;
+            font-weight: bold;
+        }
+
+        .chart-container {
+            margin: 30px 0;
+            padding: 25px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            text-align: -webkit-center;
+        }
+
+        .chart-title {
+            font-size: 1.8em;
+            color: #4a90e2;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .formula-container {
+            background: rgba(74, 144, 226, 0.15);
+            padding: 25px;
+            margin: 25px 0;
+            border-radius: 15px;
+            border: 2px solid rgba(74, 144, 226, 0.4);
+            direction: ltr;
+            text-align: center;
+        }
+
+        .latex-formula {
+            direction: ltr;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .negative-number {
+            color: #ff6b6b;
+            font-weight: bold;
+            direction: ltr;
+            unicode-bidi: embed;
+        }
+
+        .calculator-section {
+            background: linear-gradient(135deg, #0f172a, #1e293b, #334155);
+            padding: 35px;
+            border-radius: 20px;
+            margin: 30px 0;
+            box-shadow: 0 20px 40px rgba(15, 23, 42, 0.6);
+            border: 2px solid rgba(59, 130, 246, 0.4);
+        }
+
+        .calculator-title {
+            font-size: 2.5em;
+            color: #ffffff;
+            text-align: center;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 6px rgba(0,0,0,0.5);
+            font-weight: bold;
+        }
+
+        .input-group {
+            margin: 20px 0;
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .input-label {
+            font-size: 1.2em;
+            color: #f1f5f9;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.4);
+        }
+
+        .input-field {
+            padding: 15px;
+            border: 2px solid rgba(59, 130, 246, 0.6);
+            border-radius: 10px;
+            font-size: 1.1em;
+            background: rgba(255, 255, 255, 0.95);
+            color: #0f172a;
+            direction: ltr;
+            text-align: right;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.2);
+            font-weight: 600;
+        }
+
+        .input-field:focus {
+            outline: none;
+            border-color: #3b82f6;
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.3), inset 0 2px 4px rgba(0,0,0,0.2);
+            transform: scale(1.02);
+        }
+
+        .calculate-btn {
+            background: linear-gradient(45deg, #059669, #10b981, #34d399);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            font-size: 1.4em;
+            font-weight: bold;
+            border-radius: 15px;
+            cursor: pointer;
+            margin: 30px auto;
+            display: block;
+            box-shadow: 0 10px 25px rgba(16, 185, 129, 0.4);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+        }
+
+        .calculate-btn:hover {
+            transform: translateY(-4px) scale(1.05);
+            background: linear-gradient(45deg, #047857, #059669, #10b981);
+            box-shadow: 0 15px 35px rgba(16, 185, 129, 0.5);
+        }
+
+        .calculate-btn:active {
+            transform: translateY(-2px) scale(1.03);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .results-box {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid #4ade80;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .result-item {
+            font-size: 1.3em;
+            margin: 15px 0;
+            color: #4ade80;
+        }
+
+        .warning-box {
+            background: rgba(255, 107, 107, 0.15);
+            border: 2px solid #ff6b6b;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .tip-box {
+            background: rgba(75, 192, 192, 0.15);
+            border: 2px solid #4bc0c0;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .list-item {
+            margin: 15px 0;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border-right: 5px solid #4a90e2;
+            font-size: 1.1em;
+        }
+
+        .highlight-stat {
+            font-size: 1.5em;
+            color: #fbbf24;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .footer-section {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            padding: 40px;
+            border-radius: 20px;
+            margin-top: 40px;
+            text-align: center;
+            border: 1px solid rgba(74, 144, 226, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5em;
+            }
+            
+            .section-title {
+                font-size: 2.2em;
+            }
+            
+            .input-group {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .comparison-table {
+                font-size: 0.9em;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+        }
+		
+		.result-item {
+            font-size: 1.3em;
+            margin: 15px 0;
+            color: #4ade80;
+        }
+
+        .warning-box {
+            background: rgba(255, 107, 107, 0.15);
+            border: 2px solid #ff6b6b;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .tip-box {
+            background: rgba(75, 192, 192, 0.15);
+            border: 2px solid #4bc0c0;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 25px 0;
+            backdrop-filter: blur(10px);
+        }
+
+        .list-item {
+            margin: 15px 0;
+            padding: 15px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border-right: 5px solid #4a90e2;
+            font-size: 1.1em;
+        }
+
+        .highlight-stat {
+            font-size: 1.5em;
+            color: #fbbf24;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.5);
+        }
+
+        .footer-section {
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            padding: 40px;
+            border-radius: 20px;
+            margin-top: 40px;
+            text-align: center;
+            border: 1px solid rgba(74, 144, 226, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5em;
+            }
+            
+            .section-title {
+                font-size: 2.2em;
+            }
+            
+            .input-group {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .comparison-table {
+                font-size: 0.9em;
+            }
+            
+            .container {
+                padding: 15px;
+            }
+        }
+		
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header Section -->
+        <div class="header">
+            <<h1>🏠 מדריך מקיף: מבצעי קבלן 10-90 , 15-85 ו 20-80</h1>
+            <div class="header-subtitle">הסבר מעמיק על מבצעי המימון החדשניים לרכישת דירה מקבלן בישראל</div>
+        </div>
+
+        <!-- Section 1: What are these deals -->
+        <div class="content-section">
+            <h2 class="section-title">🎯 מה הם מבצעי 10-90 , 15-85 ו 20-80?</h2>
+            
+            <div class="subsection-title">📋 הגדרה בסיסית</div>
+            <p style="font-size: 1.2em; margin-bottom: 20px;">
+                מבצעי קבלן הם שיטות מימון חדשניות שפותחו על ידי חברות הבנייה כדי להקל על רוכשי הדירות ולהגביר את המכירות בתקופה של ריביות גבוהות ואי-ודאות כלכלית.
+            </p>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin: 30px 0;">
+                <div style="background: rgba(74, 144, 226, 0.1); padding: 25px; border-radius: 15px; border: 2px solid #4a90e2;">
+                    <h3 style="color: #4a90e2; font-size: 1.8em; margin-bottom: 15px;">🔵 מבצע 20-80</h3>
+                    <p><strong>משמעות:</strong> הרוכש משלם 20% ממחיר הדירה בחתימה על החוזה</p>
+                    <p><strong>יתרת התשלום:</strong> 80% ישולמו רק במועד מסירת המפתחות</p>
+                    <p><strong>זמן המתנה:</strong> בדרך כלל 2-4 שנים (תלוי בשלב הפרויקט)</p>
+                </div>
+                
+                <div style="background: rgba(123, 104, 238, 0.1); padding: 25px; border-radius: 15px; border: 2px solid #7b68ee;">
+                    <h3 style="color: #7b68ee; font-size: 1.8em; margin-bottom: 15px;">🟣 מבצע 15-85</h3>
+                    <p><strong>משמעות:</strong> הרוכש משלם רק 15% ממחיר הדירה בחתימה</p>
+                    <p><strong>יתרת התשלום:</strong> 85% ישולמו במועד מסירת המפתחות</p>
+                    <p><strong>מגמה:</strong> התפתח כתגובה לעליית המע"מ ב-2025</p>
+                </div>
+            </div>
+
+            <div class="warning-box">
+                <h3 style="color: #ff6b6b; margin-bottom: 15px;">⚠️ התפתחות חדשה: הגבלות בנק ישראל</h3>
+                <p style="font-size: 1.1em;">
+                    במרץ 2025, בנק ישראל הכריז על צעדים להגבלת מבצעי הקבלן: העלאת דרישת הון הבנקים עבור אשראי למבצעים אלה, והגבלת שיעור הלוואות הבלון המסובסדות ל-10% מסך המשכנתאות החודשיות. ההגבלות יחולו עד סוף 2026.
+                </p>
+            </div>
+        </div>
+
+        <!-- Section 2: How it works -->
+        <div class="content-section">
+            <h2 class="section-title">⚙️ איך זה עובד?</h2>
+            
+            <div class="subsection-title">🔄 שתי שיטות מימוש</div>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>שיטה</th>
+                        <th>תיאור</th>
+                        <th>מי משלם הריבית</th>
+                        <th>סיכון לרוכש</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>דחיית תשלום פשוטה</strong></td>
+                        <td>הקבלן פשוט דוחה את קבלת התשלום</td>
+                        <td>אין ריבית - הקבלן "מלווה" חינם</td>
+                        <td class="positive">נמוך</td>
+                    </tr>
+                    <tr>
+                        <td><strong>הלוואת בלון</strong></td>
+                        <td>הבנק מעניק הלוואה לחלק מהסכום</td>
+                        <td>הקבלן משלם הריבית במקום הרוכש</td>
+                        <td class="neutral">בינוני</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="tip-box">
+                <h3 style="color: #4bc0c0; margin-bottom: 15px;">💡 נתון מעניין</h3>
+                <p style="font-size: 1.2em;">
+                    25% מהדירות החדשות שנמכרו בספטמבר 2024 שווקו באמצעות מבצעי 80/20, מה שמעיד על הפופולריות הגדולה של מבצעים אלה.
+                </p>
+            </div>
+        </div>
+
+
+        <!-- Section 4: Advantages and Disadvantages -->
+        <div class="content-section">
+            <h2 class="section-title">⚖️ יתרונות וחסרונות</h2>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                <div>
+                    <h3 class="subsection-title positive">✅ יתרונות לרוכש</h3>
+                    <div class="list-item">
+                        <strong>נגישות מוגברת:</strong> אפשרות לרכוש דירה עם הון עצמי מינימלי
+                    </div>
+                    <div class="list-item">
+                        <strong>זמן להתארגנות:</strong> 2-4 שנים לחסוך להון העצמי הנדרש
+                    </div>
+                    <div class="list-item">
+                        <strong>חיסכון בשכירות:</strong> הימנעות מתשלום שכר דירה עד למסירה
+                    </div>
+                    <div class="list-item">
+                        <strong>הגנה מפני עליית מחירים:</strong> נעילת מחיר היום
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="subsection-title negative">❌ חסרונות וסיכונים</h3>
+                    <div class="list-item">
+                        <strong>עלייה מוסתרת במחירים:</strong> הקבלנים מגלגלים את עלויות המימון למחיר
+                    </div>
+                    <div class="list-item">
+                        <strong>סיכון אי-עמידה:</strong> קושי במימון היתרה במועד המסירה
+                    </div>
+                    <div class="list-item">
+                        <strong>תלות בקבלן:</strong> סיכון כשל פיננסי של חברת הבנייה
+                    </div>
+                    <div class="list-item">
+                        <strong>מגבלות מכירה:</strong> קושי במכירת הדירה טרם השלמתה
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 5: Market Impact -->
+        <div class="content-section">
+            <h2 class="section-title">📊 השפעה על השוק</h2>
+            
+            <div class="chart-container">
+                <div class="chart-title">השפעת מבצעי הקבלן על האשראי</div>
+                <canvas id="creditImpactChart" style="max-height: 400px;"></canvas>
+            </div>
+            
+            <div style="background: rgba(255, 255, 255, 0.05); padding: 25px; border-radius: 15px; margin: 25px 0;">
+                <h3 style="color: #fbbf24; font-size: 1.8em; margin-bottom: 15px;">📈 נתונים מהשוק</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                    <div style="text-align: center;">
+                        <div class="highlight-stat">47 מיליארד ₪</div>
+                        <p>סך האשראי למימון בנייה (ספטמבר 2024)</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div class="highlight-stat">+38%</div>
+                        <p>גידול באשראי תוך 12 חודשים</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div class="highlight-stat">25%</div>
+                        <p>אחוז הדירות שנמכרו במבצעי 80/20</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 6: Risk Analysis -->
+        <div class="content-section">
+            <h2 class="section-title">🎯 ניתוח סיכונים</h2>
+            
+            <div class="chart-container">
+                <div class="chart-title">רמות סיכון לפי תרחישים</div>
+                <canvas id="riskAnalysisChart" style="max-height: 400px;"></canvas>
+            </div>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>תרחיש</th>
+                        <th>הסתברות</th>
+                        <th>השפעה על הרוכש</th>
+                        <th>המלצה</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ירידת ריביות</td>
+                        <td class="positive">גבוהה</td>
+                        <td class="positive">חיובית - קל יותר לממן</td>
+                        <td>כדאי להיכנס למבצע</td>
+                    </tr>
+                    <tr>
+                        <td>עליית מחירי דירות</td>
+                        <td class="neutral">בינונית</td>
+                        <td class="positive">חיובית - רכישה במחיר נמוך</td>
+                        <td>יתרון משמעותי</td>
+                    </tr>
+                    <tr>
+                        <td>כשל פיננסי של קבלן</td>
+                        <td class="negative">נמוכה</td>
+                        <td class="negative">שלילית - עיכובים ובעיות</td>
+                        <td>לבדוק יציבות הקבלן</td>
+                    </tr>
+                    <tr>
+                        <td>ירידת מחירי דירות</td>
+                        <td class="negative">נמוכה</td>
+                        <td class="negative">שלילית - תשלום יתר</td>
+                        <td>סיכון מחושב</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Section 7: Expert Recommendations -->
+        <div class="content-section">
+            <h2 class="section-title">🎯 המלצות מומחים</h2>
+            
+            <div class="subsection-title">✅ מתי כדאי להיכנס למבצע?</div>
+            <div class="tip-box">
+                <div class="list-item">
+                    <strong>יכולת מימון מוכחת:</strong> ודאו שתוכלו לממן את היתרה במועד המסירה
+                </div>
+                <div class="list-item">
+                    <strong>קבלן יציב:</strong> בדקו את המצב הפיננסי והמוניטין של חברת הבנייה
+                </div>
+                <div class="list-item">
+                    <strong>ליווי בנקאי:</strong> ודאו שקיים ליווי בנקאי מלא לפרויקט
+                </div>
+                <div class="list-item">
+                    <strong>הבנת החוזה:</strong> קראו בעיון את כל התנאים וההגבלות
+                </div>
+            </div>
+            
+            <div class="subsection-title">⚠️ מתי להיזהר?</div>
+            <div class="warning-box">
+                <div class="list-item">
+                    <strong>אי-יציבות כלכלית:</strong> אם אין ודאות לגבי ההכנסות העתידיות
+                </div>
+                <div class="list-item">
+                    <strong>קבלן חדש:</strong> היזהרו מחברות בנייה ללא ניסיון מוכח
+                </div>
+                <div class="list-item">
+                    <strong>מחירים מנופחים:</strong> אם מחיר הדירה גבוה משמעותית מהשוק
+                </div>
+                <div class="list-item">
+                    <strong>תנאים לא ברורים:</strong> חוזה עם סעיפים מעורפלים או מגבילים
+                </div>
+                <div class="list-item">
+                    <strong>לחץ למכירה מהירה:</strong> אם הקבלן לוחץ להחתמה מיידית
+                </div>
+            </div>
+        </div>
+
+        <!-- Section 8: Financial Calculations -->
+        <div class="content-section">
+            <h2 class="section-title">🧮 חישובים פיננסיים מתקדמים</h2>
+            
+            <div class="subsection-title">💰 דוגמה מעשית: דירה של 4 מיליון ₪</div>
+            
+           <table class="comparison-table">
+			<thead>
+				<tr>
+					<th>סוג מבצע</th>
+					<th>תשלום בחתימה</th>
+					<th>יתרת לתשלום במסירה</th>
+					<th>חיסכון מיידי</th>
+					<th>נדרש להשלמה במסירה</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><strong>מבצע 10-90</strong></td>
+					<td class="positive">400,000 ₪</td>
+					<td>3,600,000 ₪</td>
+					<td class="positive">600,000 ₪</td>
+					<td class="neutral">600,000 ₪</td>
+				</tr>
+				<tr>
+					<td><strong>מבצע 15-85</strong></td>
+					<td class="positive">600,000 ₪</td>
+					<td>3,400,000 ₪</td>
+					<td class="positive">400,000 ₪</td>
+					<td class="neutral">400,000 ₪</td>
+				</tr>
+				<tr>
+					<td><strong>מבצע 20-80</strong></td>
+					<td class="neutral">800,000 ₪</td>
+					<td>3,200,000 ₪</td>
+					<td class="neutral">200,000 ₪</td>
+					<td class="positive">200,000 ₪</td>
+				</tr>
+				<tr>
+					<td><strong>רכישה רגילה</strong></td>
+					<td class="negative">1,000,000 ₪</td>
+					<td>3,000,000 ₪</td>
+					<td>0 ₪</td>
+					<td class="positive">0 ₪</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<!-- הסבר נוסף מתחת לטבלה -->
+		<div style="background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 10px; margin-top: 20px;">
+			<h4 style="color: #66d9ef; margin-bottom: 15px;">💡 הסבר על הטבלה:</h4>
+			<div style="font-size: 1.1em; line-height: 1.6;">
+				<p><strong>תשלום בחתימה:</strong> מה שמשלמים עכשיו על החוזה</p>
+				<p><strong>חיסכון מיידי:</strong> כמה פחות צריך לשלם עכשיו לעומת רכישה רגילה</p>
+				<p><strong>נדרש להשלמה במסירה:</strong> כמה צריך להוסיף כדי להגיע ל-25% הון עצמי</p>
+				<p><strong>יתרת לתשלום:</strong> מה שנשאר לתשלום במועד קבלת המפתח (כולל משכנתא 75%)</p>
+				<div style="background: rgba(75, 192, 192, 0.15); padding: 15px; border-radius: 8px; margin-top: 15px;">
+					<strong>חישוב:</strong> הון עצמי כולל = תשלום בחתימה + נדרש להשלמה = 1,000,000 ₪ (25%)
+				</div>
+			</div>
+		</div>
+
+            <div class="formula-container">
+				<h3 style="color: white; margin-bottom: 20px;">נוסחת חישוב העלות האמיתית</h3>
+				<div class="latex-formula">
+					$$\text{עלות אמיתית} = \text{מחיר דירה} + \text{עלות מימון סמויה}$$
+				</div>
+				
+				<div class="latex-formula">
+					$$\text{עלות מימון סמויה} = \frac{\text{יתרת תשלום} \times \text{ריבית שוק} \times \text{תקופת בנייה}}{100}$$
+				</div>
+				
+				<p style="color: #e0e6ed; margin-top: 15px; font-size: 1.1em;">
+					לדוגמה: במבצע 15-85 על דירה של 4M ₪, תקופת בנייה 3 שנים, ריבית 4.5%:
+				</p>
+				
+				<div class="latex-formula">
+					$$\text{עלות סמויה} = \frac{3{,}400{,}000 \times 4.5 \times 3}{100} = 459{,}000 \text{ ש״ח}$$
+				</div>
+			</div>
+        </div>
+
+        <!-- Calculator Section -->
+        <div class="calculator-section">
+            <h2 class="calculator-title">🧮 מחשבון מבצעי קבלן</h2>
+            
+            <div class="input-group">
+                <label class="input-label">מחיר הדירה (ש"ח):</label>
+                <input type="number" id="propertyPrice" class="input-field" placeholder="4,000,000" value="4000000">
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">אחוז תשלום ראשוני:</label>
+                <select id="paymentPercent" class="input-field">
+					<option value="10">10% (10-90 מבצע)</option>
+                    <option value="15">15% (מבצע 15-85)</option>
+                    <option value="20" selected>20% (מבצע 20-80)</option>
+                    <option value="25">25% (רגיל)</option>
+                </select>
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">תקופת הבנייה (שנים):</label>
+                <input type="number" id="buildingPeriod" class="input-field" placeholder="3" value="3" min="1" max="5">
+            </div>
+            
+            <div class="input-group">
+                <label class="input-label">ריבית שוק נוכחית (%):</label>
+                <input type="number" id="interestRate" class="input-field" placeholder="4.5" value="4.5" step="0.1">
+            </div>
+            
+            <button class="calculate-btn" onclick="calculateDeal()">חשב את המבצע</button>
+            
+            <div id="calculatorResults" class="results-box" style="display: none;">
+                <!-- Results will be populated by JavaScript -->
+            </div>
+        </div>
+
+        <!-- Charts Section -->
+        <div class="content-section">
+            <h2 class="section-title">📊 ניתוח גרפי</h2>
+            
+            <div class="chart-container">
+                <div class="chart-title">השוואת עלויות בין סוגי המבצעים</div>
+                <canvas id="costComparisonChart" style="max-height: 400px;"></canvas>
+            </div>
+            
+            <div class="chart-container">
+                <div class="chart-title">חלוקת הסיכונים במבצעי קבלן</div>
+                <canvas id="riskDistributionChart" style="max-height: 400px;"></canvas>
+            </div>
+        </div>
+
+        <!-- Market Trends Section -->
+        <div class="content-section">
+            <h2 class="section-title">📈 מגמות השוק ונתונים עדכניים</h2>
+            
+            <div style="background: rgba(255, 255, 255, 0.05); padding: 25px; border-radius: 15px; margin: 25px 0;">
+                <h3 style="color: #fbbf24; font-size: 1.8em; margin-bottom: 15px;">📊 סטטיסטיקות מהשוק (2024-2025)</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                    <div style="text-align: center; background: rgba(74, 144, 226, 0.1); padding: 20px; border-radius: 10px;">
+                        <div class="highlight-stat">25%</div>
+                        <p>מהדירות החדשות נמכרו במבצעי 80/20</p>
+                    </div>
+                    <div style="text-align: center; background: rgba(123, 104, 238, 0.1); padding: 20px; border-radius: 10px;">
+                        <div class="highlight-stat">47 מיליארד ₪</div>
+                        <p>סך האשראי למימון בנייה</p>
+                    </div>
+                    <div style="text-align: center; background: rgba(255, 107, 107, 0.1); padding: 20px; border-radius: 10px;">
+                        <div class="highlight-stat">+38%</div>
+                        <p>גידול באשראי תוך שנה</p>
+                    </div>
+                    <div style="text-align: center; background: rgba(75, 192, 192, 0.1); padding: 20px; border-radius: 10px;">
+                        <div class="highlight-stat">64%</div>
+                        <p>מרוכשים משתמשים ביועץ משכנתאות</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <div class="chart-title">מגמת התפתחות מבצעי הקבלן לאורך השנים</div>
+                <canvas id="trendsChart" style="max-height: 400px;"></canvas>
+            </div>
+        </div>
+
+        <!-- Expert Tips Section -->
+        <div class="content-section">
+            <h2 class="section-title">💡 טיפים ממומחים</h2>
+            
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px;">
+                <div class="tip-box">
+                    <h3 style="color: #4bc0c0; margin-bottom: 15px;">✅ לפני החתימה</h3>
+                    <div class="list-item">בדקו את הדוחות הכספיים של הקבלן ב-3 השנים האחרונות</div>
+                    <div class="list-item">ודאו קיום ביטוח אחריות מקצועית וביטוח עבודות</div>
+                    <div class="list-item">בדקו אם יש ליווי בנקאי מלא ומה תנאיו</div>
+                    <div class="list-item">השוו מחירים עם פרויקטים דומים באזור</div>
+                </div>
+                
+                <div class="warning-box">
+                    <h3 style="color: #ff6b6b; margin-bottom: 15px;">⚠️ סימני אזהרה</h3>
+                    <div class="list-item">מחירים נמוכים בצורה חשודה מהשוק</div>
+                    <div class="list-item">לחץ להחתמה מיידית "הצעה מוגבלת"</div>
+                    <div class="list-item">סירוב לתת פרטים על המצב הפיננסי</div>
+                    <div class="list-item">חוזה עם סעיפים לא ברורים או מגבילים</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Future Outlook Section -->
+        <div class="content-section">
+            <h2 class="section-title">🔮 תחזית העתיד</h2>
+            
+            <div class="subsection-title">📊 השפעת הגבלות בנק ישראל</div>
+            <p style="font-size: 1.2em; margin-bottom: 20px;">
+                ההגבלות החדשות של בנק ישראל, שנכנסו לתוקף במרץ 2025, צפויות להשפיע על השוק בכמה דרכים:
+            </p>
+            
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>השפעה</th>
+                        <th>טווח קצר (2025)</th>
+                        <th>טווח בינוני (2026)</th>
+                        <th>טווח ארוך (2027+)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>זמינות מבצעים</strong></td>
+                        <td class="negative">ירידה משמעותית</td>
+                        <td class="neutral">התייצבות</td>
+                        <td class="positive">חזרה מדורגת</td>
+                    </tr>
+                    <tr>
+                        <td><strong>מחירי דירות</strong></td>
+                        <td class="neutral">עליה מתונה</td>
+                        <td class="negative">עליה משמעותית</td>
+                        <td class="neutral">התייצבות</td>
+                    </tr>
+                    <tr>
+                        <td><strong>נגישות לקונים</strong></td>
+                        <td class="negative">ירידה</td>
+                        <td class="negative">ירידה נוספת</td>
+                        <td class="neutral">שיפור הדרגתי</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Action Plan Section -->
+        <div class="content-section">
+            <h2 class="section-title">🎯 תוכנית פעולה לרוכש פוטנציאלי</h2>
+            
+            <div style="background: linear-gradient(135deg, #4a90e2, #7b68ee); padding: 30px; border-radius: 15px; margin: 25px 0;">
+                <h3 style="color: white; font-size: 2em; margin-bottom: 20px; text-align: center;">📝 רשימת משימות</h3>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 25px;">
+                    <div>
+                        <h4 style="color: #e8f4f8; font-size: 1.4em; margin-bottom: 15px;">שלב 1: הכנה</h4>
+                        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; margin-bottom: 10px;">
+                            בדיקת יכולת מימון אישית
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; margin-bottom: 10px;">
+                            איסוף מידע על פרויקטים רלוונטיים
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                            בדיקת מוניטין קבלנים
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <h4 style="color: #e8f4f8; font-size: 1.4em; margin-bottom: 15px;">שלב 2: ביצוע</h4>
+                        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; margin-bottom: 10px;">
+                            השוואת מבצעים וחישוב עלויות
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px; margin-bottom: 10px;">
+                            בדיקת חוזה עם עורך דין
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 10px;">
+                            קבלת אישור בנקאי מוקדם
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Section -->
+        <div class="footer-section">
+            <h2 style="color: #4a90e2; font-size: 2.5em; margin-bottom: 20px;">📋 סיכום ומסקנות</h2>
+            
+            <div style="background: rgba(255, 255, 255, 0.05); padding: 25px; border-radius: 15px; margin-bottom: 25px;">
+                <h3 style="color: #66d9ef; font-size: 1.8em; margin-bottom: 15px;">🎯 נקודות מפתח לזכירה:</h3>
+                <div style="font-size: 1.2em; line-height: 1.8;">
+                    <p>• מבצעי 15-85 ו-20-80 מציעים נגישות גבוהה לרכישת דירה, אך דורשים תכנון פיננסי מדוקדק</p>
+                    <p>• העלות האמיתית כוללת תוספת של 10-15% למחיר הדירה בגלל עלויות המימון הסמויות</p>
+                    <p>• הגבלות בנק ישראל צפויות להקטין את זמינות המבצעים החל מ-2025</p>
+                    <p>• הצלחת המבצע תלויה ביציבות הקבלן ויכולת המימון העתידית של הרוכש</p>
+                </div>
+            </div>
+            
+            <div style="font-size: 1.1em; color: #e0e6ed; text-align: center;">
+                📊 דו"ח זה הוכן על בסיס נתונים עדכניים מבנק ישראל, משרד האוצר ונתוני השוק לאוגוסט 2025
+            </div>
+        </div>
+    </div>
+
+    <script>
+	
+	// מחשבון מבצעי קבלן - כל התרחישים האפשריים
+	// מחשבון מבצעי קבלן - לוגיקה נכונה של מבנה המימון
+	function calculateDeal() {
+		const price = parseFloat(document.getElementById('propertyPrice').value);
+		const percent = parseFloat(document.getElementById('paymentPercent').value);
+		const period = parseFloat(document.getElementById('buildingPeriod').value);
+		const interest = parseFloat(document.getElementById('interestRate').value);
+		
+		if (!price || !percent || !period || !interest) {
+			alert('אנא מלאו את כל השדות');
+			return;
+		}
+		
+		// 📊 חישובים בסיסיים
+		const initialPayment = price * (percent / 100);
+		const requiredEquityAtDelivery = price * 0.25;
+		const actualPaymentAtDelivery = requiredEquityAtDelivery - initialPayment;
+		const mortgageAmount = price * 0.75; // זהה בכל המקרים
+		
+		// 💰 תרחיש רכישה רגילה
+		const regularEquityPayment = price * 0.25;
+		
+		// 📅 תרחישי מימון
+		const monthsToSave = period * 12;
+		const monthlySavingNeeded = actualPaymentAtDelivery / monthsToSave;
+		
+		// 💳 חישובי משכנתא (זהה בכל המקרים - 75% מהדירה)
+		const monthlyRate = interest / 100 / 12;
+		const numPayments = 25 * 12;
+		const monthlyMortgagePayment = calculateMonthlyPayment(mortgageAmount, monthlyRate, numPayments);
+		
+		// 🎯 תרחיש א': יש יכולת חיסכון במהלך הבנייה
+		const scenario1_savingPhase = monthlySavingNeeded * monthsToSave;
+		const scenario1_mortgagePhase = monthlyMortgagePayment * (25 * 12);
+		const scenario1_grandTotal = initialPayment + scenario1_savingPhase + scenario1_mortgagePhase;
+		
+		// 🎯 תרחיש ב': אין יכולת חיסכון - הלוואה נוספת
+		// במקרה זה: משכנתא רגילה (75%) + הלוואה נוספת לכיסוי ההפרש
+		const additionalLoanAmount = actualPaymentAtDelivery;
+		const additionalLoanRate = (interest + 1) / 100 / 12; // הלוואה נוספת בריבית גבוהה יותר
+		const additionalLoanPayments = 15 * 12; // הלוואה קצרה יותר - 15 שנים
+		const monthlyAdditionalLoan = calculateMonthlyPayment(additionalLoanAmount, additionalLoanRate, additionalLoanPayments);
+		
+		const scenario2_monthlyTotal = monthlyMortgagePayment + monthlyAdditionalLoan;
+		const scenario2_mortgageTotal = monthlyMortgagePayment * (25 * 12);
+		const scenario2_additionalLoanTotal = monthlyAdditionalLoan * additionalLoanPayments;
+		const scenario2_grandTotal = initialPayment + scenario2_mortgageTotal + scenario2_additionalLoanTotal;
+		
+		// 🎯 תרחיש ג': רכישה רגילה
+		const scenario3_mortgagePhase = monthlyMortgagePayment * (25 * 12);
+		const scenario3_grandTotal = regularEquityPayment + scenario3_mortgagePhase;
+		
+		// 📊 חישוב חיסכון/הפסד
+		const savings_A_vs_C = scenario3_grandTotal - scenario1_grandTotal;
+		const loss_B_vs_C = scenario2_grandTotal - scenario3_grandTotal;
+		const loss_B_vs_A = scenario2_grandTotal - scenario1_grandTotal;
+		
+		// 🏆 קביעת התרחיש הטוב ביותר
+		const bestScenario = Math.min(scenario1_grandTotal, scenario2_grandTotal, scenario3_grandTotal);
+		
+		const resultsHTML = `
+			<h3 style="color: #4ade80; margin-bottom: 20px; text-align: center;">📊 3 תרחישי רכישה - מבנה מימון נכון</h3>
+			
+			<div style="background: rgba(74, 144, 226, 0.1); padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+				<h4 style="color: #4a90e2; margin-bottom: 15px;">📋 נתוני הבסיס</h4>
+				<div class="result-item">מחיר הדירה: <strong>${price.toLocaleString('he-IL')} ₪</strong></div>
+				<div class="result-item">תשלום ראשוני במבצע: <strong>${initialPayment.toLocaleString('he-IL')} ₪</strong> (${percent}%)</div>
+				<div class="result-item">נדרש להשלמה להון עצמי: <strong>${actualPaymentAtDelivery.toLocaleString('he-IL')} ₪</strong></div>
+				<div class="result-item">משכנתא בכל המקרים: <strong>${mortgageAmount.toLocaleString('he-IL')} ₪</strong> (75%)</div>
+				<div class="result-item">תקופת בנייה: <strong>${period} שנים</strong></div>
+			</div>
+			
+			<div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-bottom: 20px;">
+				<div style="background: rgba(75, 192, 192, 0.1); padding: 20px; border-radius: 10px;">
+					<h4 style="color: #4bc0c0; margin-bottom: 15px;">🎯 תרחיש א'</h4>
+					<h5 style="color: #4bc0c0; text-align: center; margin-bottom: 15px;">מבצע + חיסכון</h5>
+					
+					<div style="margin-bottom: 15px;">
+						<div style="color: #e0e6ed; font-weight: bold; margin-bottom: 8px;">תשלומים:</div>
+						<div class="result-item">תשלום ראשוני: ${initialPayment.toLocaleString('he-IL')} ₪</div>
+						<div class="result-item">חיסכון (${period} שנים): ${scenario1_savingPhase.toLocaleString('he-IL')} ₪</div>
+						<div class="result-item">- חודשי: ${Math.round(monthlySavingNeeded).toLocaleString('he-IL')} ₪</div>
+					</div>
+					
+					<div style="margin-bottom: 15px;">
+						<div style="color: #e0e6ed; font-weight: bold; margin-bottom: 8px;">משכנתא (25 שנים):</div>
+						<div class="result-item">סכום: ${mortgageAmount.toLocaleString('he-IL')} ₪</div>
+						<div class="result-item">חודשי: ${Math.round(monthlyMortgagePayment).toLocaleString('he-IL')} ₪</div>
+						<div class="result-item">סה"כ: ${Math.round(scenario1_mortgagePhase).toLocaleString('he-IL')} ₪</div>
+					</div>
+					
+					<div style="border-top: 2px solid #4bc0c0; padding-top: 10px;">
+						<div class="result-item"><strong>סה"כ כולל: ${Math.round(scenario1_grandTotal).toLocaleString('he-IL')} ₪</strong></div>
+						${scenario1_grandTotal === bestScenario ? '<div style="color: #4ade80; text-align: center; margin-top: 8px;">🏆 הזול ביותר!</div>' : ''}
+					</div>
+				</div>
+				
+				<div style="background: rgba(255, 193, 7, 0.1); padding: 20px; border-radius: 10px;">
+					<h4 style="color: #ffc107; margin-bottom: 15px;">🎯 תרחיש ב'</h4>
+					<h5 style="color: #ffc107; text-align: center; margin-bottom: 15px;">מבצע + הלוואה נוספת</h5>
+					
+					<div style="margin-bottom: 15px;">
+						<div style="color: #e0e6ed; font-weight: bold; margin-bottom: 8px;">תשלומים:</div>
+						<div class="result-item">תשלום ראשוני: ${initialPayment.toLocaleString('he-IL')} ₪</div>
+						<div class="result-item">אין חיסכון במהלך בנייה</div>
+					</div>
+					
+					<div style="margin-bottom: 15px;">
+						<div style="color: #e0e6ed; font-weight: bold; margin-bottom: 8px;">2 הלוואות נפרדות:</div>
+						<div class="result-item">משכנתא: ${Math.round(monthlyMortgagePayment).toLocaleString('he-IL')} ₪/חודש</div>
+						<div class="result-item">הלוואה נוספת: ${Math.round(monthlyAdditionalLoan).toLocaleString('he-IL')} ₪/חודש</div>
+						<div class="result-item">סה"כ חודשי: <strong>${Math.round(scenario2_monthlyTotal).toLocaleString('he-IL')} ₪</strong></div>
+					</div>
+					
+					<div style="margin-bottom: 15px;">
+						<div style="color: #e0e6ed; font-weight: bold; margin-bottom: 8px;">סה"כ תשלומים:</div>
+						<div class="result-item">משכנתא (25 שנים): ${Math.round(scenario2_mortgageTotal).toLocaleString('he-IL')} ₪</div>
+						<div class="result-item">הלוואה (15 שנים): ${Math.round(scenario2_additionalLoanTotal).toLocaleString('he-IL')} ₪</div>
+					</div>
+					
+					<div style="border-top: 2px solid #ffc107; padding-top: 10px;">
+						<div class="result-item"><strong>סה"כ כולל: ${Math.round(scenario2_grandTotal).toLocaleString('he-IL')} ₪</strong></div>
+						<div style="color: #ff9999; text-align: center; margin-top: 8px; font-size: 0.9em;">
+							+${Math.round(loss_B_vs_A).toLocaleString('he-IL')} ₪ מתרחיש א'
+						</div>
+					</div>
+				</div>
+				
+				<div style="background: rgba(255, 107, 107, 0.1); padding: 20px; border-radius: 10px;">
+					<h4 style="color: #ff6b6b; margin-bottom: 15px;">🎯 תרחיש ג'</h4>
+					<h5 style="color: #ff6b6b; text-align: center; margin-bottom: 15px;">רכישה רגילה</h5>
+					
+					<div style="margin-bottom: 15px;">
+						<div style="color: #e0e6ed; font-weight: bold; margin-bottom: 8px;">תשלום מיידי:</div>
+						<div class="result-item">הון עצמי: ${regularEquityPayment.toLocaleString('he-IL')} ₪</div>
+						<div class="result-item">(25% מהדירה)</div>
+					</div>
+					
+					<div style="margin-bottom: 15px;">
+						<div style="color: #e0e6ed; font-weight: bold; margin-bottom: 8px;">משכנתא (25 שנים):</div>
+						<div class="result-item">סכום: ${mortgageAmount.toLocaleString('he-IL')} ₪</div>
+						<div class="result-item">חודשי: ${Math.round(monthlyMortgagePayment).toLocaleString('he-IL')} ₪</div>
+						<div class="result-item">סה"כ: ${Math.round(scenario3_mortgagePhase).toLocaleString('he-IL')} ₪</div>
+					</div>
+					
+					<div style="border-top: 2px solid #ff6b6b; padding-top: 10px;">
+						<div class="result-item"><strong>סה"כ כולל: ${Math.round(scenario3_grandTotal).toLocaleString('he-IL')} ₪</strong></div>
+						${savings_A_vs_C > 0 ? 
+							`<div style="color: #ff9999; text-align: center; margin-top: 8px; font-size: 0.9em;">
+								+${Math.round(savings_A_vs_C).toLocaleString('he-IL')} ₪ מתרחיש א'
+							</div>` : ''
+						}
+					</div>
+				</div>
+			</div>
+			
+			<div style="background: linear-gradient(135deg, rgba(74, 144, 226, 0.2), rgba(123, 104, 238, 0.2)); padding: 25px; border-radius: 15px;">
+				<h4 style="color: #ffffff; margin-bottom: 20px; text-align: center;">🏆 ניתוח מפורט</h4>
+				
+				<div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+					<h5 style="color: #ffffff; margin-bottom: 15px;">💰 הפרשי עלויות:</h5>
+					<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+						<div>
+							<div style="color: #4ade80; font-size: 1.1em; margin-bottom: 5px;">
+								✅ חיסכון במבצע עם משמעת:
+							</div>
+							<div style="color: #ffffff; font-size: 1.3em; font-weight: bold;">
+								${savings_A_vs_C > 0 ? savings_A_vs_C.toLocaleString('he-IL') + ' ₪' : 'אין חיסכון'}
+							</div>
+						</div>
+						<div>
+							<div style="color: #ff6b6b; font-size: 1.1em; margin-bottom: 5px;">
+								❌ עלות נוספת ללא משמעת חיסכון:
+							</div>
+							<div style="color: #ffffff; font-size: 1.3em; font-weight: bold;">
+								+${Math.round(loss_B_vs_C).toLocaleString('he-IL')} ₪
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+					<h5 style="color: #ffffff; margin-bottom: 15px;">📊 המתמטיקה מאחורי התוצאות:</h5>
+					<div style="color: #e8f4f8; font-size: 0.95em; line-height: 1.6;">
+						<div style="margin-bottom: 10px;">
+							<strong>למה תרחיש א' הזול ביותר?</strong> אתה חוסך ${Math.round(monthlySavingNeeded).toLocaleString('he-IL')} ₪ מהרכישה הרגילה במשך ${period} שנים
+						</div>
+						<div style="margin-bottom: 10px;">
+							<strong>למה תרחיש ב' הכי יקר?</strong> אתה לוקח הלוואה נוספת בריבית גבוהה יותר (${(interest + 1).toFixed(1)}%) למשך 15 שנים
+						</div>
+						<div>
+							<strong>תרחיש ג':</strong> בטוח ויציב, אבל דורש ${regularEquityPayment.toLocaleString('he-IL')} ₪ מיידי
+						</div>
+					</div>
+				</div>
+				
+				<div style="background: rgba(255,255,255,0.1); padding: 20px; border-radius: 10px;">
+					<h5 style="color: #ffffff; margin-bottom: 15px;">🎯 המלצה סופית:</h5>
+					<div style="color: #e8f4f8; font-size: 1em; line-height: 1.7;">
+						${savings_A_vs_C > 100000 ? 
+							`<div style="color: #4ade80; font-size: 1.1em; margin-bottom: 10px;">
+								✅ <strong>המבצע משתלם!</strong> חיסכון של ${Math.round(savings_A_vs_C).toLocaleString('he-IL')} ₪ הוא משמעותי
+							</div>
+							<div>אבל רק אם יש לך משמעת חיסכון של ${Math.round(monthlySavingNeeded).toLocaleString('he-IL')} ₪ כל חודש ללא פשרות</div>` :
+							`<div style="color: #fbbf24; font-size: 1.1em; margin-bottom: 10px;">
+								⚖️ <strong>ההפרש קטן יחסית</strong> - שקול רכישה רגילה לביטחון
+							</div>`
+						}
+						
+						<div style="margin-top: 15px; padding: 12px; background: rgba(255,107,107,0.3); border-radius: 6px;">
+							<strong>⚠️ אזהרה קריטית:</strong> אל תיכנס למבצע ללא יכולת חיסכון ודאית!
+							<br>תרחיש ב' עולה ${Math.round(loss_B_vs_C).toLocaleString('he-IL')} ₪ יותר מרכישה רגילה
+						</div>
+					</div>
+				</div>
+			</div>
+		`;
+		
+		document.getElementById('calculatorResults').innerHTML = resultsHTML;
+		document.getElementById('calculatorResults').style.display = 'block';
+	}
+
+	// פונקציה לחישוב תשלום חודשי למשכנתא (נוסחת PMT)
+	function calculateMonthlyPayment(principal, monthlyRate, numPayments) {
+		if (monthlyRate === 0) {
+			return principal / numPayments;
+		}
+		
+		// נוסחת PMT: P * [r(1+r)^n] / [(1+r)^n - 1]
+		const rPowerN = Math.pow(1 + monthlyRate, numPayments);
+		return principal * (monthlyRate * rPowerN) / (rPowerN - 1);
+	}
+
+	// פונקציה עזר לפורמט מספרים בעברית
+	function formatNumber(number) {
+		return new Intl.NumberFormat('he-IL').format(Math.round(number));
+	}
+        // Chart Initialization - יוצר את כל הגרפים באתר
+        function initializeCharts() {
+            
+            // Graf 1: השוואת עלויות בין המבצעים - מעודכן
+			const ctx1 = document.getElementById('costComparisonChart');
+			if (ctx1) {
+				new Chart(ctx1.getContext('2d'), {
+					type: 'bar',
+					data: {
+						labels: ['מבצע 10-90', 'מבצע 15-85', 'מבצע 20-80', 'רכישה רגילה'],
+						datasets: [{
+							label: 'תשלום בחתימה (אלפי ₪)',
+							data: [400, 600, 800, 1000],
+							backgroundColor: ['#10b981', '#4a90e2', '#7b68ee', '#ff6b6b'],
+							borderColor: ['#10b981', '#4a90e2', '#7b68ee', '#ff6b6b'],
+							borderWidth: 3
+						}, {
+							label: 'נדרש להשלמה במסירה (אלפי ₪)',
+							data: [600, 400, 200, 0],
+							backgroundColor: ['rgba(16, 185, 129, 0.6)', 'rgba(74, 144, 226, 0.6)', 'rgba(123, 104, 238, 0.6)', 'rgba(255, 107, 107, 0.6)'],
+							borderColor: ['#10b981', '#4a90e2', '#7b68ee', '#ff6b6b'],
+							borderWidth: 2
+						}]
+					},
+					options: {
+						responsive: true,
+						maintainAspectRatio: false,
+						plugins: {
+							title: {
+								display: true,
+								text: 'השוואת מבנה תשלומים - דירה של 4 מיליון ₪',
+								color: '#ffffff',
+								font: { size: 16, weight: 'bold' }
+							},
+							legend: {
+								labels: {
+									color: '#ffffff',
+									font: { size: 14 },
+									usePointStyle: true,
+									padding: 20
+								}
+							},
+							tooltip: {
+								callbacks: {
+									label: function(context) {
+										return context.dataset.label + ': ' + context.parsed.y.toLocaleString('he-IL') + 'k ₪';
+									},
+									afterBody: function(tooltipItems) {
+										const dataIndex = tooltipItems[0].dataIndex;
+										const immediate = tooltipItems[0].parsed.y;
+										const needed = tooltipItems[1] ? tooltipItems[1].parsed.y : 0;
+										const total = immediate + needed;
+										
+										return [
+											'',
+											'סה"כ הון עצמי: ' + total.toLocaleString('he-IL') + 'k ₪',
+											'חיסכון מיידי: ' + needed.toLocaleString('he-IL') + 'k ₪'
+										];
+									}
+								}
+							}
+						},
+						scales: {
+							y: {
+								beginAtZero: true,
+								max: 1200,
+								ticks: { 
+									color: '#ffffff',
+									font: { size: 12 },
+									callback: function(value) {
+										return value.toLocaleString('he-IL') + 'k ₪';
+									}
+								},
+								grid: { color: 'rgba(255, 255, 255, 0.15)' },
+								title: {
+									display: true,
+									text: 'סכום (אלפי ₪)',
+									color: '#ffffff'
+								}
+							},
+							x: {
+								ticks: { color: '#ffffff', font: { size: 12 } },
+								grid: { color: 'rgba(255, 255, 255, 0.1)' }
+							}
+						},
+						interaction: {
+							mode: 'index',
+							intersect: false
+						},
+						animation: {
+							duration: 2000,
+							easing: 'easeInOutQuart'
+						}
+					}
+				});
+			}
+						
+           // Graf 2: חלוקת סיכונים במבצעי קבלן - עם labels בלבן
+			const ctx2 = document.getElementById('riskDistributionChart');
+			if (ctx2) {
+				new Chart(ctx2.getContext('2d'), {
+					type: 'doughnut',
+					data: {
+						labels: ['סיכון נמוך - קבלן יציב', 'סיכון בינוני - תנאי שוק', 'סיכון גבוה - כשלים פוטנציאליים'],
+						datasets: [{
+							data: [45, 35, 20],
+							backgroundColor: [
+								'#4ade80',  // ירוק - סיכון נמוך
+								'#fbbf24',  // צהוב - סיכון בינוני  
+								'#f87171'   // אדום - סיכון גבוה
+							],
+							borderColor: '#ffffff',
+							borderWidth: 3,
+							hoverOffset: 15
+						}]
+					},
+					options: {
+						responsive: true,
+						maintainAspectRatio: false,
+						plugins: {
+							title: {
+								display: true,
+								text: 'התפלגות סיכונים במבצעי קבלן (%)',
+								color: '#ffffff',
+								font: { size: 16, weight: 'bold' }
+							},
+							legend: {
+								position: 'bottom',
+								labels: {
+									color: '#ffffff',  // צבע הטקסט בלבן
+									font: { size: 13 },
+									usePointStyle: true,
+									padding: 25,
+									// הסרתי את generateLabels שגרם לבעיה
+								}
+							},
+							tooltip: {
+								callbacks: {
+									label: function(context) {
+										return context.label + ': ' + context.parsed + '%';
+									}
+								}
+							}
+						},
+						animation: {
+							duration: 2500,
+							easing: 'easeInOutBounce'
+						}
+					}
+				});
+			}
+            
+            // Graf 3: מגמות שוק לאורך השנים
+            const ctx3 = document.getElementById('trendsChart');
+            if (ctx3) {
+                new Chart(ctx3.getContext('2d'), {
+                    type: 'line',
+                    data: {
+                        labels: ['2022', '2023', '2024', '2025 (צפי)', '2026 (צפי)'],
+                        datasets: [{
+                            label: 'אחוז דירות במבצעי קבלן (%)',
+                            data: [5, 15, 25, 18, 12],
+                            borderColor: '#4a90e2',
+                            backgroundColor: 'rgba(74, 144, 226, 0.2)',
+                            fill: true,
+                            tension: 0.4,
+                            pointRadius: 6,
+                            pointHoverRadius: 8,
+                            pointBackgroundColor: '#4a90e2',
+                            pointBorderColor: '#ffffff',
+                            pointBorderWidth: 2
+                        }, {
+                            label: 'אשראי לבנייה (מיליארדי ₪)',
+                            data: [25, 35, 47, 52, 48],
+                            borderColor: '#ff6b6b',
+                            backgroundColor: 'rgba(255, 107, 107, 0.2)',
+                            fill: true,
+                            tension: 0.4,
+                            yAxisID: 'y1',
+                            pointRadius: 6,
+                            pointHoverRadius: 8,
+                            pointBackgroundColor: '#ff6b6b',
+                            pointBorderColor: '#ffffff',
+                            pointBorderWidth: 2
+                        }, {
+                            label: 'מדד מחירי דירות (2022=100)',
+                            data: [100, 108, 116, 122, 118],
+                            borderColor: '#fbbf24',
+                            backgroundColor: 'rgba(251, 191, 36, 0.2)',
+                            fill: false,
+                            tension: 0.4,
+                            yAxisID: 'y2',
+                            pointRadius: 6,
+                            pointHoverRadius: 8,
+                            pointBackgroundColor: '#fbbf24',
+                            pointBorderColor: '#ffffff',
+                            pointBorderWidth: 2,
+                            borderDash: [5, 5]
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'מגמות השוק: מבצעי קבלן, אשראי ומחירי דירות',
+                                color: '#ffffff',
+                                font: { size: 16, weight: 'bold' }
+                            },
+                            legend: {
+                                labels: {
+                                    color: '#ffffff',
+                                    font: { size: 13 },
+                                    usePointStyle: true,
+                                    padding: 20
+                                }
+                            },
+                            tooltip: {
+                                mode: 'index',
+                                intersect: false,
+                                callbacks: {
+                                    title: function(tooltipItems) {
+                                        return 'שנת ' + tooltipItems[0].label;
+                                    }
+                                }
+                            }
+                        },
+                        scales: {
+                            y: {
+                                type: 'linear',
+                                display: true,
+                                position: 'left',
+                                beginAtZero: true,
+                                ticks: { 
+                                    color: '#ffffff',
+                                    font: { size: 11 }
+                                },
+                                grid: { color: 'rgba(255, 255, 255, 0.1)' },
+                                title: {
+                                    display: true,
+                                    text: 'אחוז מבצעי קבלן (%)',
+                                    color: '#4a90e2'
+                                }
+                            },
+                            y1: {
+                                type: 'linear',
+                                display: true,
+                                position: 'right',
+                                beginAtZero: true,
+                                ticks: { 
+                                    color: '#ffffff',
+                                    font: { size: 11 }
+                                },
+                                grid: { drawOnChartArea: false },
+                                title: {
+                                    display: true,
+                                    text: 'אשראי (מיליארדי ₪)',
+                                    color: '#ff6b6b'
+                                }
+                            },
+                            y2: {
+                                type: 'linear',
+                                display: false,
+                                position: 'right',
+                                beginAtZero: false,
+                                min: 95,
+                                max: 130
+                            },
+                            x: {
+                                ticks: { 
+                                    color: '#ffffff',
+                                    font: { size: 12 }
+                                },
+                                grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                            }
+                        },
+                        interaction: {
+                            mode: 'nearest',
+                            intersect: false
+                        },
+                        animation: {
+                            duration: 3000,
+                            easing: 'easeInOutCubic'
+                        }
+                    }
+                });
+            }
+            
+            // Graf 4: גרף השפעות הגבלות בנק ישראל (חדש)
+            const ctx4 = document.getElementById('bankRestrictionsChart');
+            if (ctx4) {
+                new Chart(ctx4.getContext('2d'), {
+                    type: 'radar',
+                    data: {
+                        labels: ['זמינות מבצעים', 'מחירי דירות', 'נגישות לקונים', 'יציבות קבלנים', 'רווחיות בנקים', 'סיכון מערכתי'],
+                        datasets: [{
+                            label: 'לפני הגבלות (2024)',
+                            data: [85, 45, 70, 65, 80, 75],
+                            borderColor: '#ff6b6b',
+                            backgroundColor: 'rgba(255, 107, 107, 0.2)',
+                            pointBackgroundColor: '#ff6b6b',
+                            pointBorderColor: '#ffffff',
+                            pointBorderWidth: 2,
+                            borderWidth: 3
+                        }, {
+                            label: 'אחרי הגבלות (2025)',
+                            data: [35, 65, 45, 80, 90, 45],
+                            borderColor: '#4ade80',
+                            backgroundColor: 'rgba(74, 222, 128, 0.2)',
+                            pointBackgroundColor: '#4ade80',
+                            pointBorderColor: '#ffffff',
+                            pointBorderWidth: 2,
+                            borderWidth: 3
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            title: {
+                                display: true,
+                                text: 'השפעת הגבלות בנק ישראל על מדדי השוק',
+                                color: '#ffffff',
+                                font: { size: 16, weight: 'bold' }
+                            },
+                            legend: {
+                                labels: {
+                                    color: '#ffffff',
+                                    font: { size: 14 }
+                                }
+                            }
+                        },
+                        scales: {
+                            r: {
+                                beginAtZero: true,
+                                max: 100,
+                                ticks: {
+                                    color: '#ffffff',
+                                    font: { size: 11 },
+                                    stepSize: 20
+                                },
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.2)'
+                                },
+                                pointLabels: {
+                                    color: '#ffffff',
+                                    font: { size: 12, weight: 'bold' }
+                                }
+                            }
+                        },
+                        animation: {
+                            duration: 2500,
+                            easing: 'easeInOutElastic'
+                        }
+                    }
+                });
+            }
+			
+			// הוספת הגרפים החסרים לפונקציית initializeCharts()
+
+			// Graf 5: creditImpactChart - השפעה על האשראי
+			const ctx5 = document.getElementById('creditImpactChart');
+			if (ctx5) {
+				new Chart(ctx5.getContext('2d'), {
+					type: 'line',
+					data: {
+						labels: ['2022', '2023', 'Q1 2024', 'Q2 2024', 'Q3 2024', 'Q4 2024', '2025 (צפי)'],
+						datasets: [{
+							label: 'אשראי לבנייה (מיליארד ₪)',
+							data: [25, 30, 35, 40, 47, 52, 48],
+							borderColor: '#ff6b6b',
+							backgroundColor: 'rgba(255, 107, 107, 0.2)',
+							fill: true,
+							tension: 0.3,
+							pointRadius: 6,
+							pointHoverRadius: 8,
+							pointBackgroundColor: '#ff6b6b',
+							pointBorderColor: '#ffffff',
+							pointBorderWidth: 2
+						}, {
+							label: 'אחוז מבצעי קבלן מסך האשראי (%)',
+							data: [8, 18, 22, 28, 35, 42, 30],
+							borderColor: '#4a90e2',
+							backgroundColor: 'rgba(74, 144, 226, 0.2)',
+							fill: true,
+							tension: 0.3,
+							yAxisID: 'y1',
+							pointRadius: 6,
+							pointHoverRadius: 8,
+							pointBackgroundColor: '#4a90e2',
+							pointBorderColor: '#ffffff',
+							pointBorderWidth: 2
+						}, {
+							label: 'מדד סיכון בנקאי (1-10)',
+							data: [3, 4, 5, 6, 7.5, 8.2, 6.5],
+							borderColor: '#fbbf24',
+							backgroundColor: 'rgba(251, 191, 36, 0.2)',
+							fill: false,
+							tension: 0.3,
+							yAxisID: 'y2',
+							pointRadius: 6,
+							pointHoverRadius: 8,
+							pointBackgroundColor: '#fbbf24',
+							pointBorderColor: '#ffffff',
+							pointBorderWidth: 2,
+							borderDash: [8, 4]
+						}]
+					},
+					options: {
+						responsive: true,
+						maintainAspectRatio: false,
+						plugins: {
+							title: {
+								display: true,
+								text: 'השפעת מבצעי הקבלן על היקף האשראי ורמת הסיכון',
+								color: '#ffffff',
+								font: { size: 16, weight: 'bold' }
+							},
+							legend: {
+								labels: {
+									color: '#ffffff',
+									font: { size: 13 },
+									usePointStyle: true,
+									padding: 20
+								}
+							},
+							tooltip: {
+								mode: 'index',
+								intersect: false,
+								callbacks: {
+									title: function(tooltipItems) {
+										return 'תקופה: ' + tooltipItems[0].label;
+									},
+									label: function(context) {
+										let label = context.dataset.label || '';
+										if (label) {
+											label += ': ';
+										}
+										if (context.datasetIndex === 2) {
+											label += context.parsed.y + '/10';
+										} else if (context.datasetIndex === 1) {
+											label += context.parsed.y + '%';
+										} else {
+											label += context.parsed.y.toLocaleString('he-IL') + ' מ"ש';
+										}
+										return label;
+									}
+								}
+							}
+						},
+						scales: {
+							y: {
+								type: 'linear',
+								display: true,
+								position: 'left',
+								beginAtZero: true,
+								max: 60,
+								ticks: { 
+									color: '#ffffff',
+									font: { size: 11 },
+									callback: function(value) {
+										return value + ' מ"ש';
+									}
+								},
+								grid: { color: 'rgba(255, 255, 255, 0.1)' },
+								title: {
+									display: true,
+									text: 'אשראי (מיליארד ₪)',
+									color: '#ff6b6b',
+									font: { size: 12, weight: 'bold' }
+								}
+							},
+							y1: {
+								type: 'linear',
+								display: true,
+								position: 'right',
+								beginAtZero: true,
+								max: 50,
+								ticks: { 
+									color: '#ffffff',
+									font: { size: 11 },
+									callback: function(value) {
+										return value + '%';
+									}
+								},
+								grid: { drawOnChartArea: false },
+								title: {
+									display: true,
+									text: 'אחוז מבצעי קבלן (%)',
+									color: '#4a90e2',
+									font: { size: 12, weight: 'bold' }
+								}
+							},
+							y2: {
+								type: 'linear',
+								display: false,
+								position: 'right',
+								beginAtZero: true,
+								max: 10,
+								min: 0
+							},
+							x: {
+								ticks: { 
+									color: '#ffffff',
+									font: { size: 12 }
+								},
+								grid: { color: 'rgba(255, 255, 255, 0.1)' }
+							}
+						},
+						interaction: {
+							mode: 'nearest',
+							intersect: false
+						},
+						animation: {
+							duration: 2800,
+							easing: 'easeInOutQuart'
+						}
+					}
+				});
+			}
+
+			// Graf 6: riskAnalysisChart - ניתוח סיכונים לפי תרחישים
+			const ctx6 = document.getElementById('riskAnalysisChart');
+			if (ctx6) {
+				new Chart(ctx6.getContext('2d'), {
+					type: 'polarArea',
+					data: {
+						labels: [
+							'עליית ריביות (+2%)',
+							'ירידת מחירי דירות (-10%)', 
+							'כשל פיננסי קבלן',
+							'עיכוב בבנייה (+1 שנה)',
+							'משבר כלכלי כללי',
+							'הגבלות רגולטוריות'
+						],
+						datasets: [{
+							label: 'רמת סיכון (1-10)',
+							data: [7.5, 8.2, 9.1, 6.3, 8.8, 7.0],
+							backgroundColor: [
+								'rgba(255, 193, 7, 0.7)',   // צהוב - עליית ריביות
+								'rgba(255, 107, 107, 0.7)', // אדום - ירידת מחירים
+								'rgba(220, 38, 127, 0.7)',  // ורוד כהה - כשל קבלן
+								'rgba(156, 163, 175, 0.7)', // אפור - עיכוב בנייה
+								'rgba(239, 68, 68, 0.7)',   // אדום כהה - משבר כלכלי
+								'rgba(99, 102, 241, 0.7)'   // כחול - רגולציה
+							],
+							borderColor: [
+								'#ffc107',
+								'#ff6b6b', 
+								'#dc2677',
+								'#9ca3af',
+								'#ef4444',
+								'#6366f1'
+							],
+							borderWidth: 3,
+							hoverBackgroundColor: [
+								'rgba(255, 193, 7, 0.9)',
+								'rgba(255, 107, 107, 0.9)',
+								'rgba(220, 38, 127, 0.9)',
+								'rgba(156, 163, 175, 0.9)',
+								'rgba(239, 68, 68, 0.9)',
+								'rgba(99, 102, 241, 0.9)'
+							]
+						}]
+					},
+					options: {
+						responsive: true,
+						maintainAspectRatio: false,
+						plugins: {
+							title: {
+								display: true,
+								text: 'ניתוח סיכונים במבצעי קבלן - תרחישים שונים',
+								color: '#ffffff',
+								font: { size: 16, weight: 'bold' }
+							},
+							legend: {
+							position: 'bottom',
+								labels: {
+									color: '#ffffff',
+									font: { size: 12 },
+									usePointStyle: true,
+									padding: 15,
+									generateLabels: function(chart) {
+										const data = chart.data;
+										return data.labels.map((label, i) => ({
+											text: label + ' (' + data.datasets[0].data[i] + '/10)',
+											fillStyle: data.datasets[0].backgroundColor[i],
+											strokeStyle: data.datasets[0].borderColor[i],
+											lineWidth: 2,
+											pointStyle: 'circle'
+										}));
+									}
+								}
+							},
+							tooltip: {
+								callbacks: {
+									label: function(context) {
+										return context.label + ': ' + context.parsed.r + '/10 (רמת סיכון)';
+									},
+									afterLabel: function(context) {
+										const riskLevel = context.parsed.r;
+										if (riskLevel <= 3) return '🟢 סיכון נמוך';
+										if (riskLevel <= 6) return '🟡 סיכון בינוני';
+										if (riskLevel <= 8) return '🟠 סיכון גבוה';
+										return '🔴 סיכון קריטי';
+									}
+								}
+							}
+						},
+						scales: {
+							r: {
+								beginAtZero: true,
+								max: 10,
+								min: 0,
+								ticks: {
+									stepSize: 2,
+									color: '#ffffff',
+									font: { size: 11 },
+									backdropColor: 'rgba(0, 0, 0, 0.5)',
+									backdropPadding: 4,
+									callback: function(value) {
+										return value + '/10';
+									}
+								},
+								grid: {
+									color: 'rgba(255, 255, 255, 0.2)',
+									lineWidth: 1
+								},
+								angleLines: {
+									color: 'rgba(255, 255, 255, 0.2)',
+									lineWidth: 1
+								},
+								pointLabels: {
+									color: '#ffffff',
+									font: { size: 11, weight: 'bold' },
+									padding: 10
+								}
+							}
+						},
+						animation: {
+							duration: 3000,
+							easing: 'easeInOutElastic'
+						}
+					}
+				});
+			}
+
+        }
+		
+		function initializeMath() {
+			if (typeof renderMathInElement !== 'undefined') {
+				renderMathInElement(document.body, {
+					delimiters: [
+					   {left: "\\(", right: "\\)", display: false},
+					   {left: "\\[", right: "\\]", display: true},
+					   {left: "$$", right: "$$", display: true},
+					   {left: "$", right: "$", display: false}
+					],
+					throwOnError: false,
+					errorColor: '#cc0000',
+					strict: false
+				});
+				console.log('KaTeX rendering completed');
+			} else {
+				console.log('KaTeX not loaded, retrying in 100ms');
+				setTimeout(initializeMath, 100);
+			}
+		}
+		
+		document.addEventListener("DOMContentLoaded", function() {
+			initializeMath();
+			
+			// אתחול גרפים
+			if (typeof initializeCharts === 'function') {
+				setTimeout(initializeCharts, 200);
+			}
+				
+		});
+		
+		 function sendHeight() {
+            try {
+              const h = Math.max(
+                document.body.scrollHeight,
+                document.documentElement.scrollHeight
+              );
+              window.parent.postMessage({ type: 'resize-mortgage', height: h }, '*');
+            } catch (e) {}
+          }
+
+          // שליחה ראשונית
+          window.addEventListener('load', sendHeight);
+          // שליחה על כל שינוי גודל חלון
+          window.addEventListener('resize', sendHeight);
+          // שליחה חוזרת מדי כמה שניות לגיבוי
+          setInterval(sendHeight, 2000);
+		  
+		
+
+    </script>
+</body>
+</html>

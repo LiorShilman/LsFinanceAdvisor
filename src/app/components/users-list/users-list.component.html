@@ -1,0 +1,142 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-12">
+      <div class="card text-light mb-3 custom-card">
+        <div class="card-body custom-gradient">
+          <div class="card-header fs-1 text-center fw-bold">רשימת לקוחות</div>
+          
+          <div class="table-responsive table-striped fs-5">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th class="text-center">#</th>
+                  <th style="text-align: start">שם פרטי</th>
+                  <th style="text-align: start" class="d-none d-md-table-cell">מייל</th>
+                  <th style="text-align: start" class="d-none d-lg-table-cell">ת.ז</th>
+                  <th style="text-align: start">פעולות</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container
+                  *ngFor="let user of currentUsers; let u = index">
+                  <tr class="mb-12">
+                    <td class="text-center fs-4" data-label="מספר">
+                      {{u+1}}
+                    </td>
+                    <td class="fs-4" style="text-align: start;" data-label="שם פרטי">
+                      {{user.FirstName}}
+                    </td>
+                    <td class="fs-4 d-none d-md-table-cell" style="text-align: start" data-label="מייל">
+                      {{user.Mail}}
+                    </td>
+                    <td class="fs-4 d-none d-lg-table-cell" style="text-align: start" data-label="ת.ז">
+                      {{user.Identification}}
+                    </td>
+                    <td class="fs-4 text-center" data-label="פעולות">
+                      <div class="d-flex justify-content-center align-items-center flex-wrap gap-2">
+                        <a class="edit" 
+                           title="עריכה" 
+                           data-toggle="tooltip"
+                           (click)="EditUser(user.UserID,user.Mail,user.Identification)"
+                           role="button"
+                           tabindex="0"
+                           [attr.aria-label]="'עריכת משתמש ' + user.FirstName">
+                          <i class="material-icons">&#xE254;</i>
+                        </a>
+                        <a class="delete" 
+                           title="מחיקה" 
+                           data-toggle="tooltip" 
+                           (click)="DeleteUser(user.UserID)"
+                           role="button"
+                           tabindex="0"
+                           [attr.aria-label]="'מחיקת משתמש ' + user.FirstName">
+                          <i class="material-icons">&#xE872;</i>
+                        </a>
+                      </div>
+                    </td>
+                  </tr>
+                  
+                  <!-- Mobile-only detailed view -->
+                  <tr class="d-md-none mobile-details" *ngIf="showMobileDetails && selectedMobileUser === u">
+                    <td colspan="5" class="mobile-details-content">
+                      <div class="mobile-info-grid">
+                        <div class="mobile-info-item">
+                          <span class="mobile-label">מייל:</span>
+                          <span class="mobile-value">{{user.Mail}}</span>
+                        </div>
+                        <div class="mobile-info-item">
+                          <span class="mobile-label">ת.ז:</span>
+                          <span class="mobile-value">{{user.Identification}}</span>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+            
+            <!-- Pagination Section -->
+            <div class="clearfix mt-4" *ngIf="getTotalPages() > 1">
+              <div class="row align-items-center">
+                <div class="col-md-6">
+                  <ul class="pagination justify-content-center justify-content-md-start mb-0">
+                    <li class="page-item" [class.disabled]="currentPage === 1">
+                      <a href="#" class="page-link" (click)="$event.preventDefault(); previousPage()" 
+                         [attr.tabindex]="currentPage === 1 ? -1 : null" 
+                         [attr.aria-disabled]="currentPage === 1">קודם</a>
+                    </li>
+                    <li class="page-item" *ngFor="let page of getPageNumbers()" 
+                        [class.active]="page === currentPage">
+                      <a href="#" class="page-link" (click)="$event.preventDefault(); goToPage(page)"
+                         [attr.aria-current]="page === currentPage ? 'page' : null">{{page}}</a>
+                    </li>
+                    <li class="page-item" [class.disabled]="currentPage === getTotalPages()">
+                      <a href="#" class="page-link" (click)="$event.preventDefault(); nextPage()"
+                         [attr.tabindex]="currentPage === getTotalPages() ? -1 : null"
+                         [attr.aria-disabled]="currentPage === getTotalPages()">הבא</a>
+                    </li>
+                  </ul>
+                </div>
+                <div class="col-md-6">
+                  <div class="hint-text text-center text-md-end fs-6">
+                    מציג <b>{{startIndex}}</b> עד <b>{{endIndex}}</b> מתוך <b>{{totalRecords}}</b> רשומות
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- Empty State -->
+            <div class="text-center py-5" *ngIf="!hasData && !isLoading">
+              <div class="empty-state-icon mb-3">
+                <i class="material-icons" style="font-size: 4rem; color: #64748b;">&#xE7FD;</i>
+              </div>
+              <h4 class="text-muted mb-2">אין נתונים להצגה</h4>
+              <p class="text-muted">לא נמצאו לקוחות במערכת</p>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Loading Overlay -->
+  <div class="loading-overlay" *ngIf="isLoading">
+    <div class="loading-spinner">
+      <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">טוען...</span>
+      </div>
+      <div class="loading-text mt-3">טוען נתונים...</div>
+    </div>
+  </div>
+</div>
+
+<!-- Mobile Floating Action Button -->
+<div class="mobile-fab d-md-none">
+  <button class="fab-button" 
+          type="button" 
+          (click)="addNewUser()"
+          aria-label="הוסף לקוח חדש">
+    <i class="material-icons">&#xE145;</i>
+  </button>
+</div>

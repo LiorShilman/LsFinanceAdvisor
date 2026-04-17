@@ -1,0 +1,364 @@
+/* ===========================
+   🎨 משתני צבעים גלובליים
+   =========================== */
+   :root {
+    --bg-grad-1: #0f172a;
+    --bg-grad-2: #1e293b;
+    --bg-grad-3: #312e81;
+    --bg-grad-4: #1e1b4b;
+    --primary-1: #3b82f6;
+    --primary-2: #6366f1;
+    --primary-3: #8b5cf6;
+    --accent-1: #60a5fa;
+    --text: #f8fafc;
+    --muted: #cbd5e1;
+    --border: rgba(99,102,241,.3);
+    --glass: rgba(30,41,59,.9);
+    --shadow: rgba(0,0,0,.15);
+  }
+  
+  @media (prefers-contrast: more) {
+    :root { --border: rgba(255,255,255,.5); }
+  }
+  
+  /* ===========================
+     🖋️ טיפוגרפיה וגוף
+     =========================== */
+  body {
+    font-family: "Assistant","Heebo","Rubik","Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;
+    background: linear-gradient(135deg, var(--bg-grad-1), var(--bg-grad-2), var(--bg-grad-3), var(--bg-grad-4));
+    color: var(--text);
+    min-height: 100vh;
+    margin: 0;
+    direction: rtl;
+    padding-bottom: 70px;
+  }
+  
+  /* ===========================
+     📦 פאנלים / כרטיסים
+     =========================== */
+  .panel, .card {
+    background: linear-gradient(180deg, rgba(15,23,42,.96), rgba(30,41,59,.92));
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1rem 1.25rem;
+    box-shadow: 0 6px 20px var(--shadow);
+  }
+  .panel + .panel { margin-top: 1rem; }
+  .panel .panel-title {
+    font-weight: 800;
+    font-size: 1.25rem;
+    margin-bottom: .5rem;
+    background: linear-gradient(135deg, #fff, var(--accent-1));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  /* ===========================
+     📑 Sidebar Navigation
+     =========================== */
+  #menu { width: 100%; }
+  #menu .nav-link {
+    color: var(--muted);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 12px;
+    width: 100%;
+    padding-inline: 1rem;
+    transition: all .25s ease;
+  }
+  #menu .nav-link:hover {
+    color: var(--accent-1);
+    background: rgba(255,255,255,.05);
+  }
+  #menu .nav-link.SubCategoryActive,
+  #menu .nav-link.active {
+    background: linear-gradient(135deg, var(--primary-1), var(--primary-2), var(--primary-3));
+    color: #fff !important;
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 24px rgba(59,130,246,.25);
+  }
+  #menu .nav-link.SubCategoryActive span,
+  #menu .nav-link.active span {
+    color: #fff !important;
+  }
+  .collapse.nav {
+    background: rgba(30,41,59,.45);
+    transition: height .25s ease, opacity .25s ease;
+    opacity: 1;
+  }
+  .collapse.nav:not(.show) { opacity: 0; }
+  
+  /* ===========================
+     🔘 כפתורים
+     =========================== */
+  .btn-primary {
+    background: linear-gradient(135deg, var(--primary-1), var(--primary-2));
+    border: 1px solid var(--border);
+    color: #fff;
+    border-radius: 12px;
+    font-weight: 700;
+    transition: all .2s ease;
+  }
+  .btn-primary:hover {
+    filter: brightness(1.08);
+    transform: translateY(-1px);
+  }
+  .btn-ghost {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    border-radius: 12px;
+    font-weight: 600;
+  }
+  
+  /* ===========================
+     📊 גרפים / Chart Containers
+     =========================== */
+  .chart-card {
+    background: rgba(2,6,23,.7);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1rem;
+  }
+  
+  /* ===========================
+     ⚡ Header / Sidebar
+     =========================== */
+  .main-header,
+  .sidebar-container {
+    box-shadow: 0 6px 24px var(--shadow);
+    transition: transform .25s ease, box-shadow .25s ease;
+  }
+  .main-header:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 28px var(--shadow);
+  }
+  
+  /* ===========================
+     📱 רספונסיביות
+     =========================== */
+  @media (max-width: 992px) {
+    .sidebar-container { position: sticky; top: 0; z-index: 40; }
+  }
+  
+  /* בסיס צבעוני יותר ללינקים בתפריט (לא אפור) */
+#menu .nav-link {
+  color: var(--text); /* היה var(--muted) */
+}
+
+/* אייקונים – הדגשה בכחול */
+#menu .nav-link i {
+  color: var(--accent-1);
+  transition: color .2s ease;
+}
+#menu .nav-link:hover i {
+  color: #fff;
+}
+
+/* מצב פעיל – ספציפיות גבוהה יותר + !important כדי לגבור על Bootstrap */
+.nav.nav-pills .nav-link.active,
+.nav.nav-pills .nav-link.SubCategoryActive {
+  background: linear-gradient(135deg, var(--primary-1), var(--primary-2), var(--primary-3)) !important;
+  color: #fff !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: 0 8px 24px rgba(59,130,246,.25) !important;
+}
+
+/* טקסט פנימי במצב פעיל */
+.nav.nav-pills .nav-link.active span,
+.nav.nav-pills .nav-link.SubCategoryActive span {
+  color: #fff !important;
+}
+
+/* תתי־תפריט – רקע מעט יותר “זכוכיתי” כדי להחזיר עומק וצבע */
+#menu .collapse.nav {
+  background: linear-gradient(180deg, rgba(49,46,129,.35), rgba(30,41,59,.45));
+}
+
+/* כדי שלא יראו “אפור” על span ישן */
+.SubCategory { color: #d1d5db !important; }
+
+/* אם נשארו הדבקות על span.SubCategoryActive – תן גם לו צבעוניות */
+span.SubCategoryActive {
+  color: #fff !important;
+  background: transparent; /* ההדגשה על ה־a, לא על ה־span */
+}
+
+/* ========= הורה פתוח (קטגוריה) ========= */
+#menu li.section-open > a.nav-link {
+  position: relative;
+  background: linear-gradient(180deg, rgba(49,46,129,.35), rgba(2,6,23,.6));
+  color: #fff;
+  border: 1px solid var(--border);
+  box-shadow: 0 8px 24px rgba(99,102,241,.18);
+}
+
+/* פס הדגשה אנכי לקטגוריה פתוחה */
+#menu li.section-open > a.nav-link::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: auto;   /* RTL-aware */
+  inset-inline-end: 10px;     /* מרחק מהקצה */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 6px;
+  height: 60%;
+  border-radius: 8px;
+  background: linear-gradient(180deg, var(--primary-1), var(--primary-2), var(--primary-3));
+  box-shadow: 0 0 24px rgba(99,102,241,.45);
+}
+
+/* ========= תתי־קטגוריה (ילדים) ========= */
+#menu .collapse.nav .nav-link {
+  position: relative;
+  background: linear-gradient(180deg, rgba(3,7,18,.6), rgba(2,6,23,.8));
+  border: 1px solid transparent;
+  color: var(--text);
+}
+
+/* תת־קטגוריה פעילה – גרדיאנט בהיר יותר + פס דק */
+#menu .collapse.nav .nav-link.active,
+#menu .collapse.nav .nav-link.SubCategoryActive {
+  background: linear-gradient(135deg, rgba(96,165,250,.28), rgba(99,102,241,.28), rgba(139,92,246,.28)) !important;
+  border: 1px solid var(--border) !important;
+  color: #fff !important;
+}
+#menu .collapse.nav .nav-link.active::before,
+#menu .collapse.nav .nav-link.SubCategoryActive::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: auto;
+  inset-inline-end: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 4px;
+  height: 50%;
+  border-radius: 8px;
+  background: linear-gradient(180deg, var(--accent-1), var(--primary-2));
+  box-shadow: 0 0 18px rgba(96,165,250,.45);
+}
+
+/* כותרת הקבוצה עצמה (ה־span) – טקסט לבן כשהקבוצה פתוחה */
+#menu li.section-open > a.nav-link span {
+  color: #fff !important;
+}
+
+/* רקע של רשימת הילדים – מעט יותר “זכוכית” כשהקבוצה פתוחה */
+#menu li.section-open > ul.collapse.nav.show {
+  background: linear-gradient(180deg, rgba(49,46,129,.35), rgba(15,23,42,.55));
+  border-radius: 14px;
+}
+
+#menu li.section-open > a.nav-link span { transform: scale(1.02); display: inline-block; }
+
+:root{
+  --footer-bg: rgba(15,23,42,.72);
+  --footer-bd: rgba(99,102,241,.28);
+  --footer-tx: #f8fafc;
+  --footer-muted: #cbd5e1;
+  --footer-shadow: 0 12px 30px rgba(0,0,0,.28), 0 -6px 24px rgba(99,102,241,.15) inset;
+}
+
+.app-footer{
+  position: fixed;/* נשארת ליד התוכן; אם תרצה 'fixed-bottom' – ראה הערה למטה */
+  bottom: 0;
+  width: 100%;
+  background: linear-gradient(180deg, rgba(2,6,23,.0), rgba(2,6,23,.35)), var(--footer-bg);
+  backdrop-filter: blur(100px);
+  border-top: 1px solid var(--footer-bd);
+  box-shadow: var(--footer-shadow);
+  color: var(--footer-tx);
+  padding: .5rem .75rem;
+  z-index: 1030;
+}
+
+.footer-row{
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: .75rem;
+}
+
+.footer-left{ justify-self: start; }
+.footer-center{ justify-self: center; font-weight: 600; }
+.footer-right{ justify-self: end; }
+
+.brand{
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  color: var(--footer-tx);
+  white-space: nowrap;
+}
+.brand-logo{ border-radius: 8px; }
+.brand-name{ font-weight: 800; letter-spacing: .2px; }
+.brand-dot{ opacity: .5; }
+.brand-sub{ color: var(--footer-muted); font-weight: 600; }
+
+.btn-user{
+  background: rgba(255,255,255,.06);
+  border: 1px solid var(--footer-bd);
+  color: var(--footer-tx);
+  border-radius: 12px;
+  padding: .35rem .6rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+}
+.btn-user:hover{
+  filter: brightness(1.05);
+  transform: translateY(-1px);
+}
+
+.dropdown-menu{
+  border-radius: 12px;
+  border: 1px solid var(--footer-bd);
+  padding: .35rem;
+}
+.dropdown-item{
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+  font-weight: 600;
+}
+.dropdown-item i{ opacity: .85; }
+
+.footer-note{ color: var(--footer-muted); }
+.footer-version{ color: var(--footer-muted); font-weight: 700; }
+.footer-sep{ margin: 0 .35rem; opacity: .6; }
+
+/* רספונסיביות */
+@media (max-width: 768px){
+  .footer-row{
+    grid-template-columns: 1fr auto; /* מסתירים מרכזית למטה */
+    grid-template-areas:
+      "left right"
+      "center center";
+    row-gap: .25rem;
+  }
+  .footer-left{ grid-area: left; }
+  .footer-right{ grid-area: right; }
+  .footer-center{
+    grid-area: center;
+    justify-self: center;
+    font-size: .9rem;
+  }
+  .brand-sub{ display: none; }
+}
+
+.app-footer {
+  direction: rtl; /* מוודא יישור כללי לימין */
+}
+
+.footer-row {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+}
+
+.footer-left { justify-self: start; }   /* שם/מותג בימין */
+.footer-center { justify-self: center; }
+.footer-right { justify-self: end; } /* תפריט משתמש בצד שמאל */
+
+

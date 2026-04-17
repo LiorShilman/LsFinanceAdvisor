@@ -1,0 +1,210 @@
+<div id="numerologyPage" class="container-fluid">
+    <div class="row">
+        <div class="col-xl-12">
+            <div class="card text-white mb-3 h-100">
+                <div class="card-body">
+                    <div class="card-header fs-1 text-center blockquote fw-bold">
+                        <i class="bi bi-calculator me-3"
+                            style="color: #60a5fa; filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.5));"></i>
+                        נתונים אישיים - נומרולוגיה
+                    </div>
+
+                    <form name="personalDataNuerolgyForm" class="alert alert-primary" autocomplete="off"
+                        #personalDataForm="ngForm">
+                        <div class="container" id="body">
+
+                            <div class="row mb-3 mt-3">
+                                <div class="col-md-4">
+                                    <label for="fullName" class="form-label">
+                                        <i class="bi bi-person me-2" style="color: #60a5fa;"></i>
+                                        שם מלא:
+                                    </label>
+                                    <input type="text" id="fullName" class="form-control"
+                                        placeholder="הזן שם מלא בעברית" [(ngModel)]="fullName"
+                                        [ngModelOptions]="{standalone: true}">
+                                </div>
+                                <div class="col-md-8">
+                                    <label for="nickName" class="form-label">
+                                        <i class="bi bi-tag me-2" style="color: #60a5fa;"></i>
+                                        כינוי:
+                                    </label>
+                                    <input type="text" id="nickName" class="form-control" placeholder="הזן כינוי"
+                                        [(ngModel)]="nickName" [ngModelOptions]="{standalone: true}">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-2">
+                                    <label for="dateOfBirth" class="form-label">
+                                        <i class="bi bi-calendar-date me-2" style="color: #60a5fa;"></i>
+                                        תאריך לידה:
+                                    </label>
+                                    <input type="date" 
+                                           id="dateOfBirth" 
+                                           class="form-control" 
+                                           [(ngModel)]="dateOfBirth"
+                                           (ngModelChange)="onDateOfBirthChange($event)"
+                                           [ngModelOptions]="{standalone: true}">
+                                </div>
+
+                                <div class="col-md-2">
+                                    <label for="hebrewDate" class="form-label">
+                                        <i class="bi bi-calendar-hebrew me-2" style="color: #60a5fa;"></i>
+                                        תאריך עברי:
+                                    </label>
+                                    <input type="text" id="hebrewDate" class="form-control" placeholder="תאריך עברי"
+                                        [(ngModel)]="hebrewDate" [ngModelOptions]="{standalone: true}" readonly>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <label class="form-label">
+                                        <i class="bi bi-sunset me-2" style="color: #60a5fa;"></i>
+                                        אחרי השקיעה?
+                                    </label>
+                                    <div class="form-check" style="margin-top: 0.5rem;">
+                                        <input class="form-check-input" 
+                                               type="checkbox" 
+                                               id="afterSunsetCheck"
+                                               [(ngModel)]="afterSunset" 
+                                               (ngModelChange)="onAfterSunsetChange()"
+                                               [ngModelOptions]="{standalone: true}">
+                                        <label class="form-check-label" for="afterSunsetCheck">
+                                            כן
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <label for="attributionDate" class="form-label">
+                                        <i class="bi bi-calendar-check me-2" style="color: #60a5fa;"></i>
+                                        תאריך ייחוס:
+                                    </label>
+                                    <input type="date" id="attributionDate" class="form-control"
+                                        [(ngModel)]="attributionDate" [ngModelOptions]="{standalone: true}">
+                                </div>
+
+                                <div class="col-md-3">
+                                    <label for="dateOfBirthPartner" class="form-label">
+                                        <i class="bi bi-heart me-2" style="color: #60a5fa;"></i>
+                                        תאריך לידה בן/בת זוג:
+                                    </label>
+                                    <input type="date" id="dateOfBirthPartner" class="form-control"
+                                        [(ngModel)]="dateOfBirthPartner" [ngModelOptions]="{standalone: true}">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label for="fullNameChild" class="form-label">
+                                        <i class="bi bi-person-hearts me-2" style="color: #60a5fa;"></i>
+                                        שם מלא בן/בת:
+                                    </label>
+                                    <input type="text" id="fullNameChild" class="form-control"
+                                        placeholder="הזן שם מלא בעברית" [(ngModel)]="fullNameChild"
+                                        [ngModelOptions]="{standalone: true}">
+                                </div>
+                                <div class="col-md-8">
+                                    <label for="dateOfBirthChild" class="form-label">
+                                        <i class="bi bi-calendar-heart me-2" style="color: #60a5fa;"></i>
+                                        תאריך לידה בן/בת:
+                                    </label>
+                                    <input type="date" id="dateOfBirthChild" class="form-control"
+                                        [(ngModel)]="dateOfBirthChild" [ngModelOptions]="{standalone: true}">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label for="fullNameChild2" class="form-label">
+                                        <i class="bi bi-person-hearts me-2" style="color: #60a5fa;"></i>
+                                        שם מלא בן/בת 2:
+                                    </label>
+                                    <input type="text" id="fullNameChild2" class="form-control"
+                                        placeholder="הזן שם מלא בעברית" [(ngModel)]="fullNameChild2"
+                                        [ngModelOptions]="{standalone: true}">
+                                </div>
+                                <div class="col-md-8">
+                                    <label for="dateOfBirthChild2" class="form-label">
+                                        <i class="bi bi-calendar-heart me-2" style="color: #60a5fa;"></i>
+                                        תאריך לידה בן/בת 2:
+                                    </label>
+                                    <input type="date" id="dateOfBirthChild2" class="form-control"
+                                        [(ngModel)]="dateOfBirthChild2" [ngModelOptions]="{standalone: true}">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label for="motherFirstName" class="form-label">
+                                        <i class="bi bi-person-female me-2" style="color: #60a5fa;"></i>
+                                        שם פרטי של האם:
+                                    </label>
+                                    <input type="text" id="motherFirstName" class="form-control"
+                                        placeholder="הזן שם מלא של האם בעברית" [(ngModel)]="motherFirstName"
+                                        [ngModelOptions]="{standalone: true}">
+                                </div>
+                                <div class="col-md-8">
+                                    <label for="fatherFirstName" class="form-label">
+                                        <i class="bi bi-person-male me-2" style="color: #60a5fa;"></i>
+                                        שם פרטי של האב:
+                                    </label>
+                                    <input type="text" id="fatherFirstName" class="form-control"
+                                        placeholder="הזן שם פרטי של האב בעברית" [(ngModel)]="fatherFirstName"
+                                        [ngModelOptions]="{standalone: true}">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-4">
+                                    <label class="form-label">
+                                        <i class="bi bi-gender-ambiguous me-2" style="color: #60a5fa;"></i>
+                                        מין:
+                                    </label>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="sex" id="male" value="male"
+                                            [(ngModel)]="selectedGender" [checked]="selectedGender === 'male'"
+                                            [ngModelOptions]="{standalone: true}">
+                                        <label class="form-check-label" for="male">זכר</label>
+                                    </div>
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="sex" id="female"
+                                            value="female" [(ngModel)]="selectedGender"
+                                            [checked]="selectedGender === 'female'"
+                                            [ngModelOptions]="{standalone: true}">
+                                        <label class="form-check-label" for="female">נקבה</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <label for="address" class="form-label">
+                                        <i class="bi bi-geo-alt me-2" style="color: #60a5fa;"></i>
+                                        כתובת:
+                                    </label>
+                                    <input type="text" id="address" class="form-control" placeholder="הזן כתובת"
+                                        [(ngModel)]="address" [ngModelOptions]="{standalone: true}">
+                                </div>
+                                <div class="col-md-4 d-flex align-items-end">
+                                    <button (click)="CalculateFullNumerology()" class="btn btn-primary w-100">
+                                        <i class="bi bi-calculator-fill me-2"></i>
+                                        פיענוח מלא
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="container-fluid" id="ResultNomorologicMapMain">
+                        <div class="text-center mb-3">
+                            <h3 class="text-white text-center">
+                                <i class="bi bi-magic me-2"
+                                    style="color: #60a5fa; filter: drop-shadow(0 0 8px rgba(96, 165, 250, 0.5));"></i>
+                                תוצאות נומרולוגיה
+                            </h3>
+                        </div>
+                        <div id="ResultNomorologicMap"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

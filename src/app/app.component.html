@@ -1,0 +1,357 @@
+<div class="d-flex justify-content-center mb-3 mt-3">
+  <div class="main-header">
+    <h1 class="d-flex align-items-center text-white mb-0 fw-bold blockquote fs-1">
+      <img src="./assets/images/financial-advisor.png" width="35" height="35" class="mx-3" alt="Financial Advisor">
+      L.S - ייעוץ לכלכלת המשפחה בעזרת - AI
+    </h1>
+  </div>
+</div>
+
+<div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+  <ul class="navbar-nav me-auto mb-2 mb-xl-0"></ul>
+  <ul class="navbar-nav me-auto mb-2 mb-xl-0"></ul>
+</div>
+
+<div class="container-fluid">
+  <div class="row flex-nowrap">
+    <!-- שים לב: בלי this. בתבנית -->
+    <div *ngIf="generalInfoService.WithoutSidebar == false" class="col-lg-2 col-md-4 px-sm-2 px-0" style="background-color: black;">
+      <div *ngIf="generalInfoService.AfterLogin == true" class="d-flex flex-column align-items-center align-items-sm-start pt-2 text-white">
+
+        <ul class="nav nav-pills flex-column align-items-stretch w-100 px-2" id="menu">
+
+          <!-- כללי -->
+          <li [class.section-open]="isInSection(['/PersonalData','/Relatives'])">
+            <a href="#submenu1" data-bs-toggle="collapse"
+               class="nav-link w-100 px-0 align-middle"
+               [class.SubCategoryActive]="isInSection(['/PersonalData','/Relatives'])"
+               [attr.aria-expanded]="isInSection(['/PersonalData','/Relatives']) ? 'true' : 'false'">
+              <i class="fs-5 bi bi-house-door mx-3"></i>
+              <span class="ms-1 d-none d-sm-inline fs-3 fw-bold blockquote">כללי</span>
+            </a>
+            <ul class="collapse nav flex-column ms-1 w-100" id="submenu1"
+                [class.show]="isInSection(['/PersonalData','/Relatives'])" data-bs-parent="#menu">
+              <li class="w-100">
+                <a routerLink="/PersonalData" class="nav-link w-100 px-3"
+                   routerLinkActive="active SubCategoryActive" [routerLinkActiveOptions]="{ exact: true }">
+                  <span class="d-none d-sm-inline fw-bold fs-5 blockquote">נתונים אישיים</span>
+                </a>
+              </li>
+              <li class="w-100">
+                <a routerLink="/Relatives" class="nav-link w-100 px-3"
+                   routerLinkActive="active SubCategoryActive" [routerLinkActiveOptions]="{ exact: true }">
+                  <span class="d-none d-sm-inline fw-bold fs-5 blockquote">קרובי משפחה</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        
+          <!-- תזרים חודשי -->
+          <li [class.section-open]="isInSection(['/Incomes','/FixedExpenses','/VariableExpenses','/Saving','/CurrentFlow','/SalaryCalculator'])">
+            <a href="#submenu2" data-bs-toggle="collapse"
+               class="nav-link w-100 px-0 align-middle"
+               [class.SubCategoryActive]="isInSection(['/Incomes','/FixedExpenses','/VariableExpenses','/Saving','/CurrentFlow','/SalaryCalculator'])"
+               [attr.aria-expanded]="isInSection(['/Incomes','/FixedExpenses','/VariableExpenses','/Saving','/CurrentFlow','/SalaryCalculator']) ? 'true' : 'false'">
+              <i class="fs-5 bi-speedometer2 mx-3"></i>
+              <span class="ms-1 d-none d-sm-inline fs-3 fw-bold blockquote">תזרים חודשי</span>
+            </a>
+            <ul class="collapse nav flex-column ms-1 w-100" id="submenu2"
+                [class.show]="isInSection(['/Incomes','/FixedExpenses','/VariableExpenses','/Saving','/CurrentFlow','/SalaryCalculator'])"
+                data-bs-parent="#menu">
+              <li class="w-100">
+                <a routerLink="/Incomes" class="nav-link w-100 px-3" routerLinkActive="active SubCategoryActive" [routerLinkActiveOptions]="{ exact: true }">
+                  <span class="d-none d-sm-inline fw-bold fs-5 blockquote">הכנסות</span>
+                </a>
+              </li>
+              <li class="w-100">
+                <a routerLink="/FixedExpenses" class="nav-link w-100 px-3" routerLinkActive="active SubCategoryActive" [routerLinkActiveOptions]="{ exact: true }">
+                  <span class="d-none d-sm-inline fw-bold fs-5 blockquote">הוצאות קבועות</span>
+                </a>
+              </li>
+              <li class="w-100">
+                <a routerLink="/VariableExpenses" class="nav-link w-100 px-3" routerLinkActive="active SubCategoryActive" [routerLinkActiveOptions]="{ exact: true }">
+                  <span class="d-none d-sm-inline fw-bold fs-5 blockquote">הוצאות משתנות</span>
+                </a>
+              </li>
+              <li class="w-100">
+                <a routerLink="/Saving" class="nav-link w-100 px-3" routerLinkActive="active SubCategoryActive" [routerLinkActiveOptions]="{ exact: true }">
+                  <span class="d-none d-sm-inline fw-bold fs-5 blockquote">חסכונות והשקעות</span>
+                </a>
+              </li>
+              <li class="w-100">
+                <a routerLink="/CurrentFlow" class="nav-link w-100 px-3" routerLinkActive="active SubCategoryActive" [routerLinkActiveOptions]="{ exact: true }">
+                  <span class="d-none d-sm-inline fw-bold fs-5 blockquote">תזרים עו"ש</span>
+                </a>
+              </li>
+              <li class="w-100">
+                <a routerLink="/SalaryCalculator" class="nav-link w-100 px-3" routerLinkActive="active SubCategoryActive" [routerLinkActiveOptions]="{ exact: true }">
+                  <span class="d-none d-sm-inline fw-bold fs-5 blockquote">מחשבון משכורת</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        
+          <!-- נכסים -->
+          <li [class.section-open]="isInSection(['/RealEstate','/Vehicles','/FinancialAssets'])">
+            <a href="#submenu3" data-bs-toggle="collapse"
+               class="nav-link w-100 px-0 align-middle"
+               [class.SubCategoryActive]="isInSection(['/RealEstate','/Vehicles','/FinancialAssets'])"
+               [attr.aria-expanded]="isInSection(['/RealEstate','/Vehicles','/FinancialAssets']) ? 'true' : 'false'">
+              <i class="fs-5 bi-speedometer2 mx-3"></i>
+              <span class="ms-1 d-none d-sm-inline fs-3 fw-bold blockquote">נכסים</span>
+            </a>
+            <ul class="collapse nav flex-column ms-1 w-100" id="submenu3"
+                [class.show]="isInSection(['/RealEstate','/Vehicles','/FinancialAssets'])" data-bs-parent="#menu">
+              <li class="w-100">
+                <a routerLink="/RealEstate" class="nav-link w-100 px-3" routerLinkActive="active SubCategoryActive" [routerLinkActiveOptions]="{ exact: true }">
+                  <span class="d-none d-sm-inline fw-bold fs-5 blockquote">נדל"ן</span>
+                </a>
+              </li>
+              <li class="w-100">
+                <a routerLink="/Vehicles" class="nav-link w-100 px-3" routerLinkActive="active SubCategoryActive" [routerLinkActiveOptions]="{ exact: true }">
+                  <span class="d-none d-sm-inline fw-bold fs-5 blockquote">רכבים</span>
+                </a>
+              </li>
+              <li class="w-100">
+                <a routerLink="/FinancialAssets" class="nav-link w-100 px-3" routerLinkActive="active SubCategoryActive" [routerLinkActiveOptions]="{ exact: true }">
+                  <span class="d-none d-sm-inline fw-bold fs-5 blockquote">פיננסים</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        
+          <!-- חובות -->
+          <li>
+            <a routerLink="/Commitments" class="nav-link w-100 px-0 align-middle"
+               routerLinkActive="active SubCategoryActive" [routerLinkActiveOptions]="{ exact: true }">
+              <i class="fs-5 bi-table mx-3"></i>
+              <span class="ms-1 d-none d-sm-inline fs-3 fw-bold blockquote">חובות</span>
+            </a>
+          </li>
+        
+          <!-- משכנתה -->
+          <li>
+            <a routerLink="/Mortgage" class="nav-link w-100 px-0 align-middle"
+               routerLinkActive="active SubCategoryActive" [routerLinkActiveOptions]="{ exact: true }">
+              <i class="fs-5 bi-table mx-3"></i>
+              <span class="ms-1 d-none d-sm-inline fs-3 fw-bold blockquote">משכנתה</span>
+            </a>
+          </li>
+        
+          <!-- ביטוחים -->
+          <li [class.section-open]="isInSection(['/LifeInsurance','/LossOfWorkingCapacity','/LongTermCareInsurance','/HealthInsurance'])">
+            <a href="#submenu4" data-bs-toggle="collapse"
+               class="nav-link w-100 px-0 align-middle"
+               [class.SubCategoryActive]="isInSection(['/LifeInsurance','/LossOfWorkingCapacity','/LongTermCareInsurance','/HealthInsurance'])"
+               [attr.aria-expanded]="isInSection(['/LifeInsurance','/LossOfWorkingCapacity','/LongTermCareInsurance','/HealthInsurance']) ? 'true' : 'false'">
+              <i class="fs-5 bi-speedometer2 mx-3"></i>
+              <span class="ms-1 d-none d-sm-inline fs-3 fw-bold blockquote">ביטוחים</span>
+            </a>
+            <ul class="collapse nav flex-column ms-1 w-100" id="submenu4"
+                [class.show]="isInSection(['/LifeInsurance','/LossOfWorkingCapacity','/LongTermCareInsurance','/HealthInsurance'])" data-bs-parent="#menu">
+              <li class="w-100">
+                <a routerLink="/LifeInsurance" class="nav-link w-100 px-3" routerLinkActive="active SubCategoryActive" [routerLinkActiveOptions]="{ exact: true }">
+                  <span class="d-none d-sm-inline fw-bold fs-5 blockquote">ביטוח חיים ותאונות</span>
+                </a>
+              </li>
+              <li class="w-100">
+                <a routerLink="/LossOfWorkingCapacity" class="nav-link w-100 px-3" routerLinkActive="active SubCategoryActive" [routerLinkActiveOptions]="{ exact: true }">
+                  <span class="d-none d-sm-inline fw-bold fs-5 blockquote">אובדן כושר עבודה</span>
+                </a>
+              </li>
+              <li class="w-100">
+                <a routerLink="/LongTermCareInsurance" class="nav-link w-100 px-3" routerLinkActive="active SubCategoryActive" [routerLinkActiveOptions]="{ exact: true }">
+                  <span class="d-none d-sm-inline fw-bold fs-5 blockquote">ביטוח סעודי</span>
+                </a>
+              </li>
+              <li class="w-100">
+                <a routerLink="/HealthInsurance" class="nav-link w-100 px-3" routerLinkActive="active SubCategoryActive" [routerLinkActiveOptions]="{ exact: true }" data-bs-toggle="tooltip" data-bs-custom-class="custom-tooltip">
+                  <span class="d-none d-sm-inline fw-bold fs-5 blockquote">ביטוח בריאות</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        
+          <!-- פנסיה -->
+          <li [class.section-open]="isInSection(['/Pension','/Pension2','/PensionJoint'])">
+            <a href="#submenu5" data-bs-toggle="collapse"
+               class="nav-link w-100 px-0 align-middle"
+               [class.SubCategoryActive]="isInSection(['/Pension','/Pension2','/PensionJoint'])"
+               [attr.aria-expanded]="isInSection(['/Pension','/Pension2','/PensionJoint']) ? 'true' : 'false'">
+              <i class="fs-5 bi-speedometer2 mx-3"></i>
+              <span class="ms-1 d-none d-sm-inline fs-3 fw-bold blockquote">פנסיה</span>
+            </a>
+            <ul class="collapse nav flex-column ms-1 w-100" id="submenu5"
+                [class.show]="isInSection(['/Pension','/Pension2','/PensionJoint'])" data-bs-parent="#menu">
+              <li class="w-100">
+                <a routerLink="/Pension" class="nav-link w-100 px-3" routerLinkActive="active SubCategoryActive" [routerLinkActiveOptions]="{ exact: true }">
+                  <span class="d-none d-sm-inline fw-bold fs-5 blockquote">בן זוג 1</span>
+                </a>
+              </li>
+              <li class="w-100" *ngIf="generalInfoService.AllInfo.PersonalDataViewInfo.Marride">
+                <a routerLink="/Pension2" class="nav-link w-100 px-3" routerLinkActive="active SubCategoryActive" [routerLinkActiveOptions]="{ exact: true }">
+                  <span class="d-none d-sm-inline fw-bold fs-5 blockquote">בן זוג 2</span>
+                </a>
+              </li>
+              <li class="w-100">
+                <a routerLink="/PensionJoint" class="nav-link w-100 px-3" routerLinkActive="active SubCategoryActive" [routerLinkActiveOptions]="{ exact: true }">
+                  <span class="d-none d-sm-inline fw-bold fs-5 blockquote">משותפת</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        
+          <!-- יעדים -->
+          <li [class.section-open]="isInSection(['/IncomeGoals','/EconomicalStability','/RepetitiveGoals','/OneOffFamilyGoals'])">
+            <a href="#submenu6" data-bs-toggle="collapse"
+               class="nav-link w-100 px-0 align-middle"
+               [class.SubCategoryActive]="isInSection(['/IncomeGoals','/EconomicalStability','/RepetitiveGoals','/OneOffFamilyGoals'])"
+               [attr.aria-expanded]="isInSection(['/IncomeGoals','/EconomicalStability','/RepetitiveGoals','/OneOffFamilyGoals']) ? 'true' : 'false'">
+              <i class="bi bi-amazon mx-3"></i>
+              <span class="ms-1 d-none d-sm-inline fs-3 fw-bold blockquote">יעדים</span>
+            </a>
+            <ul class="collapse nav flex-column ms-1 w-100" id="submenu6"
+                [class.show]="isInSection(['/IncomeGoals','/EconomicalStability','/RepetitiveGoals','/OneOffFamilyGoals'])" data-bs-parent="#menu">
+              <li class="w-100">
+                <a routerLink="/IncomeGoals" class="nav-link w-100 px-3" routerLinkActive="active SubCategoryActive" [routerLinkActiveOptions]="{ exact: true }">
+                  <span class="d-none d-sm-inline fw-bold fs-5 blockquote">הכנסות</span>
+                </a>
+              </li>
+              <li class="w-100">
+                <a routerLink="/EconomicalStability" class="nav-link w-100 px-3" routerLinkActive="active SubCategoryActive" [routerLinkActiveOptions]="{ exact: true }">
+                  <span class="d-none d-sm-inline fw-bold fs-5 blockquote">יציבות כלכלית</span>
+                </a>
+              </li>
+              <li class="w-100">
+                <a routerLink="/RepetitiveGoals" class="nav-link w-100 px-3" routerLinkActive="active SubCategoryActive" [routerLinkActiveOptions]="{ exact: true }">
+                  <span class="d-none d-sm-inline fw-bold fs-5 blockquote">חוזרים על עצמם</span>
+                </a>
+              </li>
+              <li class="w-100">
+                <a routerLink="/OneOffFamilyGoals" class="nav-link w-100 px-3" routerLinkActive="active SubCategoryActive" [routerLinkActiveOptions]="{ exact: true }">
+                  <span class="d-none d-sm-inline fw-bold fs-5 blockquote">חד פעמיים</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        
+          <!-- הערות ותובנות -->
+          <li>
+            <a routerLink="/NotesInsights" class="nav-link w-100 px-0 align-middle"
+               routerLinkActive="active SubCategoryActive" [routerLinkActiveOptions]="{ exact: true }">
+              <i class="fs-5 bi-table mx-3"></i>
+              <span class="ms-1 d-none d-sm-inline fs-3 fw-bold blockquote">הערות ותובנות</span>
+            </a>
+          </li>
+        
+          <!-- נומרולוגיה -->
+          <li>
+            <a routerLink="/Nomerology" class="nav-link w-100 px-0 align-middle"
+               routerLinkActive="active SubCategoryActive" [routerLinkActiveOptions]="{ exact: true }">
+              <i class="fs-5 bi-table mx-3"></i>
+              <span class="ms-1 d-none d-sm-inline fs-3 fw-bold blockquote">נומרולוגיה</span>
+            </a>
+          </li>
+        
+          <!-- בינה מלאכותית -->
+          <li>
+            <a routerLink="/GptApi" class="nav-link w-100 px-0 align-middle"
+               routerLinkActive="active SubCategoryActive" [routerLinkActiveOptions]="{ exact: true }">
+              <i class="fs-5 bi-table mx-3"></i>
+              <span class="ms-1 d-none d-sm-inline fs-3 fw-bold blockquote">בינה מלאכותית</span>
+            </a>
+          </li>
+        
+          <!-- כותרת דו"ח -->
+          <p routerLink="/" class="d-flex align-items-center mt-3 mb-xl-0 ms-auto text-white text-decoration-none">
+            <span class="fs-1 d-none d-sm-inline blockquote fw-bold">הפקת דו"ח</span>
+          </p>
+        
+          <!-- דו"ח / כללי -->
+          <li [class.section-open]="isInSection(['/CalculatedData'])">
+            <a href="#submenu11" class="nav-link w-100 px-0 align-middle"
+               [class.SubCategoryActive]="isInSection(['/CalculatedData'])"
+               [attr.aria-expanded]="isInSection(['/CalculatedData']) ? 'true' : 'false'">
+              <i class="fs-5 bi bi-house-door mx-3"></i>
+              <span class="ms-1 d-none d-sm-inline fs-3 fw-bold blockquote">כללי</span>
+            </a>
+            <ul class="nav flex-column ms-1 w-100" id="submenu11" data-bs-parent="#menu"
+                [class.show]="isInSection(['/CalculatedData'])">
+              <li class="w-100">
+                <a routerLink="/CalculatedData" class="nav-link w-100 px-3"
+                   routerLinkActive="active SubCategoryActive" [routerLinkActiveOptions]="{ exact: true }">
+                  <span class="d-none d-sm-inline fw-bold fs-5 blockquote">נתונים מחושבים</span>
+                </a>
+              </li>
+            </ul>
+          </li>
+        
+        </ul>
+        
+
+        <hr>
+      </div>
+    </div>
+
+    <!-- אזור התוכן -->
+    <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-offset="0" tabindex="0"
+         class="col-lg-10 container-fluid align-items-center"
+         [ngClass]="generalInfoService.WithoutSidebar == false ? 'col-md-8' : 'col-md-10'"
+         style="background-color: black;">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+
+  <div style="height: 100px;"></div>
+
+  <footer class="app-footer" dir="rtl">
+    <div class="container-fluid">
+      <div class="footer-row">
+        <!-- שמאל / מותג -->
+      
+
+        <!-- ימין / משתמש -->
+        <div class="footer-left dropup">
+          <button class="btn btn-user dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" id="userMenu">
+            <img src="https://github.com/mdo.png" alt="" width="28" height="28" class="rounded-circle ms-2" />
+            <span class="d-none d-sm-inline">ליאור שילמן</span>
+          </button>
+  
+          <ul class="dropdown-menu dropdown-menu-start dropdown-menu-dark text-end shadow" aria-labelledby="userMenu">
+            <li><button class="dropdown-item" (click)="LoadAllUsersDB()"><i class="bi bi-box-arrow-in-right ms-2"></i>כניסה למערכת</button></li>
+            <li><button class="dropdown-item" (click)="NewProject()"><i class="bi bi-plus-square ms-2"></i>צור פרוייקט חדש</button></li>
+            <li><button class="dropdown-item" (click)="Save2DB()"><i class="bi bi-cloud-arrow-up ms-2"></i>שמור</button></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#"><i class="bi bi-gear ms-2"></i>הגדרות</a></li>
+            <li><button class="dropdown-item" (click)="OpenFullscreen()"><i class="bi bi-arrows-fullscreen ms-2"></i>מסך מלא</button></li>
+            <li><button class="dropdown-item" (click)="Profile()"><i class="bi bi-person ms-2"></i>פרופיל</button></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right ms-2"></i>יציאה</a></li>
+          </ul>
+        </div>
+
+  
+        <!-- מרכז -->
+        <div class="footer-center text-truncate">
+          <span class="footer-note d-none d-md-inline">© {{ currentYear }} ליאור שילמן — כל הזכויות שמורות</span>
+          <span class="footer-sep d-none d-md-inline">•</span>
+          <span class="footer-version">גרסה {{ appVersion }}</span>
+        </div>
+
+        <div class="footer-right">
+          <div class="brand">
+            <img src="./assets/images/financial-advisor.png" width="28" height="28" alt="" class="brand-logo" />
+            <span class="brand-name">L.S Advisor</span>
+            <span class="brand-dot">•</span>
+            <span class="brand-sub">ניהול פיננסי משפחתי</span>
+          </div>
+        </div>
+        
+  
+        
+      </div>
+    </div>
+  </footer>
+  
+  
+</div>

@@ -1,0 +1,2119 @@
+/* ===== Custom Tooltip ===== */
+.custom-tooltip {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+/* ===== Income Goals Specific Styling ===== */
+
+/* Income Goals Card Theme */
+.income-goals-card {
+    border-color: rgba(59, 130, 246, 0.3) !important;
+}
+
+.income-goals-card::before {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 30%, #1d4ed8 70%, #1e40af 100%);
+    opacity: 0.08;
+}
+
+.income-goals-card .card-header {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.12) 0%, rgba(37, 99, 235, 0.08) 100%) !important;
+    border-color: rgba(59, 130, 246, 0.3) !important;
+}
+
+.income-goals-card .table thead th {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 25%, #1d4ed8 50%, #1e40af 75%, #1e3a8a 100%) !important;
+}
+
+/* ===== Income Source Input Styling ===== */
+.income-source-input {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(51, 65, 85, 0.8) 100%) !important;
+    border: 2px solid rgba(59, 130, 246, 0.4) !important;
+    border-radius: 10px !important;
+    color: #60a5fa !important;
+    font-weight: 700;
+    width: 15em;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+    text-shadow: 0 0 8px rgba(96, 165, 250, 0.4);
+}
+
+.income-source-input:focus {
+    border-color: rgba(59, 130, 246, 0.7) !important;
+    box-shadow:
+        0 0 0 3px rgba(59, 130, 246, 0.2),
+        0 0 20px rgba(59, 130, 246, 0.4) !important;
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.9) 100%) !important;
+}
+
+.income-source-input:hover {
+    border-color: rgba(59, 130, 246, 0.6);
+    transform: translateY(-1px);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+}
+
+/* ===== Income Amount Input Styling ===== */
+.income-amount-input {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(51, 65, 85, 0.8) 100%) !important;
+    border: 2px solid rgba(245, 158, 11, 0.3) !important;
+    border-radius: 8px !important;
+    color: #f59e0b !important;
+    font-weight: 600;
+    width: 7em;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+    direction: ltr;
+    text-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
+}
+
+.income-amount-input:focus {
+    border-color: rgba(245, 158, 11, 0.6) !important;
+    box-shadow:
+        0 0 0 3px rgba(245, 158, 11, 0.2),
+        0 0 20px rgba(245, 158, 11, 0.4) !important;
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.9) 100%) !important;
+}
+
+.income-amount-input:hover {
+    border-color: rgba(245, 158, 11, 0.5);
+    transform: translateY(-1px);
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.3);
+}
+
+/* ===== Income Summary Input Styling ===== */
+.income-summary-input {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%) !important;
+    color: white !important;
+    font-weight: 800 !important;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(34, 197, 94, 0.5) !important;
+    border-radius: 10px !important;
+    box-shadow:
+        0 4px 15px rgba(34, 197, 94, 0.3),
+        0 0 20px rgba(34, 197, 94, 0.2);
+    transition: all 0.3s ease;
+    font-size: 1rem !important;
+    padding: 0.75rem !important;
+    width: 7em;
+}
+
+.income-summary-input:hover {
+    transform: scale(1.02);
+    box-shadow:
+        0 6px 20px rgba(34, 197, 94, 0.4),
+        0 0 25px rgba(34, 197, 94, 0.3);
+}
+
+/* ===== Savings Information Card ===== */
+.savings-info-card,
+.returns-input:focus {
+    border-color: rgba(59, 130, 246, 0.7) !important;
+    box-shadow:
+        0 0 0 3px rgba(59, 130, 246, 0.2),
+        0 0 20px rgba(59, 130, 246, 0.4) !important;
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.9) 100%) !important;
+}
+
+.returns-percentage {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+    color: white !important;
+    border: 2px solid rgba(59, 130, 246, 0.4) !important;
+    border-left: none !important;
+    font-weight: 700;
+    font-size: 1rem;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+/* ===== Info Text Styling ===== */
+.savings-info-text,
+.returns-info-text {
+    color: rgba(34, 197, 94, 0.9);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+    padding: 0.5rem;
+    background: rgba(34, 197, 94, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.returns-info-text {
+    color: rgba(59, 130, 246, 0.9);
+    background: rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.2);
+}
+
+.savings-info-text i,
+.returns-info-text i {
+    filter: drop-shadow(0 0 5px currentColor);
+}
+
+/* ===== Projection Cards ===== */
+.projection-card {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(51, 65, 85, 0.8) 100%);
+    border: 2px solid rgba(245, 158, 11, 0.3);
+    border-radius: 20px;
+    padding: 2rem;
+    margin: 1rem;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.15),
+        0 8px 32px rgba(245, 158, 11, 0.15);
+}
+
+.projection-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(245, 158, 11, 0.5);
+    box-shadow:
+        0 0 20px rgba(245, 158, 11, 0.3),
+        0 15px 40px -12px rgba(0, 0, 0, 0.7);
+}
+
+.projection-card.current-savings {
+    border-color: rgba(34, 197, 94, 0.3);
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.15),
+        0 8px 32px rgba(34, 197, 94, 0.15);
+}
+
+.projection-card.current-savings:hover {
+    border-color: rgba(34, 197, 94, 0.5);
+    box-shadow:
+        0 0 20px rgba(34, 197, 94, 0.3),
+        0 15px 40px -12px rgba(0, 0, 0, 0.7);
+}
+
+.projection-card.expected-returns {
+    border-color: rgba(59, 130, 246, 0.3);
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.15),
+        0 8px 32px rgba(59, 130, 246, 0.15);
+}
+
+.projection-card.expected-returns:hover {
+    border-color: rgba(59, 130, 246, 0.5);
+    box-shadow:
+        0 0 20px rgba(59, 130, 246, 0.3),
+        0 15px 40px -12px rgba(0, 0, 0, 0.7);
+}
+
+.projection-card.future-value {
+    border-color: rgba(168, 85, 247, 0.3);
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.15),
+        0 8px 32px rgba(168, 85, 247, 0.15);
+}
+
+.projection-card.future-value:hover {
+    border-color: rgba(168, 85, 247, 0.5);
+    box-shadow:
+        0 0 20px rgba(168, 85, 247, 0.3),
+        0 15px 40px -12px rgba(0, 0, 0, 0.7);
+}
+
+.projection-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 30%, #b45309 70%, #92400e 100%);
+    opacity: 0.08;
+    border-radius: 20px;
+    z-index: -1;
+}
+
+.projection-card.current-savings::before {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 30%, #15803d 70%, #166534 100%);
+}
+
+.projection-card.expected-returns::before {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 30%, #1d4ed8 70%, #1e40af 100%);
+}
+
+.projection-card.future-value::before {
+    background: linear-gradient(135deg, #a855f7 0%, #9333ea 30%, #7c3aed 70%, #6d28d9 100%);
+}
+
+.projection-card i {
+    color: #f59e0b;
+    filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.5));
+    margin-bottom: 1rem;
+}
+
+.projection-card.current-savings i {
+    color: #22c55e;
+    filter: drop-shadow(0 0 10px rgba(34, 197, 94, 0.5));
+}
+
+.projection-card.expected-returns i {
+    color: #3b82f6;
+    filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.5));
+}
+
+.projection-card.future-value i {
+    color: #a855f7;
+    filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.5));
+}
+
+.projection-card h4 {
+    color: #f8fafc;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 10px rgba(248, 250, 252, 0.4);
+}
+
+.projection-card .amount {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #f59e0b;
+    text-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
+    margin-top: 1rem;
+}
+
+.projection-card.current-savings .amount {
+    color: #22c55e;
+    text-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
+}
+
+.projection-card.expected-returns .amount {
+    color: #3b82f6;
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+}
+
+.projection-card.future-value .amount {
+    color: #a855f7;
+    text-shadow: 0 0 10px rgba(168, 85, 247, 0.4);
+}
+
+/* ===== Savings Amount Container ===== */
+.savings-amount-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+/* ===== Enhanced Animations ===== */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes fadeInRight {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes pulseBlue {
+
+    0%,
+    100% {
+        box-shadow:
+            0 4px 20px rgba(59, 130, 246, 0.3),
+            0 0 30px rgba(59, 130, 246, 0.2);
+    }
+
+    50% {
+        box-shadow:
+            0 4px 20px rgba(59, 130, 246, 0.5),
+            0 0 40px rgba(59, 130, 246, 0.4);
+    }
+}
+
+@keyframes pulseGreen {
+
+    0%,
+    100% {
+        box-shadow:
+            0 4px 20px rgba(34, 197, 94, 0.3),
+            0 0 30px rgba(34, 197, 94, 0.2);
+    }
+
+    50% {
+        box-shadow:
+            0 4px 20px rgba(34, 197, 94, 0.5),
+            0 0 40px rgba(34, 197, 94, 0.4);
+    }
+}
+
+/* ===== Apply Income Goals Animations ===== */
+.income-goals-card {
+    animation: slideInLeft 0.6s ease-out;
+}
+
+.savings-info-card {
+    animation: fadeInScale 0.7s ease-out;
+    animation-delay: 0.2s;
+    animation-fill-mode: both;
+}
+
+.returns-info-card {
+    animation: fadeInScale 0.7s ease-out;
+    animation-delay: 0.4s;
+    animation-fill-mode: both;
+}
+
+.projection-card {
+    animation: fadeInScale 0.6s ease-out;
+    animation-fill-mode: both;
+}
+
+.projection-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.projection-card:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.projection-card:nth-child(3) {
+    animation-delay: 0.5s;
+}
+
+.income-goals-card .card-header {
+    animation: pulseBlue 4s ease-in-out infinite;
+}
+
+.savings-info-card,
+.projection-card.current-savings {
+    animation: pulseGreen 3s ease-in-out infinite;
+}
+
+.returns-info-card,
+.projection-card.expected-returns {
+    animation: pulseBlue 3s ease-in-out infinite;
+}
+
+/* ===== Table Row Animation ===== */
+.income-goals-card .table tbody tr {
+    animation: fadeInRight 0.5s ease-out;
+    animation-fill-mode: both;
+}
+
+.income-goals-card .table tbody tr:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.income-goals-card .table tbody tr:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.income-goals-card .table tbody tr:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.income-goals-card .table tbody tr:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.income-goals-card .table tbody tr:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+/* ===== Responsive Design for Income Goals ===== */
+@media (max-width: 1200px) {
+    .income-source-input {
+        width: 12em;
+        font-size: 1rem !important;
+    }
+
+    .income-amount-input {
+        width: 6em;
+        font-size: 1rem !important;
+    }
+
+    .savings-display-input {
+        font-size: 1.5rem !important;
+        padding: 1rem !important;
+    }
+
+    .returns-input {
+        font-size: 1.2rem !important;
+        padding: 0.8rem !important;
+    }
+
+    .projection-card {
+        margin: 0.5rem;
+        padding: 1.5rem;
+    }
+
+    .projection-card .amount {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .income-source-input {
+        width: 10em;
+        font-size: 0.9rem !important;
+    }
+
+    .income-amount-input {
+        width: 5em;
+        font-size: 0.9rem !important;
+    }
+
+    .savings-display-input {
+        font-size: 1.2rem !important;
+        padding: 0.8rem !important;
+    }
+
+    .returns-input {
+        font-size: 1rem !important;
+        padding: 0.6rem !important;
+    }
+
+    .savings-info-card,
+    .returns-info-card {
+        padding: 1.5rem;
+        margin: 0.5rem 0;
+    }
+
+    .projection-card {
+        margin: 0.25rem;
+        padding: 1rem;
+    }
+
+    .projection-card .amount {
+        font-size: 1.2rem;
+    }
+
+    .projection-card i {
+        font-size: 2.5rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .income-source-input {
+        width: 8em;
+        font-size: 0.8rem !important;
+    }
+
+    .income-amount-input {
+        width: 4em;
+        font-size: 0.8rem !important;
+    }
+
+    .table-responsive {
+        font-size: 0.8rem;
+    }
+
+    .savings-info-card h3,
+    .returns-info-card h3 {
+        font-size: 1.2rem;
+    }
+
+    .projection-card h4 {
+        font-size: 1rem;
+    }
+
+    .projection-card .amount {
+        font-size: 1rem;
+    }
+}
+
+/* ===== Input Group Styling ===== */
+.input-group {
+    position: relative;
+}
+
+.input-group .form-control {
+    border-top-left-radius: 10px !important;
+    border-bottom-left-radius: 10px !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.input-group-text {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-top-right-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+}
+
+/* ===== Enhanced Focus States ===== */
+.income-source-input:focus-visible,
+.income-amount-input:focus-visible,
+.returns-input:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+}
+
+/* ===== Print Styles for Income Goals ===== */
+@media print {
+
+    .savings-info-card,
+    .returns-info-card,
+    .projection-card {
+        background: white !important;
+        border: 1px solid #ccc !important;
+        box-shadow: none !important;
+        break-inside: avoid;
+    }
+
+    .income-source-input,
+    .income-amount-input,
+    .returns-input {
+        background: white !important;
+        color: black !important;
+        border: 1px solid #ccc !important;
+    }
+
+    .savings-display-input,
+    .income-summary-input {
+        background: #f0f0f0 !important;
+        color: black !important;
+        border: 1px solid #ccc !important;
+    }
+
+    .fa-plus {
+        display: none !important;
+    }
+
+    .projection-card .amount {
+        color: black !important;
+        text-shadow: none !important;
+    }
+}
+
+/* ===== Special Effects for Different Input Types ===== */
+.income-source-input::placeholder {
+    color: rgba(96, 165, 250, 0.6);
+    font-style: italic;
+}
+
+.income-amount-input::placeholder {
+    color: rgba(245, 158, 11, 0.6);
+    font-style: italic;
+}
+
+.returns-input::placeholder {
+    color: rgba(59, 130, 246, 0.6);
+    font-style: italic;
+}
+
+/* ===== Hover Effects for Table Cells ===== */
+.income-goals-card .table tbody td {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.income-goals-card .table tbody tr:hover td {
+    background: rgba(59, 130, 246, 0.1) !important;
+    transform: translateX(2px);
+}
+
+/* ===== Enhanced Visual Feedback ===== */
+.savings-amount-container:hover .savings-display-input {
+    animation: pulseGreen 1s ease-in-out;
+}
+
+.returns-input-container:hover .returns-input {
+    animation: pulseBlue 1s ease-in-out;
+}
+
+/* ===== Accessibility Enhancements ===== */
+@media (prefers-reduced-motion: reduce) {
+
+    .income-goals-card,
+    .savings-info-card,
+    .returns-info-card,
+    .projection-card {
+        animation: none !important;
+    }
+
+    .income-goals-card .card-header,
+    .savings-info-card,
+    .returns-info-card,
+    .projection-card.current-savings,
+    .projection-card.expected-returns {
+        animation: none !important;
+    }
+}
+
+@media (prefers-contrast: high) {
+
+    .income-source-input,
+    .income-amount-input,
+    .returns-input {
+        border-color: rgba(255, 255, 255, 0.7) !important;
+        color: #E0E0E0 !important;
+    }
+
+    .savings-info-card,
+    .returns-info-card,
+    .projection-card {
+        border-color: rgba(255, 255, 255, 0.5) !important;
+    }
+}
+
+info-card {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.9) 50%, rgba(71, 85, 105, 0.9) 100%);
+    border: 2px solid rgba(34, 197, 94, 0.3);
+    border-radius: 20px;
+    padding: 2rem;
+    margin: 1rem 0;
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.15),
+        0 8px 32px rgba(34, 197, 94, 0.15),
+        0 16px 64px rgba(16, 185, 129, 0.1);
+    backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+}
+
+.returns-info-card {
+    border-color: rgba(59, 130, 246, 0.3);
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.15),
+        0 8px 32px rgba(59, 130, 246, 0.15),
+        0 16px 64px rgba(37, 99, 235, 0.1);
+}
+
+.savings-info-card:hover,
+.returns-info-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(34, 197, 94, 0.4);
+    box-shadow:
+        0 0 20px rgba(34, 197, 94, 0.3),
+        0 15px 40px -12px rgba(0, 0, 0, 0.7),
+        0 0 30px rgba(16, 185, 129, 0.2);
+}
+
+.returns-info-card:hover {
+    border-color: rgba(59, 130, 246, 0.4);
+    box-shadow:
+        0 0 20px rgba(59, 130, 246, 0.3),
+        0 15px 40px -12px rgba(0, 0, 0, 0.7),
+        0 0 30px rgba(37, 99, 235, 0.2);
+}
+
+.savings-info-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 30%, #15803d 70%, #166534 100%);
+    opacity: 0.08;
+    border-radius: 20px;
+    z-index: -1;
+}
+
+.returns-info-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 30%, #1d4ed8 70%, #1e40af 100%);
+    opacity: 0.08;
+    border-radius: 20px;
+    z-index: -1;
+}
+
+.savings-info-card h3,
+.returns-info-card h3 {
+    color: #f8fafc;
+    text-shadow: 0 0 15px rgba(34, 197, 94, 0.4);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.returns-info-card h3 {
+    text-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+}
+
+.savings-info-card h3 i,
+.returns-info-card h3 i {
+    filter: drop-shadow(0 0 8px rgba(34, 197, 94, 0.5));
+}
+
+.returns-info-card h3 i {
+    filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.5));
+}
+
+/* ===== Savings Display Input ===== */
+.savings-display-input {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%) !important;
+    color: white !important;
+    font-weight: 800 !important;
+    font-size: 2rem !important;
+    text-align: center !important;
+    padding: 1.2rem !important;
+    border: 2px solid rgba(34, 197, 94, 0.5) !important;
+    border-radius: 15px !important;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    box-shadow:
+        0 6px 20px rgba(34, 197, 94, 0.3),
+        0 0 25px rgba(34, 197, 94, 0.2);
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-bottom: 1rem;
+    direction: ltr;
+}
+
+.savings-display-input:hover {
+    transform: scale(1.02);
+    box-shadow:
+        0 8px 25px rgba(34, 197, 94, 0.4),
+        0 0 30px rgba(34, 197, 94, 0.3);
+}
+
+/* ===== Returns Input Container ===== */
+.returns-input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.returns-input {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(51, 65, 85, 0.8) 100%) !important;
+    border: 2px solid rgba(59, 130, 246, 0.4) !important;
+    border-radius: 10px !important;
+    color: #3b82f6 !important;
+    font-weight: 700;
+    font-size: 1.5rem !important;
+    padding: 1rem !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+    text-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+}
+
+.returns-
+/* income-goals.component.css - Enhanced Modern Design */
+
+/* income-goals.component.css - Enhanced Modern Design */
+
+/* ===== Container Styling ===== */
+.container-fluid {
+    min-height: 100vh;
+    padding: 2rem;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    direction: rtl;
+}
+
+/* ===== Row Styling ===== */
+.row {
+    background: transparent !important;
+    margin-bottom: 2rem;
+}
+
+/* ===== Column Styling ===== */
+.col-xl-12,
+.col-xl-6,
+.col-xl-4,
+.col-xl-3,
+.col-xl-1,
+.col-md-6,
+.col-md-2 {
+    background: transparent !important;
+}
+
+/* ===== Card Base Styling ===== */
+.card {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.9) 50%, rgba(71, 85, 105, 0.85) 100%) !important;
+    border: 2px solid rgba(245, 158, 11, 0.3) !important;
+    border-radius: 20px !important;
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.15),
+        0 8px 32px rgba(245, 158, 11, 0.15),
+        0 16px 64px rgba(217, 119, 6, 0.1) !important;
+    backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-bottom: 2rem;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(217, 119, 6, 0.4) !important;
+    box-shadow:
+        0 0 20px rgba(245, 158, 11, 0.3),
+        0 25px 50px -12px rgba(0, 0, 0, 0.7),
+        0 0 40px rgba(217, 119, 6, 0.2) !important;
+}
+
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 30%, #b45309 70%, #92400e 100%);
+    opacity: 0.08;
+    border-radius: 20px;
+    z-index: -1;
+}
+
+.card-body {
+    background: transparent !important;
+    padding: 2.5rem !important;
+    position: relative;
+    z-index: 1;
+}
+
+/* ===== Header Styling with Icon Support ===== */
+.card-header {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(217, 119, 6, 0.08) 100%) !important;
+    border-bottom: 2px solid rgba(245, 158, 11, 0.3) !important;
+    color: #f8fafc !important;
+    font-weight: 800 !important;
+    font-size: 2.2rem !important;
+    text-align: center;
+    padding: 1.8rem;
+    margin-bottom: 1.5rem;
+    border-radius: 16px;
+    backdrop-filter: blur(20px);
+    position: relative;
+    background-clip: padding-box;
+    text-shadow: 0 0 20px rgba(245, 158, 11, 0.4);
+    border: 2px solid rgba(245, 158, 11, 0.3) !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+.card-header span {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.card-header i {
+    font-size: 1.8rem;
+    filter: drop-shadow(0 0 8px rgba(245, 158, 11, 0.5));
+}
+
+.card-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 30%, #b45309 70%, #92400e 100%);
+    opacity: 0.1;
+    border-radius: 16px;
+    z-index: -1;
+}
+
+/* ===== Add Button Styling ===== */
+.fa-plus {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    border-radius: 50%;
+    padding: 0.6rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow:
+        0 4px 15px rgba(245, 158, 11, 0.3),
+        0 0 20px rgba(245, 158, 11, 0.2);
+    border: 2px solid rgba(245, 158, 11, 0.3);
+    filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.4));
+    font-size: 1.2rem !important;
+}
+
+.fa-plus:hover {
+    transform: scale(1.15) rotate(90deg);
+    box-shadow:
+        0 0 25px rgba(245, 158, 11, 0.5),
+        0 8px 30px rgba(245, 158, 11, 0.4);
+    border-color: rgba(245, 158, 11, 0.5);
+    background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+}
+
+/* ===== Table Container ===== */
+.table-responsive {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(51, 65, 85, 0.8) 100%) !important;
+    border-radius: 16px;
+    padding: 1.5rem;
+    border: 2px solid rgba(245, 158, 11, 0.3);
+    backdrop-filter: blur(20px);
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.15),
+        0 8px 32px rgba(245, 158, 11, 0.15);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.table-responsive::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+        radial-gradient(circle at 20% 30%, rgba(245, 158, 11, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 70%, rgba(217, 119, 6, 0.03) 0%, transparent 50%);
+    z-index: -1;
+}
+
+/* ===== Table Styling ===== */
+.table {
+    background: transparent !important;
+    color: #f8fafc !important;
+    border-collapse: separate;
+    border-spacing: 0;
+    position: relative;
+    z-index: 1;
+}
+
+/* ===== Table Header ===== */
+.table thead th {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 25%, #b45309 50%, #92400e 75%, #78350f 100%) !important;
+    color: white !important;
+    font-weight: 800 !important;
+    font-size: 0.95rem !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 1.2rem 0.6rem !important;
+    border: none !important;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    position: relative;
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table thead th i {
+    margin-left: 0.3rem;
+    font-size: 1rem;
+    filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.4));
+}
+
+.table thead th:first-child {
+    border-top-right-radius: 8px !important;
+    border-bottom-right-radius: 8px !important;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+  }
+  
+  .table thead th:last-child {
+    border-top-left-radius: 8px !important;
+    border-bottom-left-radius: 8px !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+
+.table thead th::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    border-radius: inherit;
+    z-index: -1;
+}
+
+/* ===== Table Body ===== */
+.table tbody tr {
+    background: rgba(30, 41, 59, 0.5) !important;
+    border: 1px solid rgba(245, 158, 11, 0.2) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-bottom: 0.5rem;
+}
+
+.table tbody tr:hover {
+    background: rgba(245, 158, 11, 0.1) !important;
+    border-color: rgba(217, 119, 6, 0.4) !important;
+    transform: translateX(4px);
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.15),
+        0 0 25px rgba(245, 158, 11, 0.2);
+}
+
+.table tbody td {
+    background: transparent !important;
+    color: #f8fafc !important;
+    font-weight: 600 !important;
+    padding: 1rem 0.5rem !important;
+    border: none !important;
+    vertical-align: middle;
+    position: relative;
+}
+
+/* ===== Form Controls Base ===== */
+.form-control {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(51, 65, 85, 0.8) 100%) !important;
+    border: 2px solid rgba(245, 158, 11, 0.3) !important;
+    border-radius: 8px !important;
+    color: #f8fafc !important;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    font-size: 0.9rem;
+    padding: 0.6rem 0.8rem;
+}
+
+.form-control:focus {
+    border-color: rgba(245, 158, 11, 0.6) !important;
+    box-shadow:
+        0 0 0 3px rgba(245, 158, 11, 0.2),
+        0 0 20px rgba(245, 158, 11, 0.4) !important;
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.9) 100%) !important;
+    outline: none;
+}
+
+.form-control:hover {
+    border-color: rgba(245, 158, 11, 0.5);
+    transform: translateY(-1px);
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.3);
+}
+
+.form-control::placeholder {
+    color: rgba(248, 250, 252, 0.6);
+    font-style: italic;
+}
+
+/* ===== Text Color Classes ===== */
+.text-info {
+    color: #60a5fa !important;
+    text-shadow: 0 0 8px rgba(96, 165, 250, 0.4);
+}
+
+.text-primary {
+    color: #f59e0b !important;
+    text-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
+}
+
+.text-success {
+    color: #22c55e !important;
+    text-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
+}
+
+.text-white {
+    color: #f8fafc !important;
+    text-shadow: 0 0 8px rgba(248, 250, 252, 0.4);
+}
+
+/* ===== Enhanced Alert Classes ===== */
+.alert-primary {
+    background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(217, 119, 6, 0.05) 100%) !important;
+    border-color: rgba(245, 158, 11, 0.3) !important;
+    color: #f8fafc !important;
+}
+
+.alert-success {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1) 0%, rgba(16, 185, 129, 0.05) 100%) !important;
+    border-color: rgba(34, 197, 94, 0.3) !important;
+    color: #f8fafc !important;
+}
+
+.alert-info {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(37, 99, 235, 0.05) 100%) !important;
+    border-color: rgba(59, 130, 246, 0.3) !important;
+    color: #f8fafc !important;
+}
+
+/* ===== Summary Section Enhancement ===== */
+.pension-summary-section {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.9) 50%, rgba(71, 85, 105, 0.9) 100%);
+    border: 2px solid rgba(245, 158, 11, 0.3);
+    border-radius: 20px;
+    padding: 2rem;
+    margin: 1rem 0;
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.15),
+        0 8px 32px rgba(245, 158, 11, 0.15),
+        0 16px 64px rgba(217, 119, 6, 0.1);
+    backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.pension-summary-section:hover {
+    transform: translateY(-3px);
+    border-color: rgba(217, 119, 6, 0.4);
+    box-shadow:
+        0 0 20px rgba(245, 158, 11, 0.3),
+        0 15px 40px -12px rgba(0, 0, 0, 0.7),
+        0 0 30px rgba(217, 119, 6, 0.2);
+}
+
+.pension-summary-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 30%, #b45309 70%, #92400e 100%);
+    opacity: 0.08;
+    border-radius: 20px;
+    z-index: -1;
+}
+
+.pension-summary-section h2 {
+    color: #f8fafc;
+    text-shadow: 0 0 15px rgba(245, 158, 11, 0.4);
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+/* ===== Bootstrap Icons Support ===== */
+
+/* ===== Custom Tooltip ===== */
+.custom-tooltip {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+/* ===== Income Goals Specific Styling ===== */
+
+/* Income Goals Card Theme */
+.income-goals-card {
+    border-color: rgba(59, 130, 246, 0.3) !important;
+}
+
+.income-goals-card::before {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 30%, #1d4ed8 70%, #1e40af 100%);
+    opacity: 0.08;
+}
+
+.income-goals-card .card-header {
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.12) 0%, rgba(37, 99, 235, 0.08) 100%) !important;
+    border-color: rgba(59, 130, 246, 0.3) !important;
+}
+
+.income-goals-card .table thead th {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 25%, #1d4ed8 50%, #1e40af 75%, #1e3a8a 100%) !important;
+}
+
+/* ===== Income Source Input Styling ===== */
+.income-source-input {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(51, 65, 85, 0.8) 100%) !important;
+    border: 2px solid rgba(59, 130, 246, 0.4) !important;
+    border-radius: 10px !important;
+    color: #60a5fa !important;
+    font-weight: 700;
+    width: 15em;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+    text-shadow: 0 0 8px rgba(96, 165, 250, 0.4);
+}
+
+.income-source-input:focus {
+    border-color: rgba(59, 130, 246, 0.7) !important;
+    box-shadow:
+        0 0 0 3px rgba(59, 130, 246, 0.2),
+        0 0 20px rgba(59, 130, 246, 0.4) !important;
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.9) 100%) !important;
+}
+
+.income-source-input:hover {
+    border-color: rgba(59, 130, 246, 0.6);
+    transform: translateY(-1px);
+    box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+}
+
+/* ===== Income Amount Input Styling ===== */
+.income-amount-input {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(51, 65, 85, 0.8) 100%) !important;
+    border: 2px solid rgba(245, 158, 11, 0.3) !important;
+    border-radius: 8px !important;
+    color: #f59e0b !important;
+    font-weight: 600;
+    width: 7em;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+    direction: ltr;
+    text-shadow: 0 0 8px rgba(245, 158, 11, 0.4);
+}
+
+.income-amount-input:focus {
+    border-color: rgba(245, 158, 11, 0.6) !important;
+    box-shadow:
+        0 0 0 3px rgba(245, 158, 11, 0.2),
+        0 0 20px rgba(245, 158, 11, 0.4) !important;
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.9) 100%) !important;
+}
+
+.income-amount-input:hover {
+    border-color: rgba(245, 158, 11, 0.5);
+    transform: translateY(-1px);
+    box-shadow: 0 0 15px rgba(245, 158, 11, 0.3);
+}
+
+/* ===== Income Summary Input Styling ===== */
+.income-summary-input {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%) !important;
+    color: white !important;
+    font-weight: 800 !important;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(34, 197, 94, 0.5) !important;
+    border-radius: 10px !important;
+    box-shadow:
+        0 4px 15px rgba(34, 197, 94, 0.3),
+        0 0 20px rgba(34, 197, 94, 0.2);
+    transition: all 0.3s ease;
+    font-size: 1rem !important;
+    padding: 0.75rem !important;
+    width: 7em;
+}
+
+.income-summary-input:hover {
+    transform: scale(1.02);
+    box-shadow:
+        0 6px 20px rgba(34, 197, 94, 0.4),
+        0 0 25px rgba(34, 197, 94, 0.3);
+}
+
+/* ===== Savings Information Card ===== */
+.savings-info-card,
+.returns-info-card {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.9) 50%, rgba(71, 85, 105, 0.9) 100%);
+    border: 2px solid rgba(34, 197, 94, 0.3);
+    border-radius: 20px;
+    padding: 2rem;
+    margin: 1rem 0;
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.15),
+        0 8px 32px rgba(34, 197, 94, 0.15),
+        0 16px 64px rgba(16, 185, 129, 0.1);
+    backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    height: 100%;
+}
+
+.returns-info-card {
+    border-color: rgba(59, 130, 246, 0.3);
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.15),
+        0 8px 32px rgba(59, 130, 246, 0.15),
+        0 16px 64px rgba(37, 99, 235, 0.1);
+}
+
+.savings-info-card:hover,
+.returns-info-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(34, 197, 94, 0.4);
+    box-shadow:
+        0 0 20px rgba(34, 197, 94, 0.3),
+        0 15px 40px -12px rgba(0, 0, 0, 0.7),
+        0 0 30px rgba(16, 185, 129, 0.2);
+}
+
+.returns-info-card:hover {
+    border-color: rgba(59, 130, 246, 0.4);
+    box-shadow:
+        0 0 20px rgba(59, 130, 246, 0.3),
+        0 15px 40px -12px rgba(0, 0, 0, 0.7),
+        0 0 30px rgba(37, 99, 235, 0.2);
+}
+
+.savings-info-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 30%, #15803d 70%, #166534 100%);
+    opacity: 0.08;
+    border-radius: 20px;
+    z-index: -1;
+}
+
+.returns-info-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 30%, #1d4ed8 70%, #1e40af 100%);
+    opacity: 0.08;
+    border-radius: 20px;
+    z-index: -1;
+}
+
+.savings-info-card h3,
+.returns-info-card h3 {
+    color: #f8fafc;
+    text-shadow: 0 0 15px rgba(34, 197, 94, 0.4);
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.returns-info-card h3 {
+    text-shadow: 0 0 15px rgba(59, 130, 246, 0.4);
+}
+
+.savings-info-card h3 i,
+.returns-info-card h3 i {
+    filter: drop-shadow(0 0 8px rgba(34, 197, 94, 0.5));
+}
+
+.returns-info-card h3 i {
+    filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.5));
+}
+
+/* ===== Savings Display Input ===== */
+.savings-display-input {
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%) !important;
+    color: white !important;
+    font-weight: 800 !important;
+    font-size: 2rem !important;
+    text-align: center !important;
+    padding: 1.2rem !important;
+    border: 2px solid rgba(34, 197, 94, 0.5) !important;
+    border-radius: 15px !important;
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    box-shadow:
+        0 6px 20px rgba(34, 197, 94, 0.3),
+        0 0 25px rgba(34, 197, 94, 0.2);
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-bottom: 1rem;
+    direction: ltr;
+}
+
+.savings-display-input:hover {
+    transform: scale(1.02);
+    box-shadow:
+        0 8px 25px rgba(34, 197, 94, 0.4),
+        0 0 30px rgba(34, 197, 94, 0.3);
+}
+
+/* ===== Returns Input Container ===== */
+.returns-input-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.returns-input {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(51, 65, 85, 0.8) 100%) !important;
+    border: 2px solid rgba(59, 130, 246, 0.4) !important;
+    border-radius: 10px !important;
+    color: #3b82f6 !important;
+    font-weight: 700;
+    font-size: 1.5rem !important;
+    padding: 1rem !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+    text-shadow: 0 0 8px rgba(59, 130, 246, 0.4);
+}
+
+.returns-input:focus {
+    border-color: rgba(59, 130, 246, 0.7) !important;
+    box-shadow:
+        0 0 0 3px rgba(59, 130, 246, 0.2),
+        0 0 20px rgba(59, 130, 246, 0.4) !important;
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.9) 100%) !important;
+}
+
+.returns-percentage {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+    color: white !important;
+    border: 2px solid rgba(59, 130, 246, 0.4) !important;
+    border-left: none !important;
+    font-weight: 700;
+    font-size: 1rem;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+/* ===== Info Text Styling ===== */
+.savings-info-text,
+.returns-info-text {
+    color: rgba(34, 197, 94, 0.9);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-align: center;
+    padding: 0.5rem;
+    background: rgba(34, 197, 94, 0.1);
+    border-radius: 8px;
+    border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.returns-info-text {
+    color: rgba(59, 130, 246, 0.9);
+    background: rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.2);
+}
+
+.savings-info-text i,
+.returns-info-text i {
+    filter: drop-shadow(0 0 5px currentColor);
+}
+
+/* ===== Projection Cards ===== */
+.projection-card {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(51, 65, 85, 0.8) 100%);
+    border: 2px solid rgba(245, 158, 11, 0.3);
+    border-radius: 20px;
+    padding: 2rem;
+    margin: 1rem;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.15),
+        0 8px 32px rgba(245, 158, 11, 0.15);
+}
+
+.projection-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(245, 158, 11, 0.5);
+    box-shadow:
+        0 0 20px rgba(245, 158, 11, 0.3),
+        0 15px 40px -12px rgba(0, 0, 0, 0.7);
+}
+
+.projection-card.current-savings {
+    border-color: rgba(34, 197, 94, 0.3);
+    box-shadow:
+        0 4px 20px rgba(0, 0, 0, 0.15),
+        0 8px 32px rgba(34, 197, 94, 0.15);
+}
+
+.projection-card.current-savings:hover {
+    border-color: rgba(34, 197, 94, 0.5);
+    box-shadow:
+        0 0 20px rgba(34, 197, 94, 0.3),
+        0 15px 40px -12px rgba(0, 0, 0, 0.7);
+}
+
+.projection-card.expected-returns i {
+    color: #3b82f6;
+    filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.5));
+}
+
+.projection-card.future-value i {
+    color: #a855f7;
+    filter: drop-shadow(0 0 10px rgba(168, 85, 247, 0.5));
+}
+
+.projection-card h4 {
+    color: #f8fafc;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-shadow: 0 0 10px rgba(248, 250, 252, 0.4);
+}
+
+.projection-card .amount {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #f59e0b;
+    text-shadow: 0 0 10px rgba(245, 158, 11, 0.4);
+    margin-top: 1rem;
+}
+
+.projection-card.current-savings .amount {
+    color: #22c55e;
+    text-shadow: 0 0 10px rgba(34, 197, 94, 0.4);
+}
+
+.projection-card.expected-returns .amount {
+    color: #3b82f6;
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.4);
+}
+
+.projection-card.future-value .amount {
+    color: #a855f7;
+    text-shadow: 0 0 10px rgba(168, 85, 247, 0.4);
+}
+
+/* ===== Savings Amount Container ===== */
+.savings-amount-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+}
+
+/* ===== Enhanced Animations ===== */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes pulseBlue {
+
+    0%,
+    100% {
+        box-shadow:
+            0 4px 20px rgba(59, 130, 246, 0.3),
+            0 0 30px rgba(59, 130, 246, 0.2);
+    }
+
+    50% {
+        box-shadow:
+            0 4px 20px rgba(59, 130, 246, 0.5),
+            0 0 40px rgba(59, 130, 246, 0.4);
+    }
+}
+
+@keyframes pulseGreen {
+
+    0%,
+    100% {
+        box-shadow:
+            0 4px 20px rgba(34, 197, 94, 0.3),
+            0 0 30px rgba(34, 197, 94, 0.2);
+    }
+
+    50% {
+        box-shadow:
+            0 4px 20px rgba(34, 197, 94, 0.5),
+            0 0 40px rgba(34, 197, 94, 0.4);
+    }
+}
+
+/* ===== Apply Income Goals Animations ===== */
+.income-goals-card {
+    animation: slideInLeft 0.6s ease-out;
+}
+
+.savings-info-card {
+    animation: fadeInScale 0.7s ease-out;
+    animation-delay: 0.2s;
+    animation-fill-mode: both;
+}
+
+.returns-info-card {
+    animation: fadeInScale 0.7s ease-out;
+    animation-delay: 0.4s;
+    animation-fill-mode: both;
+}
+
+.projection-card {
+    animation: fadeInScale 0.6s ease-out;
+    animation-fill-mode: both;
+}
+
+.projection-card:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.projection-card:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.projection-card:nth-child(3) {
+    animation-delay: 0.5s;
+}
+
+.income-goals-card .card-header {
+    animation: pulseBlue 4s ease-in-out infinite;
+}
+
+.savings-info-card,
+.projection-card.current-savings {
+    animation: pulseGreen 3s ease-in-out infinite;
+}
+
+.returns-info-card,
+.projection-card.expected-returns {
+    animation: pulseBlue 3s ease-in-out infinite;
+}
+
+/* ===== Table Row Animation ===== */
+.income-goals-card .table tbody tr {
+    animation: fadeInRight 0.5s ease-out;
+    animation-fill-mode: both;
+}
+
+.income-goals-card .table tbody tr:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.income-goals-card .table tbody tr:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.income-goals-card .table tbody tr:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.income-goals-card .table tbody tr:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.income-goals-card .table tbody tr:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+/* ===== Responsive Design for Income Goals ===== */
+@media (max-width: 1200px) {
+    .income-source-input {
+        width: 12em;
+        font-size: 1rem !important;
+    }
+
+    .income-amount-input {
+        width: 6em;
+        font-size: 1rem !important;
+    }
+
+    .savings-display-input {
+        font-size: 1.5rem !important;
+        padding: 1rem !important;
+    }
+
+    .returns-input {
+        font-size: 1.2rem !important;
+        padding: 0.8rem !important;
+    }
+
+    .projection-card {
+        margin: 0.5rem;
+        padding: 1.5rem;
+    }
+
+    .projection-card .amount {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .income-source-input {
+        width: 10em;
+        font-size: 0.9rem !important;
+    }
+
+    .income-amount-input {
+        width: 5em;
+        font-size: 0.9rem !important;
+    }
+
+    .savings-display-input {
+        font-size: 1.2rem !important;
+        padding: 0.8rem !important;
+    }
+
+    .returns-input {
+        font-size: 1rem !important;
+        padding: 0.6rem !important;
+    }
+
+    .savings-info-card,
+    .returns-info-card {
+        padding: 1.5rem;
+        margin: 0.5rem 0;
+    }
+
+    .projection-card {
+        margin: 0.25rem;
+        padding: 1rem;
+    }
+
+    .projection-card .amount {
+        font-size: 1.2rem;
+    }
+
+    .projection-card i {
+        font-size: 2.5rem !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .income-source-input {
+        width: 8em;
+        font-size: 0.8rem !important;
+    }
+
+    .income-amount-input {
+        width: 4em;
+        font-size: 0.8rem !important;
+    }
+
+    .table-responsive {
+        font-size: 0.8rem;
+    }
+
+    .savings-info-card h3,
+    .returns-info-card h3 {
+        font-size: 1.2rem;
+    }
+
+    .projection-card h4 {
+        font-size: 1rem;
+    }
+
+    .projection-card .amount {
+        font-size: 1rem;
+    }
+}
+
+/* ===== Input Group Styling ===== */
+.input-group {
+    position: relative;
+}
+
+.input-group .form-control {
+    border-top-left-radius: 10px !important;
+    border-bottom-left-radius: 10px !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+}
+
+.input-group-text {
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-top-right-radius: 10px !important;
+    border-bottom-right-radius: 10px !important;
+}
+
+/* ===== Enhanced Focus States ===== */
+.income-source-input:focus-visible,
+.income-amount-input:focus-visible,
+.returns-input:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+}
+
+/* ===== Print Styles for Income Goals ===== */
+@media print {
+
+    .savings-info-card,
+    .returns-info-card,
+    .projection-card {
+        background: white !important;
+        border: 1px solid #ccc !important;
+        box-shadow: none !important;
+        break-inside: avoid;
+    }
+
+    .income-source-input,
+    .income-amount-input,
+    .returns-input {
+        background: white !important;
+        color: black !important;
+        border: 1px solid #ccc !important;
+    }
+
+    .savings-display-input,
+    .income-summary-input {
+        background: #f0f0f0 !important;
+        color: black !important;
+        border: 1px solid #ccc !important;
+    }
+
+    .fa-plus {
+        display: none !important;
+    }
+
+    .projection-card .amount {
+        color: black !important;
+        text-shadow: none !important;
+    }
+}
+
+/* ===== Enhanced Tooltip Support ===== */
+.custom-tooltip {
+    background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+/* ===== Special Effects for Different Input Types ===== */
+.income-source-input::placeholder {
+    color: rgba(96, 165, 250, 0.6);
+    font-style: italic;
+}
+
+.income-amount-input::placeholder {
+    color: rgba(245, 158, 11, 0.6);
+    font-style: italic;
+}
+
+.returns-input::placeholder {
+    color: rgba(59, 130, 246, 0.6);
+    font-style: italic;
+}
+
+/* ===== Hover Effects for Table Cells ===== */
+.income-goals-card .table tbody td {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.income-goals-card .table tbody tr:hover td {
+    background: rgba(59, 130, 246, 0.1) !important;
+    transform: translateX(2px);
+}
+
+/* ===== Enhanced Visual Feedback ===== */
+.savings-amount-container:hover .savings-display-input {
+    animation: pulseGreen 1s ease-in-out;
+}
+
+.returns-input-container:hover .returns-input {
+    animation: pulseBlue 1s ease-in-out;
+}
+
+
+/* income-goals.component.css - Horizontal Scroll Only */
+
+/* ===== Table Container with Horizontal Scroll ===== */
+.table-responsive {
+    overflow-x: auto !important;
+    overflow-y: visible !important;
+    max-width: 100% !important;
+    margin-bottom: 2rem;
+    width: 100% !important;
+    display: block !important;
+}
+
+/* ===== Table Styling for Horizontal Scroll ===== */
+.table {
+    min-width: 2400px !important;
+    /* הגדלתי עוד יותר לכפיית גלילה */
+    table-layout: auto !important;
+    border-collapse: separate;
+    border-spacing: 0;
+    width: auto !important;
+    display: table !important;
+}
+
+/* ===== First Column Styling - עגול מימין, ישר משמאל ===== */
+.table th:first-child,
+.table td:first-child,
+.first-col {
+    position: sticky !important;
+    right: 0 !important;
+    z-index: 10 !important;
+    background: black !important;
+    border-right: 2px solid rgba(16, 185, 129, 0.4) !important;
+    min-width: 500px !important;
+    max-width: 500px !important;
+    border-top-right-radius: 8px !important;
+    border-bottom-right-radius: 8px !important;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+}
+
+/* ===== Last Column Styling - עגול משמאל, ישר מימין ===== */
+.table th:last-child,
+.table td:last-child {
+    border-top-left-radius: 8px !important;
+    border-bottom-left-radius: 8px !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+    border-left: 2px solid rgba(16, 185, 129, 0.4) !important;
+    min-width: 200px !important;
+}
+
+/* ===== Column Sizing - הגדלתי את רוחב העמודות ===== */
+.table th,
+.table td {
+    min-width: 240px !important;
+    /* הגדלתי מ-140px ל-180px */
+    white-space: nowrap;
+    padding: 0.75rem 0.5rem !important;
+    background: black !important;
+}
+
+.table th:first-child,
+.table td:first-child {
+    min-width: 500px !important;
+    /* הגדלתי מ-200px ל-250px */
+    max-width: 500px !important;
+    background: black !important;
+}
+
+/* ===== Input Styling ===== */
+.table input {
+    background: black !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+    width: 100% !important;
+}
+
+/* ===== Row Styling ===== */
+.table tbody tr,
+.table thead tr {
+    background: black !important;
+}
+
+.table tbody tr:hover {
+    background: rgba(16, 185, 129, 0.1) !important;
+}
+
+/* ===== Custom Scrollbar ===== */
+.table-responsive::-webkit-scrollbar {
+    height: 12px;
+    width: 12px;
+}
+
+.table-responsive::-webkit-scrollbar-track {
+    background: rgba(30, 41, 59, 0.8);
+    border-radius: 8px;
+    border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+.table-responsive::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    border-radius: 8px;
+    border: 2px solid rgba(16, 185, 129, 0.3);
+    box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
+}
+
+.table-responsive::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.5);
+}
+
+.table-responsive::-webkit-scrollbar-corner {
+    background: rgba(30, 41, 59, 0.8);
+}
+
+/* ===== Force Scroll Visibility ===== */
+.table-responsive {
+    scrollbar-width: thin;
+    scrollbar-color: #10b981 rgba(30, 41, 59, 0.8);
+}
+
+/* ===== Input Width Adjustments ===== */
+input[style*="width: 15em"],
+input[style*="width: 100%"] {
+    width: 100% !important;
+    max-width: none !important;
+}
+
+input[style*="width: 7em"] {
+    width: 100% !important;
+    max-width: 140px !important;
+}
+
+/* ===== Responsive Design ===== */
+@media (max-width: 1200px) {
+    .table {
+        min-width: 2200px !important;
+    }
+
+    .table th,
+    .table td {
+        min-width: 160px !important;
+        /* הגדלתי מ-120px ל-160px */
+        padding: 0.6rem 0.4rem !important;
+    }
+
+    .table th:first-child,
+    .table td:first-child {
+        min-width: 220px !important;
+        /* הגדלתי מ-180px ל-220px */
+        max-width: 220px !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .table {
+        min-width: 2000px !important;
+    }
+
+    .table th,
+    .table td {
+        min-width: 140px !important;
+        /* הגדלתי מ-100px ל-140px */
+        padding: 0.5rem 0.3rem !important;
+    }
+
+    .table th:first-child,
+    .table td:first-child {
+        min-width: 200px !important;
+        /* הגדלתי מ-160px ל-200px */
+        max-width: 200px !important;
+    }
+}
+
+@media (max-width: 480px) {
+    .table {
+        min-width: 1800px !important;
+    }
+
+    .table th,
+    .table td {
+        min-width: 120px !important;
+        /* הגדלתי מ-80px ל-120px */
+        padding: 0.4rem 0.2rem !important;
+    }
+
+    .table th:first-child,
+    .table td:first-child {
+        min-width: 180px !important;
+        /* הגדלתי מ-140px ל-180px */
+        max-width: 180px !important;
+    }
+}

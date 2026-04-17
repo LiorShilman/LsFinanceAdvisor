@@ -1,0 +1,12 @@
+{
+  "name": "ls-finance-advisor",
+  "description": "LS Finance Advisor - Electron Host",
+  "author": {
+    "name": "Lior Shilman",
+    "email": "shilmanlior@gmail.com"
+  },
+  "version": "13.0.0",
+  "main": "main.js",
+  "private": true,
+  "dependencies": {}
+}

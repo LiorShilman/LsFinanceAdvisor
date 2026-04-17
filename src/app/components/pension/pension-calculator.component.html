@@ -1,0 +1,960 @@
+<div class="pc-container" dir="rtl">
+
+  <div class="container">
+    <div class="header">
+      <h1>🏦 מערכת ייעוץ פיננסי מתקדמת</h1>
+      <p>ניתוח כלכלי מקצועי עם תמיכה מלאה בכל מצבי החיים + סליידר גיל דינמי</p>
+      <div class="update-banner"
+        style="background: linear-gradient(135deg, #FFE66D, #F39C12); color: #0F0F23; padding: 15px; border-radius: 10px; margin: 15px 0; font-weight: bold; text-align: center; position: relative; z-index: 2; box-shadow: 0 5px 15px rgba(243, 156, 18, 0.3);">
+        🔥 עודכן אוגוסט 2025 | השכר הממוצע: 13,316 ש"ח | כולל אזהרות מיסוי חדשות | סליידר גיל חדש!
+      </div>
+    </div>
+
+    <div class="test-scenarios">
+      <h3>🧪 תרחישי בדיקה מהירים</h3>
+    
+      <!-- באנר תרחיש נוכחי -->
+      <div class="selected-scenario-banner" *ngIf="selectedScenarioLabel" aria-live="polite">
+        <span>תרחיש נוכחי:</span>
+        <span>{{ selectedScenarioLabel }}</span>
+      </div>
+    
+      <!-- תרחישים בסיסיים -->
+      <button class="test-scenario-btn"
+              [class.selected]="selectedScenarioId===1"
+              [attr.aria-pressed]="selectedScenarioId===1"
+              (click)="loadScenario(1,'רווק 35 ללא ילדים')">
+        רווק 35 ללא ילדים
+      </button>
+    
+      <button class="test-scenario-btn"
+              [class.selected]="selectedScenarioId===2"
+              [attr.aria-pressed]="selectedScenarioId===2"
+              (click)="loadScenario(2,'גרוש 45 עם ילד')">
+        גרוש 45 עם ילד
+      </button>
+    
+      <button class="test-scenario-btn"
+              [class.selected]="selectedScenarioId===3"
+              [attr.aria-pressed]="selectedScenarioId===3"
+              (click)="loadScenario(3,'נשוי 50 עם ילדים')">
+        נשוי 50 עם ילדים
+      </button>
+    
+      <button class="test-scenario-btn"
+              [class.selected]="selectedScenarioId===4"
+              [attr.aria-pressed]="selectedScenarioId===4"
+              (click)="loadScenario(4,'חד-הורית 30')">
+        חד-הורית 30
+      </button>
+    
+      <button class="test-scenario-btn"
+              [class.selected]="selectedScenarioId===5"
+              [attr.aria-pressed]="selectedScenarioId===5"
+              (click)="loadScenario(5,'נשוי 68 ללא ילדים')">
+        נשוי 68 ללא ילדים
+      </button>
+    
+      <button class="test-scenario-btn"
+              [class.selected]="selectedScenarioId===6"
+              [attr.aria-pressed]="selectedScenarioId===6"
+              (click)="loadScenario(6,'גרוש 39 ללא ילדים')">
+        גרוש 39 ללא ילדים
+      </button>
+    
+      <button class="test-scenario-btn"
+              [class.selected]="selectedScenarioId===7"
+              [attr.aria-pressed]="selectedScenarioId===7"
+              (click)="loadScenario(7,'הורה יחידני 42')">
+        הורה יחידני 42
+      </button>
+    
+      <button class="test-scenario-btn"
+              [class.selected]="selectedScenarioId===8"
+              [attr.aria-pressed]="selectedScenarioId===8"
+              (click)="loadScenario(8,'נשוי 47 ללא ילדים')">
+        נשוי 47 ללא ילדים
+      </button>
+    
+      <button class="test-scenario-btn"
+              [class.selected]="selectedScenarioId===9"
+              [attr.aria-pressed]="selectedScenarioId===9"
+              (click)="loadScenario(9,'גרוש 60 ילדים בוגרים')">
+        גרוש 60 ילדים בוגרים
+      </button>
+    
+      <button class="test-scenario-btn"
+              [class.selected]="selectedScenarioId===10"
+              [attr.aria-pressed]="selectedScenarioId===10"
+              (click)="loadScenario(10,'רווקה 28 עם ילד')">
+        רווקה 28 עם ילד
+      </button>
+    
+      <button class="test-scenario-btn"
+              [class.selected]="selectedScenarioId===11"
+              [attr.aria-pressed]="selectedScenarioId===11"
+              (click)="loadScenario(11,'פנסיונר 72 נשוי')">
+        פנסיונר 72 נשוי
+      </button>
+    
+      <button class="test-scenario-btn"
+              [class.selected]="selectedScenarioId===12"
+              [attr.aria-pressed]="selectedScenarioId===12"
+              (click)="loadScenario(12,'פנסיונר 67 - אובדן 40%')">
+        פנסיונר 67 - אובדן 40%
+      </button>
+    
+      <!-- חדשים עם קצבאות נוספות -->
+      <button class="test-scenario-btn"
+              [class.selected]="selectedScenarioId===16"
+              [attr.aria-pressed]="selectedScenarioId===16"
+              (click)="loadScenario(16,'פנסיונר 70 עני')"
+              style="background: linear-gradient(135deg, #8E44AD, #9B59B6); color: white;">
+        פנסיונר 70 עני
+      </button>
+    
+      <button class="test-scenario-btn"
+              [class.selected]="selectedScenarioId===17"
+              [attr.aria-pressed]="selectedScenarioId===17"
+              (click)="loadScenario(17,'הורה יחיד עני')"
+              style="background: linear-gradient(135deg, #27AE60, #2ECC71); color: white;">
+        הורה יחיד עני
+      </button>
+    
+      <button class="test-scenario-btn"
+              [class.selected]="selectedScenarioId===18"
+              [attr.aria-pressed]="selectedScenarioId===18"
+              (click)="loadScenario(18,'משפחה עם קצבת ילדים')"
+              style="background: linear-gradient(135deg, #3498DB, #2980B9); color: white;">
+        משפחה עם קצבת ילדים
+      </button>
+    
+      <button class="test-scenario-btn"
+              [class.selected]="selectedScenarioId===19"
+              [attr.aria-pressed]="selectedScenarioId===19"
+              (click)="loadScenario(19,'נכה בפועל')"
+              style="background: linear-gradient(135deg, #E74C3C, #C0392B); color: white;">
+        נכה בפועל
+      </button>
+    
+      <!-- משפחות מורכבות -->
+      <button class="test-scenario-btn"
+              [class.selected]="selectedScenarioId===20"
+              [attr.aria-pressed]="selectedScenarioId===20"
+              (click)="loadScenario(20,'משפחה מורכבת')"
+              style="background: linear-gradient(135deg, #9C27B0, #673AB7); color: white;">
+        משפחה מורכבת
+      </button>
+    
+      <button class="test-scenario-btn"
+              [class.selected]="selectedScenarioId===21"
+              [attr.aria-pressed]="selectedScenarioId===21"
+              (click)="loadScenario(21,'גרוש שכר גבוה')"
+              style="background: linear-gradient(135deg, #FF5722, #E64A19); color: white;">
+        גרוש שכר גבוה
+      </button>
+    
+      <!-- מצבים רפואיים -->
+      <button class="test-scenario-btn"
+              [class.selected]="selectedScenarioId===22"
+              [attr.aria-pressed]="selectedScenarioId===22"
+              (click)="loadScenario(22,'אם חד-הורית נכה')"
+              style="background: linear-gradient(135deg, #795548, #5D4037); color: white;">
+        אם חד-הורית נכה
+      </button>
+    
+      <!-- עושר/עוני קיצוניים -->
+      <button class="test-scenario-btn"
+              [class.selected]="selectedScenarioId===23"
+              [attr.aria-pressed]="selectedScenarioId===23"
+              (click)="loadScenario(23,'משפחה עשירה')"
+              style="background: linear-gradient(135deg, #FFD700, #FFA000); color: white;">
+        משפחה עשירה
+      </button>
+    
+      <button class="test-scenario-btn"
+              [class.selected]="selectedScenarioId===24"
+              [attr.aria-pressed]="selectedScenarioId===24"
+              (click)="loadScenario(24,'עוני קיצוני')"
+              style="background: linear-gradient(135deg, #607D8B, #455A64); color: white;">
+        עוני קיצוני
+      </button>
+    
+      <!-- מקצוע מיוחד -->
+      <button class="test-scenario-btn"
+              [class.selected]="selectedScenarioId===25"
+              [attr.aria-pressed]="selectedScenarioId===25"
+              (click)="loadScenario(25,'טייס - פרישה מוקדמת')"
+              style="background: linear-gradient(135deg, #00BCD4, #0097A7); color: white;">
+        טייס - פרישה מוקדמת
+      </button>
+    
+      <!-- תרחיש מיסוי -->
+      <button class="test-scenario-btn"
+              [class.selected]="selectedScenarioId===15"
+              [attr.aria-pressed]="selectedScenarioId===15"
+              (click)="loadScenario(15,'מיסוי פנסיה גבוהה')"
+              style="background: linear-gradient(135deg, #F39C12, #E67E22); color: white;">
+        מיסוי פנסיה גבוהה
+      </button>
+    
+      <!-- סימולציית גירושין -->
+      <div class="divorce-simulation">
+        <h3>💔 סימולציית תרחישי גירושין</h3>
+        <button class="divorce-scenario-btn"
+                [class.selected]="selectedDivorceScenarioId===13"
+                (click)="loadDivorceScenario(13)">
+          גירושין אחרי 15 שנים
+        </button>
+        <button class="divorce-scenario-btn"
+                [class.selected]="selectedDivorceScenarioId===14"
+                (click)="loadDivorceScenario(14)">
+          גירושין מאוחרים
+        </button>
+        <div id="divorce-results" style="display: none;"></div>
+      </div>
+    </div>
+    
+
+    <!-- 🔥 NEW: Age Slider Section - Two Columns Layout -->
+    <div class="age-slider-container">
+      <div class="age-slider-header">
+        <h2>🎯 סליידר גיל המוות</h2>
+        <p>גרור את הסליידר וראה בזמן אמת איך הגיל משפיע על פנסיית השאירים</p>
+      </div>
+
+      <!-- 🔥 חלוקה לשתי עמודות -->
+      <div class="age-slider-grid">
+        <!-- עמודה שמאלית: בקרות וסליידר -->
+        <div class="age-controls-column">
+          <div class="age-control-panel">
+            <div class="age-slider-wrapper">
+              <input type="range" id="ageSlider" min="20" max="85" [step]="1" [(ngModel)]="age"
+                (ngModelChange)="onAgeChange($event)" list="ageTicks" />
+
+              <datalist id="ageTicks">
+                <option value="20"></option>
+                <option value="30"></option>
+                <option value="40"></option>
+                <option value="50"></option>
+                <option value="60"></option>
+                <option value="67"></option>
+                <option value="75"></option>
+                <option value="85"></option>
+              </datalist>
+
+              <!-- תוויות מתחת למסילה -->
+              <div class="range-labels" style="direction: ltr;">
+                <span class="tick" *ngFor="let t of ageTicks" [style.left.%]="tickLeftPct(t)">
+                  {{ t }}
+                </span>
+              </div>
+
+            </div>
+
+            <div class="age-display" id="ageDisplay">
+              <div class="current-age">{{ age }}</div>
+              <div class="age-category" id="ageCategory">גיל עבודה</div>
+              <div class="age-description" id="ageDescription">זכאי לפנסיית שאירים</div>
+              <div class="eligibility-indicator eligible" id="sliderEligibilityIndicator">✅ זכאי לפנסיה
+              </div>
+            </div>
+
+            <div class="quick-ages">
+              <button class="quick-age-btn" (click)="setSliderAge(25)">25 - צעיר</button>
+              <button class="quick-age-btn" (click)="setSliderAge(35)">35 - עובד</button>
+              <button class="quick-age-btn" (click)="setSliderAge(45)">45 - בוגר</button>
+              <button class="quick-age-btn" (click)="setSliderAge(55)">55 - ותיק</button>
+              <button class="quick-age-btn" (click)="setSliderAge(67)">67 - פנסיונר</button>
+              <button class="quick-age-btn" (click)="setSliderAge(75)">75 - מבוגר</button>
+            </div>
+
+            <div class="age-preview" id="agePreview">
+              <div class="age-preview-card">
+                <div class="age-preview-value" id="sliderMonthly" style="color: var(--success-color);">
+                  7,250 ש"ח</div>
+                <div class="age-preview-label">פנסיה חודשית</div>
+              </div>
+              <div class="age-preview-card">
+                <div class="age-preview-value" id="sliderTotal" style="color: var(--primary-color);">
+                  1,740,000 ש"ח</div>
+                <div class="age-preview-label">ערך כולל</div>
+              </div>
+              <div class="age-preview-card">
+                <div class="age-preview-value" id="sliderYears" style="color: var(--warning-color);">20
+                  שנים</div>
+                <div class="age-preview-label">תקופת תשלום</div>
+              </div>
+              <div class="age-preview-card">
+                <div class="age-preview-value" id="sliderRisk" style="color: var(--accent-color);">
+                  בינוני</div>
+                <div class="age-preview-label">רמת סיכון</div>
+              </div>
+            </div>
+
+            <div class="age-thresholds">
+              <div class="threshold-card">
+                <div class="threshold-age" style="color: var(--accent-color);">40</div>
+                <div class="threshold-desc">גיל מינימום לזכאות</div>
+              </div>
+              <div class="threshold-card">
+                <div class="threshold-age" style="color: var(--warning-color);">67</div>
+                <div class="threshold-desc">גיל פנסיה רשמי</div>
+              </div>
+              <div class="threshold-card">
+                <div class="threshold-age" style="color: var(--success-color);">5</div>
+                <div class="threshold-desc">שנות ביטוח נדרשות</div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+        <!-- עמודה ימנית: גרף והתובנות -->
+        <div class="age-chart-column">
+          <div class="age-chart-container">
+            <div class="chart-header">
+              <h3>📊 השפעת גיל המוות על פנסיית השאירים</h3>
+              <p>גרף אינטראקטיבי המציג את הקשר בין גיל המוות לבין גובה הפנסיה וערכה הכולל</p>
+            </div>
+
+            <div class="chart-fixed-400">
+              <highcharts-chart
+                [Highcharts]="Highcharts"
+                [options]="ageImpactOptions"
+                [update]="updateAgeImpact"
+                [oneToOne]="true"
+                style="display:block; min-height:360px">
+              </highcharts-chart>
+            </div>
+
+            <div class="chart-legend">
+              <div class="legend-item">
+                <div class="legend-color monthly"></div>
+                <span>פנסיה חודשית (ש"ח)</span>
+              </div>
+              <div class="legend-item">
+                <div class="legend-color total"></div>
+                <span>ערך כולל (אלפי ש"ח)</span>
+              </div>
+            </div>
+
+            <div class="age-markers">
+              <div class="age-marker critical">20-30<br>צעיר</div>
+              <div class="age-marker critical">30-40<br>מוקדם</div>
+              <div class="age-marker optimal">40-50<br>אופטימלי</div>
+              <div class="age-marker optimal">50-60<br>בוגר</div>
+              <div class="age-marker">60-67<br>פרישה</div>
+              <div class="age-marker">67+<br>פנסיונר</div>
+            </div>
+
+            <div class="chart-insights">
+              <h4>🔍 תובנות מהגרף</h4>
+              <ul>
+                <li>הפנסיה החודשית עולה עם הגיל בגלל צבירת הקרן וותק</li>
+                <li>הערך הכולל מתחיל לרדת אחרי גיל 60 בגלל קיצור תקופת התשלום</li>
+                <li>הגיל האופטימלי למוות (מבחינה פיננסית) הוא 45-55</li>
+                <li>אחרי גיל 70 הפנסיה גבוהה אך התקופה קצרה</li>
+                <li>לפני גיל 40 יש סיכון לחוסר זכאות לחלוטין</li>
+              </ul>
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+
+    <div class="main-content">
+
+      <div class="panel">
+        <h2>📊 מחשבון פנסיית שארים</h2>
+
+        <div class="marital-status-group">
+          <h3>👥 מצב משפחתי</h3>
+          <div class="radio-group">
+            <label class="radio-option" [class.selected]="maritalStatus==='married'">
+              <input type="radio" name="marital-status" value="married" [checked]="maritalStatus==='married'"
+                (change)="selectMaritalStatus('married')">
+              <span>נשוי/נשואה</span>
+            </label>
+
+            <label class="radio-option" [class.selected]="maritalStatus==='single-no-children'">
+              <input type="radio" name="marital-status" value="single-no-children"
+                [checked]="maritalStatus==='single-no-children'" (change)="selectMaritalStatus('single-no-children')">
+              <span>רווק/ה ללא ילדים</span>
+            </label>
+
+            <label class="radio-option" [class.selected]="maritalStatus==='single-with-children'">
+              <input type="radio" name="marital-status" value="single-with-children"
+                [checked]="maritalStatus==='single-with-children'"
+                (change)="selectMaritalStatus('single-with-children')">
+              <span>רווק/ה עם ילדים</span>
+            </label>
+
+            <label class="radio-option" [class.selected]="maritalStatus==='divorced-with-children'">
+              <input type="radio" name="marital-status" value="divorced-with-children"
+                [checked]="maritalStatus==='divorced-with-children'"
+                (change)="selectMaritalStatus('divorced-with-children')">
+              <span>גרוש/ה עם ילדים</span>
+            </label>
+
+            <label class="radio-option" [class.selected]="maritalStatus==='divorced-no-children'">
+              <input type="radio" name="marital-status" value="divorced-no-children"
+                [checked]="maritalStatus==='divorced-no-children'"
+                (change)="selectMaritalStatus('divorced-no-children')">
+              <span>גרוש/ה ללא ילדים</span>
+            </label>
+          </div>
+
+          <div id="marital-status-info" *ngIf="maritalStatus==='divorced-with-children'">
+            <div class="divorced-alert">
+              <h4>📋 גרוש/ה עם ילדים</h4>
+              <p>זכויות הפנסיה יעברו לילדים בלבד. ייתכנו זכויות מוגבלות לבן/בת זוג לשעבר.</p>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="input-group form-grid">
+          <!-- שורה 1 -->
+          <div class="input-field col-6">
+            <label for="age">גיל הנפטר</label>
+            <input type="number" id="age" min="20" max="85" [(ngModel)]="age" (input)="onAgeChange(age)">
+          </div>
+
+          <div class="input-field col-6">
+            <label for="spouse-age">גיל בן/בת זוג</label>
+            <input type="number" id="spouse-age" min="18" max="100" [(ngModel)]="spouseAge" (input)="onInputChange()"
+              [disabled]="maritalStatus!=='married'">
+          </div>
+
+
+          <div class="input-field col-6">
+            <label for="salary">שכר חודשי ברוטו (ש"ח)</label>
+            <input type="text" id="salary" inputmode="numeric" [ngModel]="salaryInput"
+              (ngModelChange)="onSalaryInput($event)" />
+            <small>לפני מס הכנסה וביטוח לאומי</small>
+          </div>
+
+          <div class="input-field col-6">
+            <label for="years-insured">שנות ביטוח</label>
+            <input type="number" id="years-insured" min="0" max="50" [(ngModel)]="yearsInsured"
+              (input)="onInputChange()">
+          </div>
+
+          <!-- שורה 2 -->
+          <div class="input-field col-6">
+            <label for="pension-fund">צבירה בקרן פנסיה (ש"ח)</label>
+            <input type="text" id="pension-fund" inputmode="numeric" [ngModel]="pensionFundInput"
+              (ngModelChange)="onPensionFundChange($event)" />
+          </div>
+
+          <div class="input-field col-6">
+            <label for="children">מספר ילדים</label>
+            <input type="number" id="children" min="0" max="10" [(ngModel)]="children" (input)="onInputChange()">
+          </div>
+
+          <div class="input-field col-6">
+            <label for="children-ages">גילאי ילדים (פסיקים)</label>
+            <input type="text" id="children-ages" placeholder="לדוגמה: 8,12,16" [(ngModel)]="childrenAges"
+              (input)="onInputChange()">
+          </div>
+
+          <!-- שורה 3: תרומות/תשואה -->
+          <div class="input-field col-6">
+            <label for="monthly-contribution">הפקדה חודשית (₪)</label>
+            <input type="text" id="monthly-contribution" [(ngModel)]="monthlyContribution" (input)="onInputChange()">
+          </div>
+
+          <div class="input-field col-6">
+            <label for="annual-fee">עמלת ניהול שנתית (%)</label>
+            <input type="number" id="annual-fee" inputmode="decimal" step="0.01" min="0" max="5" [(ngModel)]="annualFee"
+              (input)="onInputChange()">
+            <small>מחושבת נטו: ריבית − עמלה</small>
+          </div>
+
+          <div class="input-field col-6">
+            <label for="avg-annual-return">ריבית ממוצעת שנתית (%)</label>
+            <input type="number" id="avg-annual-return" inputmode="decimal" step="0.1" min="-50" max="50"
+              [(ngModel)]="avgAnnualReturn" (input)="onInputChange()">
+            <small>אפשר גם שלילי לשנים חלשות</small>
+          </div>
+
+          <!-- כפתורי פעולה -->
+          <div class="col-12 actions-bar">
+            <button class="btn" (click)="calculatePension()">🔍 חשב פנסיית שאירים</button>
+            <button class="btn ai-prompt-btn" (click)="generateAIPrompt()">🤖 יצירת פרומפט AI מקצועי</button>
+          </div>
+        </div>
+
+
+        <!-- אזור תוצאות פרומפט AI - להוסיף אחרי הפאנל הראשי -->
+        <div id="ai-prompt-result" style="display: none;">
+          <div class="ai-prompt-container">
+            <div class="ai-prompt-header">
+              <h2>🤖 פרומפט AI מקצועי נוצר בהצלחה</h2>
+              <p>העתק את הפרומפט למטה ושלח אותו ל-AI מקצועי לקבלת המלצות אסטרטגיות מותאמות אישית</p>
+            </div>
+
+            <div class="ai-prompt-content">
+              <div class="prompt-actions">
+                <button (click)="copyPromptToClipboard()" class="copy-btn">📋 העתק פרומפט</button>
+                <button (click)="downloadPrompt()" class="download-btn">💾 הורד כקובץ</button>
+                <button (click)="closeAIPrompt()" class="close-btn">✖️ סגור</button>
+              </div>
+
+              <div class="prompt-text" id="generated-prompt">
+                <!-- הפרומפט יוכנס כאן דינמית -->
+              </div>
+            </div>
+
+            <div class="ai-usage-tips">
+              <h4>💡 טיפים לשימוש מקסימלי בפרומפט:</h4>
+              <ul>
+                <li><strong>שלח ל-AI מתקדם:</strong> Claude 3.5 Sonnet, GPT-4, או Gemini Pro</li>
+                <li><strong>בקש הבהרות:</strong> אל תהסס לשאול שאלות נוספות על ההמלצות</li>
+                <li><strong>עדכן נתונים:</strong> צור פרומפט חדש כשמצבך משתנה</li>
+                <li><strong>התאם לצרכים:</strong> הוסף מידע על מטרות אישיות או אילוצים ספציפיים</li>
+                <li><strong>בקש סימולציות:</strong> בקש מה-AI לבדוק תרחישי "מה אם" נוספים</li>
+              </ul>
+            </div>
+
+            <div class="ai-prompt-examples">
+              <h4>🎯 דוגמאות לשאלות המשך:</h4>
+              <div class="example-questions">
+                <div class="example-q">"איך אוכל לשפר את מצבי הפיננסי עד גיל 50?"</div>
+                <div class="example-q">"מה יקרה אם אתחתן/אתגרש בעתיד?"</div>
+                <div class="example-q">"איך לתכנן ביטוח חיים אופטימלי?"</div>
+                <div class="example-q">"מה ההשפעה של שינוי קריירה על הפנסיה?"</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div
+          style="background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 12px; margin-top: 20px; border: 1px solid rgba(255,255,255,0.1);">
+          <div id="eligibility-status" style="display: block;">
+            <div class="eligibility-check eligible">
+              <h4>✅ זכאי לפנסיית שאירים</h4>
+              <p>מוות בגיל 40 ומעלה - עמידה בתנאי הגיל</p>
+            </div>
+          </div>
+          <div id="explanations-box" style="display: block; margin-top: 15px;">
+            <ul>
+              <li>👶 הילדים זכאים לפנסיית שאירים עד גיל 18</li>
+              <li>💡 ילדים יתומים זכאים ל-40% מפנסיית הקרן (במקום 20%)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div id="results" style="display:block;">
+          <div class="analysis-grid">
+            <!-- ביטוח לאומי -->
+            <div class="metric-card">
+              <div class="metric-value">{{ fmtPublic(monthlyPension) }}</div>
+              <div class="metric-label">תשלום חודשי מביטוח לאומי (לפי טבלת ב"ל)</div>
+              <div class="metric-explanation">{{ monthlyPensionExplanation }}</div>
+              <span class="status-indicator" [ngClass]="monthlyPension > 0 ? 'status-good' : 'status-warning'"></span>
+            </div>
+
+            <!-- קרן פנסיה -->
+            <div class="metric-card">
+              <div class="metric-value">{{ fmtPublic(fundPension) }}</div>
+              <div class="metric-label">תשלום חודשי מקרן פנסיה</div>
+              <div class="metric-explanation">{{ fundPensionExplanation }}</div>
+              <span class="status-indicator" [ngClass]="fundPension > 0 ? 'status-good' : 'status-warning'"></span>
+            </div>
+
+            <!-- ילדים -->
+            <div class="metric-card">
+              <div class="metric-value">{{ fmtPublic(childrenPension) }}</div>
+              <div class="metric-label">פנסיית ילדים</div>
+              <div class="metric-explanation">{{ childrenPensionExplanation }}</div>
+              <span class="status-indicator" [ngClass]="childrenPension > 0 ? 'status-good' : 'status-warning'"></span>
+            </div>
+
+            <!-- כל ילד מקבל -->
+            <div class="metric-card" *ngIf="perChildAmount !== null">
+              <div class="metric-value">{{ fmtPublic(perChildAmount!) }}</div>
+              <div class="metric-label">כל ילד מקבל</div>
+              <div class="metric-explanation">{{ perChildExplanation }}</div>
+              <span class="status-indicator status-good"></span>
+            </div>
+
+            <!-- ערך נוכחי כולל -->
+            <div class="metric-card">
+              <div class="metric-value">{{ fmtPublic(totalValue) }}</div>
+              <div class="metric-label">ערך נוכחי כולל</div>
+              <div class="metric-explanation">{{ totalValueExplanation }}</div>
+              <span class="status-indicator" [ngClass]="totalValue > 0 ? 'status-warning' : 'status-good'"></span>
+            </div>
+
+            <!-- ערך עתידי עם הצמדה -->
+            <div class="metric-card">
+              <div class="metric-value">{{ fmtPublic(futureValue) }}</div>
+              <div class="metric-label">ערך עתידי עם הצמדה</div>
+              <div class="metric-explanation">{{ futureValueExplanation }}</div>
+              <span class="status-indicator status-good"></span>
+            </div>
+
+            <!-- ירושה -->
+            <div class="metric-card" *ngIf="inheritanceValue > 0">
+              <div class="metric-value">{{ fmtPublic(inheritanceValue) }}</div>
+              <div class="metric-label">ירושה מקרן פנסיה</div>
+              <div class="metric-explanation">{{ inheritanceExplanation }}</div>
+              <span class="status-indicator status-warning"></span>
+            </div>
+          </div>
+        </div>
+
+        <div id="calculation-breakdown"></div>
+
+        <div class="breakdown-panel" [innerHTML]="survivorsBreakdownHtml"></div>
+
+        <div class="tax-alert"
+          style="background: linear-gradient(135deg, rgba(243, 156, 18, 0.15) 0%, rgba(230, 126, 34, 0.15) 100%); padding: 20px; margin: 20px 0px; border-radius: 10px; border-right: 4px solid rgb(243, 156, 18); position: relative;">
+          <h4 style="color: #F39C12;">💰 חשוב: היבטי מיסוי</h4>
+          <p><strong>פטור ממס:</strong> פנסיה עד 9,430 ש"ח חודשית פטורה ממס</p>
+          <p><strong>⚠️ חישוב מס משוער:</strong></p>
+          <p>סכום חייב: 1,698 ש"ח</p>
+          <p>מס חודשי משוער: 170 ש"ח (10%)</p>
+          <p><strong>נטו לאחר מס: 10,958 ש"ח</strong></p>
+          <p><strong>המלצה:</strong> התייעץ עם יועץ מס לתכנון מיטבי</p>
+        </div>
+
+        <div class="panel">
+          <h2>⚡ תובנות מתקדמות</h2>
+          <div class="chart-container chart-fixed-400">
+            <highcharts-chart [Highcharts]="Highcharts" [options]="insightsOptions" [update]="updateInsights" [oneToOne]="true"
+              style="display:block; min-height:360px">
+            </highcharts-chart>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>🎯 סיכום וניתוח</h2>
+        
+          <ng-container *ngIf="summary">
+            <h3>📊 ניתוח מצב - {{ summary.statusText }}</h3>
+        
+            <!-- ❌ אין זכאות -->
+            <div *ngIf="!summary.eligible"
+                 class="summary-banner summary-error">
+              <h4>❌ חוסר זכאות לפנסיית שאירים</h4>
+              <p>
+                ללא זכאות מביטוח לאומי.
+                <ng-container *ngIf="summary.inheritanceValue > 0">
+                  הצבירה בקרן תעבור ליורשים.
+                </ng-container>
+              </p>
+              <p><strong>המלצה:</strong> שקול ביטוח חיים פרטי לכיסוי המשפחה.</p>
+            </div>
+        
+            <!-- ✅ זכאי + יש תשלום חודשי -->
+            <div *ngIf="summary.eligible && summary.totalMonthly > 0"
+                 class="summary-banner summary-ok">
+              <h4>✅ זכאות לפנסיית שאירים</h4>
+              <p><strong>סה"כ חודשי:</strong> {{ summary.totalMonthly | number:'1.0-0':'he-IL' }} ש"ח</p>
+              <p><strong>ערך כולל:</strong> {{ summary.presentValue | number:'1.0-0':'he-IL' }} ש"ח</p>
+              <p><strong>תקופת תשלום:</strong> {{ summary.yearsToReceive }} שנים</p>
+            </div>
+        
+            <!-- ⚠️ זכאי אבל ללא שאירים (אין תשלום חודשי) -->
+            <p *ngIf="summary.inheritanceValue > 0; else noInheritance">
+              הצבירה בקרן תעבור ליורשים:
+              {{ summary.inheritanceValue | number:'1.0-0':'he-IL' }} ש"ח
+            </p>
+            <ng-template #noInheritance>
+              <p>אין צבירה בקרן להעברה.</p>
+            </ng-template>
+        
+            <!-- המלצות -->
+            <div style="margin-top: 20px;">
+              <h4>💡 המלצות מותאמות:</h4>
+              <ul style="text-align: right; padding-right: 20px;">
+                <li *ngFor="let tip of summary.tips">{{ tip }}</li>
+              </ul>
+            </div>
+          </ng-container>
+        </div>
+
+
+      </div>
+
+      <div id="flow-diagram-container" class="panel">
+
+        <div class="panel" id="death-distribution-panel">
+          <h2>⚖️ חלוקת פטירה – שארים מול יורשים</h2>
+          <table class="dist-table" dir="rtl" aria-describedby="dist-note">
+            <caption class="sr-only">חלוקת תשלומים לשארים מול יורשים</caption>
+        
+            <colgroup>
+              <col class="col-source">
+              <col class="col-monthly">
+              <col class="col-lump">
+              <col class="col-notes">
+            </colgroup>
+        
+            <thead>
+              <tr>
+                <th scope="col">מקור</th>
+                <th scope="col">לשארים <small>(חודשי)</small></th>
+                <th scope="col">ליורשים <small>(חד־פעמי)</small></th>
+                <th scope="col">הערות</th>
+              </tr>
+            </thead>
+        
+            <tbody>
+              <tr>
+                <th scope="row">ביטוח לאומי – פנסיית שארים</th>
+                <td class="num">{{ dd.btl.monthly ? fmtPublic(dd.btl.monthly) : '' }}</td>
+                <td class="num mute"></td>
+                <td>{{ dd.btl.note }}</td>
+              </tr>
+        
+              <tr>
+                <th scope="row">קרן פנסיה – פנסיית שארים</th>
+                <td class="num">{{ dd.fund.monthly ? fmtPublic(dd.fund.monthly) : '' }}</td>
+                <td class="num">{{ dd.fund.lump ? fmtPublic(dd.fund.lump) : '' }}</td>
+                <td>{{ dd.fund.note }}</td>
+              </tr>
+        
+              <tr>
+                <th scope="row">פנסיית/קצבת ילדים (ישירה)</th>
+                <td class="num">{{ dd.children.monthly ? fmtPublic(dd.children.monthly) : '' }}</td>
+                <td class="num mute"></td>
+                <td>{{ dd.children.note }}</td>
+              </tr>
+            </tbody>
+        
+            <tfoot>
+              <tr class="total">
+                <th scope="row">סיכום</th>
+                <td class="num strong">{{ dd.total.monthly ? fmtPublic(dd.total.monthly) : '' }}</td>
+                <td class="num strong">{{ dd.total.lump ? fmtPublic(dd.total.lump) : '' }}</td>
+                <td id="dist-note">{{ dd.total.note }}</td>
+              </tr>
+            </tfoot>
+          </table>
+
+          <div class="pension-split-alert" id="dd-inheritance-hint" style="display:none; margin-top:14px;">
+            <h4>💡 הבהרה</h4>
+            <div id="dd-inheritance-text"></div>
+          </div>
+        </div>
+
+        <div class="panel">
+          <!-- אחרי שורה 470, אחרי div id="results" -->
+          <h2>📈 ניתוח השוואתי מתקדם</h2>
+          <highcharts-chart [Highcharts]="Highcharts" [options]="comparisonOptions" [update]="updateComparison" [oneToOne]="true"
+            style="display:block; min-height:360px">
+          </highcharts-chart>
+
+          <div class="recommendation-box">
+            <h4>המלצות מקצועיות מותאמות למצב</h4>
+            <p id="recommendations">בחר תרחיש או הזן נתונים כדי לקבל המלצות מותאמות אישית</p>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>🌊 דיאגרמת זרימת כסף - ויזואליזציה</h2>
+        
+          <div id="flowDiagram">
+            <div class="flow-diagram">
+              <h3>🌊 זרימת הכסף לשאירים</h3>
+        
+              <div class="flow-container" [attr.data-flow-tick]="flowTick">
+                <!-- מקור: ביטוח לאומי -->
+                <div class="flow-source btl-source"
+                     [class.dim]="!monthlyPension"
+                     [style.opacity]="monthlyPension ? 1 : 0.4"
+                     [style.transform]="'translateY(0)'">
+                  <div style="font-size: 3em; margin-bottom: 15px;">🏦</div>
+                  <h4>ביטוח לאומי</h4>
+                  <div class="flow-amount">{{ fmtPublic(monthlyPension) }}</div>
+                  <small>פנסיית שאירים</small>
+                </div>
+        
+                <div class="flow-arrow" [class.active]="monthlyPension">💧</div>
+        
+                <!-- מקור: קרן פנסיה -->
+                <div class="flow-source fund-source"
+                     [class.dim]="!fundPension"
+                     [style.opacity]="fundPension ? 1 : 0.4"
+                     [style.transform]="'translateY(0)'">
+                  <div style="font-size: 3em; margin-bottom: 15px;">💼</div>
+                  <h4>קרן פנסיה</h4>
+                  <div class="flow-amount">{{ fmtPublic(fundPension) }}</div>
+                  <small>פנסיית שאירים מקרן</small>
+                </div>
+        
+                <div class="flow-arrow" [class.active]="fundPension">💧</div>
+        
+                <!-- מקור: פנסיית ילדים -->
+                <div class="flow-source children-source"
+                     [class.dim]="!childrenPension"
+                     [style.opacity]="childrenPension ? 1 : 0.4"
+                     [style.transform]="'translateY(0)'">
+                  <div style="font-size: 3em; margin-bottom: 15px;">👶</div>
+                  <h4>פנסיית ילדים</h4>
+                  <div class="flow-amount">{{ fmtPublic(childrenPension) }}</div>
+                  <small>תשלום ישיר לילדים</small>
+                </div>
+        
+                <div class="flow-arrow" [class.active]="childrenPension">💧</div>
+        
+                <!-- יעד: השאירים / סה״כ -->
+                <div class="flow-target survivors-target"
+                     [class.pulse]="flowPulse"
+                     [style.transform]="'translateY(0)'">
+                  <div style="font-size: 3em; margin-bottom: 15px;">👨‍👩‍👧‍👦</div>
+                  <h4>השאירים</h4>
+                  <div class="flow-total">{{ fmtPublic(totalMonthly) }}</div>
+                  <small>סה״כ חודשי</small>
+                </div>
+              </div>
+        
+              <!-- במצב שאין זכאות חודשית, אפשר להציג הודעה/מצב ירושה -->
+              <div *ngIf="totalMonthly === 0" class="no-monthly-hint">
+                אין קצבה חודשית; בדוק ירושה/מוטבים לפי סוג הקרן.
+              </div>
+            </div>
+          </div>
+        </div>
+        
+
+
+        <!-- פירוט חלוקת מוטבים (רנדר ע"י Angular בלבד) -->
+        <div id="beneficiary-split" [innerHTML]="BeneficiarySplitHtml"></div>
+
+        <!--  מדריך שימוש מקצועי ואסטרטגיות - תרשים Mermaid עם זום ופאן 
+        <div class="panel" style="margin-top: 50px;">
+          <h2>🎯 מדריך שימוש מקצועי ואסטרטגיות פיננסיות</h2>
+          <p>תרשים אינטראקטיבי להבנה מעמיקה של זכויות פנסיית שאירים ותכנון פיננסי חכם</p>
+
+          בקרי זום ופאן 
+          <div
+            style="background: rgba(99, 102, 241, 0.08); padding: 15px; border-radius: 10px; margin: 15px 0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+            <div style="display: flex; gap: 10px; align-items: center;">
+              <button id="zoomIn" class="zoom-control"
+                style="background: var(--primary-color); color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-weight: bold;">🔍+
+                הגדל</button>
+              <button id="zoomOut" class="zoom-control"
+                style="background: var(--primary-color); color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-weight: bold;">🔍-
+                הקטן</button>
+              <button id="resetZoom" class="zoom-control"
+                style="background: var(--success-color); color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-weight: bold;">🎯
+                איפוס</button>
+              <button id="fitToScreen" class="zoom-control"
+                style="background: var(--info-color); color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-weight: bold;">📱
+                התאם למסך</button>
+            </div>
+            <div style="color: var(--text-secondary); font-size: 0.9em;">
+              <span style="margin-left: 15px;">🖱️ גלילה = זום</span>
+              <span style="margin-left: 15px;">🖱️ גרירה = תזוזה</span>
+              <span style="margin-left: 15px;">📱 מגע = פאן וזום</span>
+            </div>
+          </div>
+
+          מכל התרשים עם זום ופאן 
+
+
+          מידע נוסף והוראות שימוש 
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+            <div
+              style="background: rgba(6, 182, 212, 0.08); padding: 20px; border-radius: 10px; border-right: 4px solid #06b6d4;">
+              <h4 style="color: #06b6d4;">💡 איך להשתמש בתרשים:</h4>
+              <ul style="margin-right: 20px; line-height: 1.8;">
+                <li><strong>עקוב אחרי הזרימה מימין לשמאל</strong> - מותאם לקריאה בעברית</li>
+                <li><strong>הגדל והקטן</strong> עם הכפתורים או גלילת העכבר</li>
+                <li><strong>גרור לתזוזה</strong> בתרשים הגדול</li>
+                <li><strong>לחץ "איפוס"</strong> כדי לחזור למצב הראשוני</li>
+              </ul>
+            </div>
+
+            <div
+              style="background: rgba(139, 92, 246, 0.08); padding: 20px; border-radius: 10px; border-right: 4px solid #8b5cf6;">
+              <h4 style="color: #8b5cf6;">🎨 מפתח צבעים:</h4>
+              <ul style="margin-right: 20px; line-height: 1.8;">
+                <li><span style="color: #ef4444;">🔴 אדום</span> - סיכונים קריטיים לתשומת לב</li>
+                <li><span style="color: #8b5cf6;">🟣 סגול</span> - אסטרטגיות מתקדמות ותכנון</li>
+                <li><span style="color: #10b981;">🟢 ירוק</span> - תהליכים חיוביים ובטוחים</li>
+                <li><span style="color: #06b6d4;">🔵 טורקיז</span> - תוצאות ומידע חשוב</li>
+              </ul>
+            </div>
+          </div>
+        </div> -->
+
+          
+
+      </div>
+
+    </div>
+
+
+
+
+  </div>
+
+  <div class="panel">
+    <h2>📋 טבלת תרחישים מפורטת - כולל כל מצבי החיים</h2>
+    <table class="scenarios-table">
+      <thead>
+        <tr>
+          <th>תרחיש</th>
+          <th>זכאות</th>
+          <th>ביטוח לאומי</th>
+          <th>קרן פנסיה</th>
+          <th>פנסיית ילדים</th>
+          <th>סה"כ חודשי</th>
+          <th>נטו (אחרי מס)</th>
+          <th class="hide-mobile">כל ילד מקבל</th>
+          <th class="hide-mobile">ירושה/מעבר</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let r of scenarioRows">
+          <td>
+            <button
+              type="button"
+              class="test-scenario-btn"
+              [ngClass]="btnClassFor(r)"
+              (click)="loadScenario(r.id)"
+            >
+              תרחיש {{ r.id }}
+            </button>
+          </td>
+          <td>{{ r.eligible ? '✅' : '❌' }}</td>
+          <td>{{ fmtPublic(r.btl) }}</td>
+          <td>{{ fmtPublic(r.fund) }}</td>
+          <td>{{ fmtPublic(r.kids) }}</td>
+          <td><strong>{{ fmtPublic(r.total) }}</strong></td>
+          <td>{{ fmtPublic(r.net) }}</td>
+          <td class="hide-mobile">{{ r.perChild }}</td>
+          <td class="hide-mobile">{{ r.inheritance }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <!-- 
+
+    <div class="footer">
+      <p><strong>מערכת ייעוץ פיננסי מתקדמת</strong> - עודכן אוגוסט 2025 עם נתוני ביטוח לאומי אמיתיים</p>
+      <p class="smart-question" id="smart-question">
+        💭 האם ברצונך לבחון תרחישים נוספים או לקבל ניתוח מותאם אישית לצרכים שלך?
+      </p>
+    </div> -->
+</div>
+
+<!-- Mermaid.js Script 
+
+
+
+</div>-->

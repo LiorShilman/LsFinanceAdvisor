@@ -1,0 +1,444 @@
+<!-- salary-calculator.component.html - Enhanced Modern Design -->
+<div class="container-fluid" dir="rtl">
+    <!-- Main Title with Enhanced Styling -->
+    <h1>
+        <i class="bi bi-calculator me-3"></i>
+        מחשבון שכר דינמי
+        <i class="bi bi-graph-up ms-3"></i>
+    </h1>
+
+    <!-- Input Form Section -->
+    <div class="card">
+        <h2>
+            <i class="bi bi-gear me-2"></i>
+            הגדרות חישוב
+        </h2>
+        
+        <form [formGroup]="calculatorForm" class="input-grid">
+            <div class="input-card">
+                <label for="hourlyRate">
+                    <i class="bi bi-currency-dollar me-2"></i>
+                    שכר לשעה (₪)
+                </label>
+                <input type="number" 
+                       id="hourlyRate" 
+                       [formControl]="calculatorForm.controls.hourlyRate" 
+                       min="0" 
+                       step="0.1"
+                       placeholder="הכנס שכר לשעה">
+            </div>
+
+            <div class="input-card">
+                <label for="monthlyHours">
+                    <i class="bi bi-clock me-2"></i>
+                    שעות חודשיות
+                </label>
+                <input type="number" 
+                       id="monthlyHours" 
+                       [formControl]="calculatorForm.controls.monthlyHours" 
+                       min="0"
+                       placeholder="הכנס מספר שעות">
+            </div>
+
+            <div class="input-card">
+                <label for="creditPoints">
+                    <i class="bi bi-star me-2"></i>
+                    נקודות זיכוי
+                </label>
+                <input type="number" 
+                       id="creditPoints" 
+                       [formControl]="calculatorForm.controls.creditPoints" 
+                       min="0" 
+                       step="0.25"
+                       placeholder="הכנס נקודות זיכוי">
+            </div>
+
+            <div class="input-card">
+                <label for="taxDiscount">
+                    <i class="bi bi-percent me-2"></i>
+                    הנחת מס (%)
+                </label>
+                <input type="number" 
+                       id="taxDiscount" 
+                       [formControl]="calculatorForm.controls.taxDiscount" 
+                       min="0" 
+                       max="100"
+                       placeholder="הכנס אחוז הנחה">
+            </div>
+
+            <div class="input-card study-fund-card">
+                <h3>
+                    <i class="bi bi-mortarboard me-2"></i>
+                    קרן השתלמות
+                </h3>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="checkbox" 
+                               id="hasStudyFund" 
+                               [formControl]="calculatorForm.controls.hasStudyFund">
+                        <label for="hasStudyFund">
+                            <i class="bi bi-check-circle me-2"></i>
+                            כולל קרן השתלמות (2.5% עובד, 7.5% מעסיק)
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- Information Cards Grid -->
+    <div class="info-grid">
+        <div class="info-card">
+            <h2>
+                <i class="bi bi-calculator me-2"></i>
+                חישוב שכר ברוטו
+            </h2>
+            <div class="explanation">
+                <p>שכר הברוטו מחושב על בסיס שעות העבודה החודשיות:</p>
+                <div class="formula">
+                    <app-formula-display [formula]="formulas.gross"></app-formula-display>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <h2>
+                <i class="bi bi-piggy-bank me-2"></i>
+                הפרשות פנסיוניות
+            </h2>
+            <div class="explanation">
+                <p><span class="highlight">הפרשות מעסיק:</span></p>
+                <ul>
+                    <li>6.5% לקרן פנסיה</li>
+                    <li>6% לפיצויים</li>
+                </ul>
+                <p><span class="highlight">הפרשות עובד:</span></p>
+                <ul>
+                    <li>6% לקרן פנסיה</li>
+                </ul>
+                <div class="formula">
+                    <app-formula-display [formula]="formulas.pension"></app-formula-display>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <h2>
+                <i class="bi bi-shield-check me-2"></i>
+                ביטוח לאומי וביטוח בריאות
+            </h2>
+            <div class="explanation">
+                <p><span class="highlight">תשלומי מעסיק:</span></p>
+                <ul>
+                    <li>4.15% עד 7,522 ש"ח</li>
+                    <li>7.6% מעל 7,522 ש"ח</li>
+                </ul>
+                <p><span class="highlight">תשלומי עובד:</span></p>
+                <ul>
+                    <li><span class="highlight">ביטוח לאומי:</span></li>
+                    <ul>
+                        <li>1% עד 7,522 ש"ח</li>
+                        <li>7% מעל 7,522 ש"ח</li>
+                    </ul>
+                    <li><span class="highlight">ביטוח בריאות:</span></li>
+                    <ul>
+                        <li>3.1% עד 7,522 ש"ח</li>
+                        <li>5% מעל 7,522 ש"ח</li>
+                    </ul>
+                </ul>
+                <div class="formula">
+                    <app-formula-display [formula]="formulas.insurance"></app-formula-display>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <h2>
+                <i class="bi bi-receipt me-2"></i>
+                מס הכנסה
+            </h2>
+            <div class="explanation">
+                <p>החישוב כולל:</p>
+                <ul>
+                    <li><i class="bi bi-star me-2" style="padding-left: 15px"></i>נקודות זיכוי: <app-formatted-money [value]="salaryData.creditPoints"></app-formatted-money></li>
+                    <li><i class="bi bi-geo-alt me-2" style="padding-left: 15px"></i>הנחת אזור: {{formatPercent(salaryData.taxDiscount/100)}}</li>
+                    <li><i class="bi bi-calendar3 me-2" style="padding-left: 15px"></i>חישוב לפי מדרגות מס 2025</li>
+                </ul>
+                <div class="formula">
+                    <app-formula-display [formula]="formulas.tax"></app-formula-display>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Detailed Calculations Table -->
+    <div class="card">
+        <h2>
+            <i class="bi bi-table me-2"></i>
+            טבלת חישובים מפורטת
+        </h2>
+        <div class="table-responsive">
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col">
+                            <i class="bi bi-list-ul me-2"></i>
+                            קטגוריה
+                        </th>
+                        <th scope="col">
+                            <i class="bi bi-currency-shekel me-2"></i>
+                            סכום
+                        </th>
+                        <th scope="col">
+                            <i class="bi bi-info-circle me-2"></i>
+                            הסבר
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <i class="bi bi-cash me-2"></i>
+                            שכר ברוטו
+                        </td>
+                        <td><app-formatted-money [value]="salaryData.grossSalary"></app-formatted-money></td>
+                        <td>{{salaryData.hourlyRate}} ש"ח × {{salaryData.monthlyHours}} שעות</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="bi bi-arrow-up-circle text-success me-2"></i>
+                            הפרשת מעסיק לפנסיה
+                        </td>
+                        <td><app-formatted-money [value]="salaryData.pensionEmployer"></app-formatted-money></td>
+                        <td>{{formatPercent(PENSION_EMPLOYER)}} מהברוטו</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="bi bi-arrow-up-circle text-success me-2"></i>
+                            הפרשת מעסיק לפיצויים
+                        </td>
+                        <td><app-formatted-money [value]="salaryData.severance"></app-formatted-money></td>
+                        <td>{{formatPercent(SEVERANCE)}} מהברוטו</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="bi bi-arrow-down-circle text-warning me-2"></i>
+                            הפרשת עובד לפנסיה
+                        </td>
+                        <td><app-formatted-money [value]="-salaryData.pensionEmployee"></app-formatted-money></td>
+                        <td>{{formatPercent(PENSION_EMPLOYEE)}} מהברוטו</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="bi bi-arrow-down-circle text-warning me-2"></i>
+                            ביטוח לאומי עובד
+                        </td>
+                        <td><app-formatted-money [value]="-salaryData.niiEmployee"></app-formatted-money></td>
+                        <td>
+                            {{formatPercent(NII_EMPLOYEE_LOW)}} עד {{NII_THRESHOLD}} ש"ח, 
+                            {{formatPercent(NII_EMPLOYEE_HIGH)}} מעל
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="bi bi-arrow-down-circle text-warning me-2"></i>
+                            ביטוח בריאות
+                        </td>
+                        <td><app-formatted-money [value]="-salaryData.healthInsurance"></app-formatted-money></td>
+                        <td>
+                            {{formatPercent(HEALTH_INSURANCE_LOW)}} עד {{NII_THRESHOLD}} ש"ח, 
+                            {{formatPercent(HEALTH_INSURANCE_HIGH)}} מעל
+                        </td>
+                    </tr>
+                    <ng-container *ngIf="salaryData.hasStudyFund">
+                        <tr>
+                            <td>
+                                <i class="bi bi-arrow-up-circle text-info me-2"></i>
+                                הפרשת מעסיק לקרן השתלמות
+                            </td>
+                            <td><app-formatted-money [value]="salaryData.studyFundEmployer"></app-formatted-money></td>
+                            <td>{{formatPercent(STUDY_FUND_EMPLOYER)}} מהברוטו</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <i class="bi bi-arrow-down-circle text-warning me-2"></i>
+                                הפרשת עובד לקרן השתלמות
+                            </td>
+                            <td><app-formatted-money [value]="-salaryData.studyFundEmployee"></app-formatted-money></td>
+                            <td>{{formatPercent(STUDY_FUND_EMPLOYEE)}} מהברוטו</td>
+                        </tr>
+                    </ng-container>
+                    <tr>
+                        <td>
+                            <i class="bi bi-arrow-up-circle text-success me-2"></i>
+                            ביטוח לאומי מעסיק
+                        </td>
+                        <td><app-formatted-money [value]="salaryData.niiEmployer"></app-formatted-money></td>
+                        <td>
+                            {{formatPercent(NII_EMPLOYER_LOW)}} עד {{NII_THRESHOLD}} ש"ח, 
+                            {{formatPercent(NII_EMPLOYER_HIGH)}} מעל
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <i class="bi bi-arrow-down-circle text-danger me-2"></i>
+                            מס הכנסה
+                        </td>
+                        <td><app-formatted-money [value]="-salaryData.incomeTax"></app-formatted-money></td>
+                        <td>כולל {{salaryData.creditPoints}} נק' זיכוי והנחת אזור {{formatPercent(salaryData.taxDiscount/100)}}</td>
+                    </tr>
+                    <tr class="highlight">
+                        <td>
+                            <i class="bi bi-wallet2 text-success me-2"></i>
+                            <strong>שכר נטו</strong>
+                        </td>
+                        <td><strong><app-formatted-money [value]="salaryData.netSalary"></app-formatted-money></strong></td>
+                        <td><strong>ברוטו פחות ניכויים</strong></td>
+                    </tr>
+                    <tr class="highlight">
+                        <td>
+                            <i class="bi bi-building text-primary me-2"></i>
+                            <strong>עלות מעסיק</strong>
+                        </td>
+                        <td><strong><app-formatted-money [value]="salaryData.employerCost"></app-formatted-money></strong></td>
+                        <td><strong>ברוטו + הפרשות מעסיק</strong></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Summary Section -->
+    <div class="summary">
+        <div class="summary-card">
+            <h3>
+                <i class="bi bi-building me-2"></i>
+                עלות מעסיק
+            </h3>
+            <p><app-formatted-money [value]="salaryData.employerCost"></app-formatted-money></p>
+            <div class="formula">
+                <app-formula-display [formula]="formulas.employer"></app-formula-display>
+            </div>
+        </div>
+        
+        <div class="summary-card">
+            <h3>
+                <i class="bi bi-wallet2 me-2"></i>
+                שכר נטו
+            </h3>
+            <p><app-formatted-money [value]="salaryData.netSalary"></app-formatted-money></p>
+            <div class="formula">
+                <app-formula-display [formula]="formulas.net"></app-formula-display>
+            </div>
+        </div>
+    </div>
+
+    <!-- Benefits and Total Value Section -->
+    <div class="summary-card benefits-card">
+        <h3>
+            <i class="bi bi-award me-3"></i>
+            תנאים סוציאליים וערך כולל
+        </h3>
+        <div class="benefits-details">
+            <div class="benefit-item">
+                <h4>
+                    <i class="bi bi-piggy-bank me-2"></i>
+                    פנסיה
+                </h4>
+                <div class="dual-value">
+                    <div class="monthly">
+                        <p><app-formatted-money [value]="salaryData.pensionEmployer + salaryData.pensionEmployee"></app-formatted-money></p>
+                        <small>לחודש</small>
+                    </div>
+                    <div class="yearly">
+                        <p><app-formatted-money [value]="yearlyData.yearlyPension"></app-formatted-money></p>
+                        <small>לשנה</small>
+                    </div>
+                </div>
+                <small>הפרשות מעסיק ועובד</small>
+            </div>
+
+            <div class="benefit-item">
+                <h4>
+                    <i class="bi bi-shield-check me-2"></i>
+                    פיצויים
+                </h4>
+                <div class="dual-value">
+                    <div class="monthly">
+                        <p><app-formatted-money [value]="salaryData.severance"></app-formatted-money></p>
+                        <small>לחודש</small>
+                    </div>
+                    <div class="yearly">
+                        <p><app-formatted-money [value]="yearlyData.yearlySeverance"></app-formatted-money></p>
+                        <small>לשנה</small>
+                    </div>
+                </div>
+                <small>הפרשות מעסיק</small>
+            </div>
+
+            <div class="benefit-item">
+                <h4>
+                    <i class="bi bi-mortarboard me-2"></i>
+                    קרן השתלמות
+                </h4>
+                <div class="dual-value">
+                    <div class="monthly">
+                        <p>
+                            <ng-container *ngIf="salaryData.hasStudyFund; else noStudyFund">
+                                <app-formatted-money [value]="salaryData.studyFundEmployer + salaryData.studyFundEmployee"></app-formatted-money>
+                            </ng-container>
+                            <ng-template #noStudyFund>
+                                <span class="text-muted">לא פעיל</span>
+                            </ng-template>
+                        </p>
+                        <small>לחודש</small>
+                    </div>
+                    <div class="yearly">
+                        <p>
+                            <ng-container *ngIf="salaryData.hasStudyFund; else noStudyFundYearly">
+                                <app-formatted-money [value]="yearlyData.yearlyStudyFund"></app-formatted-money>
+                            </ng-container>
+                            <ng-template #noStudyFundYearly>
+                                <span class="text-muted">לא פעיל</span>
+                            </ng-template>
+                        </p>
+                        <small>לשנה</small>
+                    </div>
+                </div>
+                <small>אם פעילה</small>
+            </div>
+        </div>
+
+        <div class="benefit-total">
+            <h4>
+                <i class="bi bi-gem me-2"></i>
+                ערך חבילה כולל
+            </h4>
+            <div class="dual-value total">
+                <div class="monthly">
+                    <p><app-formatted-money [value]="salaryData.netSalary + monthlyBenefits"></app-formatted-money></p>
+                    <small>לחודש</small>
+                </div>
+                <div class="yearly">
+                    <p><app-formatted-money [value]="yearlyData.totalPackageValue"></app-formatted-money></p>
+                    <small>לשנה</small>
+                </div>
+            </div>
+            <small>שכר נטו + תנאים סוציאליים</small>
+        </div>
+
+        <div class="formula">
+            <app-formula-display [formula]="formulas.total"></app-formula-display>
+        </div>
+    </div>
+
+    
+  <div class="panel">
+    <h2>מחשבון תוספת שכר ישראלי 2025</h2>
+    <app-calculate-embed
+      srcPath="/LsFinanceAdvisor/assets/incomes/israel_salary_calculator_2025.html">
+    </app-calculate-embed>
+  </div>
+
+  
+</div>

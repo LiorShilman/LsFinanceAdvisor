@@ -1,0 +1,738 @@
+<!-- long-term-care-insurance.component.html - Enhanced Modern Design -->
+<div class="container-fluid" dir="rtl">
+  
+  <!-- Main Long Term Care Insurance Section - Spouse 1 -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card text-white mb-4">
+        <div class="card-body alert alert-primary">
+          <div class="card-header" 
+               data-bs-toggle="tooltip" 
+               data-bs-custom-class="custom-tooltip" 
+               autocomplete="off"
+               data-bs-title="בא לתת מענה למצב סיעודי, ולדאוג לכך שהנזקק לאשפוז לא ייפול על כתפי בני משפחתו (המחוייבים על פי חוק לטפל בו)" 
+               data-bs-placement="right">
+            <i class="bi bi-shield-heart me-3"></i>
+            ביטוח סיעודי - {{this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1}}
+          </div>
+          
+          <!-- Health Fund Insurance Card -->
+          <div class="card-body alert alert-warning health-fund-card">
+            <div class="card-header fs-1 blockquote fw-bold health-fund-category" style="text-align: right;">
+              <i class="bi bi-hospital me-2"></i>
+              ביטוח בקופת החולים
+              
+              <div class="table-responsive table-striped">
+                <table class="table table-borderless">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-4"
+                          data-bs-toggle="tooltip"
+                          data-bs-custom-class="custom-tooltip" 
+                          data-bs-title='כללית,מכבי,לאומית,מאוחדת'
+                          data-bs-placement="right">
+                        <i class="bi bi-building me-2 mx-1"></i>
+                        שם הקופה
+                      </th>
+                      <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-4"
+                          data-bs-toggle="tooltip"
+                          data-bs-custom-class="custom-tooltip" 
+                          data-bs-title='יש למלא רק אם יש ביטוח בקופת החולים'
+                          data-bs-placement="right">
+                        <i class="bi bi-house-heart me-2 mx-1"></i>
+                        סכום ביטוח בבית
+                      </th>
+                      <th scope="col" class="text-center text-success col-xl-4 blockquote fw-bold fs-5"
+                          data-bs-toggle="tooltip" 
+                          data-bs-custom-class="custom-tooltip"
+                          data-bs-title='יש למלא רק אם יש ביטוח בקופת החולים' 
+                          data-bs-placement="right">
+                        <i class="bi bi-hospital me-2 mx-1"></i>
+                        סכום ביטוח במוסד
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <input type="text" 
+                               name="health-fund-name-1" 
+                               numbersOnly 
+                               autocomplete="off"
+                               class="form-control fw-bold fs-5 text-info blockquote" 
+                               id="health-fund-name-1"
+                               [(ngModel)]="this.generalInfoService.AllInfo.LifeLongCareInsurancesViewInfo.LifeLongCareInsurancesInHealthFund[0].Name"
+                               placeholder="שם הקופה">
+                      </td>
+                      <td>
+                        <input type="text" 
+                               name="health-fund-home-1" 
+                               autocomplete="off"
+                               class="form-control fw-bold text-center fs-5 blockquote text-primary" 
+                               numbersOnly
+                               id="health-fund-home-1"
+                               [(ngModel)]="this.generalInfoService.AllInfo.LifeLongCareInsurancesViewInfo.LifeLongCareInsurancesInHealthFund[0].HomeAmount"
+                               placeholder="0">
+                      </td>
+                      <td>
+                        <input type="text" 
+                               name="health-fund-institution-1"
+                               class="form-control fw-bold text-center fs-5 blockquote text-primary"
+                               id="health-fund-institution-1"
+                               [(ngModel)]="this.generalInfoService.AllInfo.LifeLongCareInsurancesViewInfo.LifeLongCareInsurancesInHealthFund[0].SeudiAmount"
+                               placeholder="0">
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Insurance Company Card -->
+          <div class="card-body alert alert-success insurance-company-card">
+            <div class="card-header fs-1 blockquote fw-bold insurance-company-category" style="text-align: right;">
+              <i class="bi bi-shield-check me-2"></i>
+              ביטוח בחברת הביטוח 
+              <i class="fs-1 text-success fa fa-plus" (click)="AddRowCompany1()"></i>
+              
+              <div class="table-responsive table-striped">
+                <table class="table table-borderless">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="text-center text-success col-xl-2 blockquote fw-bold fs-5">
+                        <i class="bi bi-card-text me-2"></i>
+                        שם הביטוח
+                      </th>
+                      <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-5">
+                        <i class="bi bi-house-heart me-2"></i>
+                        בבית
+                      </th>
+                      <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-5">
+                        <i class="bi bi-hospital me-2"></i>
+                        במוסד
+                      </th>
+                    </tr>
+                  </thead>
+                </table>
+                
+                <table class="table table-borderless">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="text-center text-success col-xl-2 blockquote fw-bold fs-5"></th>
+                      <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-2">
+                        חמש שנים ראשונות
+                      </th>
+                      <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-3">
+                        משנה שישית
+                      </th>
+                      <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-2">
+                        חמש שנים ראשונות
+                      </th>
+                      <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-3">
+                        משנה שישית
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor='let income of this.generalInfoService.AllInfo.LifeLongCareInsurancesViewInfo.LifeLongCareInsurancesInInsuranceCompanyRows[0]; let i = index'>
+                      <tr>
+                        <td>
+                          <input type="text" 
+                                 name="insurance-name-{{i+1}}" 
+                                 numbersOnly 
+                                 autocomplete="off"
+                                 class="form-control fw-bold fs-5 text-info blockquote"
+                                 id="insurance-name-{{i+1}}"
+                                 [(ngModel)]="this.generalInfoService.AllInfo.LifeLongCareInsurancesViewInfo.LifeLongCareInsurancesInInsuranceCompanyRows[0][i].Name"
+                                 placeholder="שם הביטוח">
+                        </td>
+                        <td>
+                          <input type="text" 
+                                 name="first-5-home-{{i+1}}" 
+                                 autocomplete="off"
+                                 class="form-control fw-bold text-center fs-5 blockquote text-primary" 
+                                 numbersOnly
+                                 id="first-5-home-{{i+1}}"
+                                 [(ngModel)]="this.generalInfoService.AllInfo.LifeLongCareInsurancesViewInfo.LifeLongCareInsurancesInInsuranceCompanyRows[0][i].First5YearHomeAmount"
+                                 placeholder="0">
+                        </td>
+                        <td>
+                          <input type="text" 
+                                 name="over-6-home-{{i+1}}" 
+                                 autocomplete="off"
+                                 class="form-control fw-bold text-center fs-5 blockquote text-primary" 
+                                 numbersOnly
+                                 id="over-6-home-{{i+1}}"
+                                 [(ngModel)]="this.generalInfoService.AllInfo.LifeLongCareInsurancesViewInfo.LifeLongCareInsurancesInInsuranceCompanyRows[0][i].Over6YearHomeAmount"
+                                 placeholder="0">
+                        </td>
+                        <td>
+                          <input type="text" 
+                                 name="first-5-institution-{{i+1}}" 
+                                 autocomplete="off"
+                                 class="form-control fw-bold text-primary text-center blockquote align-middle fs-5"
+                                 id="first-5-institution-{{i+1}}"
+                                 [(ngModel)]="this.generalInfoService.AllInfo.LifeLongCareInsurancesViewInfo.LifeLongCareInsurancesInInsuranceCompanyRows[0][i].First5YearSeudiAmount"
+                                 placeholder="0">
+                        </td>
+                        <td>
+                          <input type="text" 
+                                 name="over-6-institution-{{i+1}}" 
+                                 autocomplete="off"
+                                 class="form-control fw-bold text-primary text-center blockquote align-middle fs-5"
+                                 id="over-6-institution-{{i+1}}"
+                                 [(ngModel)]="this.generalInfoService.AllInfo.LifeLongCareInsurancesViewInfo.LifeLongCareInsurancesInInsuranceCompanyRows[0][i].Over6YearSeudiAmount"
+                                 placeholder="0">
+                        </td>
+                      </tr>
+                    </ng-container>
+                    
+                    <!-- Summary Row -->
+                    <tr>
+                      <td>
+                        <input type="text" 
+                               name="summary-interim-1" 
+                               disabled 
+                               style="background-color: limegreen;"
+                               class="form-control fw-bold text-black  fw-bold fs-5" 
+                               id="summary-interim-1"
+                               value="סיכום ביניים">
+                      </td>
+                      <td>
+                        <input type="text" 
+                               name="summary-first-5-home-1"
+                               class="form-control fw-bold text-black text-center fs-5" 
+                               id="summary-first-5-home-1" 
+                               disabled
+                               style="background-color: limegreen;"
+                               [value]="CalcFirst5YearHomeAmount(0) | currency:'ILS':'symbol':'.0'">
+                      </td>
+                      <td>
+                        <input type="text" 
+                               name="summary-over-6-home-1"
+                               class="form-control fw-bold text-black text-center fs-5" 
+                               id="summary-over-6-home-1" 
+                               disabled
+                               style="background-color: limegreen;"
+                               [value]="CalcOver6YearHomeAmount(0) | currency:'ILS':'symbol':'.0'">
+                      </td>
+                      <td>
+                        <input type="text" 
+                               name="summary-first-5-institution-1"
+                               class="form-control fw-bold text-black text-center fs-5" 
+                               id="summary-first-5-institution-1" 
+                               disabled
+                               style="background-color: limegreen;"
+                               [value]="CalcFirst5YearSeudiAmount(0) | currency:'ILS':'symbol':'.0'">
+                      </td>
+                      <td>
+                        <input type="text" 
+                               name="summary-over-6-institution-1"
+                               class="form-control fw-bold text-black text-center fs-5" 
+                               id="summary-over-6-institution-1" 
+                               disabled
+                               style="background-color: limegreen;"
+                               [value]="CalcOver6YearSeudiAmount(0) | currency:'ILS':'symbol':'.0'">
+                      </td>
+                    </tr>
+                    
+                    <!-- Gap Row -->
+                    <tr>
+                      <td>
+                        <input type="text" 
+                               name="gap-1" 
+                               disabled 
+                               style="background-color: limegreen;"
+                               class="form-control fw-bold text-black blockquote fw-bold fs-5" 
+                               id="gap-1"
+                               value="פער">
+                      </td>
+                      <td>
+                        <input dir="ltr" 
+                               type="text" 
+                               name="gap-first-5-home-1"
+                               class="form-control fw-bold text-black text-center fs-5" 
+                               id="gap-first-5-home-1" 
+                               disabled
+                               style="background-color: limegreen;"
+                               [value]="CalcGapFirst5YearHomeAmount(0) | currency:'ILS':'symbol':'.0'"
+                               [ngClass]="CalcGapFirst5YearHomeAmount(0) >= 0 ? 'bg-lim-success' : 'custom-red-bg'">
+                      </td>
+                      <td>
+                        <input dir="ltr" 
+                               type="text" 
+                               name="gap-over-6-home-1"
+                               class="form-control fw-bold text-black text-center fs-5" 
+                               id="gap-over-6-home-1" 
+                               disabled
+                               style="background-color: limegreen;"
+                               [value]="CalcGapOver6YearHomeAmount(0) | currency:'ILS':'symbol':'.0'"
+                               [ngClass]="CalcGapOver6YearHomeAmount(0) >= 0 ? 'bg-lim-success' : 'custom-red-bg'">
+                      </td>
+                      <td>
+                        <input dir="ltr" 
+                               type="text" 
+                               name="gap-first-5-institution-1"
+                               class="form-control fw-bold text-black text-center fs-5" 
+                               id="gap-first-5-institution-1" 
+                               disabled
+                               style="background-color: limegreen;"
+                               [value]="CalcGapFirst5YearSeudiAmount(0) | currency:'ILS':'symbol':'.0'"
+                               [ngClass]="CalcGapFirst5YearSeudiAmount(0) >= 0 ? 'bg-lim-success' : 'custom-red-bg'">
+                      </td>
+                      <td>
+                        <input dir="ltr" 
+                               type="text" 
+                               name="gap-over-6-institution-1"
+                               class="form-control fw-bold text-black text-center fs-5" 
+                               id="gap-over-6-institution-1" 
+                               disabled
+                               style="background-color: limegreen;"
+                               [value]="CalcGapOver6YearSeudiAmount(0) | currency:'ILS':'symbol':'.0'"
+                               [ngClass]="CalcGapOver6YearSeudiAmount(0) >= 0 ? 'bg-lim-success' : 'custom-red-bg'">
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Long Term Care Insurance Section - Spouse 2 (Only if married) -->
+  <div class="row" *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Marride">
+    <div class="col-xl-12">
+      <div class="card text-white mb-4 spouse2-care-card">
+        <div class="card-body alert alert-primary">
+          <div class="card-header">
+            <i class="bi bi-people-fill me-3"></i>
+            ביטוח סיעודי - {{this.generalInfoService.AllInfo.PersonalDataViewInfo.Name2}}
+          </div>
+          
+          <!-- Health Fund Card for Spouse 2 -->
+          <div class="card text-white mb-3 mt-3 mx-3 col-xl-6">
+            <div class="card-body alert alert-warning health-fund-card">
+              <div class="card-header fs-1 blockquote fw-bold health-fund-category" style="text-align: right;">
+                <i class="bi bi-hospital me-2"></i>
+                ביטוח בקופת החולים
+                
+                <div class="table-responsive table-striped">
+                  <table class="table table-borderless">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-4"
+                            data-bs-toggle="tooltip"
+                            data-bs-custom-class="custom-tooltip" 
+                            data-bs-title='כללית,מכבי,לאומית,מאוחדת'
+                            data-bs-placement="right">
+                          <i class="bi bi-building me-2 mx-1"></i>
+                          שם הקופה
+                        </th>
+                        <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-4"
+                            data-bs-toggle="tooltip"
+                            data-bs-custom-class="custom-tooltip" 
+                            data-bs-title='יש למלא רק אם יש ביטוח בקופת החולים'
+                            data-bs-placement="right">
+                          <i class="bi bi-house-heart me-2 mx-1"></i>
+                          סכום ביטוח בבית
+                        </th>
+                        <th scope="col" class="text-center text-success col-xl-4 blockquote fw-bold fs-5"
+                            data-bs-toggle="tooltip" 
+                            data-bs-custom-class="custom-tooltip"
+                            data-bs-title='יש למלא רק אם יש ביטוח בקופת החולים' 
+                            data-bs-placement="right">
+                          <i class="bi bi-hospital me-2 mx-1"></i>
+                          סכום ביטוח במוסד
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <input type="text" 
+                                 name="health-fund-name-2" 
+                                 numbersOnly 
+                                 autocomplete="off"
+                                 class="form-control fw-bold fs-5 text-info blockquote" 
+                                 id="health-fund-name-2"
+                                 [(ngModel)]="this.generalInfoService.AllInfo.LifeLongCareInsurancesViewInfo.LifeLongCareInsurancesInHealthFund[1].Name"
+                                 placeholder="שם הקופה">
+                        </td>
+                        <td>
+                          <input type="text" 
+                                 name="health-fund-home-2" 
+                                 autocomplete="off"
+                                 class="form-control fw-bold text-center fs-5 blockquote text-primary"
+                                 numbersOnly
+                                 id="health-fund-home-2"
+                                 [(ngModel)]="this.generalInfoService.AllInfo.LifeLongCareInsurancesViewInfo.LifeLongCareInsurancesInHealthFund[1].HomeAmount"
+                                 placeholder="0">
+                        </td>
+                        <td>
+                          <input type="text" 
+                                 name="health-fund-institution-2"
+                                 class="form-control fw-bold text-center fs-5 blockquote text-primary"
+                                 id="health-fund-institution-2"
+                                 [(ngModel)]="this.generalInfoService.AllInfo.LifeLongCareInsurancesViewInfo.LifeLongCareInsurancesInHealthFund[1].SeudiAmount"
+                                 placeholder="0">
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Insurance Company Card for Spouse 2 -->
+          <div class="card text-white mb-3 mt-3 mx-3">
+            <div class="card-body alert alert-success insurance-company-card">
+              <div class="card-header fs-1 blockquote fw-bold insurance-company-category" style="text-align: right;">
+                <i class="bi bi-shield-check me-2"></i>
+                ביטוח בחברת הביטוח 
+                <i class="fs-1 text-success fa fa-plus" (click)="AddRowCompany2()"></i>
+                
+                <div class="table-responsive table-striped">
+                  <table class="table table-borderless">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="text-center text-success col-xl-2 blockquote fw-bold fs-5">
+                          <i class="bi bi-card-text me-2"></i>
+                          שם הביטוח
+                        </th>
+                        <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-5">
+                          <i class="bi bi-house-heart me-2"></i>
+                          בבית
+                        </th>
+                        <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-5">
+                          <i class="bi bi-hospital me-2"></i>
+                          במוסד
+                        </th>
+                      </tr>
+                    </thead>
+                  </table>
+                  
+                  <table class="table table-borderless">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="text-center text-success col-xl-2 blockquote fw-bold fs-5"></th>
+                        <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-2">
+                          חמש שנים ראשונות
+                        </th>
+                        <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-3">
+                          משנה שישית
+                        </th>
+                        <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-2">
+                          חמש שנים ראשונות
+                        </th>
+                        <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-3">
+                          משנה שישית
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container *ngFor='let income of this.generalInfoService.AllInfo.LifeLongCareInsurancesViewInfo.LifeLongCareInsurancesInInsuranceCompanyRows[1]; let i = index'>
+                        <tr>
+                          <td>
+                            <input type="text" 
+                                   name="insurance-name-spouse2-{{i+1}}" 
+                                   numbersOnly 
+                                   autocomplete="off"
+                                   class="form-control fw-bold fs-5 text-info blockquote"
+                                   id="insurance-name-spouse2-{{i+1}}"
+                                   [(ngModel)]="this.generalInfoService.AllInfo.LifeLongCareInsurancesViewInfo.LifeLongCareInsurancesInInsuranceCompanyRows[1][i].Name"
+                                   placeholder="שם הביטוח">
+                          </td>
+                          <td>
+                            <input type="text" 
+                                   name="first-5-home-spouse2-{{i+1}}" 
+                                   autocomplete="off"
+                                   class="form-control fw-bold text-center fs-5 blockquote text-primary"
+                                   numbersOnly
+                                   id="first-5-home-spouse2-{{i+1}}"
+                                   [(ngModel)]="this.generalInfoService.AllInfo.LifeLongCareInsurancesViewInfo.LifeLongCareInsurancesInInsuranceCompanyRows[1][i].First5YearHomeAmount"
+                                   placeholder="0">
+                          </td>
+                          <td>
+                            <input type="text" 
+                                   name="over-6-home-spouse2-{{i+1}}" 
+                                   autocomplete="off"
+                                   class="form-control fw-bold text-center fs-5 blockquote text-primary"
+                                   numbersOnly
+                                   id="over-6-home-spouse2-{{i+1}}"
+                                   [(ngModel)]="this.generalInfoService.AllInfo.LifeLongCareInsurancesViewInfo.LifeLongCareInsurancesInInsuranceCompanyRows[1][i].Over6YearHomeAmount"
+                                   placeholder="0">
+                          </td>
+                          <td>
+                            <input type="text" 
+                                   name="first-5-institution-spouse2-{{i+1}}" 
+                                   autocomplete="off"
+                                   class="form-control fw-bold text-primary text-center blockquote align-middle fs-5"
+                                   id="first-5-institution-spouse2-{{i+1}}"
+                                   [(ngModel)]="this.generalInfoService.AllInfo.LifeLongCareInsurancesViewInfo.LifeLongCareInsurancesInInsuranceCompanyRows[1][i].First5YearSeudiAmount"
+                                   placeholder="0">
+                          </td>
+                          <td>
+                            <input type="text" 
+                                   name="over-6-institution-spouse2-{{i+1}}" 
+                                   autocomplete="off"
+                                   class="form-control fw-bold text-primary text-center blockquote align-middle fs-5"
+                                   id="over-6-institution-spouse2-{{i+1}}"
+                                   [(ngModel)]="this.generalInfoService.AllInfo.LifeLongCareInsurancesViewInfo.LifeLongCareInsurancesInInsuranceCompanyRows[1][i].Over6YearSeudiAmount"
+                                   placeholder="0">
+                          </td>
+                        </tr>
+                      </ng-container>
+                      
+                      <!-- Summary Row for Spouse 2 -->
+                      <tr>
+                        <td>
+                          <input type="text" 
+                                 name="summary-interim-2" 
+                                 disabled 
+                                 style="background-color: limegreen;"
+                                 class="form-control fw-bold text-black  fw-bold fs-5" 
+                                 id="summary-interim-2"
+                                 value="סיכום ביניים">
+                        </td>
+                        <td>
+                          <input type="text" 
+                                 name="summary-first-5-home-2"
+                                 class="form-control fw-bold text-black text-center fs-5" 
+                                 id="summary-first-5-home-2" 
+                                 disabled
+                                 style="background-color: limegreen;"
+                                 [value]="CalcFirst5YearHomeAmount(1) | currency:'ILS':'symbol':'.0'">
+                        </td>
+                        <td>
+                          <input type="text" 
+                                 name="summary-over-6-home-2"
+                                 class="form-control fw-bold text-black text-center fs-5" 
+                                 id="summary-over-6-home-2" 
+                                 disabled
+                                 style="background-color: limegreen;"
+                                 [value]="CalcOver6YearHomeAmount(1) | currency:'ILS':'symbol':'.0'">
+                        </td>
+                        <td>
+                          <input type="text" 
+                                 name="summary-first-5-institution-2"
+                                 class="form-control fw-bold text-black text-center fs-5" 
+                                 id="summary-first-5-institution-2" 
+                                 disabled
+                                 style="background-color: limegreen;"
+                                 [value]="CalcFirst5YearSeudiAmount(1) | currency:'ILS':'symbol':'.0'">
+                        </td>
+                        <td>
+                          <input type="text" 
+                                 name="summary-over-6-institution-2"
+                                 class="form-control fw-bold text-black text-center fs-5" 
+                                 id="summary-over-6-institution-2" 
+                                 disabled
+                                 style="background-color: limegreen;"
+                                 [value]="CalcOver6YearSeudiAmount(1) | currency:'ILS':'symbol':'.0'">
+                        </td>
+                      </tr>
+                      
+                      <!-- Gap Row for Spouse 2 -->
+                      <tr>
+                        <td>
+                          <input type="text" 
+                                 name="gap-2" 
+                                 disabled 
+                                 style="background-color: limegreen;"
+                                 class="form-control fw-bold text-black blockquote fw-bold fs-5" 
+                                 id="gap-2"
+                                 value="פער">
+                        </td>
+                        <td>
+                          <input dir="ltr" 
+                                 type="text" 
+                                 name="gap-first-5-home-2"
+                                 class="form-control fw-bold text-black text-center fs-5" 
+                                 id="gap-first-5-home-2" 
+                                 disabled
+                                 style="background-color: limegreen;"
+                                 [value]="CalcGapFirst5YearHomeAmount(1) | currency:'ILS':'symbol':'.0'"
+                                 [ngClass]="CalcGapFirst5YearHomeAmount(1) >= 0 ? 'bg-lim-success' : 'custom-red-bg'">
+                        </td>
+                        <td>
+                          <input dir="ltr" 
+                                 type="text" 
+                                 name="gap-over-6-home-2"
+                                 class="form-control fw-bold text-black text-center fs-5" 
+                                 id="gap-over-6-home-2" 
+                                 disabled
+                                 style="background-color: limegreen;"
+                                 [value]="CalcGapOver6YearHomeAmount(1) | currency:'ILS':'symbol':'.0'"
+                                 [ngClass]="CalcGapOver6YearHomeAmount(1) >= 0 ? 'bg-lim-success' : 'custom-red-bg'">
+                        </td>
+                        <td>
+                          <input dir="ltr" 
+                                 type="text" 
+                                 name="gap-first-5-institution-2"
+                                 class="form-control fw-bold text-black text-center fs-5" 
+                                 id="gap-first-5-institution-2" 
+                                 disabled
+                                 style="background-color: limegreen;"
+                                 [value]="CalcGapFirst5YearSeudiAmount(1) | currency:'ILS':'symbol':'.0'"
+                                 [ngClass]="CalcGapFirst5YearSeudiAmount(1) >= 0 ? 'bg-lim-success' : 'custom-red-bg'">
+                        </td>
+                        <td>
+                          <input dir="ltr" 
+                                 type="text" 
+                                 name="gap-over-6-institution-2"
+                                 class="form-control fw-bold text-black text-center fs-5" 
+                                 id="gap-over-6-institution-2" 
+                                 disabled
+                                 style="background-color: limegreen;"
+                                 [value]="CalcGapOver6YearSeudiAmount(1) | currency:'ILS':'symbol':'.0'"
+                                 [ngClass]="CalcGapOver6YearSeudiAmount(1) >= 0 ? 'bg-lim-success' : 'custom-red-bg'">
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Children Long Term Care Insurance Section -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card text-white mb-4 children-care-card">
+        <div class="card-body alert alert-info">
+          <div class="card-header fs-1 blockquote fw-bold children-category">
+            <i class="bi bi-people me-3"></i>
+            ביטוח סיעודי - ילדים 
+            <i class="fs-1 text-success fa fa-plus" (click)="AddRowChildren()"></i>
+            
+            <div class="card-body alert alert-success insurance-company-card">
+              <div class="card-header fs-1 blockquote fw-bold insurance-company-category" style="text-align: right;">
+                <i class="bi bi-shield-check me-2"></i>
+                ביטוח בחברת הביטוח
+                
+                <div class="table-responsive table-striped">
+                  <table class="table table-borderless">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="text-center text-success col-xl-2 blockquote fw-bold fs-5">
+                          <i class="bi bi-person me-2"></i>
+                          שם הילד
+                        </th>
+                        <th scope="col" class="text-center text-success col-xl-2 blockquote fw-bold fs-5">
+                          <i class="bi bi-building me-2"></i>
+                          חברת הביטוח
+                        </th>
+                        <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-4">
+                          <i class="bi bi-house-heart me-2"></i>
+                          בבית
+                        </th>
+                        <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-4">
+                          <i class="bi bi-hospital me-2"></i>
+                          במוסד
+                        </th>
+                      </tr>
+                    </thead>
+                  </table>
+                  
+                  <table class="table table-borderless">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="text-center text-success col-xl-2 blockquote fw-bold fs-5"></th>
+                        <th scope="col" class="text-center text-success col-xl-2 blockquote fw-bold fs-5"></th>
+                        <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-2">
+                          חמש שנים ראשונות
+                        </th>
+                        <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-2">
+                          משנה שישית
+                        </th>
+                        <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-2">
+                          חמש שנים ראשונות
+                        </th>
+                        <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-2">
+                          משנה שישית
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <ng-container *ngFor='let income of this.generalInfoService.AllInfo.LifeLongCareInsurancesViewInfo.LifeLongCareInsurancesInInsuranceCompany4ChildrensRows; let i = index'>
+                        <tr>
+                          <td>
+                            <input type="text" 
+                                   name="child-name-{{i+1}}" 
+                                   numbersOnly 
+                                   autocomplete="off"
+                                   class="form-control fw-bold fs-5 text-info blockquote" 
+                                   id="child-name-{{i+1}}"
+                                   [(ngModel)]="this.generalInfoService.AllInfo.LifeLongCareInsurancesViewInfo.LifeLongCareInsurancesInInsuranceCompany4ChildrensRows[i].ChildName"
+                                   placeholder="שם הילד">
+                          </td>
+                          <td>
+                            <input type="text" 
+                                   name="child-insurance-company-{{i+1}}" 
+                                   numbersOnly 
+                                   autocomplete="off"
+                                   class="form-control fw-bold fs-5 text-info blockquote" 
+                                   id="child-insurance-company-{{i+1}}"
+                                   [(ngModel)]="this.generalInfoService.AllInfo.LifeLongCareInsurancesViewInfo.LifeLongCareInsurancesInInsuranceCompany4ChildrensRows[i].Name"
+                                   placeholder="חברת הביטוח">
+                          </td>
+                          <td>
+                            <input type="text" 
+                                   name="child-first-5-home-{{i+1}}" 
+                                   autocomplete="off"
+                                   class="form-control fw-bold text-center fs-5 blockquote text-primary" 
+                                   numbersOnly
+                                   id="child-first-5-home-{{i+1}}"
+                                   [(ngModel)]="this.generalInfoService.AllInfo.LifeLongCareInsurancesViewInfo.LifeLongCareInsurancesInInsuranceCompany4ChildrensRows[i].First5YearHomeAmount"
+                                   placeholder="0">
+                          </td>
+                          <td>
+                            <input type="text" 
+                                   name="child-over-6-home-{{i+1}}" 
+                                   autocomplete="off"
+                                   class="form-control fw-bold text-center fs-5 blockquote text-primary" 
+                                   numbersOnly
+                                   id="child-over-6-home-{{i+1}}"
+                                   [(ngModel)]="this.generalInfoService.AllInfo.LifeLongCareInsurancesViewInfo.LifeLongCareInsurancesInInsuranceCompany4ChildrensRows[i].Over6YearHomeAmount"
+                                   placeholder="0">
+                          </td>
+                          <td>
+                            <input type="text" 
+                                   name="child-first-5-institution-{{i+1}}" 
+                                   autocomplete="off"
+                                   class="form-control fw-bold text-primary text-center blockquote align-middle fs-5"
+                                   id="child-first-5-institution-{{i+1}}"
+                                   [(ngModel)]="this.generalInfoService.AllInfo.LifeLongCareInsurancesViewInfo.LifeLongCareInsurancesInInsuranceCompany4ChildrensRows[i].First5YearSeudiAmount"
+                                   placeholder="0">
+                          </td>
+                          <td>
+                            <input type="text" 
+                                   name="child-over-6-institution-{{i+1}}" 
+                                   autocomplete="off"
+                                   class="form-control fw-bold text-primary text-center blockquote align-middle fs-5"
+                                   id="child-over-6-institution-{{i+1}}"
+                                   [(ngModel)]="this.generalInfoService.AllInfo.LifeLongCareInsurancesViewInfo.LifeLongCareInsurancesInInsuranceCompany4ChildrensRows[i].Over6YearSeudiAmount"
+                                   placeholder="0">
+                          </td>
+                        </tr>
+                      </ng-container>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

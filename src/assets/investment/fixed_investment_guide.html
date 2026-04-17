@@ -1,0 +1,2887 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מערכת הדרכה להשקעות - תיק השקעות מקסימלי</title>
+    
+    <!-- Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    
+    <!-- KaTeX Support for Mathematical Formulas -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #2d2d2d 100%);
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            direction: rtl;
+        }
+        
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            text-align: center;
+			padding: 50px 0;
+			background: linear-gradient(45deg, #4a90e2, #50e3c2, #ff6b6b);
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(74, 144, 226, 0.3);
+			position: relative;
+			overflow: hidden;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .header .subtitle {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+		
+		.header::before {
+			content: '';
+			position: absolute;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background: linear-gradient(45deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%);
+			animation: shimmer 3s ease-in-out infinite;
+		}
+		
+		@keyframes shimmer {
+			0%, 100% { opacity: 0.3; }
+			50% { opacity: 0.7; }
+		}
+
+        .response-header {
+            background: rgba(74, 144, 226, 0.15);
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid rgba(74, 144, 226, 0.3);
+            margin-bottom: 30px;
+        }
+        
+        .response-header h2 {
+            color: #4a90e2;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .response-header .field {
+            margin: 10px 0;
+            font-size: 1.1em;
+        }
+        
+        .response-header .field strong {
+            color: #50e3c2;
+        }
+        
+        .content-section {
+            background: rgba(45, 45, 45, 0.8);
+            padding: 30px;
+            margin: 20px 0;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .content-section h3 {
+            color: #4a90e2;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #4a90e2;
+            padding-bottom: 10px;
+        }
+        
+        .content-section h4 {
+            color: #50e3c2;
+            font-size: 1.4em;
+            margin: 20px 0 15px 0;
+        }
+        
+        .step-card {
+            background: linear-gradient(135deg, rgba(74, 144, 226, 0.1) 0%, rgba(80, 227, 194, 0.1) 100%);
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 15px;
+            border: 1px solid rgba(74, 144, 226, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 5px;
+            height: 100%;
+            background: linear-gradient(to bottom, #4a90e2, #50e3c2);
+        }
+        
+        .step-number {
+            background: linear-gradient(45deg, #4a90e2, #50e3c2);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-left: 15px;
+            font-size: 1.2em;
+        }
+        
+        .step-title {
+            display: inline-block;
+            color: #4a90e2;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .criteria-table, .comparison-table, .tracking-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background: rgba(30, 30, 30, 0.8);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .criteria-table th, .comparison-table th, .tracking-table th {
+            background: linear-gradient(45deg, #4a90e2, #50e3c2);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+        
+        .criteria-table td, .comparison-table td, .tracking-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+        
+        .criteria-table tr:hover, .comparison-table tr:hover, .tracking-table tr:hover {
+            background: rgba(74, 144, 226, 0.1);
+        }
+        
+        .investment-category {
+            background: rgba(50, 50, 50, 0.8);
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border-right: 4px solid #4a90e2;
+        }
+        
+        .investment-category h5 {
+            color: #50e3c2;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        
+        .investment-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .investment-item {
+            background: rgba(74, 144, 226, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid rgba(74, 144, 226, 0.3);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .investment-item:hover {
+            background: rgba(74, 144, 226, 0.2);
+            transform: translateY(-2px);
+        }
+        
+        .important-note {
+            background: linear-gradient(45deg, rgba(255, 193, 7, 0.2), rgba(255, 87, 34, 0.2));
+            border: 2px solid #ffc107;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .important-note h4 {
+            color: #ffc107;
+            margin-bottom: 10px;
+        }
+        
+        .question-box {
+            background: linear-gradient(135deg, rgba(80, 227, 194, 0.2) 0%, rgba(74, 144, 226, 0.2) 100%);
+            border: 2px solid #50e3c2;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 25px 0;
+            text-align: center;
+        }
+        
+        .question-box h4 {
+            color: #50e3c2;
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+        
+        .question-box p {
+            font-size: 1.1em;
+            line-height: 1.8;
+        }
+        
+        .latex-formula {
+            direction: ltr;
+            text-align: center;
+            margin: 15px 0;
+            font-size: 1.2em;
+        }
+        
+        .formula-container {
+            background: rgba(74, 144, 226, 0.15);
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 1px solid rgba(74, 144, 226, 0.3);
+            direction: ltr;
+            text-align: center;
+        }
+        
+        .negative-number {
+            color: #ff6b6b;
+            font-weight: bold;
+            direction: ltr;
+            unicode-bidi: embed;
+        }
+        
+        ul {
+            margin: 15px 0;
+            padding-right: 25px;
+        }
+        
+        li {
+            margin: 8px 0;
+            font-size: 1.05em;
+        }
+        
+        .chart-container {
+            background: rgba(45, 45, 45, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .chart-container h3 {
+            color: #4a90e2;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+        
+        .chart-wrapper {
+            position: relative;
+            height: 500px;
+            margin: 20px 0;
+        }
+        
+        canvas {
+            max-height: 500px;
+        }
+        
+        .portfolio-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .portfolio-card {
+            background: linear-gradient(135deg, rgba(74, 144, 226, 0.1) 0%, rgba(80, 227, 194, 0.1) 100%);
+            padding: 25px;
+            border-radius: 15px;
+            border: 1px solid rgba(74, 144, 226, 0.3);
+        }
+        
+        .portfolio-card h4 {
+            color: #50e3c2;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .portfolio-card.conservative {
+            border-color: #50e3c2;
+        }
+        
+        .portfolio-card.balanced {
+            border-color: #4a90e2;
+        }
+        
+        .portfolio-card.growth {
+            border-color: #ff6b6b;
+        }
+        
+        .allocation-bar {
+            background: rgba(30, 30, 30, 0.6);
+            border-radius: 10px;
+            margin: 10px 0;
+            overflow: hidden;
+            height: 60px;
+            position: relative;
+        }
+        
+        .allocation-fill {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 0.9em;
+        }
+        
+        .conservative-color { background-color: #50e3c2; }
+        .balanced-color { background-color: #4a90e2; }
+        .growth-color { background-color: #ff6b6b; }
+		
+        .action-plan {
+            background: linear-gradient(135deg, rgba(255, 193, 7, 0.2), rgba(255, 152, 0, 0.2));
+            border: 2px solid #ffc107;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+        }
+        
+        .action-plan h4 {
+            color: #ffc107;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+        
+        .warning-signs {
+            background: rgba(255, 107, 107, 0.1);
+            border: 2px solid #ff6b6b;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .warning-signs h4 {
+            color: #ff6b6b;
+            margin-bottom: 15px;
+        }
+        
+        .success-signs {
+            background: rgba(80, 227, 194, 0.1);
+            border: 2px solid #50e3c2;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        
+        .success-signs h4 {
+            color: #50e3c2;
+            margin-bottom: 15px;
+        }
+        
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        
+        .timeline-item {
+            background: rgba(74, 144, 226, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            border-right: 4px solid #4a90e2;
+            position: relative;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            right: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            background: #4a90e2;
+            border-radius: 50%;
+        }
+
+        .advanced-section {
+			background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(255, 193, 7, 0.1));
+			border: 2px solid rgba(255, 107, 107, 0.3);
+			padding: 25px;
+			border-radius: 15px;
+			margin: 20px 0;
+		}
+
+		.advanced-section h5 {
+			color: #ff6b6b;
+			font-size: 1.3em;
+			margin-bottom: 15px;
+		}
+
+		.behavioral-finance {
+			background: linear-gradient(135deg, rgba(255, 140, 0, 0.1), rgba(255, 165, 0, 0.1));
+			border: 2px solid rgba(255, 140, 0, 0.4);
+			padding: 25px;
+			border-radius: 15px;
+			margin: 25px 0;
+		}
+
+		.behavioral-finance h4 {
+			color: #ffa500;
+			margin-bottom: 15px;
+		}
+
+		.portfolio-optimizer {
+			background: linear-gradient(135deg, rgba(128, 0, 128, 0.2), rgba(75, 0, 130, 0.2));
+			border: 2px solid rgba(128, 0, 128, 0.5);
+			padding: 25px;
+			border-radius: 15px;
+			margin: 25px 0;
+		}
+
+		.portfolio-optimizer h4 {
+			color: #da70d6;
+			margin-bottom: 15px;
+		}
+
+		.trading-strategies {
+			background: linear-gradient(135deg, rgba(255, 20, 147, 0.1), rgba(199, 21, 133, 0.1));
+			border: 2px solid rgba(255, 20, 147, 0.4);
+			padding: 25px;
+			border-radius: 15px;
+			margin: 25px 0;
+		}
+
+		.trading-strategies h4 {
+			color: #ff1493;
+			margin-bottom: 15px;
+		}
+
+		.strategy-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+			gap: 20px;
+			margin: 25px 0;
+		}
+
+		.strategy-card {
+			background: linear-gradient(135deg, rgba(74, 144, 226, 0.1), rgba(80, 227, 194, 0.1));
+			padding: 20px;
+			border-radius: 15px;
+			border: 1px solid rgba(74, 144, 226, 0.3);
+		}
+
+		.strategy-card h5 {
+			color: #50e3c2;
+			margin-bottom: 10px;
+		}
+
+		.risk-management {
+			background: linear-gradient(135deg, rgba(220, 20, 60, 0.1), rgba(255, 69, 0, 0.1));
+			border: 2px solid rgba(220, 20, 60, 0.4);
+			padding: 25px;
+			border-radius: 15px;
+			margin: 25px 0;
+		}
+
+		.risk-management h4 {
+			color: #dc143c;
+			margin-bottom: 15px;
+		}
+
+        .method-card {
+            background: rgba(50, 50, 50, 0.8);
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 15px;
+            border-right: 4px solid #4a90e2;
+            position: relative;
+        }
+
+        .method-number {
+            background: linear-gradient(45deg, #4a90e2, #50e3c2);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin-left: 15px;
+            font-size: 1.2em;
+        }
+
+        .method-title {
+            display: inline-block;
+            color: #4a90e2;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .pros, .cons {
+            margin: 15px 0;
+        }
+
+        .pros h4 {
+            color: #50e3c2;
+            margin-bottom: 10px;
+        }
+
+        .cons h4 {
+            color: #ff6b6b;
+            margin-bottom: 10px;
+        }
+
+        .calculation-example {
+            background: rgba(30, 30, 30, 0.8);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .calculation-step {
+            margin: 15px 0;
+            padding: 10px;
+            background: rgba(74, 144, 226, 0.1);
+            border-radius: 5px;
+        }
+
+        .warning-box {
+            background: rgba(255, 107, 107, 0.1);
+            border: 2px solid #ff6b6b;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .warning-box h4 {
+            color: #ff6b6b;
+            margin-bottom: 15px;
+        }
+
+        .success-box {
+            background: rgba(80, 227, 194, 0.1);
+            border: 2px solid #50e3c2;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        .success-box h4 {
+            color: #50e3c2;
+            margin-bottom: 15px;
+        }
+
+        .practical-tip {
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .tool-card {
+            background: rgba(45, 45, 45, 0.8);
+            padding: 20px;
+            margin: 15px 0;
+            border-radius: 10px;
+            border-left: 4px solid #50e3c2;
+        }
+
+        .tool-card h5 {
+            color: #50e3c2;
+            margin-bottom: 10px;
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.8);
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            color: #50e3c2;
+            margin: 10px 0;
+            overflow-x: auto;
+        }
+
+        .benchmark-section {
+            background: rgba(74, 144, 226, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+
+        /* Calculator Styles */
+        .calculator-container {
+            background: linear-gradient(135deg, rgba(74, 144, 226, 0.1) 0%, rgba(80, 227, 194, 0.1) 100%);
+            padding: 25px;
+            margin: 20px 0;
+            border-radius: 15px;
+            border: 1px solid rgba(74, 144, 226, 0.3);
+        }
+
+        .calculator-container input {
+            background: rgba(30, 30, 30, 0.8);
+            border: 1px solid rgba(74, 144, 226, 0.3);
+            border-radius: 8px;
+            padding: 12px;
+            color: #ffffff;
+            font-size: 1em;
+            width: 100%;
+        }
+
+        .calculator-container label {
+            color: #50e3c2;
+            margin-bottom: 5px;
+            font-weight: bold;
+            display: block;
+        }
+
+        .calculator-container button {
+            background: linear-gradient(45deg, #4a90e2, #50e3c2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 1.2em;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .calculator-container button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(74, 144, 226, 0.4);
+        }
+
+        #resultsContainer {
+            background: rgba(30, 30, 30, 0.8);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border: 2px solid #50e3c2;
+        }
+
+        #interpretationSection {
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.1), rgba(75, 0, 130, 0.1));
+            border: 2px solid rgba(138, 43, 226, 0.4);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+        }
+		
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .content-section {
+                padding: 20px;
+            }
+            
+            .criteria-table {
+                font-size: 0.9em;
+            }
+            
+            .investment-list {
+                grid-template-columns: 1fr;
+            }
+			
+			.chart-wrapper {
+                height: 400px;
+            }
+            
+            .portfolio-details {
+                grid-template-columns: 1fr;
+            }
+			
+        }
+        
+        .highlight {
+            background: linear-gradient(45deg, rgba(74, 144, 226, 0.3), rgba(80, 227, 194, 0.3));
+            padding: 2px 8px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        
+        .emoji {
+            font-size: 1.2em;
+            margin-left: 8px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎯 מערכת מתקדמת להשקעות</h1>
+            <div class="subtitle">הדרך לבניית תיק השקעות מקסימלי ומותאם אישית</div>
+        </div>
+       
+        
+        <div class="content-section">
+            <h3>🏛️ מבוא - מהי מערכת השקעות מקסימלית?</h3>
+            <p>מערכת השקעות מקסימלית היא גישה מקצועית ומתקדמת לבניית תיק השקעות המשלב:</p>
+            <ul>
+                <li><span class="highlight">פיזור אמיתי</span> על פני מגוון רחב של אפיקי השקעה</li>
+                <li><span class="highlight">התאמה אישית</span> לפרופיל הסיכון והמטרות הפיננסיות</li>
+                <li><span class="highlight">איזון דינמי</span> בין תשואה, סיכון ונזילות</li>
+                <li><span class="highlight">הגנה מפני אינפלציה</span> ושינויים כלכליים</li>
+                <li><span class="highlight">מעקב ובקרה מתמדת</span> עם התאמות לפי הצורך</li>
+            </ul>
+        </div>
+        
+        <div class="step-card">
+            <span class="step-number">1</span>
+            <span class="step-title">הגדרת הפרופיל האישי והיעדים</span>
+            
+            <h4>🎯 מה נבדוק?</h4>
+            <div class="investment-category">
+                <h5>נתונים אישיים בסיסיים:</h5>
+                <ul>
+                    <li>גיל, מצב משפחתי, מספר ילדים</li>
+                    <li>רמת הכנסה חודשית ושנתית</li>
+                    <li>נכסים קיימים (דירה, חיסכונות, קופות גמל)</li>
+                    <li>התחייבויות כספיות (משכנתא, הלוואות)</li>
+                </ul>
+            </div>
+            
+            <div class="investment-category">
+                <h5>אופק השקעה ומטרות:</h5>
+                <ul>
+                    <li>מתי תצטרך את הכסף? (קצר/בינוני/ארוך טווח)</li>
+                    <li>מהן המטרות הפיננסיות? (פרישה, דירה, השכלה לילדים)</li>
+                    <li>האם יש צורך בהכנסה שוטפת מההשקעות?</li>
+                </ul>
+            </div>
+            
+            <div class="investment-category">
+                <h5>הערכת סיכון:</h5>
+                <ul>
+                    <li>כמה סיכון אתה <strong>מסוגל</strong> לקחת? (יכולת פיננסית)</li>
+                    <li>כמה סיכון אתה <strong>מוכן</strong> לקחת? (נוחות נפשית)</li>
+                    <li>איך תגיב לירידה של 20% בתיק תוך חודש?</li>
+                </ul>
+            </div>
+            
+            <div class="question-box">
+				<div class="behavioral-finance">
+					<h4>🧭 מימון התנהגותי - הכרת ההטיות שלך</h4>
+					<div class="strategy-grid">
+						<div class="strategy-card">
+							<h5>הטיה של אובדן</h5>
+							<p>נטייה לחשוש יותר מהפסד מאשר לשמוח על רווח זהה</p>
+						</div>
+						<div class="strategy-card">
+							<h5>אפקט העגלה</h5>
+							<p>השקעה בגלל שכולם עושים זאת (FOMO)</p>
+						</div>
+						<div class="strategy-card">
+							<h5>ביטחון יתר</h5>
+							<p>האמונה שאתה יכול לנבא את השוק טוב יותר מאחרים</p>
+						</div>
+					</div>
+				</div>
+
+                <h4>❓ שאלה ראשונה עבורך:</h4>
+                <p>האם יש לך טווח זמן מסוים או מטרה מוגדרת שאליה אתה משקיע? (למשל: פרישה בגיל 60, קניית דירה בעוד 5 שנים, או השגת חופש כלכלי)</p>
+				
+				<div class="content-section">
+					<h3>🎯 למה חישוב תשואת תיק עם הפקדות זה מורכב?</h3>
+					<p>כאשר אתה מפקיד כסף באופן קבוע לתיק השקעות, חישוב התשואה האמיתית הופך למורכב משום שהכסף לא הושקע באותו זמן. כל הפקדה "עובדת" פרק זמן שונה, ולכן <span class="highlight">לא ניתן פשוט לחלק את הרווח בסכום ההפקדות</span>.</p>
+					
+					<div class="warning-box">
+						<h4>⚠️ טעות נפוצה!</h4>
+						<p><strong>טעות:</strong> חישוב תשואה כך: (שווי סופי - סך הפקדות) ÷ סך הפקדות</p>
+						<p><strong>למה זה שגוי:</strong> זה לא מתחשב בזמן שכל הפקדה הייתה בתיק</p>
+						<p><strong>דוגמה:</strong> אם הפקדת 1,000 ש"ח בחודש הראשון ו-1,000 ש"ח בחודש האחרון, ההפקדה הראשונה הייתה חשופה לשוק 12 חודשים לעומת יום אחד בלבד להפקדה האחרונה!</p>
+					</div>
+				</div>
+				
+				<div class="method-card">
+					<span class="method-number">1</span>
+					<span class="method-title">שיטת TWR - Time Weighted Return (המדויקת ביותר)</span>
+					
+					<h4>💡 מה זה TWR?</h4>
+					<p>שיטה המבטלת את השפעת תזמון ההפקדות ומודדת את ביצועי מנהל התיק הטהורים.</p>
+					
+					<div class="formula-container">
+						<div class="latex-formula">
+						$$TWR = \prod_{t=1}^{n} (1 + R_t) - 1$$
+						</div>
+						<p>כאשר:</p>
+						<div class="latex-formula">
+						$$R_t = \frac{V_t - V_{t-1} - CF_t}{V_{t-1}}$$
+						</div>
+						<p>$V_t$ = שווי התיק בסוף תקופה t<br>
+						   $CF_t$ = תזרים מזומנים בתקופה t (הפקדה או משיכה)</p>
+					</div>
+					
+					<div class="pros">
+						<h4>✅ יתרונות:</h4>
+						<ul>
+							<li>המדד המקצועי ביותר לביצועי מנהלי תיקים</li>
+							<li>מבטל השפעת תזמון הפקדות</li>
+							<li>מאפשר השוואה נכונה לבנצ'מרק</li>
+							<li>מוכר על ידי רגולטורים בעולם</li>
+						</ul>
+					</div>
+					
+					<div class="cons">
+						<h4>❌ חסרונות:</h4>
+						<ul>
+							<li>מורכב לחישוב ידני</li>
+							<li>דורש מעקב יומי אחר שווי התיק</li>
+							<li>לא מראה כמה באמת הרווחת כמשקיע</li>
+						</ul>
+					</div>
+
+					<div class="calculation-example">
+						<h4>🧮 דוגמה מעשית - TWR:</h4>
+						<div class="calculation-step">
+							<strong>נתונים:</strong><br>
+							• 1/1: שווי התחלתי 10,000 ש"ח<br>
+							• 15/1: הפקדה 2,000 ש"ח, שווי לפני ההפקדה: 10,500 ש"ח<br>
+							• 31/1: שווי סופי 13,000 ש"ח
+						</div>
+						
+						<div class="calculation-step">
+							<strong>שלב 1:</strong> תשואה תת-תקופה 1 (1/1-15/1)<br>
+							<div class="latex-formula">
+							$$R_1 = \frac{10{,}500 - 10{,}000}{10{,}000} = 5\%$$
+							</div>
+						</div>
+						
+						<div class="calculation-step">
+							<strong>שלב 2:</strong> תשואה תת-תקופה 2 (15/1-31/1)<br>
+							<div class="latex-formula">
+							$$R_2 = \frac{13{,}000 - (10{,}500 + 2{,}000)}{10{,}500 + 2{,}000} = \frac{500}{12{,}500} = 4\%$$
+							</div>
+						</div>
+						
+						<div class="calculation-step">
+							<strong>שלב 3:</strong> חישוב TWR<br>
+							<div class="latex-formula">
+							$$TWR = (1 + 0.05) \times (1 + 0.04) - 1 = 9.2\%$$
+							</div>
+						</div>
+					</div>
+				</div>
+				
+				<div class="method-card">
+					<span class="method-number">2</span>
+					<span class="method-title">שיטת IRR - Internal Rate of Return (הכי רלוונטית לך)</span>
+					
+					<h4>💡 מה זה IRR?</h4>
+					<p>השיטה שעונה על השאלה: "מה התשואה השנתית שקיבלתי על הכסף שלי?"</p>
+					
+					<div class="formula-container">
+						<div class="latex-formula">
+						$$\sum_{t=0}^{n} \frac{CF_t}{(1 + IRR)^t} = 0$$
+						</div>
+						<p>כאשר $CF_t$ = תזרים מזומנים בזמן t (שלילי להפקדות, חיובי לשווי סופי)</p>
+					</div>
+					
+					<div class="pros">
+						<h4>✅ יתרונות:</h4>
+						<ul>
+							<li>מראה את התשואה האמיתית שלך כמשקיע</li>
+							<li>לוקח בחשבון את תזמון ההפקדות</li>
+							<li>קל להבנה - תשואה שנתית פשוטה</li>
+							<li>מתאים להשוואה עם חלופות השקעה אחרות</li>
+						</ul>
+					</div>
+					
+					<div class="cons">
+						<h4>❌ חסרונות:</h4>
+						<ul>
+							<li>מושפע מתזמון ההפקדות</li>
+							<li>לא מדויק להערכת ביצועי מנהל</li>
+							<li>דורש חישוב איטרטיבי (מורכב)</li>
+						</ul>
+					</div>
+
+					<div class="calculation-example">
+						<h4>🧮 דוגמה מעשית - IRR:</h4>
+						<div class="calculation-step">
+							<strong>נתונים:</strong><br>
+							• חודש 1: הפקדה 1,000 ש"ח<br>
+							• חודש 2: הפקדה 1,000 ש"ח<br>
+							• חודש 3: הפקדה 1,000 ש"ח<br>
+							• סוף חודש 3: שווי כולל 3,200 ש"ח
+						</div>
+						
+						<div class="calculation-step">
+							<strong>נוסחת IRR:</strong><br>
+							<div class="latex-formula">
+							$$\frac{-1{,}000}{(1+IRR)^{0}} + \frac{-1{,}000}{(1+IRR)^{1}} + \frac{-1{,}000}{(1+IRR)^{2}} + \frac{3{,}200}{(1+IRR)^{3}} = 0$$
+							</div>
+						</div>
+						
+						<div class="calculation-step">
+							<strong>פתרון:</strong> IRR ≈ 8.4% תשואה חודשית = ~160% תשואה שנתית<br>
+							(חישוב באמצעות Excel או מחשבון פיננסי)
+						</div>
+					</div>
+				</div>
+				
+				<div class="chart-container">
+					<h3>השוואת שיטות חישוב תשואה</h3>
+					<div class="chart-wrapper">
+						<canvas id="returnComparisonChart"></canvas>
+					</div>
+				</div>
+				
+				<div class="chart-container">
+					<h3>דוגמה: התפתחות תיק עם הפקדות חודשיות</h3>
+					<div class="chart-wrapper">
+						<canvas id="portfolioGrowthExampleChart"></canvas>
+					</div>
+				</div>
+            </div>
+        </div>
+        
+        <div class="step-card">
+            <span class="step-number">2</span>
+            <span class="step-title">מיפוי כל אפיקי ההשקעה הקיימים</span>
+            
+            <p>נחלק את כל האפיקים ל-3 קטגוריות עיקריות לפי רמת הסיכון והחדשנות:</p>
+            
+            <div class="investment-category">
+                <h5>🏛️ השקעות מסורתיות (Traditional Assets)</h5>
+                <div class="investment-list">
+                    <div class="investment-item">מניות ישראליות</div>
+                    <div class="investment-item">מניות חו"ל</div>
+                    <div class="investment-item">תעודות סל (ETF)</div>
+                    <div class="investment-item">מניות דיבידנד</div>
+                    <div class="investment-item">אג"ח מדינה</div>
+                    <div class="investment-item">אג"ח קונצרני</div>
+                    <div class="investment-item">קרנות נאמנות</div>
+                    <div class="investment-item">קופות גמל להשקעה</div>
+                    <div class="investment-item">קרנות השתלמות</div>
+                    <div class="investment-item">פיקדונות</div>
+                    <div class="investment-item">מק"מ</div>
+                    <div class="investment-item">קרנות כספיות</div>
+                </div>
+            </div>
+            
+            <div class="investment-category">
+                <h5>🧱 השקעות ריאליות (Real Assets)</h5>
+                <div class="investment-list">
+                    <div class="investment-item">נדל"ן ישראלי</div>
+                    <div class="investment-item">נדל"ן חו"ל</div>
+                    <div class="investment-item">שותפויות נדל"ן</div>
+                    <div class="investment-item">קרנות ריט (REIT)</div>
+                    <div class="investment-item">השקעה בעסקים</div>
+                    <div class="investment-item">מיזמים טכנולוגיים</div>
+                    <div class="investment-item">השקעות אנג'לים</div>
+                    <div class="investment-item">זהב ומתכות יקרות</div>
+                </div>
+            </div>
+            
+            <div class="investment-category">
+                <h5>🌀 השקעות אלטרנטיביות (Alternative Assets)</h5>
+                <div class="investment-list">
+                    <div class="investment-item">קרנות גידור</div>
+                    <div class="investment-item">קרנות חוב פרטי</div>
+                    <div class="investment-item">P2P Lending</div>
+                    <div class="investment-item">הלוואות פרטיות</div>
+                    <div class="investment-item">השקעות מגובות נכסים</div>
+                    <div class="investment-item">קריפטו (זהירות)</div>
+                    <div class="investment-item">חכירות ציוד</div>
+                    <div class="investment-item">השקעות תשתית</div>
+                </div>
+            </div>
+			
+			<div class="advanced-section">
+				<h5>🌟 אפיקים אקסקלוסיביים</h5>
+				<div class="investment-list">
+					<div class="investment-item">השקעות בזכויות מים</div>
+					<div class="investment-item">אוספנות (יין, אמנות, שעונים)</div>
+					<div class="investment-item">קרקעות חקלאיות</div>
+					<div class="investment-item">פטנטים וקניין רוחני</div>
+					<div class="investment-item">אנרגיות מתחדשות פרטיות</div>
+					<div class="investment-item">השקעות בחלל ולוויינים</div>
+					<div class="investment-item">ביוטכנולוגיה מוקדמת</div>
+					<div class="investment-item">משחקי מחשב ו-NFT</div>
+				</div>
+			</div>
+        </div>
+        
+        <div class="step-card">
+            <span class="step-number">3</span>
+            <span class="step-title">ניתוח כל אפיק לפי 7 קריטריונים מרכזיים</span>
+            
+            <p>כל אפיק השקעה יוערך לפי הקריטריונים הבאים:</p>
+            
+            <table class="criteria-table">
+                <thead>
+                    <tr>
+                        <th>קריטריון</th>
+                        <th>הסבר</th>
+                        <th>דוגמה</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>תשואה היסטורית ריאלית</strong></td>
+                        <td>כמה רווחי היה האפיק בטווחי זמן שונים (לאחר אינפלציה)</td>
+                        <td>מניות: 7% שנתי ממוצע ב-20 שנה</td>
+                    </tr>
+                    <tr>
+                        <td><strong>סטיית תקן (סיכון)</strong></td>
+                        <td>תנודתיות האפיק - כמה "קופץ" למעלה ולמטה</td>
+                        <td>מניות: 18-22% | אג"ח: 3-8%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>נזילות</strong></td>
+                        <td>כמה זמן לוקח להפוך את ההשקעה למזומן</td>
+                        <td>מניות: מיידי | נדל"ן: חודשים</td>
+                    </tr>
+                    <tr>
+                        <td><strong>מסים</strong></td>
+                        <td>שיעורי מיסוי, אפשרויות דחייה או פטור</td>
+                        <td>מניות: 25% | קופ"ג: דחיה לפרישה</td>
+                    </tr>
+                    <tr>
+                        <td><strong>מורכבות</strong></td>
+                        <td>האם מצריך ידע מקצועי, ניתוח או מעקב אקטיבי</td>
+                        <td>פיקדון: פשוט | מניות: מורכב</td>
+                    </tr>
+                    <tr>
+                        <td><strong>קורלציה לשוק</strong></td>
+                        <td>האם עולה/יורד יחד עם שוק ההון הכללי</td>
+                        <td>מניות ישראליות: גבוהה | זהב: נמוכה</td>
+                    </tr>
+                    <tr>
+                        <td><strong>הגנה מפני אינפלציה</strong></td>
+                        <td>האם שומר על הכוח הקנייתי כשהמחירים עולים</td>
+                        <td>נדל"ן: מעולה | פיקדון: חלשה</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="step-card">
+            <span class="step-number">4</span>
+            <span class="step-title">התאמת שילוב האפיקים לפי פרופיל סיכון</span>
+            
+            <p>נשתמש בגישה מקצועית של <strong>Asset Allocation</strong> - חלוקת נכסים אסטרטגית:</p>
+            
+            <div class="chart-container">
+				<h3>פיזור המשקיעים לפי פרופיל סיכון</h3>
+				<div class="chart-wrapper">
+					<canvas id="riskProfileChart"></canvas>
+				</div>
+			</div>
+			
+			<div class="chart-container">
+				<h3>השוואת תמהיל התיקים</h3>
+				<div class="chart-wrapper">
+					<canvas id="portfolioComparisonChart"></canvas>
+				</div>
+			</div>
+			
+			<div class="portfolio-details">
+				<div class="portfolio-card conservative">
+					<h4>🛡️ תיק שמרני</h4>
+					<p><strong>מתאים ל:</strong> גילי 55+, צורך בהכנסה שוטפת</p>
+					
+					<div class="allocation-bar">
+						<div class="allocation-fill conservative-color" style="width: 70%;">
+							אג"ח ופיקדונות - 70%
+						</div>
+					</div>
+					
+					<div class="allocation-bar">
+						<div class="allocation-fill conservative-color" style="width: 20%;">
+							מניות - 20%
+						</div>
+					</div>
+					
+					<div class="allocation-bar">
+						<div class="allocation-fill conservative-color" style="width: 10%;">
+							אחר - 10%
+						</div>
+					</div>
+				</div>
+				
+				<div class="portfolio-card balanced">
+					<h4>⚖️ תיק מאוזן</h4>
+					<p><strong>מתאים ל:</strong> גילי 35-55, איזון צמיחה ויציבות</p>
+					
+					<div class="allocation-bar">
+						<div class="allocation-fill balanced-color" style="width: 40%;">
+							אג"ח ופיקדונות - 40%
+						</div>
+					</div>
+					
+					<div class="allocation-bar">
+						<div class="allocation-fill balanced-color" style="width: 50%;">
+							מניות - 50%
+						</div>
+					</div>
+					
+					<div class="allocation-bar">
+						<div class="allocation-fill balanced-color" style="width: 10%;">
+							אחר - 10%
+						</div>
+					</div>
+				</div>
+				
+				<div class="portfolio-card growth">
+					<h4>🚀 תיק צמיחה</h4>
+					<p><strong>מתאים ל:</strong> גילי 25-45, אופק השקעה ארוך</p>
+					
+					<div class="allocation-bar">
+						<div class="allocation-fill growth-color" style="width: 20%;">
+							אג"ח ופיקדונות - 20%
+						</div>
+					</div>
+					
+					<div class="allocation-bar">
+						<div class="allocation-fill growth-color" style="width: 60%;">
+							מניות - 60%
+						</div>
+					</div>
+					
+					<div class="allocation-bar">
+						<div class="allocation-fill growth-color" style="width: 20%;">
+							אחר - 20%
+						</div>
+					</div>
+				</div>
+			</div>
+        </div>
+        
+        <div class="step-card">
+            <span class="step-number">5</span>
+            <span class="step-title">בניית התיק בפועל - מכשירים קונקרטיים</span>
+            
+            <h4>🎯 בחירת מכשירים ספציפיים:</h4>
+            <div class="investment-category">
+                <h5>מניות ישראליות:</h5>
+                <ul>
+                    <li>תעודות סל: MSCI Israel, תל בונד 40, תל-טק</li>
+                    <li>מניות יחידות: בנק הפועלים, טבע, אלביט</li>
+                    <li>מגזרים: תעודת סל בנקים, נדל"ן, טכנולוגיה</li>
+                </ul>
+            </div>
+            
+            <div class="investment-category">
+                <h5>מניות בינלאומיות:</h5>
+                <ul>
+                    <li>S&P 500 ETF, NASDAQ 100</li>
+                    <li>אירופה: STOXX 600</li>
+                    <li>שווקים מתפתחים: EM ETF</li>
+                </ul>
+            </div>
+            
+            <div class="investment-category">
+                <h5>אג"ח:</h5>
+                <ul>
+                    <li>אג"ח מדינה צמודות מדד</li>
+                    <li>אג"ח קונצרני AAA</li>
+                    <li>אג"ח בינלאומיות</li>
+                </ul>
+            </div>
+            
+            <h4>🏦 פתיחת חשבונות:</h4>
+            <ul>
+                <li>חשבון בורסה (הראל, קלמן, פסגות)</li>
+                <li>פלטפורמות השקעות דיגיטליות</li>
+                <li>חשבון בבנק לניהול נזילות</li>
+            </ul>
+        </div>
+        
+        <div class="step-card">
+            <span class="step-number">6</span>
+            <span class="step-title">ניטור, התאמה ולמידה מתמדת</span>
+            
+            <div class="chart-container">
+                <h4>לוח מעקב תיק השקעות</h4>
+                <canvas id="portfolioTrackingChart" style="max-height: 400px;"></canvas>
+            </div>
+            
+            <h4>📊 מעקב שוטף:</h4>
+            <ul>
+                <li><strong>חודשי:</strong> עדכון שווי כללי ובדיקת סטיות גדולות</li>
+                <li><strong>רבעוני:</strong> איזון התיק לפי יעדי החלוקה המקוריים</li>
+                <li><strong>שנתי:</strong> הערכה מחדש של פרופיל הסיכון והמטרות</li>
+            </ul>
+            
+            <h4>🎯 מדדי ביצועים מרכזיים (KPIs):</h4>
+            
+            <table class="tracking-table">
+                <thead>
+                    <tr>
+                        <th>מדד</th>
+                        <th>חישוב</th>
+                        <th>יעד</th>
+                        <th>תדירות בדיקה</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>תשואה שנתית</strong></td>
+                        <td>$(FV/PV)^{1/n} - 1$</td>
+                        <td>אינפלציה + 3-5%</td>
+                        <td>חודשי</td>
+                    </tr>
+                    <tr>
+                        <td><strong>יחס שארפ</strong></td>
+                        <td>$(R_p - R_f) / \sigma_p$</td>
+                        <td>> 0.5</td>
+                        <td>רבעוני</td>
+                    </tr>
+                    <tr>
+                        <td><strong>מקסימום ירידה</strong></td>
+                        <td>מהשיא לשפל</td>
+                        <td>< -20%</td>
+                        <td>שבועי</td>
+                    </tr>
+                    <tr>
+                        <td><strong>סטיית חלוקה</strong></td>
+                        <td>הפרש מיעד החלוקה</td>
+                        <td>< 5%</td>
+                        <td>חודשי</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="formula-container">
+                <h4>נוסחאות מרכזיות לניתוח ביצועים:</h4>
+                
+                <div class="latex-formula">
+                $$\text{תשואה שנתית מורכבת} = \left(\frac{\text{ערך סופי}}{\text{ערך התחלתי}}\right)^{\frac{1}{\text{מספר שנים}}} - 1$$
+                </div>
+                
+                <div class="latex-formula">
+                $$\text{יחס שארפ} = \frac{R_p - R_f}{\sigma_p}$$
+                </div>
+                
+                <div class="latex-formula">
+                $$\text{בטא התיק} = \frac{\text{Cov}(R_p, R_m)}{\text{Var}(R_m)}$$
+                </div>
+            </div>
+			
+			<div class="portfolio-optimizer">
+				<h4>🔬 אופטימיזציית תיק בעזרת תכנות ליניארי</h4>
+				<div class="formula-container">
+					<p><strong>בעיית האופטימיזציה המלאה:</strong></p>
+					<div class="latex-formula">
+					$$\max_{w} \left[ \sum_{i=1}^n w_i \mu_i - \frac{\lambda}{2} \sum_{i=1}^n \sum_{j=1}^n w_i w_j \sigma_{ij} \right]$$
+					</div>
+					<p>כאשר:</p>
+					<div class="latex-formula">
+					$$w_i = \text{משקל נכס } i, \quad \mu_i = \text{תשואה צפויה}, \quad \sigma_{ij} = \text{קוואריאנס}$$
+					</div>
+				</div>
+				
+				<div class="chart-container">
+					<h4>Efficient Frontier - גבול היעילות של מרקוביץ</h4>
+					<canvas id="efficientFrontierChart" style="max-height: 500px;"></canvas>
+				</div>
+				
+				<div class="formula-container">
+					<p><strong>נוסחת יחס שארפ אופטימלי:</strong></p>
+					<div class="latex-formula">
+					$$\text{Optimal Sharpe} = \sqrt{(\mu - r_f)^T \Sigma^{-1} (\mu - r_f)}$$
+					</div>
+					<p><strong>תיק עם שארפ מקסימלי:</strong></p>
+					<div class="latex-formula">
+					$$w^* = \frac{\Sigma^{-1}(\mu - r_f)}{1^T\Sigma^{-1}(\mu - r_f)}$$
+					</div>
+				</div>
+			</div>
+			
+        </div>
+		
+		<div class="content-section">
+            <h3>🎯 טיפים מעשיים לניתוח מדויק</h3>
+            
+            <h4>1. תיעוד מדויק:</h4>
+            <div class="practical-tip">
+                <ul>
+                    <li>רשום כל הפקדה עם תאריך מדויק (לא רק חודש)</li>
+                    <li>כלול עמלות ומיסים בחישוב</li>
+                    <li>שמור צילומי מסך של יתרות חשבון בסוף כל חודש</li>
+                    <li>בדוק חלוקת דיבידנדים והשקעה חוזרת</li>
+                    <li>תעד שינויי חלוקה בין מסלולים</li>
+                </ul>
+            </div>
+            
+            <h4>2. התמודדות עם מסלולים מרובים:</h4>
+            <div class="practical-tip">
+                <h5>אסטרטגיה משולבת:</h5>
+                <ul>
+                    <li><strong>חשב נפרד:</strong> IRR לכל מסלול בנפרד</li>
+                    <li><strong>שקלל לפי הון:</strong> משקל כל מסלול לפי סכום ההשקעה</li>
+                    <li><strong>חשב כללי:</strong> IRR על כל התיק כמקשה אחת</li>
+                </ul>
+                
+                <div class="formula-container">
+                    <div class="latex-formula">
+                    $$IRR_{משולב} = \sum_{i=1}^{n} w_i \times IRR_i$$
+                    </div>
+                    <p>כאשר $w_i$ = משקל מסלול i בתיק הכללי</p>
+                </div>
+            </div>
+            
+            <h4>3. טיפול בשינויי חלוקה:</h4>
+            <div class="warning-box">
+                <h4>⚠️ זהירות!</h4>
+                <p>כאשר אתה משנה את חלוקת הכסף בין מסלולים (למשל מ-60% מניות ל-70% מניות), זה נחשב כמו מכירה וקנייה. יש להתייחס לזה כתזרים מזומנים בחישוב ה-IRR.</p>
+            </div>
+            
+            <h4>4. השוואה לבנצ'מרק:</h4>
+            <div class="benchmark-section">
+                <h4>🎯 בחירת בנצ'מרק מתאים</h4>
+                <ul>
+                    <li><strong>תיק שמרני:</strong> מדד אג"ח ממשלתיות + 2%</li>
+                    <li><strong>תיק מאוזן:</strong> 50% תל-אביב 125 + 50% אג"ח</li>
+                    <li><strong>תיק צמיחה:</strong> 70% תל-אביב 125 + 30% S&P 500</li>
+                    <li><strong>תיק בינלאומי:</strong> MSCI World או FTSE Global</li>
+                </ul>
+                
+                <div class="formula-container">
+                    <h5>מדד ביצועים מותאם סיכון (Risk-Adjusted Return):</h5>
+                    <div class="latex-formula">
+                    $$\text{Sharpe Ratio} = \frac{R_p - R_f}{\sigma_p}$$
+                    </div>
+                    <div class="latex-formula">
+                    $$\text{Information Ratio} = \frac{R_p - R_b}{\sigma_{tracking}}$$
+                    </div>
+                    <p>$R_p$ = תשואת התיק, $R_f$ = תשואה חסרת סיכון, $R_b$ = תשואת בנצ'מרק</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h3>🛠️ כלים מתקדמים לחישוב</h3>
+            
+            <h4>Excel/Google Sheets - נוסחאות מתקדמות:</h4>
+            
+            <div class="tool-card">
+                <h5>1. XIRR (מדויק ביותר)</h5>
+                <div class="code-block">
+=XIRR(B2:B13, A2:A13)
+// עמודה A: תאריכים
+// עמודה B: תזרימים (שלילי = הפקדה, חיובי = שווי סופי)
+                </div>
+                <p><strong>יתרון:</strong> מתחשב בתאריכים מדויקים</p>
+            </div>
+            
+            <div class="tool-card">
+                <h5>2. PMT + FV (לבדיקת עקביות)</h5>
+                <div class="code-block">
+=FV(IRR_מחושב/12, מספר_חודשים, הפקדה_חודשית, 0)
+// השווה לשווי בפועל
+                </div>
+                <p><strong>שימוש:</strong> ודא שהחישוב נכון</p>
+            </div>
+            
+            <div class="tool-card">
+                <h5>3. נוסחה מותאמת לתשואה מורכבת</h5>
+                <div class="code-block">
+=((שווי_סופי/השקעה_ראשונה)^(1/שנים))-1
+// רק להפקדה חד-פעמית
+                </div>
+            </div>
+            
+            <h4>תוכנות מקצועיות:</h4>
+            
+            <div class="tool-card">
+                <h5>Portfolio Performance (חינמי)</h5>
+                <ul>
+                    <li>יבוא אוטומטי מבנקים וחברות השקעה</li>
+                    <li>חישוב TWR ו-IRR אוטומטי</li>
+                    <li>השוואה לבנצ'מרק מרובים</li>
+                    <li>ניתוח תרומת נכסים לביצועים</li>
+                </ul>
+            </div>
+            
+            <div class="tool-card">
+                <h5>Quicken (בתשלום)</h5>
+                <ul>
+                    <li>אינטגרציה מלאה עם בנקים אמריקאיים</li>
+                    <li>דוחות מס מתקדמים</li>
+                    <li>ניתוח allocation מתקדם</li>
+                </ul>
+            </div>
+            
+            <div class="tool-card">
+                <h5>Personal Capital (חינמי בסיסי)</h5>
+                <ul>
+                    <li>מעקב אוטומטי אחר חשבונות</li>
+                    <li>ניתוח עמלות</li>
+                    <li>התראות על סטיות</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <h3>ניתוח סיכון-תשואה: תיק לעומת שוק</h3>
+            <div class="chart-wrapper">
+                <canvas id="riskReturnChart"></canvas>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h3>🚨 מלכודות נפוצות וכיצד להימנע מהן</h3>
+            
+            <div class="warning-box">
+                <h4>🪤 מלכודת #1: התעלמות מעמלות</h4>
+                <p><strong>הטעות:</strong> חישוב תשואה ללא התחשבות בעמלות ניהול</p>
+                <p><strong>הפתרון:</strong> הפחת עמלות שנתיות מהתשואה. עמלה של 1.5% הופכת תשואה של 8% ל-6.5%</p>
+            </div>
+            
+            <div class="warning-box">
+                <h4>🪤 מלכודת #2: Cherry Picking תקופות</h4>
+                <p><strong>הטעות:</strong> בחירת תקופות "טובות" לחישוב תשואה</p>
+                <p><strong>הפתרון:</strong> תמיד חשב תשואה מהתחלה או משיא קודם</p>
+            </div>
+            
+            <div class="warning-box">
+                <h4>🪤 מלכודת #3: השוואה לא הוגנת</h4>
+                <p><strong>הטעות:</strong> השוואת תיק מעורב למדד מניות טהור</p>
+                <p><strong>הפתרון:</strong> השווה לבנצ'מרק עם allocation דומה</p>
+            </div>
+            
+            <div class="warning-box">
+                <h4>🪤 מלכודת #4: התעלמות מאינפלציה</h4>
+                <p><strong>הטעות:</strong> התמקדות רק בתשואה נומינלית</p>
+                <p><strong>הפתרון:</strong> תמיד חשב גם תשואה ריאלית (לאחר אינפלציה)</p>
+                <div class="formula-container">
+                    <div class="latex-formula">
+                    $$\text{תשואה ריאלית} = \frac{1 + \text{תשואה נומינלית}}{1 + \text{אינפלציה}} - 1$$
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="calculation-example">
+            <h4>🧮 דוגמה מעשית מלאה - תיק עם 3 מסלולים</h4>
+            
+            <div class="practical-tip">
+                <h5>נתונים:</h5>
+                <ul>
+                    <li><strong>מסלול מניות:</strong> 1,500 ש"ח כל חודש, 12 חודשים</li>
+                    <li><strong>מסלול אג"ח:</strong> 800 ש"ח כל חודש, 12 חודשים</li>
+                    <li><strong>מסלול בינלאומי:</strong> 700 ש"ח כל חודש, 12 חודשים</li>
+                    <li><strong>סה"כ הפקדה חודשית:</strong> 3,000 ש"ח</li>
+                    <li><strong>שווי סופי לאחר שנה:</strong> 38,500 ש"ח</li>
+                </ul>
+            </div>
+            
+            <div class="practical-tip">
+                <h5>שלב 1: חישוב תשואה גולמית (שגוי!)</h5>
+                <div class="code-block">
+תשואה גולמית = (38,500 - 36,000) / 36,000 = 6.94%
+// זה חישוב שגוי!
+                </div>
+            </div>
+            
+            <div class="practical-tip">
+                <h5>שלב 2: חישוב IRR נכון</h5>
+                <div class="code-block">
+תזרימי מזומנים:
+חודש 1: -3,000 ש"ח
+חודש 2: -3,000 ש"ח
+...
+חודש 12: -3,000 ש"ח
+חודש 12 (סוף): +38,500 ש"ח
+
+IRR = 15.2% שנתי
+                </div>
+            </div>
+            
+            <div class="success-box">
+                <h4>✅ התוצאה הנכונה</h4>
+                <p>התשואה האמיתית שלך היא <strong>15.2% שנתי</strong> - הרבה יותר גבוהה מהחישוב הנאיבי של 6.94%!</p>
+            </div>
+        </div>
+        
+		<div class="content-section">
+			<h3>🧮 מחשבון תשואת תיק אינטראקטיבי</h3>
+			<p>עכשיו בואו ננסה את הכלי הפרקטי שיעזור לכם לחשב תשואה נכונה עם הפקדות חודשיות:</p>
+			
+			<div class="calculator-container" style="background: linear-gradient(135deg, rgba(74, 144, 226, 0.1) 0%, rgba(80, 227, 194, 0.1) 100%); padding: 25px; margin: 20px 0; border-radius: 15px; border: 1px solid rgba(74, 144, 226, 0.3);">
+				<h4 style="color: #50e3c2; margin-bottom: 20px;">📊 הזינו את נתוני התיק שלכם:</h4>
+				
+				<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px; margin: 20px 0;">
+					<div style="display: flex; flex-direction: column;">
+						<label for="monthlyDeposit" style="color: #50e3c2; margin-bottom: 5px; font-weight: bold;">הפקדה חודשית (ש"ח)</label>
+						<input type="number" id="monthlyDeposit" value="2000" min="0" style="background: rgba(30, 30, 30, 0.8); border: 1px solid rgba(74, 144, 226, 0.3); border-radius: 8px; padding: 12px; color: #ffffff; font-size: 1em;">
+					</div>
+					
+					<div style="display: flex; flex-direction: column;">
+						<label for="months" style="color: #50e3c2; margin-bottom: 5px; font-weight: bold;">מספר חודשים</label>
+						<input type="number" id="months" value="12" min="1" max="600" style="background: rgba(30, 30, 30, 0.8); border: 1px solid rgba(74, 144, 226, 0.3); border-radius: 8px; padding: 12px; color: #ffffff; font-size: 1em;">
+					</div>
+					
+					<div style="display: flex; flex-direction: column;">
+						<label for="finalValue" style="color: #50e3c2; margin-bottom: 5px; font-weight: bold;">שווי סופי (ש"ח)</label>
+						<input type="number" id="finalValue" value="26000" min="0" style="background: rgba(30, 30, 30, 0.8); border: 1px solid rgba(74, 144, 226, 0.3); border-radius: 8px; padding: 12px; color: #ffffff; font-size: 1em;">
+					</div>
+					
+					<div style="display: flex; flex-direction: column;">
+						<label for="initialValue" style="color: #50e3c2; margin-bottom: 5px; font-weight: bold;">יתרה התחלתית (ש"ח)</label>
+						<input type="number" id="initialValue" value="0" min="0" style="background: rgba(30, 30, 30, 0.8); border: 1px solid rgba(74, 144, 226, 0.3); border-radius: 8px; padding: 12px; color: #ffffff; font-size: 1em;">
+					</div>
+				</div>
+				
+				<div style="background: rgba(50, 50, 50, 0.8); padding: 20px; border-radius: 10px; margin: 15px 0; border: 1px solid rgba(138, 43, 226, 0.3);">
+					<h5 style="color: #da70d6; margin-bottom: 15px;">🎛️ אפשרויות מתקדמות</h5>
+					<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+						<div style="display: flex; flex-direction: column;">
+							<label for="annualFees" style="color: #50e3c2; margin-bottom: 5px; font-weight: bold;">עמלות שנתיות (%)</label>
+							<input type="number" id="annualFees" value="1.2" min="0" max="5" step="0.1" style="background: rgba(30, 30, 30, 0.8); border: 1px solid rgba(74, 144, 226, 0.3); border-radius: 8px; padding: 12px; color: #ffffff; font-size: 1em;">
+						</div>
+						
+						<div style="display: flex; flex-direction: column;">
+							<label for="inflation" style="color: #50e3c2; margin-bottom: 5px; font-weight: bold;">אינפלציה שנתית (%)</label>
+							<input type="number" id="inflation" value="2.5" min="0" max="10" step="0.1" style="background: rgba(30, 30, 30, 0.8); border: 1px solid rgba(74, 144, 226, 0.3); border-radius: 8px; padding: 12px; color: #ffffff; font-size: 1em;">
+						</div>
+						
+						<div style="display: flex; flex-direction: column;">
+							<label for="benchmark" style="color: #50e3c2; margin-bottom: 5px; font-weight: bold;">תשואת בנצ'מרק (%)</label>
+							<input type="number" id="benchmark" value="5.5" min="-20" max="20" step="0.1" style="background: rgba(30, 30, 30, 0.8); border: 1px solid rgba(74, 144, 226, 0.3); border-radius: 8px; padding: 12px; color: #ffffff; font-size: 1em;">
+						</div>
+					</div>
+				</div>
+				
+				<div style="text-align: center;">
+					<button onclick="calculateReturns()" style="background: linear-gradient(45deg, #4a90e2, #50e3c2); color: white; border: none; padding: 15px 30px; border-radius: 10px; font-size: 1.2em; font-weight: bold; cursor: pointer; margin: 10px; transition: all 0.3s ease;">חשב תשואה</button>
+					<button onclick="loadExample()" style="background: linear-gradient(45deg, #4a90e2, #50e3c2); color: white; border: none; padding: 15px 30px; border-radius: 10px; font-size: 1.2em; font-weight: bold; cursor: pointer; margin: 10px; transition: all 0.3s ease;">טען דוגמה</button>
+					<button onclick="clearInputs()" style="background: linear-gradient(45deg, #4a90e2, #50e3c2); color: white; border: none; padding: 15px 30px; border-radius: 10px; font-size: 1.2em; font-weight: bold; cursor: pointer; margin: 10px; transition: all 0.3s ease;">נקה נתונים</button>
+				</div>
+			</div>
+			
+			<div id="resultsContainer" style="display: none; background: rgba(30, 30, 30, 0.8); padding: 25px; border-radius: 15px; margin: 20px 0; border: 2px solid #50e3c2;">
+				<h3 style="color: #50e3c2; margin-bottom: 20px; text-align: center;">📊 תוצאות החישוב</h3>
+				
+				<div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+					<span style="color: #4a90e2; font-weight: bold;">סכום כולל הופקד:</span>
+					<span id="totalDeposited" style="color: #50e3c2; font-size: 1.2em; font-weight: bold;">-</span>
+				</div>
+				
+				<div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+					<span style="color: #4a90e2; font-weight: bold;">רווח/הפסד נטו:</span>
+					<span id="netProfit" style="color: #50e3c2; font-size: 1.2em; font-weight: bold;">-</span>
+				</div>
+				
+				<div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+					<span style="color: #4a90e2; font-weight: bold;">תשואה פשוטה (שגויה):</span>
+					<span id="simpleReturn" style="color: #ffc107; font-size: 1.2em; font-weight: bold;">-</span>
+				</div>
+				
+				<div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+					<span style="color: #4a90e2; font-weight: bold;">תשואה אמיתית - IRR שנתי:</span>
+					<span id="irrReturn" style="color: #50e3c2; font-size: 1.2em; font-weight: bold;">-</span>
+				</div>
+				
+				<div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+					<span style="color: #4a90e2; font-weight: bold;">תשואה לאחר עמלות:</span>
+					<span id="afterFeesReturn" style="color: #50e3c2; font-size: 1.2em; font-weight: bold;">-</span>
+				</div>
+				
+				<div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+					<span style="color: #4a90e2; font-weight: bold;">תשואה ריאלית (לאחר אינפלציה):</span>
+					<span id="realReturn" style="color: #50e3c2; font-size: 1.2em; font-weight: bold;">-</span>
+				</div>
+				
+				<div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+					<span style="color: #4a90e2; font-weight: bold;">ביצועים לעומת בנצ'מרק:</span>
+					<span id="vsBenchmark" style="color: #50e3c2; font-size: 1.2em; font-weight: bold;">-</span>
+				</div>
+				
+				<div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 0;">
+					<span style="color: #4a90e2; font-weight: bold;">יחס שארפ (מוערך):</span>
+					<span id="sharpeRatio" style="color: #50e3c2; font-size: 1.2em; font-weight: bold;">-</span>
+				</div>
+			</div>
+			
+			<div class="chart-container">
+				<h3>התפתחות התיק לאורך זמן</h3>
+				<div class="chart-wrapper">
+					<canvas id="portfolioGrowthChart"></canvas>
+				</div>
+			</div>
+			
+			<div class="chart-container">
+				<h3>השוואת שיטות חישוב תשואה</h3>
+				<div class="chart-wrapper">
+					<canvas id="methodComparisonChart"></canvas>
+				</div>
+			</div>
+			
+			<div id="interpretationSection" style="display: none; background: linear-gradient(135deg, rgba(138, 43, 226, 0.1), rgba(75, 0, 130, 0.1)); border: 2px solid rgba(138, 43, 226, 0.4); padding: 25px; border-radius: 15px; margin: 25px 0;">
+				<h4 style="color: #da70d6; margin-bottom: 15px;">🎯 פירוש התוצאות</h4>
+				<div id="interpretationText">
+					<p>לאחר החישוב יופיע כאן פירוש מפורט של התוצאות שלך ומשמעותן.</p>
+				</div>
+			</div>
+		</div>
+        
+        <div class="action-plan">
+            <h4>🎯 תוכנית פעולה מיידית</h4>
+            
+            <h4>השבוע הקרוב:</h4>
+            <ul>
+                <li>אסוף את כל נתוני ההפקדות מהשנה האחרונה</li>
+                <li>רשום בקובץ Excel עם תאריכים מדויקים</li>
+                <li>בדוק איזה כלי מעקב הכי מתאים לך</li>
+            </ul>
+            
+            <h4>החודש הקרוב:</h4>
+            <ul>
+                <li>חשב IRR ו-TWR לתיק שלך</li>
+                <li>השווה לבנצ'מרק מתאים</li>
+                <li>נתח drawdowns ותנודתיות</li>
+                <li>הגדר התראות לסטיות גדולות</li>
+            </ul>
+            
+            <h4>לטווח ארוך:</h4>
+            <ul>
+                <li>בנה מערכת מעקב אוטומטית</li>
+                <li>קבע בדיקות רבעוניות</li>
+                <li>תעד החלטות השקעה וסיבותיהן</li>
+                <li>התאם אסטרטגיה לפי ביצועים</li>
+            </ul>
+        </div>
+        
+        <div class="content-section">
+            <h3>🚨 אזהרות - מתי להתערב?</h3>
+            
+            <div class="warning-signs">
+                <h4>🔴 סימני אזהרה מיידיים:</h4>
+                <ul>
+                    <li>ירידה של יותר מ-15% תוך חודש אחד</li>
+                    <li>ביצועים גרועים מהשוק הכללי במשך 6 חודשים רצופים</li>
+                    <li>סטייה של יותר מ-10% מחלוקת היעד המתוכננת</li>
+                    <li>אפיק השקעה יחיד שמהווה יותר מ-20% מהתיק</li>
+                    <li>עלייה דרמטית בעמלות או בעלויות ניהול</li>
+                </ul>
+            </div>
+            
+            <div class="success-signs">
+                <h4>✅ סימנים חיוביים להמשך המסלול:</h4>
+                <ul>
+                    <li>עמידה ביעדי התשואה השנתיים</li>
+                    <li>פיזור אפקטיבי - אפיקים שונים מתנהגים באופן שונה</li>
+                    <li>שמירה על רמת הסיכון המתוכננת</li>
+                    <li>צמיחה עקבית לטווח ארוך</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="content-section">
+            <h3>📈 אסטרטגיות השקעה מתקדמות</h3>
+			
+			<div class="trading-strategies">
+				<h4>📊 אסטרטגיות המבוססות על מחקר אקדמי</h4>
+				<div class="strategy-grid">
+					<div class="strategy-card">
+						<h5>📊 Factor Investing</h5>
+						<p>השקעה מבוססת על גורמים כמו Value, Momentum, Quality, Size</p>
+						<div class="latex-formula">
+						$$R_i = \alpha + \beta_1 F_1 + \beta_2 F_2 + \beta_3 F_3 + \varepsilon$$
+						</div>
+					</div>
+					
+					<div class="strategy-card">
+						<h5>🎯 Pairs Trading</h5>
+						<p>מסחר בזוגות מניות עם קורלציה גבוהה</p>
+						<div class="latex-formula">
+						$$Spread = Price_A - \beta \times Price_B$$
+						</div>
+					</div>
+					
+					<div class="strategy-card">
+						<h5>🌪️ Volatility Arbitrage</h5>
+						<p>ניצול הפרשי תנודתיות בין האופציות למחיר הבסיס</p>
+						<div class="latex-formula">
+						$$\sigma_{implied} \neq \sigma_{realized}$$
+						</div>
+					</div>
+					
+					<div class="strategy-card">
+						<h5>📉 Mean Reversion</h5>
+						<p>ההנחה שמחירים חוזרים לממוצע לאחר תנועות קיצוניות</p>
+						<div class="latex-formula">
+						$$P_{t+1} = \alpha + \beta P_t + \varepsilon$$
+						</div>
+					</div>
+				</div>
+			</div>
+        </div>
+
+        <div class="content-section">
+			<h3>🛡️ ניהול סיכונים מתקדם</h3>
+			
+			<div class="risk-management">
+				<h4>⚡ מדדי סיכון מתקדמים</h4>
+				
+				<div class="formula-container">
+					<h4>נוסחאות ניהול סיכונים:</h4>
+					
+					<div class="latex-formula">
+					$$VaR_{\alpha} = \inf\{l \in \mathbb{R} : P(L > l) \leq 1-\alpha\}$$
+					</div>
+					
+					<div class="latex-formula">
+					$$CVaR_{\alpha} = E[L | L > VaR_{\alpha}]$$
+					</div>
+					
+					<div class="latex-formula">
+					$$\text{Kelly Criterion} = \frac{bp - q}{b} = \frac{p \times \text{odds} - 1}{\text{odds}}$$
+					</div>
+				</div>
+				
+				<h4>🔥 אסטרטגיות הגנה מתקדמות:</h4>
+				<ul>
+					<li><strong>Dynamic Hedging:</strong> התאמת הגנות בזמן אמת</li>
+					<li><strong>Tail Risk Hedging:</strong> הגנה מפני אירועי קיצון</li>
+					<li><strong>Volatility Targeting:</strong> שמירה על רמת תנודתיות קבועה</li>
+					<li><strong>Risk Parity:</strong> התאמת החשיפה לפי תרומת הסיכון</li>
+				</ul>
+			</div>
+		</div>
+
+        <div class="question-box">
+			<h4>❓ השאלה המתקדמת לסיום:</h4>
+			<p>איזו מהאסטרטגיות המתקדמות הבאות הכי מתאימה לפרופיל שלך: 
+			<br><br>
+			🤖 <strong>השקעות אלגוריתמיות</strong> - פיתוח מודלי machine learning
+			<br>
+			📊 <strong>Factor Investing</strong> - השקעה מבוססת גורמים מדעיים  
+			<br>
+			🌍 <strong>השקעות גלובליות מורכבות</strong> - פיזור בינלאומי מתקדם
+			<br>
+			🌱 <strong>השקעות ESG מתקדמות</strong> - השקעות בר-קיימא עם מדידת impact
+			<br><br>
+			תשובתך תקבע את המסלול הבא שלך במסע להפיכה למשקיע מקצועי ברמה מוסדית! 🚀</p>
+		</div>
+    </div>
+	    
+    <script>
+	
+		document.addEventListener("DOMContentLoaded", function() {
+			renderMathInElement(document.body, {
+				delimiters: [
+				   {left: "\\(", right: "\\)", display: false},
+				   {left: "\\[", right: "\\]", display: true},
+				   {left: "$$", right: "$$", display: true},
+				   {left: "$", right: "$", display: false}
+				],
+				throwOnError: false,
+				errorColor: '#cc0000',
+				strict: false
+			});
+		});
+		
+        // Chart 1: Return Comparison Chart
+        const ctx1 = document.getElementById('returnComparisonChart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: ['תשואה פשוטה\n(שגויה)', 'IRR\n(נכונה)', 'TWR\n(מקצועית)', 'MWRR\n(מעשית)'],
+                datasets: [{
+                    label: 'תשואה שנתית (%)',
+                    data: [6.9, 15.2, 12.8, 14.7],
+                    backgroundColor: ['#ff6b6b', '#50e3c2', '#4a90e2', '#ffc107'],
+                    borderColor: '#ffffff',
+                    borderWidth: 2,
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        display: false
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        titleColor: '#ffffff',
+                        bodyColor: '#ffffff',
+                        callbacks: {
+                            label: function(context) {
+                                return 'תשואה: ' + context.parsed.y.toFixed(1) + '%';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: '#ffffff',
+                            callback: function(value) {
+                                return value.toFixed(0) + '%';
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: '#ffffff',
+                            font: { size: 12 }
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    }
+                }
+            }
+        });
+
+        // Chart 2: Portfolio Growth Example Chart
+        const ctx2 = document.getElementById('portfolioGrowthExampleChart').getContext('2d');
+        
+        // Generate sample data for portfolio growth
+        const months = ['ינו', 'פבר', 'מרץ', 'אפר', 'מאי', 'יונ', 'יול', 'אוג', 'ספט', 'אוק', 'נוב', 'דצמ'];
+        const cumulativeDeposits = [2000, 4000, 6000, 8000, 10000, 12000, 14000, 16000, 18000, 20000, 22000, 24000];
+        const portfolioValue = [2050, 4180, 6250, 8400, 10650, 12800, 15100, 17200, 19500, 21800, 24300, 26800];
+        
+        new Chart(ctx2, {
+            type: 'line',
+            data: {
+                labels: months,
+                datasets: [{
+                    label: 'סכום הופקד',
+                    data: cumulativeDeposits,
+                    borderColor: '#ffc107',
+                    backgroundColor: 'rgba(255, 193, 7, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.1
+                }, {
+                    label: 'שווי התיק',
+                    data: portfolioValue,
+                    borderColor: '#50e3c2',
+                    backgroundColor: 'rgba(80, 227, 194, 0.1)',
+                    borderWidth: 3,
+                    fill: false,
+                    tension: 0.4
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#ffffff',
+                            font: { size: 14 }
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                        titleColor: '#ffffff',
+                        bodyColor: '#ffffff',
+                        callbacks: {
+                            label: function(context) {
+                                return context.dataset.label + ': ' + context.parsed.y.toLocaleString() + ' ש"ח';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            color: '#ffffff',
+                            callback: function(value) {
+                                return value.toLocaleString() + ' ש"ח';
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: '#ffffff'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Chart 3: Risk Profile Distribution (Doughnut)
+		const ctx3 = document.getElementById('riskProfileChart').getContext('2d');
+		new Chart(ctx3, {
+			type: 'doughnut',
+			data: {
+				labels: ['תיק שמרני', 'תיק מאוזן', 'תיק צמיחה'],
+				datasets: [{
+					label: 'פיזור משקיעים',
+					data: [30, 45, 25],
+					backgroundColor: [
+						'#50e3c2',  // ירוק - שמרני
+						'#4a90e2',  // כחול - מאוזן  
+						'#ff6b6b'   // אדום - צמיחה
+					],
+					borderColor: '#ffffff',
+					borderWidth: 3,
+					hoverOffset: 20
+				}]
+			},
+			options: {
+				responsive: true,
+				maintainAspectRatio: false,
+				plugins: {
+					legend: {
+						position: 'bottom',
+						labels: {
+							color: '#ffffff',
+							font: { size: 16 },
+							padding: 25,
+							usePointStyle: true,
+							pointStyle: 'circle'
+						}
+					},
+					tooltip: {
+						backgroundColor: 'rgba(0, 0, 0, 0.8)',
+						titleColor: '#ffffff',
+						bodyColor: '#ffffff',
+						borderColor: '#4a90e2',
+						borderWidth: 2,
+						titleFont: { size: 16 },
+						bodyFont: { size: 14 },
+						callbacks: {
+							label: function(context) {
+								return context.label + ': ' + context.parsed + '% מהמשקיעים';
+							}
+						}
+					}
+				},
+				animation: {
+					animateRotate: true,
+					duration: 2500,
+					easing: 'easeInOutQuart'
+				}
+			}
+		});
+		
+		// Chart 4: Portfolio Comparison (Bar Chart)
+		const ctx4 = document.getElementById('portfolioComparisonChart').getContext('2d');
+		new Chart(ctx4, {
+			type: 'bar',
+			data: {
+				labels: ['אג"ח ופיקדונות', 'מניות ותעודות סל', 'נדל"ן', 'השקעות אלטרנטיביות'],
+				datasets: [{
+					label: 'תיק שמרני (%)',
+					data: [70, 20, 5, 5],
+					backgroundColor: '#50e3c2',
+					borderColor: '#ffffff',
+					borderWidth: 2,
+					borderRadius: 5
+				}, {
+					label: 'תיק מאוזן (%)',
+					data: [40, 50, 5, 5],
+					backgroundColor: '#4a90e2',
+					borderColor: '#ffffff',
+					borderWidth: 2,
+					borderRadius: 5
+				}, {
+					label: 'תיק צמיחה (%)',
+					data: [20, 60, 10, 10],
+					backgroundColor: '#ff6b6b',
+					borderColor: '#ffffff',
+					borderWidth: 2,
+					borderRadius: 5
+				}]
+			},
+			options: {
+				responsive: true,
+				maintainAspectRatio: false,
+				plugins: {
+					legend: {
+						labels: {
+							color: '#ffffff',
+							font: { size: 16 },
+							padding: 20,
+							usePointStyle: true
+						}
+					},
+					tooltip: {
+						backgroundColor: 'rgba(0, 0, 0, 0.8)',
+						titleColor: '#ffffff',
+						bodyColor: '#ffffff',
+						borderColor: '#4a90e2',
+						borderWidth: 2,
+						callbacks: {
+							label: function(context) {
+								return context.dataset.label + ': ' + context.parsed.y + '%';
+							}
+						}
+					}
+				},
+				scales: {
+					y: {
+						beginAtZero: true,
+						max: 75,
+						ticks: {
+							color: '#ffffff',
+							font: { size: 14 },
+							callback: function(value) {
+								return value + '%';
+							}
+						},
+						grid: {
+							color: 'rgba(255, 255, 255, 0.1)',
+							lineWidth: 1
+						}
+					},
+					x: {
+						ticks: {
+							color: '#ffffff',
+							font: { size: 14 }
+						},
+						grid: {
+							color: 'rgba(255, 255, 255, 0.1)'
+						}
+					}
+				},
+				animation: {
+					duration: 2000,
+					easing: 'easeInOutQuart'
+				}
+			}
+		});
+        
+        // Chart 5: Portfolio Tracking
+        const ctx5 = document.getElementById('portfolioTrackingChart').getContext('2d');
+        new Chart(ctx5, {
+            type: 'line',
+            data: {
+                labels: ['ינואר', 'פברואר', 'מרץ', 'אפריל', 'מאי', 'יוני', 'יולי', 'אוגוסט', 'ספטמבר', 'אוקטובר', 'נובמבר', 'דצמבר'],
+                datasets: [{
+                    label: 'שווי התיק (₪)',
+                    data: [100000, 103000, 98000, 105000, 108000, 104000, 112000, 115000, 111000, 118000, 122000, 125000],
+                    borderColor: '#4a90e2',
+                    backgroundColor: 'rgba(74, 144, 226, 0.1)',
+                    borderWidth: 3,
+                    fill: true,
+                    tension: 0.4
+                }, {
+                    label: 'יעד שנתי',
+                    data: [100000, 101000, 102000, 103000, 104000, 105000, 106000, 107000, 108000, 109000, 110000, 111000],
+                    borderColor: '#50e3c2',
+                    borderWidth: 2,
+                    borderDash: [5, 5],
+                    fill: false
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#ffffff',
+                            font: { size: 14 }
+                        }
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: false,
+                        ticks: {
+                            color: '#ffffff',
+                            callback: function(value) {
+                                return '₪' + value.toLocaleString();
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            color: '#ffffff'
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    }
+                }
+            }
+        });
+        
+        // Chart 6: Efficient Frontier
+        const ctx6 = document.getElementById('efficientFrontierChart').getContext('2d');
+        
+        // Generate Efficient Frontier data points
+        const generateEfficientFrontier = () => {
+            const points = [];
+            // Simulate efficient frontier curve
+            for (let risk = 5; risk <= 25; risk += 0.5) {
+                let expectedReturn;
+                if (risk <= 8) {
+                    // Conservative region - lower returns, lower risk
+                    expectedReturn = 2 + (risk - 5) * 0.8;
+                } else if (risk <= 15) {
+                    // Moderate region - balanced risk/return
+                    expectedReturn = 4.4 + (risk - 8) * 0.9;
+                } else {
+                    // Aggressive region - higher returns, higher risk
+                    expectedReturn = 10.7 + (risk - 15) * 0.6;
+                }
+                points.push({ x: risk, y: expectedReturn });
+            }
+            return points;
+        };
+        
+        // Portfolio points for comparison
+        const portfolioPoints = [
+            { x: 6, y: 4.5, label: 'תיק שמרני', color: '#50e3c2' },
+            { x: 12, y: 8.2, label: 'תיק מאוזן', color: '#4a90e2' },
+            { x: 18, y: 12.1, label: 'תיק צמיחה', color: '#ff6b6b' },
+            { x: 14, y: 9.8, label: 'תיק אופטימלי (שארפ מקסימלי)', color: '#ffd700' }
+        ];
+        
+        new Chart(ctx6, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'גבול היעילות',
+                    data: generateEfficientFrontier(),
+                    borderColor: '#4a90e2',
+                    backgroundColor: 'rgba(74, 144, 226, 0.1)',
+                    borderWidth: 4,
+                    fill: false,
+                    tension: 0.4,
+                    showLine: true,
+                    pointRadius: 0
+                }, {
+                    label: 'תיק שמרני',
+                    data: [portfolioPoints[0]],
+                    backgroundColor: '#50e3c2',
+                    borderColor: '#ffffff',
+                    borderWidth: 3,
+                    pointRadius: 12,
+                    pointHoverRadius: 15
+                }, {
+                    label: 'תיק מאוזן',
+                    data: [portfolioPoints[1]],
+                    backgroundColor: '#4a90e2',
+                    borderColor: '#ffffff',
+                    borderWidth: 3,
+                    pointRadius: 12,
+                    pointHoverRadius: 15
+                }, {
+                    label: 'תיק צמיחה',
+                    data: [portfolioPoints[2]],
+                    backgroundColor: '#ff6b6b',
+                    borderColor: '#ffffff',
+                    borderWidth: 3,
+                    pointRadius: 12,
+                    pointHoverRadius: 15
+                }, {
+                    label: 'תיק אופטימלי',
+                    data: [portfolioPoints[3]],
+                    backgroundColor: '#ffd700',
+                    borderColor: '#ffffff',
+                    borderWidth: 3,
+                    pointRadius: 15,
+                    pointHoverRadius: 18,
+                    pointStyle: 'star'
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#ffffff',
+                            font: { size: 14 },
+                            padding: 15,
+                            usePointStyle: true
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                        titleColor: '#ffffff',
+                        bodyColor: '#ffffff',
+                        borderColor: '#4a90e2',
+                        borderWidth: 2,
+                        callbacks: {
+                            label: function(context) {
+                                const point = context.parsed;
+                                const dataset = context.dataset;
+                                return dataset.label + ': סיכון ' + point.x.toFixed(1) + '%, תשואה ' + point.y.toFixed(1) + '%';
+                            }
+                        }
+                    },
+                    title: {
+                        display: true,
+                        text: 'גבול היעילות - יחס סיכון לתשואה אופטימלי',
+                        color: '#4a90e2',
+                        font: { size: 16 }
+                    }
+                },
+                scales: {
+                    x: {
+                        type: 'linear',
+                        title: {
+                            display: true,
+                            text: 'סיכון (סטיית תקן שנתית %)',
+                            color: '#ffffff',
+                            font: { size: 14 }
+                        },
+                        ticks: {
+                            color: '#ffffff',
+                            callback: function(value) {
+                                return value.toFixed(0) + '%';
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        min: 4,
+                        max: 26
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'תשואה צפויה שנתית (%)',
+                            color: '#ffffff',
+                            font: { size: 14 }
+                        },
+                        ticks: {
+                            color: '#ffffff',
+                            callback: function(value) {
+                                return value.toFixed(0) + '%';
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        },
+                        min: 2,
+                        max: 16
+                    }
+                },
+                animation: {
+                    duration: 3000,
+                    easing: 'easeInOutQuart'
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'point'
+                }
+            }
+		});	
+
+        // Chart 7: Risk Return Analysis
+        const ctx7 = document.getElementById('riskReturnChart').getContext('2d');
+        new Chart(ctx7, {
+            type: 'scatter',
+            data: {
+                datasets: [{
+                    label: 'תיק אישי',
+                    data: [{ x: 14.2, y: 8.7 }],
+                    backgroundColor: '#50e3c2',
+                    borderColor: '#ffffff',
+                    borderWidth: 3,
+                    pointRadius: 15,
+                    pointHoverRadius: 18
+                }, {
+                    label: 'מדד השוק',
+                    data: [{ x: 16.5, y: 7.2 }],
+                    backgroundColor: '#4a90e2',
+                    borderColor: '#ffffff',
+                    borderWidth: 3,
+                    pointRadius: 12,
+                    pointHoverRadius: 15
+                }, {
+                    label: 'תיקי השוואה',
+                    data: [
+                        { x: 8.5, y: 4.2 },
+                        { x: 12.1, y: 6.8 },
+                        { x: 18.9, y: 9.5 },
+                        { x: 22.3, y: 11.2 }
+                    ],
+                    backgroundColor: '#ffc107',
+                    borderColor: '#ffffff',
+                    borderWidth: 2,
+                    pointRadius: 8,
+                    pointHoverRadius: 12
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#ffffff',
+                            font: { size: 14 },
+                            padding: 15,
+                            usePointStyle: true
+                        }
+                    },
+                    tooltip: {
+                        backgroundColor: 'rgba(0, 0, 0, 0.9)',
+                        titleColor: '#ffffff',
+                        bodyColor: '#ffffff',
+                        borderColor: '#4a90e2',
+                        borderWidth: 2,
+                        callbacks: {
+                            label: function(context) {
+                                const point = context.parsed;
+                                return context.dataset.label + ': סיכון ' + point.x.toFixed(1) + '%, תשואה ' + point.y.toFixed(1) + '%';
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'סיכון (סטיית תקן %)',
+                            color: '#ffffff',
+                            font: { size: 14 }
+                        },
+                        ticks: {
+                            color: '#ffffff',
+                            callback: function(value) {
+                                return value.toFixed(0) + '%';
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'תשואה שנתית (%)',
+                            color: '#ffffff',
+                            font: { size: 14 }
+                        },
+                        ticks: {
+                            color: '#ffffff',
+                            callback: function(value) {
+                                return value.toFixed(0) + '%';
+                            }
+                        },
+                        grid: {
+                            color: 'rgba(255, 255, 255, 0.1)'
+                        }
+                    }
+                }
+            }
+        });
+		
+		// ========== מחשבון תשואת תיק - קוד JavaScript ==========
+        
+        // Global variables for calculator charts
+        let portfolioGrowthChart = null;
+        let methodComparisonChart = null;
+        
+        // IRR calculation function (Newton-Raphson method)
+        function calculateIRR(cashFlows, guess = 0.1) {
+            let rate = guess;
+            const maxIterations = 100;
+            const precision = 1e-6;
+            
+            for (let i = 0; i < maxIterations; i++) {
+                let npv = 0;
+                let dnpv = 0;
+                
+                for (let t = 0; t < cashFlows.length; t++) {
+                    npv += cashFlows[t] / Math.pow(1 + rate, t);
+					dnpv -= t * cashFlows[t] / Math.pow(1 + rate, t + 1);
+                }
+                
+                const newRate = rate - npv / dnpv;
+                
+                if (Math.abs(newRate - rate) < precision) {
+                    return newRate;
+                }
+                
+                rate = newRate;
+            }
+            
+            return rate;
+        }
+        
+        function calculateReturns() {
+            // Get input values
+            const monthlyDeposit = parseFloat(document.getElementById('monthlyDeposit').value) || 0;
+            const months = parseInt(document.getElementById('months').value) || 1;
+            const finalValue = parseFloat(document.getElementById('finalValue').value) || 0;
+            const initialValue = parseFloat(document.getElementById('initialValue').value) || 0;
+            const annualFees = parseFloat(document.getElementById('annualFees').value) || 0;
+            const inflation = parseFloat(document.getElementById('inflation').value) || 0;
+            const benchmark = parseFloat(document.getElementById('benchmark').value) || 0;
+            
+            // Validation
+            if (monthlyDeposit <= 0 || months <= 0 || finalValue <= 0) {
+                alert('אנא הזן ערכים תקינים');
+                return;
+            }
+            
+            // Calculate basic metrics
+            const totalDeposited = initialValue + (monthlyDeposit * months);
+            const netProfit = finalValue - totalDeposited;
+            const simpleReturn = (netProfit / totalDeposited) * 100;
+            
+            // Prepare cash flow array for IRR calculation
+            const cashFlows = [];
+            
+            // Initial investment (if any)
+            cashFlows.push(-initialValue);
+            
+            // Monthly deposits (negative values)
+            for (let i = 0; i < months - 1; i++) {
+                cashFlows.push(-monthlyDeposit);
+            }
+            
+            // Final month: deposit + final value
+            cashFlows.push(-monthlyDeposit + finalValue);
+            
+            // Calculate IRR
+            let monthlyIRR = 0;
+            let annualIRR = 0;
+            
+            try {
+                monthlyIRR = calculateIRR(cashFlows);
+                annualIRR = (Math.pow(1 + monthlyIRR, 12) - 1) * 100;
+            } catch (error) {
+                annualIRR = 0;
+            }
+            
+            // Calculate adjusted returns
+            const afterFeesReturn = annualIRR - annualFees;
+            const realReturn = ((1 + annualIRR/100) / (1 + inflation/100) - 1) * 100;
+            const vsBenchmark = annualIRR - benchmark;
+            
+            // Estimate Sharpe Ratio (simplified)
+            const estimatedVolatility = Math.max(8, Math.abs(annualIRR) * 0.8); // rough estimate
+            const riskFreeRate = 2.5; // assumed
+            const sharpeRatio = (annualIRR - riskFreeRate) / estimatedVolatility;
+            
+            // Display results
+            document.getElementById('totalDeposited').textContent = `${totalDeposited.toLocaleString()} ש"ח`;
+            document.getElementById('netProfit').textContent = `${netProfit.toLocaleString()} ש"ח`;
+            document.getElementById('netProfit').className = `${netProfit >= 0 ? 'positive' : 'negative'}`;
+            document.getElementById('netProfit').style.color = netProfit >= 0 ? '#50e3c2' : '#ff6b6b';
+            
+            document.getElementById('simpleReturn').textContent = `${simpleReturn.toFixed(2)}%`;
+            document.getElementById('irrReturn').textContent = `${annualIRR.toFixed(2)}%`;
+            document.getElementById('irrReturn').style.color = annualIRR >= 0 ? '#50e3c2' : '#ff6b6b';
+            
+            document.getElementById('afterFeesReturn').textContent = `${afterFeesReturn.toFixed(2)}%`;
+            document.getElementById('afterFeesReturn').style.color = afterFeesReturn >= 0 ? '#50e3c2' : '#ff6b6b';
+            
+            document.getElementById('realReturn').textContent = `${realReturn.toFixed(2)}%`;
+            document.getElementById('realReturn').style.color = realReturn >= 0 ? '#50e3c2' : '#ff6b6b';
+            
+            document.getElementById('vsBenchmark').textContent = `${vsBenchmark >= 0 ? '+' : ''}${vsBenchmark.toFixed(2)}%`;
+            document.getElementById('vsBenchmark').style.color = vsBenchmark >= 0 ? '#50e3c2' : '#ff6b6b';
+            
+            document.getElementById('sharpeRatio').textContent = sharpeRatio.toFixed(2);
+            document.getElementById('sharpeRatio').style.color = sharpeRatio >= 0.5 ? '#50e3c2' : (sharpeRatio >= 0 ? '#ffc107' : '#ff6b6b');
+            
+            // Show results
+            document.getElementById('resultsContainer').style.display = 'block';
+            document.getElementById('interpretationSection').style.display = 'block';
+            
+            // Generate interpretation
+            generateInterpretation(annualIRR, afterFeesReturn, realReturn, vsBenchmark, sharpeRatio, netProfit);
+            
+            // Create portfolio growth chart
+            createPortfolioGrowthChart(monthlyDeposit, months, initialValue, finalValue, annualIRR);
+            
+            // Create method comparison chart
+            createMethodComparisonChart(simpleReturn, annualIRR, afterFeesReturn, realReturn);
+        }
+        
+        function generateInterpretation(irr, afterFees, real, benchmark, sharpe, profit) {
+            let interpretation = '<div style="font-size: 1.1em; line-height: 1.8;">';
+            
+            // Overall performance assessment
+            if (irr > 15) {
+                interpretation += '<p><strong>🚀 ביצועים מצוינים!</strong> התשואה שלך גבוהה משמעותית מהממוצע. ';
+                interpretation += 'שים לב שתשואות גבוהות כאלה לא תמיד ימשכו - חשוב לבדוק את רמת הסיכון.</p>';
+            } else if (irr > 8) {
+                interpretation += '<p><strong>✅ ביצועים טובים!</strong> אתה על המסלול הנכון. ';
+                interpretation += 'התשואה שלך סבירה לטווח ארוך ומעל הממוצע הישראלי.</p>';
+            } else if (irr > 3) {
+                interpretation += '<p><strong>⚖️ ביצועים בינוניים.</strong> התשואה שלך מעל האינפלציה אבל ';
+                interpretation += 'יש מקום לשיפור. שקול לבחון את החלוקה בתיק.</p>';
+            } else if (irr > 0) {
+                interpretation += '<p><strong>⚠️ ביצועים חלשים.</strong> התשואה נמוכה מהצפוי. ';
+                interpretation += 'חשוב לבדוק את אסטרטגיית ההשקעה ועמלות הניהול.</p>';
+            } else {
+                interpretation += '<p><strong>❌ הפסד זמני.</strong> זכור שבשווקים יש תקופות קשות. ';
+                interpretation += 'אל תפאניק - המשך בתוכנית ההשקעה אם האסטרטגיה נכונה.</p>';
+            }
+            
+            // Fees impact
+            const feeImpact = irr - afterFees;
+            if (feeImpact > 2) {
+                interpretation += '<p><strong>🚨 עמלות גבוהות!</strong> העמלות "אוכלות" לך ';
+                interpretation += `${feeImpact.toFixed(1)}% מהתשואה. שקול מעבר לקרנות עם עמלות נמוכות יותר.</p>`;
+            } else if (feeImpact > 1) {
+                interpretation += '<p><strong>💰 השפעת עמלות בינונית:</strong> העמלות מפחיתות ';
+                interpretation += `${feeImpact.toFixed(1)}% מהתשואה - סביר אבל כדאי לבדוק חלופות.</p>`;
+            }
+            
+            // Real return assessment
+            if (real < 0) {
+                interpretation += '<p><strong>📉 תשואה ריאלית שלילית:</strong> התשואה שלך נמוכה מהאינפלציה. ';
+                interpretation += 'הכוח הקנייתי של הכסף שלך יורד. חשוב לשקול אסטרטגיה יותר אגרסיבית.</p>';
+            } else if (real < 2) {
+                interpretation += '<p><strong>📊 תשואה ריאלית נמוכה:</strong> אתה בקושי מנצח את האינפלציה. ';
+                interpretation += 'שקול העלאת החשיפה למניות או נדל"ן.</p>';
+            }
+            
+            // Benchmark comparison
+            if (benchmark > 2) {
+                interpretation += '<p><strong>🏆 מנצח את השוק!</strong> הביצועים שלך טובים יותר מהבנצ\'מרק ';
+                interpretation += `ב-${benchmark.toFixed(1)}%. כל הכבוד!</p>`;
+            } else if (benchmark > -2) {
+                interpretation += '<p><strong>🎯 ביצועים דומים לשוק:</strong> אתה ברמה של הבנצ\'מרק ';
+                interpretation += '- זה טוב! רוב המנהלים לא מצליחים לנצח את השוק.</p>';
+            } else {
+                interpretation += '<p><strong>📉 מפגר אחרי השוק:</strong> הביצועים נמוכים מהבנצ\'מרק ';
+                interpretation += `ב-${Math.abs(benchmark).toFixed(1)}%. כדאי לבחון את האסטרטגיה.</p>`;
+            }
+            
+            // Sharpe ratio interpretation
+            if (sharpe > 1) {
+                interpretation += '<p><strong>⭐ יחס סיכון-תשואה מעולה!</strong> אתה מקבל תשואה טובה ';
+                interpretation += 'יחסית לסיכון שאתה לוקח.</p>';
+            } else if (sharpe > 0.5) {
+                interpretation += '<p><strong>👍 יחס סיכון-תשואה טוב:</strong> האסטרטגיה שלך מאוזנת.</p>';
+            } else if (sharpe > 0) {
+                interpretation += '<p><strong>⚠️ יחס סיכון-תשואה חלש:</strong> אתה לוקח יותר סיכון ';
+                interpretation += 'מהתשואה שאתה מקבל.</p>';
+            }
+            
+            interpretation += '</div>';
+            
+            document.getElementById('interpretationText').innerHTML = interpretation;
+        }
+        
+        function createPortfolioGrowthChart(monthlyDeposit, months, initialValue, finalValue, annualIRR) {
+            const ctx = document.getElementById('portfolioGrowthChart').getContext('2d');
+            
+            // Destroy existing chart
+            if (portfolioGrowthChart) {
+                portfolioGrowthChart.destroy();
+            }
+            
+            // Calculate monthly data
+            const labels = [];
+            const depositedData = [];
+            const portfolioData = [];
+            const monthlyReturn = Math.pow(1 + annualIRR/100, 1/12) - 1;
+            
+            let cumulativeDeposited = initialValue;
+            let portfolioValue = initialValue;
+            
+            for (let i = 0; i <= months; i++) {
+                labels.push(i === 0 ? 'התחלה' : `חודש ${i}`);
+                
+                if (i > 0) {
+                    cumulativeDeposited += monthlyDeposit;
+                    portfolioValue = (portfolioValue + monthlyDeposit) * (1 + monthlyReturn);
+                }
+                
+                depositedData.push(cumulativeDeposited);
+                portfolioData.push(i === months ? finalValue : portfolioValue);
+            }
+            
+            portfolioGrowthChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'סכום הופקד',
+                        data: depositedData,
+                        borderColor: '#ffc107',
+                        backgroundColor: 'rgba(255, 193, 7, 0.1)',
+                        borderWidth: 3,
+                        fill: true,
+                        tension: 0.1
+                    }, {
+                        label: 'שווי התיק',
+                        data: portfolioData,
+                        borderColor: '#50e3c2',
+                        backgroundColor: 'rgba(80, 227, 194, 0.1)',
+                        borderWidth: 3,
+                        fill: false,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            labels: {
+                                color: '#ffffff',
+                                font: { size: 14 }
+                            }
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            titleColor: '#ffffff',
+                            bodyColor: '#ffffff',
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.parsed.y.toLocaleString() + ' ש"ח';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: '#ffffff',
+                                callback: function(value) {
+                                    return value.toLocaleString() + ' ש"ח';
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#ffffff'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function createMethodComparisonChart(simple, irr, afterFees, real) {
+            const ctx = document.getElementById('methodComparisonChart').getContext('2d');
+            
+            // Destroy existing chart
+            if (methodComparisonChart) {
+                methodComparisonChart.destroy();
+            }
+            
+            methodComparisonChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['תשואה פשוטה\n(שגויה)', 'IRR\n(נכונה)', 'לאחר עמלות', 'תשואה ריאלית'],
+                    datasets: [{
+                        label: 'תשואה שנתית (%)',
+                        data: [simple, irr, afterFees, real],
+                        backgroundColor: [
+                            '#ff6b6b',    // Simple - red (wrong)
+                            '#50e3c2',    // IRR - green (correct)
+                            '#4a90e2',    // After fees - blue
+                            '#ffc107'     // Real - yellow
+                        ],
+                        borderColor: '#ffffff',
+                        borderWidth: 2,
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                            titleColor: '#ffffff',
+                            bodyColor: '#ffffff',
+                            callbacks: {
+                                label: function(context) {
+                                    return 'תשואה: ' + context.parsed.y.toFixed(2) + '%';
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                color: '#ffffff',
+                                callback: function(value) {
+                                    return value.toFixed(1) + '%';
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                color: '#ffffff',
+                                font: { size: 12 }
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        }
+                    }
+                }
+            });
+        }
+        
+        function loadExample() {
+            // Load a realistic example
+            document.getElementById('monthlyDeposit').value = '2500';
+            document.getElementById('months').value = '18';
+            document.getElementById('finalValue').value = '52000';
+            document.getElementById('initialValue').value = '5000';
+            document.getElementById('annualFees').value = '1.5';
+            document.getElementById('inflation').value = '3.2';
+            document.getElementById('benchmark').value = '6.8';
+            
+            // Auto-calculate
+            calculateReturns();
+        }
+        
+        function clearInputs() {
+            document.getElementById('monthlyDeposit').value = '';
+            document.getElementById('months').value = '';
+            document.getElementById('finalValue').value = '';
+            document.getElementById('initialValue').value = '0';
+            document.getElementById('annualFees').value = '1.2';
+            document.getElementById('inflation').value = '2.5';
+            document.getElementById('benchmark').value = '5.5';
+            
+            // Hide results
+            document.getElementById('resultsContainer').style.display = 'none';
+            document.getElementById('interpretationSection').style.display = 'none';
+            
+            // Destroy charts
+            if (portfolioGrowthChart) {
+                portfolioGrowthChart.destroy();
+                portfolioGrowthChart = null;
+            }
+            if (methodComparisonChart) {
+                methodComparisonChart.destroy();
+                methodComparisonChart = null;
+            }
+        }
+        
+        // Add Enter key support for calculator inputs
+        document.addEventListener('DOMContentLoaded', function() {
+            const calculatorInputs = document.querySelectorAll('#monthlyDeposit, #months, #finalValue, #initialValue, #annualFees, #inflation, #benchmark');
+            calculatorInputs.forEach(input => {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        calculateReturns();
+                    }
+                });
+                
+                // Add focus styling
+                input.addEventListener('focus', function() {
+                    this.style.borderColor = '#50e3c2';
+                    this.style.boxShadow = '0 0 10px rgba(80, 227, 194, 0.3)';
+                });
+                
+                input.addEventListener('blur', function() {
+                    this.style.borderColor = 'rgba(74, 144, 226, 0.3)';
+                    this.style.boxShadow = 'none';
+                });
+            });
+			
+			const buttons = document.querySelectorAll('button[onclick]');
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px)';
+                    this.style.boxShadow = '0 10px 25px rgba(74, 144, 226, 0.4)';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = 'none';
+                });
+            });
+			
+        });
+		
+		 function sendHeight() {
+            try {
+              const h = Math.max(
+                document.body.scrollHeight,
+                document.documentElement.scrollHeight
+              );
+              window.parent.postMessage({ type: 'resize-investment', height: h }, '*');
+            } catch (e) {}
+          }
+
+          // שליחה ראשונית
+          window.addEventListener('load', sendHeight);
+          // שליחה על כל שינוי גודל חלון
+          window.addEventListener('resize', sendHeight);
+          // שליחה חוזרת מדי כמה שניות לגיבוי
+          setInterval(sendHeight, 2000);
+		  
+		
+		
+        
+        
+    </script>
+</body>
+</html>

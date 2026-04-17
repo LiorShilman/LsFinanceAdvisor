@@ -1,0 +1,494 @@
+<div class="container-fluid">
+  <!-- Partner 1 Income Section -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card text-white mb-4">
+        <div class="card-body alert alert-primary">
+          <div class="card-header">
+            <span>
+              <i class="bi bi-wallet me-3"></i>
+              הכנסות - {{this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1}}
+            </span>
+            <i class="fs-1 text-success fa fa-plus" (click)="AddRowIncomes1()" title="הוסף שורה"></i>
+          </div>
+          
+          <div class="table-responsive table-striped">
+            <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-3">
+                    מקור ההכנסה
+                  </th>
+                  <th scope="col" class="text-center text-success blockquote fw-bold fs-5" 
+                      data-bs-toggle="tooltip" 
+                      data-bs-custom-class="custom-tooltip"
+                      data-bs-title='אם ההכנסה קבועה , הכנס אותה בתא זה' 
+                      data-bs-placement="right">
+                    נתון חודשי קבוע
+                  </th>
+                  <th scope="col" class="text-center text-success blockquote fw-bold fs-5" 
+                      data-bs-toggle="tooltip" 
+                      data-bs-custom-class="custom-tooltip"
+                      data-bs-title='אם ההכנסה משתנה מחודש לחודש , הכנס את הנתונים בתאים לפי החודשים'
+                      data-bs-placement="right">
+                    חודש 1
+                  </th>
+                  <th scope="col" class="text-center text-success blockquote fw-bold fs-5">חודש 2</th>
+                  <th scope="col" class="text-center text-success blockquote fw-bold fs-5">חודש 3</th>
+                  <th scope="col" class="text-center text-success blockquote fw-bold fs-5">ממוצע</th>
+                  <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-2">הערות</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor='let income of this.generalInfoService.AllInfo.IncomesViewInfo.IncomeRows[0]; let i = index'>
+                  <tr>
+                    <td>
+                      <input type="text" 
+                             name="incomes-name{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold fs-5 text-info" 
+                             id="incomes-name{{i+1}}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.IncomesViewInfo.IncomeRows[0][i].Type"
+                             placeholder="סוג הכנסה">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="income-fixed-monthly{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-center fs-5 text-primary" 
+                             numbersOnly
+                             id="income-fixed-monthly{{i+1}}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.IncomesViewInfo.IncomeRows[0][i].FixedMonthly"
+                             placeholder="0">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="income-monthly-revenue-1{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-center fs-5 text-primary" 
+                             numbersOnly
+                             id="income-monthly-revenue-1{{i+1}}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.IncomesViewInfo.IncomeRows[0][i].MonthlyRevenue1"
+                             placeholder="0">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="income-monthly-revenue-2{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-center fs-5 text-primary" 
+                             numbersOnly
+                             id="income-monthly-revenue-2{{i+1}}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.IncomesViewInfo.IncomeRows[0][i].MonthlyRevenue2"
+                             placeholder="0">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="income-monthly-revenue-3{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-center fs-5 text-primary" 
+                             numbersOnly
+                             id="income-monthly-revenue-3{{i+1}}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.IncomesViewInfo.IncomeRows[0][i].MonthlyRevenue3"
+                             placeholder="0">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="income-monthly-average{{i+1}}" 
+                             disabled
+                             class="form-control fw-bold text-center fs-5"
+                             id="income-monthly-average{{i+1}}"
+                             [value]="this.generalInfoService.AllInfo.IncomesViewInfo.IncomeRows[0][i].CalcMonthlyAverage(i) | currency:'ILS':'symbol':'.0'">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="income-comment{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-info align-middle fs-5" 
+                             id="income-comment{{i+1}}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.IncomesViewInfo.IncomeRows[0][i].Comment"
+                             placeholder="הערות">
+                    </td>
+                  </tr>
+                </ng-container>
+                
+                <!-- Summary Row -->
+                <tr class="summary-row">
+                  <td>
+                    <input type="text" 
+                           disabled 
+                           class="form-control fw-bold  fw-bold fs-5" 
+                           value="סיכום ביניים">
+                  </td>
+                  <td>
+                    <input type="text" 
+                           disabled
+                           class="form-control fw-bold text-center fs-5"
+                           [value]="CalcMonthlyInterimAverage(0) | currency:'ILS':'symbol':'.0'">
+                  </td>
+                  <td>
+                    <input type="text" 
+                           disabled 
+                           class="form-control fw-bold text-center fs-5"
+                           [value]="CalcMonthly1Average(0) | currency:'ILS':'symbol':'.0'">
+                  </td>
+                  <td>
+                    <input type="text" 
+                           disabled 
+                           class="form-control fw-bold text-center fs-5"
+                           [value]="CalcMonthly2Average(0) | currency:'ILS':'symbol':'.0'">
+                  </td>
+                  <td>
+                    <input type="text" 
+                           disabled 
+                           class="form-control fw-bold text-center fs-5"
+                           [value]="CalcMonthly3Average(0) | currency:'ILS':'symbol':'.0'">
+                  </td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                
+                <!-- Average Row -->
+                <tr class="summary-row">
+                  <td>
+                    <input type="text" 
+                           disabled 
+                           class="form-control fw-bold fw-bold fs-5"
+                           value="ממוצע הכנסות חודשי">
+                  </td>
+                  <td>
+                    <input type="text" 
+                           disabled 
+                           class="form-control fw-bold text-center fs-5"
+                           [value]="CalcMonthlyAvgAverage(0) | currency:'ILS':'symbol':'.0'">
+                  </td>
+                  <td>
+                    <input type="text" 
+                           disabled 
+                           class="form-control fw-bold text-center fs-5"
+                           [value]="CalcPercent(0) | percent:'2.2-2'">
+                  </td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Partner 2 Income Section (if married) -->
+  <div class="row" *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Marride">
+    <div class="col-xl-12">
+      <div class="card text-white mb-4">
+        <div class="card-body alert alert-primary">
+          <div class="card-header">
+            <span>
+              <i class="bi bi-wallet me-3"></i>
+              הכנסות - {{this.generalInfoService.AllInfo.PersonalDataViewInfo.Name2}}
+            </span>
+            <i class="fs-1 text-success fa fa-plus" (click)="AddRowIncomes1()" title="הוסף שורה"></i>
+          </div>
+          
+          <div class="table-responsive table-striped">
+            <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-3">מקור ההכנסה</th>
+                  <th scope="col" class="text-center text-success blockquote fw-bold fs-5" 
+                      data-bs-toggle="tooltip" 
+                      data-bs-custom-class="custom-tooltip"
+                      data-bs-title='אם ההכנסה קבועה , הכנס אותה בתא זה' 
+                      data-bs-placement="right">נתון חודשי קבוע</th>
+                  <th scope="col" class="text-center text-success blockquote fw-bold fs-5" 
+                      data-bs-toggle="tooltip" 
+                      data-bs-custom-class="custom-tooltip"
+                      data-bs-title='אם ההכנסה משתנה מחודש לחודש , הכנס את הנתונים בתאים לפי החודשים'
+                      data-bs-placement="right">חודש 1</th>
+                  <th scope="col" class="text-center text-success blockquote fw-bold fs-5">חודש 2</th>
+                  <th scope="col" class="text-center text-success blockquote fw-bold fs-5">חודש 3</th>
+                  <th scope="col" class="text-center text-success blockquote fw-bold fs-5">ממוצע</th>
+                  <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-2">הערות</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor='let income of this.generalInfoService.AllInfo.IncomesViewInfo.IncomeRows[1]; let i = index'>
+                  <tr>
+                    <td>
+                      <input type="text" 
+                             name="incomes-name{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold fs-5 text-info" 
+                             id="incomes-name{{i+1}}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.IncomesViewInfo.IncomeRows[1][i].Type"
+                             placeholder="סוג הכנסה">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="income-fixed-monthly{{i+1}}"
+                             class="form-control fw-bold text-center fs-5 text-primary" 
+                             numbersOnly
+                             autocomplete="off"
+                             id="income-fixed-monthly{{i+1}}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.IncomesViewInfo.IncomeRows[1][i].FixedMonthly"
+                             placeholder="0">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="income-monthly-revenue-1{{i+1}}"
+                             class="form-control fw-bold text-center fs-5 text-primary" 
+                             numbersOnly
+                             id="income-monthly-revenue-1{{i+1}}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.IncomesViewInfo.IncomeRows[1][i].MonthlyRevenue1"
+                             placeholder="0">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="income-monthly-revenue-2{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-center fs-5 text-primary" 
+                             numbersOnly
+                             id="income-monthly-revenue-2{{i+1}}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.IncomesViewInfo.IncomeRows[1][i].MonthlyRevenue2"
+                             placeholder="0">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="income-monthly-revenue-3{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-center fs-5 text-primary" 
+                             numbersOnly
+                             id="income-monthly-revenue-3{{i+1}}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.IncomesViewInfo.IncomeRows[1][i].MonthlyRevenue3"
+                             placeholder="0">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="income-monthly-average{{i+1}}" 
+                             disabled
+                             class="form-control fw-bold text-center fs-5"
+                             id="income-monthly-average{{i+1}}"
+                             [value]="this.generalInfoService.AllInfo.IncomesViewInfo.IncomeRows[1][i].CalcMonthlyAverage(i) | currency:'ILS':'symbol':'.0'">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="income-comment{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-info text-center align-middle fs-5"
+                             id="income-comment{{i+1}}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.IncomesViewInfo.IncomeRows[1][i].Comment"
+                             placeholder="הערות">
+                    </td>
+                  </tr>
+                </ng-container>
+                
+                <!-- Summary Row -->
+                <tr class="summary-row">
+                  <td>
+                    <input type="text" 
+                           disabled 
+                           class="form-control fw-bold fw-bold fs-5"
+                           value="סיכום ביניים">
+                  </td>
+                  <td>
+                    <input type="text" 
+                           disabled
+                           class="form-control fw-bold text-center fs-5"
+                           [value]="CalcMonthlyInterimAverage(1) | currency:'ILS':'symbol':'.0'">
+                  </td>
+                  <td>
+                    <input type="text" 
+                           disabled
+                           class="form-control fw-bold text-center fs-5"
+                           [value]="CalcMonthly1Average(1) | currency:'ILS':'symbol':'.0'">
+                  </td>
+                  <td>
+                    <input type="text" 
+                           disabled
+                           class="form-control fw-bold text-center fs-5"
+                           [value]="CalcMonthly2Average(1) | currency:'ILS':'symbol':'.0'">
+                  </td>
+                  <td>
+                    <input type="text" 
+                           disabled
+                           class="form-control fw-bold text-center fs-5"
+                           [value]="CalcMonthly3Average(1) | currency:'ILS':'symbol':'.0'">
+                  </td>
+                  <td></td>
+                  <td></td>
+                </tr>
+                
+                <!-- Average Row -->
+                <tr class="summary-row">
+                  <td>
+                    <input type="text" 
+                           disabled
+                           class="form-control fw-bold  fw-bold fs-5"
+                           value="ממוצע הכנסות חודשי">
+                  </td>
+                  <td>
+                    <input type="text" 
+                           disabled
+                           class="form-control fw-bold text-center fs-5"
+                           [value]="CalcMonthlyAvgAverage(1) | currency:'ILS':'symbol':'.0'">
+                  </td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <input type="text" 
+                           disabled
+                           class="form-control fw-bold text-center fs-5"
+                           [value]="CalcPercent(1) | percent:'2.2-2'">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Additional Income Section -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card text-white mb-4">
+        <div class="card-body alert alert-primary">
+          <div class="card-header">
+            <span>
+              <i class="bi bi-plus-circle me-3"></i>
+              הכנסות נוספות
+            </span>
+            <i class="fs-1 text-success fa fa-plus" (click)="AddRowIncomesEx()" title="הוסף שורה"></i>
+          </div>
+          
+          <div class="table-responsive table-striped">
+            <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-center text-success col-xl-3 blockquote fw-bold fs-5">מקור ההכנסה</th>
+                  <th scope="col" class="text-center text-success col-xl-2 blockquote fw-bold fs-5">הכנסה חודשית ממוצעת</th>
+                  <th scope="col" class="text-center text-success col-xl-7 blockquote fw-bold fs-5">הערות</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor='let income of this.generalInfoService.AllInfo.IncomesViewInfo.IncomeExRows; let i = index'>
+                  <tr>
+                    <td>
+                      <input type="text" 
+                             name="incomes-ex-name{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold fs-5 text-info" 
+                             id="incomes-ex-name{{i+1}}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.IncomesViewInfo.IncomeExRows[i].Type"
+                             placeholder="סוג הכנסה נוספת">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="income-ex-fixed-monthly{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-center fs-5 text-primary" 
+                             numbersOnly
+                             id="income-ex-fixed-monthly{{i+1}}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.IncomesViewInfo.IncomeExRows[i].MonthlyAvg"
+                             placeholder="0">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="income-ex-comment{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-info align-middle fs-5" 
+                             id="income-ex-comment{{i+1}}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.IncomesViewInfo.IncomeExRows[i].Comment"
+                             placeholder="הערות">
+                    </td>
+                  </tr>
+                </ng-container>
+                
+                <!-- Summary Row -->
+                <tr class="summary-row">
+                  <td>
+                    <input type="text" 
+                           disabled
+                           class="form-control fw-bold fw-bold fs-5"
+                           value="סיכום ביניים">
+                  </td>
+                  <td>
+                    <input type="text" 
+                           disabled
+                           class="form-control fw-bold text-center fs-5"
+                           [value]="CalcMonthlyAverage() | currency:'ILS':'symbol':'.0'">
+                  </td>
+                  <td>
+                    <input type="text" 
+                           disabled
+                           class="form-control fw-bold text-center fs-5"
+                           [value]="CalcPercentEx() | percent:'1.2-2'">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Final Summary Section -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="summary-container">
+        <div class="summary-item">
+          <h2 class="summary-label">
+            <i class="bi bi-calculator me-3"></i>
+            נטו אמיתי
+          </h2>
+          <div class="summary-value">
+            <i class="bi bi-currency-shekel me-2"></i>
+            {{CalcSumIncomes() | currency:'ILS':'symbol':'.0'}}
+          </div>
+        </div>
+        
+        <div class="summary-item">
+          <h2 class="summary-label">
+            <i class="bi bi-bank me-3"></i>
+            נטו לבנק
+          </h2>
+          <div class="summary-value">
+            <i class="bi bi-currency-shekel me-2"></i>
+            {{CalcSumNetIncomes() | currency:'ILS':'symbol':'.0'}}
+          </div>
+        </div>
+        
+        <div class="summary-item">
+          <h2 class="summary-label">
+            <i class="bi bi-plus-circle me-3"></i>
+            הכנסות נוספות
+          </h2>
+          <div class="summary-value">
+            <i class="bi bi-currency-shekel me-2"></i>
+            {{CalcIncomesEx() | currency:'ILS':'symbol':'.0'}}
+          </div>
+        </div>
+
+        <!-- New Total Income Summary Row -->
+        <div class="summary-item total-summary">
+          <h2 class="summary-label">
+            <i class="bi bi-cash-stack me-3"></i>
+            סה"כ הכנסות
+          </h2>
+          <div class="summary-value">
+            <i class="bi bi-currency-shekel me-2"></i>
+            {{CalcTotalIncomes() | currency:'ILS':'symbol':'.0'}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

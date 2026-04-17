@@ -1,0 +1,3 @@
+cinematic realistic film still, two brothers standing side by side, calm confident posture, emotional maturity, slow cinematic motion, shallow depth of field --ar 16:9
+--cref URL_SON_19 URL_SON_16
+--sref URL_STYLE

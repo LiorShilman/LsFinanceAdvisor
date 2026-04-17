@@ -1,0 +1,11 @@
+<div class="formOneOffFamilyGoals-embed">
+  <iframe
+    *ngIf="safeSrc"
+    #frame
+    class="formOneOffFamilyGoals-frame"
+    [src]="safeSrc"
+    title="מחשבון מטרות פיננסיות מקצועי"
+    loading="lazy"
+    (load)="onFrameLoad()">
+  </iframe>
+</div>

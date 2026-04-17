@@ -1,0 +1,313 @@
+<!-- financial-assets.component.html - Enhanced Modern Design -->
+<div class="container-fluid" dir="rtl">
+  <!-- Liquid Financial Assets Section -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card text-white mb-4 liquid-assets">
+        <div class="card-body alert alert-primary">
+          <div class="card-header">
+            <span>
+              <i class="bi bi-cash-stack me-3"></i>
+              נכסים - פיננסים נזילים
+            </span>
+            <i class="fs-1 text-success fa fa-plus" (click)="AddRowLiquidity()" title="הוסף נכס נזיל חדש"></i>
+          </div>
+          
+          <div class="table-responsive table-striped tbody_div">
+            <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-center text-success col-xl-3 col-md-5 blockquote fw-bold fs-5">
+                    <i class="bi bi-piggy-bank me-2"></i>
+                    סוג החיסכון
+                  </th>
+                  <th scope="col" class="text-center text-success col-xl-2 col-md-5 blockquote fw-bold fs-5">
+                    <i class="bi bi-building me-2"></i>
+                    איפה חוסכים
+                  </th>
+                  <th scope="col" class="text-center text-success col-xl-2 col-md-5 blockquote fw-bold fs-5"
+                      data-bs-toggle="tooltip" 
+                      data-bs-custom-class="custom-tooltip" 
+                      autocomplete="off"
+                      data-bs-title="סכום נוכחי זמין למשיכה מיידית" 
+                      data-bs-placement="right">
+                    <i class="bi bi-cash-coin me-2 mx-1"></i>
+                    סכום נוכחי
+                  </th>
+                  <th scope="col" class="text-center text-success col-xl-5 col-md-5 blockquote fw-bold fs-5">
+                    <i class="bi bi-chat-text me-2"></i>
+                    הערות
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor='let asset of this.generalInfoService.AllInfo.FinanceAssetsViewInfo.FinanceliquidityAssetsRows; let i = index'>
+                  <tr>
+                    <!-- Saving Type -->
+                    <td>
+                      <input type="text" 
+                             name="liquid-saving-type-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold fs-5 text-info" 
+                             id="liquid-saving-type-{{i+1}}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.FinanceAssetsViewInfo.FinanceliquidityAssetsRows[i].DescriptionSaving"
+                             placeholder="סוג החיסכון (חסכון, פקדון)">
+                    </td>
+                    
+                    <!-- Where Saving -->
+                    <td>
+                      <input type="text" 
+                             name="liquid-where-saving-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-center fs-5" 
+                             id="liquid-where-saving-{{i+1}}"
+                             style="color: limegreen"
+                             [(ngModel)]="this.generalInfoService.AllInfo.FinanceAssetsViewInfo.FinanceliquidityAssetsRows[i].WhereSaving"
+                             placeholder="בנק/מוסד פיננסי">
+                    </td>
+                    
+                    <!-- Current Amount -->
+                    <td>
+                      <input type="text" 
+                             name="liquid-current-amount-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-center fs-5" 
+                             numbersOnly
+                             id="liquid-current-amount-{{i+1}}"
+                             style="color: limegreen"
+                             [(ngModel)]="this.generalInfoService.AllInfo.FinanceAssetsViewInfo.FinanceliquidityAssetsRows[i].CurrentAmount"
+                             placeholder="0">
+                    </td>
+                    
+                    <!-- Comments -->
+                    <td>
+                      <input type="text" 
+                             name="liquid-comment-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-info align-middle fs-5" 
+                             id="liquid-comment-{{i+1}}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.FinanceAssetsViewInfo.FinanceliquidityAssetsRows[i].Comment"
+                             placeholder="הערות נוספות">
+                    </td>
+                  </tr>
+                </ng-container>
+                
+                <!-- Summary Row for Liquid Assets -->
+                <tr class="summary-row">
+                  <td>
+                    <input type="text" 
+                           disabled 
+                           class="form-control fw-bold  fw-bold fs-5"
+                           value="סיכום ביניים - נזילים"
+                           [ngClass]="this.generalInfoService.AllInfo.FinanceAssetsViewInfo.FinanceLiquidityAssets >= 0 ? 'bg-lim-success' : 'custom-red-bg'">
+                  </td>
+                  <td></td>
+                  <td>
+                    <input type="text" 
+                           disabled
+                           class="form-control fw-bold text-center fs-5"
+                           [value]="CalcFinanceLiquidityAssets() | currency:'ILS':'symbol':'.0'"
+                           [ngClass]="this.generalInfoService.AllInfo.FinanceAssetsViewInfo.FinanceLiquidityAssets > 0 ? 'bg-lim-success' : this.generalInfoService.AllInfo.FinanceAssetsViewInfo.FinanceLiquidityAssets == 0 ? 'bg-dark' : 'custom-red-bg'">
+                  </td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Illiquid Financial Assets Section -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card text-white mb-4 illiquid-assets">
+        <div class="card-body alert alert-primary">
+          <div class="card-header">
+            <span>
+              <i class="bi bi-safe me-3"></i>
+              נכסים - פיננסים לא נזילים
+            </span>
+            <i class="fs-1 text-success fa fa-plus" (click)="AddRowUnliquidity()" title="הוסף נכס לא נזיל חדש"></i>
+          </div>
+          
+          <div class="table-responsive table-striped tbody_div">
+            <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-center text-success col-xl-3 blockquote fw-bold fs-5">
+                    <i class="bi bi-lock me-2"></i>
+                    סוג החיסכון
+                  </th>
+                  <th scope="col" class="text-center text-success col-xl-2 blockquote fw-bold fs-5">
+                    <i class="bi bi-building me-2"></i>
+                    איפה חוסכים
+                  </th>
+                  <th scope="col" class="text-center text-success col-xl-2 blockquote fw-bold fs-5"
+                      data-bs-toggle="tooltip" 
+                      data-bs-custom-class="custom-tooltip" 
+                      autocomplete="off"
+                      data-bs-title="סכום נוכחי במוצרים לא נזילים" 
+                      data-bs-placement="right">
+                    <i class="bi bi-graph-up me-2 mx-1"></i>
+                    סכום נוכחי
+                  </th>
+                  <th scope="col" class="text-center text-success col-xl-5 blockquote fw-bold fs-5">
+                    <i class="bi bi-chat-text me-2"></i>
+                    הערות
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor='let asset of this.generalInfoService.AllInfo.FinanceAssetsViewInfo.FinanceUnliquidityAssetsRows; let i = index'>
+                  <tr>
+                    <!-- Saving Type -->
+                    <td>
+                      <input type="text" 
+                             name="illiquid-saving-type-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold fs-5 text-info" 
+                             id="illiquid-saving-type-{{i+1}}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.FinanceAssetsViewInfo.FinanceUnliquidityAssetsRows[i].DescriptionSaving"
+                             placeholder="סוג החיסכון (מניות, אג״ח, קרנות)">
+                    </td>
+                    
+                    <!-- Where Saving -->
+                    <td>
+                      <input type="text" 
+                             name="illiquid-where-saving-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-center fs-5" 
+                             id="illiquid-where-saving-{{i+1}}"
+                             style="color: limegreen"
+                             [(ngModel)]="this.generalInfoService.AllInfo.FinanceAssetsViewInfo.FinanceUnliquidityAssetsRows[i].WhereSaving"
+                             placeholder="בורסה/קרן השקעות">
+                    </td>
+                    
+                    <!-- Current Amount -->
+                    <td>
+                      <input type="text" 
+                             name="illiquid-current-amount-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-center fs-5" 
+                             numbersOnly
+                             id="illiquid-current-amount-{{i+1}}"
+                             style="color: limegreen"
+                             [(ngModel)]="this.generalInfoService.AllInfo.FinanceAssetsViewInfo.FinanceUnliquidityAssetsRows[i].CurrentAmount"
+                             placeholder="0">
+                    </td>
+                    
+                    <!-- Comments -->
+                    <td>
+                      <input type="text" 
+                             name="illiquid-comment-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-info align-middle fs-5" 
+                             id="illiquid-comment-{{i+1}}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.FinanceAssetsViewInfo.FinanceUnliquidityAssetsRows[i].Comment"
+                             placeholder="הערות נוספות">
+                    </td>
+                  </tr>
+                </ng-container>
+                
+                <!-- Summary Row for Illiquid Assets -->
+                <tr class="summary-row">
+                  <td>
+                    <input type="text" 
+                           disabled 
+                           class="form-control fw-bold  fw-bold fs-5"
+                           value="סיכום ביניים - לא נזילים"
+                           [ngClass]="this.generalInfoService.AllInfo.FinanceAssetsViewInfo.FinanceUnliquidityAssets >= 0 ? 'bg-lim-success' : 'custom-red-bg'">
+                  </td>
+                  <td></td>
+                  <td>
+                    <input type="text" 
+                           disabled
+                           class="form-control fw-bold text-center fs-5"
+                           [value]="CalcFinanceUnliquidityAssets() | currency:'ILS':'symbol':'.0'"
+                           [ngClass]="this.generalInfoService.AllInfo.FinanceAssetsViewInfo.FinanceUnliquidityAssets > 0 ? 'bg-lim-success' : this.generalInfoService.AllInfo.FinanceAssetsViewInfo.FinanceUnliquidityAssets == 0 ? 'bg-dark' : 'custom-red-bg'">
+                  </td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Final Summary Section -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="summary-section">
+        <h1 class="summary-title">
+          <i class="bi bi-bank me-3"></i>
+          סה"כ נכסים פיננסיים
+        </h1>
+        <div class="summary-value">
+          <span class="badge bg-lim-success">
+            <i class="bi bi-currency-shekel me-2"></i>
+            {{CalcSumFinanceAssets() | currency:'ILS':'symbol':'.0'}}
+          </span>
+        </div>
+        
+        <!-- Additional Info Cards -->
+        <div class="info-cards-grid">
+          <div class="info-card-small">
+            <div class="info-icon liquid-icon">
+              <i class="bi bi-cash-stack"></i>
+            </div>
+            <div class="info-content">
+              <h4>נכסים נזילים</h4>
+              <p class="liquid-amount">{{CalcFinanceLiquidityAssets() | currency:'ILS':'symbol':'.0'}}</p>
+            </div>
+          </div>
+          
+          <div class="info-card-small">
+            <div class="info-icon illiquid-icon">
+              <i class="bi bi-safe2"></i>
+            </div>
+            <div class="info-content">
+              <h4>נכסים לא נזילים</h4>
+              <p class="illiquid-amount">{{CalcFinanceUnliquidityAssets() | currency:'ILS':'symbol':'.0'}}</p>
+            </div>
+          </div>
+          
+          <div class="info-card-small">
+            <div class="info-icon total-icon">
+              <i class="bi bi-graph-up-arrow"></i>
+            </div>
+            <div class="info-content">
+              <h4>סה"כ נכסים</h4>
+              <p class="total-amount">{{CalcSumFinanceAssets() | currency:'ILS':'symbol':'.0'}}</p>
+            </div>
+          </div>
+          
+          <div class="info-card-small">
+            <div class="info-icon financial-icon">
+              <i class="bi bi-percent"></i>
+            </div>
+            <div class="info-content">
+              <h4>יחס נזילות</h4>
+              <p class="liquid-amount">
+                {{+CalcSumFinanceAssets() > 0 ? ((+CalcFinanceLiquidityAssets() / +CalcSumFinanceAssets()) * 100 | number:'1.1-1') + '%' : '0%'}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+     
+  <div class="panel">
+    <h2>🎯 מערכת מתקדמת להשקעות</h2>
+    <app-investment-embed 
+      srcPath="/LsFinanceAdvisor/assets/investment/fixed_investment_guide.html">
+    </app-investment-embed>
+  </div>
+
+  
+</div>

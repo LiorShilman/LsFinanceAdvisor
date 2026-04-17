@@ -1,0 +1,307 @@
+<!-- economical-stability.component.html - Enhanced Modern Design -->
+<div class="container-fluid" dir="rtl">
+  
+  <!-- Main Economic Stability Section -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card text-white mb-4">
+        <div class="card-body alert alert-primary">
+          <div class="card-header" 
+               data-bs-toggle="tooltip"
+               data-bs-custom-class="custom-tooltip" 
+               autocomplete="off" 
+               data-bs-title="החיים הם דינמיים, ולעיתים קורים בהם אירועים בלתי צפויים שלא מאפשרים לנו לייצר הכנסה משפחתית כפי שהתרגלנו אליה. בסעיף ההגנה הכלכלית נבחן מהו סכום הכסף הנדרש בכל סיטואציה, מהו הסכום העומד לרשותך, ומהו הפער. רכישת ביטוחים מתאימים עולה בכסף רב מחד, אך מגינה על המשפחה מקריסה כלכלית מאידך, ומכאן חשיבותה." 
+               data-bs-placement="right">
+            <span>
+              <i class="bi bi-shield-check me-3"></i>
+              יציבות כלכלית
+            </span>
+            <i class="bi bi-info-circle-fill text-info"></i>
+          </div>
+          
+          <!-- Economic Stability Analysis Section -->
+          <div class="card-body alert alert-warning economic-stability-card">
+            <div class="card-header fs-1 blockquote fw-bold" style="text-align: right;">
+              <span>
+                <i class="bi bi-graph-up-arrow me-2"></i>
+                ניתוח יציבות כלכלית משפחתית
+              </span>
+            </div>
+            
+            <!-- Analysis Table -->
+            <div class="table-responsive table-striped">
+              <table class="table table-borderless">
+                <thead>
+                  <tr>
+                    <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-2">
+                      <i class="bi bi-house-heart me-2"></i>
+                      ההכנסות החודשיות של המשפחה
+                    </th>
+                    <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-1"
+                        data-bs-toggle="tooltip"
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title='גיל בן זוג 1 פחות 25 חלקי 3 כפול ההכנסה המשפחתית, אפשר לתייג נכסים קיימים לטובת זה.'
+                        data-bs-placement="right">
+                      <i class="bi bi-calculator me-2 mx-1"></i>
+                      הצורך
+                    </th>
+                    <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-2"
+                        data-bs-toggle="tooltip"
+                        data-bs-custom-class="custom-tooltip" 
+                        data-bs-title='יתרת הכספים בקרן'
+                        data-bs-placement="right">
+                      <i class="bi bi-piggy-bank me-2 mx-1"></i>
+                      הון שמתוייג ליציבות כלכלית
+                    </th>
+                    <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-2"
+                        data-bs-toggle="tooltip"
+                        data-bs-custom-class="custom-tooltip" 
+                        data-bs-title='יתרת הכספים בקרן'
+                        data-bs-placement="right">
+                      <i class="bi bi-exclamation-triangle me-2 mx-1"></i>
+                      כמה עוד צריך לחסוך?
+                    </th>
+                    <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-3">
+                      <i class="bi bi-clock-history me-2"></i>
+                      תוך כמה שנים רוצים לצבור את הסכום
+                    </th>
+                    <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-2">
+                      <i class="bi bi-calendar-month me-2"></i>
+                      חיסכון חודשי לצבירת הסכום
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <!-- Family Income -->
+                    <td class="col-xl-2">
+                      <input type="text" 
+                             name="family-income" 
+                             class="stability-display-input family-income-input" 
+                             id="family-income"
+                             disabled 
+                             [value]="CalcFamilyIncomes() | currency:'ILS':'symbol':'.0'">
+                    </td>
+                    
+                    <!-- Required Amount -->
+                    <td class="col-xl-1">
+                      <input type="text" 
+                             name="required-amount" 
+                             class="stability-display-input required-amount-input"
+                             id="required-amount" 
+                             disabled 
+                             [value]="CalcTheNeeded() | currency:'ILS':'symbol':'.0'">
+                    </td>
+                    
+                    <!-- Tagged Capital -->
+                    <td class="col-xl-2">
+                      <input type="text" 
+                             name="tagged-capital" 
+                             class="form-control fw-bold text-center fs-5 text-primary tagged-capital-input"
+                             autocomplete="off"
+                             id="tagged-capital"
+                             [(ngModel)]="this.generalInfoService.AllInfo.EconomicalStabilityViewInfo.CapitalTagged"
+                             placeholder="הכנס סכום">
+                    </td>
+                    
+                    <!-- Amount Left to Save -->
+                    <td class="col-xl-2">
+                      <input dir="ltr" 
+                             type="text" 
+                             name="amount-left" 
+                             [ngStyle]="(this.generalInfoService.AllInfo.EconomicalStabilityViewInfo.HowMuchIsLeft2Saving <= 0) ? {'color': 'black'} : {'color': 'white'}"
+                             class="stability-result-input" 
+                             id="amount-left" 
+                             disabled
+                             [value]="CalcHowMuchIsLeft2Saving() | currency:'ILS':'symbol':'.0'"
+                             [ngClass]="this.generalInfoService.AllInfo.EconomicalStabilityViewInfo.HowMuchIsLeft2Saving <= 0 ? 'bg-lim-success' : 'custom-red-bg'">
+                    </td>
+                    
+                    <!-- Years to Save -->
+                    <td class="col-xl-3">
+                      <input type="text" 
+                             name="years-to-save" 
+                             class="form-control fw-bold text-center fs-5 text-primary years-input"
+                             autocomplete="off"
+                             id="years-to-save"
+                             [(ngModel)]="this.generalInfoService.AllInfo.EconomicalStabilityViewInfo.HowManyYears"
+                             placeholder="מספר שנים">
+                    </td>
+                    
+                    <!-- Monthly Savings -->
+                    <td class="col-xl-2">
+                      <input dir="ltr" 
+                             type="text" 
+                             name="monthly-savings" 
+                             [ngStyle]="(this.generalInfoService.AllInfo.EconomicalStabilityViewInfo.MonthlySavings <= 0) ? {'color': 'black'} : {'color': 'white'}"
+                             class="stability-result-input" 
+                             id="monthly-savings"
+                             disabled 
+                             [value]="CalcMonthlySavings() | currency:'ILS':'symbol':'.0'"
+                             [ngClass]="this.generalInfoService.AllInfo.EconomicalStabilityViewInfo.MonthlySavings <= 0 ? 'bg-lim-success' : 'custom-red-bg'">
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Financial Protection Summary -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="pension-summary-section">
+        <div class="text-center">
+          <h2 class="h1 text-white mb-4">
+            <i class="bi bi-shield-fill-check me-3"></i>
+            סיכום הגנה כלכלית
+          </h2>
+          
+          <div class="row">
+            <div class="col-xl-4">
+              <div class="protection-card income-protection">
+                <i class="bi bi-cash-stack display-4 mb-3"></i>
+                <h4>הכנסה משפחתית</h4>
+                <div class="amount">
+                  {{CalcFamilyIncomes() | currency:'ILS':'symbol':'.0'}}
+                </div>
+                <div class="description">הכנסה חודשית נוכחית</div>
+              </div>
+            </div>
+            
+            <div class="col-xl-4">
+              <div class="protection-card stability-need">
+                <i class="bi bi-shield-check display-4 mb-3"></i>
+                <h4>צורך ליציבות</h4>
+                <div class="amount">
+                  {{CalcTheNeeded() | currency:'ILS':'symbol':'.0'}}
+                </div>
+                <div class="description">סכום נדרש להגנה</div>
+              </div>
+            </div>
+            
+            <div class="col-xl-4">
+              <div class="protection-card savings-goal" 
+                   [ngClass]="this.generalInfoService.AllInfo.EconomicalStabilityViewInfo.HowMuchIsLeft2Saving <= 0 ? 'achieved' : 'pending'">
+                <i class="bi bi-target display-4 mb-3" 
+                   [ngClass]="this.generalInfoService.AllInfo.EconomicalStabilityViewInfo.HowMuchIsLeft2Saving <= 0 ? 'text-success' : 'text-warning'"></i>
+                <h4>יעד חיסכון</h4>
+                <div class="amount">
+                  {{CalcHowMuchIsLeft2Saving() | currency:'ILS':'symbol':'.0'}}
+                </div>
+                <div class="description" 
+                     [ngClass]="this.generalInfoService.AllInfo.EconomicalStabilityViewInfo.HowMuchIsLeft2Saving <= 0 ? 'text-success' : 'text-warning'">
+                  <span *ngIf="this.generalInfoService.AllInfo.EconomicalStabilityViewInfo.HowMuchIsLeft2Saving <= 0">
+                    <i class="bi bi-check-circle me-1"></i>
+                    יעד הושג!
+                  </span>
+                  <span *ngIf="this.generalInfoService.AllInfo.EconomicalStabilityViewInfo.HowMuchIsLeft2Saving > 0">
+                    <i class="bi bi-hourglass-split me-1"></i>
+                    נותר לחסוך
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Action Plan Section -->
+          <div class="row mt-4" *ngIf="this.generalInfoService.AllInfo.EconomicalStabilityViewInfo.HowMuchIsLeft2Saving > 0">
+            <div class="col-xl-12">
+              <div class="action-plan-card">
+                <h3 class="mb-4">
+                  <i class="bi bi-list-check me-2"></i>
+                  תוכנית פעולה להשגת יציבות כלכלית
+                </h3>
+                
+                <div class="row">
+                  <div class="col-xl-6">
+                    <div class="plan-item">
+                      <div class="plan-icon">
+                        <i class="bi bi-calendar-month"></i>
+                      </div>
+                      <div class="plan-content">
+                        <h5>חיסכון חודשי נדרש</h5>
+                        <div class="plan-amount">
+                          {{CalcMonthlySavings() | currency:'ILS':'symbol':'.0'}}
+                        </div>
+                        <p class="plan-description">
+                          על מנת להשיג יציבות כלכלית תוך 
+                          {{this.generalInfoService.AllInfo.EconomicalStabilityViewInfo.HowManyYears || '5'}} שנים
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="col-xl-6">
+                    <div class="plan-item">
+                      <div class="plan-icon">
+                        <i class="bi bi-graph-up-arrow"></i>
+                      </div>
+                      <div class="plan-content">
+                        <h5>אסטרטגיות מומלצות</h5>
+                        <ul class="plan-strategies">
+                          <li>
+                            <i class="bi bi-check-circle text-success me-2"></i>
+                            פתיחת קרן חירום נפרדת
+                          </li>
+                          <li>
+                            <i class="bi bi-check-circle text-success me-2"></i>
+                            השקעה בפוליסות ביטוח מתאימות
+                          </li>
+                          <li>
+                            <i class="bi bi-check-circle text-success me-2"></i>
+                            גיוון מקורות הכנסה
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Success Message -->
+          <div class="row mt-4" *ngIf="this.generalInfoService.AllInfo.EconomicalStabilityViewInfo.HowMuchIsLeft2Saving <= 0">
+            <div class="col-xl-12">
+              <div class="success-message-card">
+                <i class="bi bi-award-fill display-3 text-success mb-3"></i>
+                <h3 class="text-success mb-3">
+                  מזל טוב! השגתם יציבות כלכלית מלאה
+                </h3>
+                <p class="text-white fs-5">
+                  המשפחה שלכם מוגנת כלכלית מפני אירועים בלתי צפויים.
+                  המשיכו לשמור על רמת החיסכון הנוכחית.
+                </p>
+                <div class="success-features">
+                  <div class="feature-item">
+                    <i class="bi bi-shield-fill-check text-success"></i>
+                    <span>הגנה מלאה</span>
+                  </div>
+                  <div class="feature-item">
+                    <i class="bi bi-graph-up text-success"></i>
+                    <span>יציבות כלכלית</span>
+                  </div>
+                  <div class="feature-item">
+                    <i class="bi bi-heart-fill text-success"></i>
+                    <span>שקט נפשי</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="mt-4">
+            <p class="text-primary fs-5">
+              <i class="bi bi-info-circle me-2"></i>
+              החישובים מבוססים על נוסחה פיננסית מקובלת לחישוב צורך ביציבות כלכלית
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

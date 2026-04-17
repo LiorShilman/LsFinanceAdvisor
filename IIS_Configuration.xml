@@ -1,0 +1,1496 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<appcmd>
+    <CONFIG CONFIG.SECTION="system.webServer/security/authentication/anonymousAuthentication" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-security-authentication-anonymousAuthentication enabled="true" userName="IUSR" />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.ftpServer/serverRuntime" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.ftpServer-serverRuntime>
+            <hostNameSupport />
+        </system.ftpServer-serverRuntime>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.applicationHost/customMetadata" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.applicationHost-customMetadata>
+        </system.applicationHost-customMetadata>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/serverRuntime" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-serverRuntime />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.applicationHost/configHistory" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.applicationHost-configHistory />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.applicationHost/webLimits" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.applicationHost-webLimits />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/directoryBrowse" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-directoryBrowse enabled="false" />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/odbcLogging" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-odbcLogging />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/caching/sqlCacheDependency" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-caching-sqlCacheDependency>
+            <databases>
+            </databases>
+        </system.web-caching-sqlCacheDependency>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/fullTrustAssemblies" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-fullTrustAssemblies>
+            <add assemblyName="Microsoft.VisualStudio.Enterprise.AspNetHelper" version="11.0.0.0" publicKey="002400000480000094000000060200000024000052534131000400000100010007D1FA57C4AED9F0A32E84AA0FAEFD0DE9E8FD6AEC8F87FB03766C834C99921EB23BE79AD9D5DCC1DD9AD236132102900B723CF980957FC4E177108FC607774F29E8320E92EA05ECE4E821C0A5EFE8F1645C4C0C93C1AB99285D622CAA652C1DFAD63D745D6F2DE5F17E5EAF0FC4963D261C8A12436518206DC093344D5AD293" />
+            <add assemblyName="Microsoft.VisualStudio.Web" version="11.0.0.0" publicKey="002400000480000094000000060200000024000052534131000400000100010007D1FA57C4AED9F0A32E84AA0FAEFD0DE9E8FD6AEC8F87FB03766C834C99921EB23BE79AD9D5DCC1DD9AD236132102900B723CF980957FC4E177108FC607774F29E8320E92EA05ECE4E821C0A5EFE8F1645C4C0C93C1AB99285D622CAA652C1DFAD63D745D6F2DE5F17E5EAF0FC4963D261C8A12436518206DC093344D5AD293" />
+            <add assemblyName="Microsoft.Web.Infrastructure" version="1.0.0.0" publicKey="0024000004800000940000000602000000240000525341310004000001000100B5FC90E7027F67871E773A8FDE8938C81DD402BA65B9201D60593E96C492651E889CC13F1415EBB53FAC1131AE0BD333C5EE6021672D9718EA31A8AEBD0DA0072F25D87DBA6FC90FFD598ED4DA35E44C398C454307E8E33B8426143DAEC9F596836F97C8F74750E5975C64E2189F45DEF46B2A2B1247ADC3652BF5C308055DA9" />
+            <add assemblyName="System.Data.SqlServerCe" version="4.0.0.0" publicKey="0024000004800000940000000602000000240000525341310004000001000100272736ad6e5f9586bac2d531eabc3acc666c2f8ec879fa94f8f7b0327d2ff2ed523448f83c3d5c5dd2dfc7bc99c5286b2c125117bf5cbe242b9d41750732b2bdffe649c6efb8e5526d526fdd130095ecdb7bf210809c6cdad8824faa9ac0310ac3cba2aa0523567b2dfa7fe250b30facbd62d4ec99b94ac47c7d3b28f1f6e4c8" />
+        </system.web-fullTrustAssemblies>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.xml.serialization/dateTimeSerialization" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.xml.serialization-dateTimeSerialization />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/httpLogging" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-httpLogging dontLog="false" />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/security/applicationDependencies" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-security-applicationDependencies>
+        </system.webServer-security-applicationDependencies>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.net/requestCaching" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.net-requestCaching>
+            <defaultFtpCachePolicy />
+            <defaultHttpCachePolicy />
+        </system.net-requestCaching>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.xml.serialization/schemaImporterExtensions" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.xml.serialization-schemaImporterExtensions>
+        </system.xml.serialization-schemaImporterExtensions>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/httpCompression" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-httpCompression directory="%SystemDrive%\inetpub\temp\IIS Temporary Compressed Files">
+            <staticTypes>
+                <add mimeType="text/*" enabled="true" />
+                <add mimeType="message/*" enabled="true" />
+                <add mimeType="application/javascript" enabled="true" />
+                <add mimeType="application/atom+xml" enabled="true" />
+                <add mimeType="application/xaml+xml" enabled="true" />
+                <add mimeType="image/svg+xml" enabled="true" />
+                <add mimeType="*/*" enabled="false" />
+            </staticTypes>
+            <dynamicTypes>
+            </dynamicTypes>
+            <scheme name="gzip" dll="%Windir%\system32\inetsrv\gzip.dll" />
+        </system.webServer-httpCompression>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/browserCaps" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-browserCaps userAgentCacheKeyLength="64">
+            <result type="System.Web.Mobile.MobileCapabilities, System.Web.Mobile, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+        </system.web-browserCaps>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.ftpServer/log" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.ftpServer-log>
+            <centralLogFile />
+        </system.ftpServer-log>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.xml.serialization/xmlSerializer" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.xml.serialization-xmlSerializer />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/authorization" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-authorization>
+            <allow users="*" />
+        </system.web-authorization>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/securityPolicy" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-securityPolicy>
+            <trustLevel name="Full" policyFile="internal" />
+            <trustLevel name="High" policyFile="web_hightrust.config" />
+            <trustLevel name="Medium" policyFile="web_mediumtrust.config" />
+            <trustLevel name="Low" policyFile="web_lowtrust.config" />
+            <trustLevel name="Minimal" policyFile="web_minimaltrust.config" />
+        </system.web-securityPolicy>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.ftpServer/security/requestFiltering" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.ftpServer-security-requestFiltering>
+            <fileExtensions>
+            </fileExtensions>
+            <requestLimits />
+            <hiddenSegments>
+            </hiddenSegments>
+            <denyUrlSequences>
+            </denyUrlSequences>
+        </system.ftpServer-security-requestFiltering>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/webdav/authoring" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-webdav-authoring>
+            <fileSystem />
+            <properties>
+            </properties>
+            <locks />
+        </system.webServer-webdav-authoring>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/security/isapiCgiRestriction" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-security-isapiCgiRestriction>
+        </system.webServer-security-isapiCgiRestriction>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.net/settings" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.net-settings>
+            <httpWebRequest />
+            <ipv6 />
+            <performanceCounters />
+            <servicePointManager />
+            <socket />
+            <webProxyScript />
+        </system.net-settings>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.applicationHost/serviceAutoStartProviders" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.applicationHost-serviceAutoStartProviders>
+        </system.applicationHost-serviceAutoStartProviders>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/security/authorization" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-security-authorization>
+        </system.webServer-security-authorization>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/urlMappings" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-urlMappings enabled="true">
+        </system.web-urlMappings>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/caching" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-caching enabled="true" enableKernelCache="true">
+            <profiles>
+            </profiles>
+        </system.webServer-caching>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/protocols" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="true">
+        <system.web-protocols>
+            <add appDomainHandlerType="System.ServiceModel.WasHosting.TcpAppDomainProtocolHandler, System.ServiceModel.WasHosting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="net.tcp" processHandlerType="System.ServiceModel.WasHosting.TcpProcessProtocolHandler, System.ServiceModel.WasHosting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" validate="false" />
+            <add appDomainHandlerType="System.ServiceModel.WasHosting.NamedPipeAppDomainProtocolHandler, System.ServiceModel.WasHosting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="net.pipe" processHandlerType="System.ServiceModel.WasHosting.NamedPipeProcessProtocolHandler, System.ServiceModel.WasHosting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" validate="false" />
+            <add appDomainHandlerType="System.ServiceModel.WasHosting.MsmqAppDomainProtocolHandler, System.ServiceModel.WasHosting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="net.msmq" processHandlerType="System.ServiceModel.WasHosting.MsmqProcessProtocolHandler, System.ServiceModel.WasHosting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" validate="false" />
+            <add appDomainHandlerType="System.ServiceModel.WasHosting.MsmqIntegrationAppDomainProtocolHandler, System.ServiceModel.WasHosting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" name="msmq.formatname" processHandlerType="System.ServiceModel.WasHosting.MsmqIntegrationProcessProtocolHandler, System.ServiceModel.WasHosting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" validate="false" />
+        </system.web-protocols>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/cgi" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-cgi />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/httpErrors" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-httpErrors>
+            <error statusCode="401" prefixLanguageFilePath="%SystemDrive%\inetpub\custerr" path="401.htm" />
+            <error statusCode="403" prefixLanguageFilePath="%SystemDrive%\inetpub\custerr" path="403.htm" />
+            <error statusCode="404" prefixLanguageFilePath="%SystemDrive%\inetpub\custerr" path="404.htm" />
+            <error statusCode="405" prefixLanguageFilePath="%SystemDrive%\inetpub\custerr" path="405.htm" />
+            <error statusCode="406" prefixLanguageFilePath="%SystemDrive%\inetpub\custerr" path="406.htm" />
+            <error statusCode="412" prefixLanguageFilePath="%SystemDrive%\inetpub\custerr" path="412.htm" />
+            <error statusCode="431" prefixLanguageFilePath="%SystemDrive%\inetpub\custerr" path="431.htm" />
+            <error statusCode="500" prefixLanguageFilePath="%SystemDrive%\inetpub\custerr" path="500.htm" />
+            <error statusCode="501" prefixLanguageFilePath="%SystemDrive%\inetpub\custerr" path="501.htm" />
+            <error statusCode="502" prefixLanguageFilePath="%SystemDrive%\inetpub\custerr" path="502.htm" />
+        </system.webServer-httpErrors>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/partialTrustVisibleAssemblies" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-partialTrustVisibleAssemblies>
+        </system.web-partialTrustVisibleAssemblies>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/tracing/traceFailedRequests" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-tracing-traceFailedRequests>
+        </system.webServer-tracing-traceFailedRequests>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/webParts" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-webParts>
+            <personalization>
+                <authorization>
+                    <deny users="*" verbs="enterSharedScope" />
+                    <allow users="*" verbs="modifyState" />
+                </authorization>
+                <providers>
+                    <add name="AspNetSqlPersonalizationProvider" type="System.Web.UI.WebControls.WebParts.SqlPersonalizationProvider, System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" connectionStringName="LocalSqlServer" />
+                </providers>
+            </personalization>
+            <transformers>
+                <add name="RowToFieldTransformer" type="System.Web.UI.WebControls.WebParts.RowToFieldTransformer" />
+                <add name="RowToParametersTransformer" type="System.Web.UI.WebControls.WebParts.RowToParametersTransformer" />
+            </transformers>
+        </system.web-webParts>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/staticContent" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-staticContent>
+            <clientCache />
+            <mimeMap fileExtension=".323" mimeType="text/h323" />
+            <mimeMap fileExtension=".3g2" mimeType="video/3gpp2" />
+            <mimeMap fileExtension=".3gp2" mimeType="video/3gpp2" />
+            <mimeMap fileExtension=".3gp" mimeType="video/3gpp" />
+            <mimeMap fileExtension=".3gpp" mimeType="video/3gpp" />
+            <mimeMap fileExtension=".aaf" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".aac" mimeType="audio/aac" />
+            <mimeMap fileExtension=".aca" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".accdb" mimeType="application/msaccess" />
+            <mimeMap fileExtension=".accde" mimeType="application/msaccess" />
+            <mimeMap fileExtension=".accdt" mimeType="application/msaccess" />
+            <mimeMap fileExtension=".acx" mimeType="application/internet-property-stream" />
+            <mimeMap fileExtension=".adt" mimeType="audio/vnd.dlna.adts" />
+            <mimeMap fileExtension=".adts" mimeType="audio/vnd.dlna.adts" />
+            <mimeMap fileExtension=".afm" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".ai" mimeType="application/postscript" />
+            <mimeMap fileExtension=".aif" mimeType="audio/x-aiff" />
+            <mimeMap fileExtension=".aifc" mimeType="audio/aiff" />
+            <mimeMap fileExtension=".aiff" mimeType="audio/aiff" />
+            <mimeMap fileExtension=".appcache" mimeType="text/cache-manifest" />
+            <mimeMap fileExtension=".application" mimeType="application/x-ms-application" />
+            <mimeMap fileExtension=".art" mimeType="image/x-jg" />
+            <mimeMap fileExtension=".asd" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".asf" mimeType="video/x-ms-asf" />
+            <mimeMap fileExtension=".asi" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".asm" mimeType="text/plain" />
+            <mimeMap fileExtension=".asr" mimeType="video/x-ms-asf" />
+            <mimeMap fileExtension=".asx" mimeType="video/x-ms-asf" />
+            <mimeMap fileExtension=".atom" mimeType="application/atom+xml" />
+            <mimeMap fileExtension=".au" mimeType="audio/basic" />
+            <mimeMap fileExtension=".avi" mimeType="video/avi" />
+            <mimeMap fileExtension=".axs" mimeType="application/olescript" />
+            <mimeMap fileExtension=".bas" mimeType="text/plain" />
+            <mimeMap fileExtension=".bcpio" mimeType="application/x-bcpio" />
+            <mimeMap fileExtension=".bin" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".bmp" mimeType="image/bmp" />
+            <mimeMap fileExtension=".c" mimeType="text/plain" />
+            <mimeMap fileExtension=".cab" mimeType="application/vnd.ms-cab-compressed" />
+            <mimeMap fileExtension=".calx" mimeType="application/vnd.ms-office.calx" />
+            <mimeMap fileExtension=".cat" mimeType="application/vnd.ms-pki.seccat" />
+            <mimeMap fileExtension=".cdf" mimeType="application/x-cdf" />
+            <mimeMap fileExtension=".chm" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".class" mimeType="application/x-java-applet" />
+            <mimeMap fileExtension=".clp" mimeType="application/x-msclip" />
+            <mimeMap fileExtension=".cmx" mimeType="image/x-cmx" />
+            <mimeMap fileExtension=".cnf" mimeType="text/plain" />
+            <mimeMap fileExtension=".cod" mimeType="image/cis-cod" />
+            <mimeMap fileExtension=".cpio" mimeType="application/x-cpio" />
+            <mimeMap fileExtension=".cpp" mimeType="text/plain" />
+            <mimeMap fileExtension=".crd" mimeType="application/x-mscardfile" />
+            <mimeMap fileExtension=".crl" mimeType="application/pkix-crl" />
+            <mimeMap fileExtension=".crt" mimeType="application/x-x509-ca-cert" />
+            <mimeMap fileExtension=".csh" mimeType="application/x-csh" />
+            <mimeMap fileExtension=".css" mimeType="text/css" />
+            <mimeMap fileExtension=".csv" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".cur" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".dcr" mimeType="application/x-director" />
+            <mimeMap fileExtension=".deploy" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".der" mimeType="application/x-x509-ca-cert" />
+            <mimeMap fileExtension=".dib" mimeType="image/bmp" />
+            <mimeMap fileExtension=".dir" mimeType="application/x-director" />
+            <mimeMap fileExtension=".disco" mimeType="text/xml" />
+            <mimeMap fileExtension=".dll" mimeType="application/x-msdownload" />
+            <mimeMap fileExtension=".dll.config" mimeType="text/xml" />
+            <mimeMap fileExtension=".dlm" mimeType="text/dlm" />
+            <mimeMap fileExtension=".doc" mimeType="application/msword" />
+            <mimeMap fileExtension=".docm" mimeType="application/vnd.ms-word.document.macroEnabled.12" />
+            <mimeMap fileExtension=".docx" mimeType="application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+            <mimeMap fileExtension=".dot" mimeType="application/msword" />
+            <mimeMap fileExtension=".dotm" mimeType="application/vnd.ms-word.template.macroEnabled.12" />
+            <mimeMap fileExtension=".dotx" mimeType="application/vnd.openxmlformats-officedocument.wordprocessingml.template" />
+            <mimeMap fileExtension=".dsp" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".dtd" mimeType="text/xml" />
+            <mimeMap fileExtension=".dvi" mimeType="application/x-dvi" />
+            <mimeMap fileExtension=".dvr-ms" mimeType="video/x-ms-dvr" />
+            <mimeMap fileExtension=".dwf" mimeType="drawing/x-dwf" />
+            <mimeMap fileExtension=".dwp" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".dxr" mimeType="application/x-director" />
+            <mimeMap fileExtension=".eml" mimeType="message/rfc822" />
+            <mimeMap fileExtension=".emz" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".eot" mimeType="application/vnd.ms-fontobject" />
+            <mimeMap fileExtension=".eps" mimeType="application/postscript" />
+            <mimeMap fileExtension=".esd" mimeType="application/vnd.ms-cab-compressed" />
+            <mimeMap fileExtension=".etx" mimeType="text/x-setext" />
+            <mimeMap fileExtension=".evy" mimeType="application/envoy" />
+            <mimeMap fileExtension=".exe" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".exe.config" mimeType="text/xml" />
+            <mimeMap fileExtension=".fdf" mimeType="application/vnd.fdf" />
+            <mimeMap fileExtension=".fif" mimeType="application/fractals" />
+            <mimeMap fileExtension=".fla" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".flr" mimeType="x-world/x-vrml" />
+            <mimeMap fileExtension=".flv" mimeType="video/x-flv" />
+            <mimeMap fileExtension=".gif" mimeType="image/gif" />
+            <mimeMap fileExtension=".glb" mimeType="model/gltf-binary" />
+            <mimeMap fileExtension=".gtar" mimeType="application/x-gtar" />
+            <mimeMap fileExtension=".gz" mimeType="application/x-gzip" />
+            <mimeMap fileExtension=".h" mimeType="text/plain" />
+            <mimeMap fileExtension=".hdf" mimeType="application/x-hdf" />
+            <mimeMap fileExtension=".hdml" mimeType="text/x-hdml" />
+            <mimeMap fileExtension=".hhc" mimeType="application/x-oleobject" />
+            <mimeMap fileExtension=".hhk" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".hhp" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".hlp" mimeType="application/winhlp" />
+            <mimeMap fileExtension=".hqx" mimeType="application/mac-binhex40" />
+            <mimeMap fileExtension=".hta" mimeType="application/hta" />
+            <mimeMap fileExtension=".htc" mimeType="text/x-component" />
+            <mimeMap fileExtension=".htm" mimeType="text/html" />
+            <mimeMap fileExtension=".html" mimeType="text/html" />
+            <mimeMap fileExtension=".htt" mimeType="text/webviewhtml" />
+            <mimeMap fileExtension=".hxt" mimeType="text/html" />
+            <mimeMap fileExtension=".ico" mimeType="image/x-icon" />
+            <mimeMap fileExtension=".ics" mimeType="text/calendar" />
+            <mimeMap fileExtension=".ief" mimeType="image/ief" />
+            <mimeMap fileExtension=".iii" mimeType="application/x-iphone" />
+            <mimeMap fileExtension=".inf" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".ins" mimeType="application/x-internet-signup" />
+            <mimeMap fileExtension=".isp" mimeType="application/x-internet-signup" />
+            <mimeMap fileExtension=".IVF" mimeType="video/x-ivf" />
+            <mimeMap fileExtension=".jar" mimeType="application/java-archive" />
+            <mimeMap fileExtension=".java" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".jck" mimeType="application/liquidmotion" />
+            <mimeMap fileExtension=".jcz" mimeType="application/liquidmotion" />
+            <mimeMap fileExtension=".jfif" mimeType="image/pjpeg" />
+            <mimeMap fileExtension=".jpb" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".jpe" mimeType="image/jpeg" />
+            <mimeMap fileExtension=".jpeg" mimeType="image/jpeg" />
+            <mimeMap fileExtension=".jpg" mimeType="image/jpeg" />
+            <mimeMap fileExtension=".js" mimeType="application/javascript" />
+            <mimeMap fileExtension=".json" mimeType="application/json" />
+            <mimeMap fileExtension=".jsonld" mimeType="application/ld+json" />
+            <mimeMap fileExtension=".jsx" mimeType="text/jscript" />
+            <mimeMap fileExtension=".latex" mimeType="application/x-latex" />
+            <mimeMap fileExtension=".less" mimeType="text/css" />
+            <mimeMap fileExtension=".lit" mimeType="application/x-ms-reader" />
+            <mimeMap fileExtension=".lpk" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".lsf" mimeType="video/x-la-asf" />
+            <mimeMap fileExtension=".lsx" mimeType="video/x-la-asf" />
+            <mimeMap fileExtension=".lzh" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".m13" mimeType="application/x-msmediaview" />
+            <mimeMap fileExtension=".m14" mimeType="application/x-msmediaview" />
+            <mimeMap fileExtension=".m1v" mimeType="video/mpeg" />
+            <mimeMap fileExtension=".m2ts" mimeType="video/vnd.dlna.mpeg-tts" />
+            <mimeMap fileExtension=".m3u" mimeType="audio/x-mpegurl" />
+            <mimeMap fileExtension=".m4a" mimeType="audio/mp4" />
+            <mimeMap fileExtension=".m4v" mimeType="video/mp4" />
+            <mimeMap fileExtension=".man" mimeType="application/x-troff-man" />
+            <mimeMap fileExtension=".manifest" mimeType="application/x-ms-manifest" />
+            <mimeMap fileExtension=".map" mimeType="text/plain" />
+            <mimeMap fileExtension=".mdb" mimeType="application/x-msaccess" />
+            <mimeMap fileExtension=".mdp" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".me" mimeType="application/x-troff-me" />
+            <mimeMap fileExtension=".mht" mimeType="message/rfc822" />
+            <mimeMap fileExtension=".mhtml" mimeType="message/rfc822" />
+            <mimeMap fileExtension=".mid" mimeType="audio/mid" />
+            <mimeMap fileExtension=".midi" mimeType="audio/mid" />
+            <mimeMap fileExtension=".mix" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".mmf" mimeType="application/x-smaf" />
+            <mimeMap fileExtension=".mno" mimeType="text/xml" />
+            <mimeMap fileExtension=".mny" mimeType="application/x-msmoney" />
+            <mimeMap fileExtension=".mov" mimeType="video/quicktime" />
+            <mimeMap fileExtension=".movie" mimeType="video/x-sgi-movie" />
+            <mimeMap fileExtension=".mp2" mimeType="video/mpeg" />
+            <mimeMap fileExtension=".mp3" mimeType="audio/mpeg" />
+            <mimeMap fileExtension=".mp4" mimeType="video/mp4" />
+            <mimeMap fileExtension=".mp4v" mimeType="video/mp4" />
+            <mimeMap fileExtension=".mpa" mimeType="video/mpeg" />
+            <mimeMap fileExtension=".mpe" mimeType="video/mpeg" />
+            <mimeMap fileExtension=".mpeg" mimeType="video/mpeg" />
+            <mimeMap fileExtension=".mpg" mimeType="video/mpeg" />
+            <mimeMap fileExtension=".mpp" mimeType="application/vnd.ms-project" />
+            <mimeMap fileExtension=".mpv2" mimeType="video/mpeg" />
+            <mimeMap fileExtension=".ms" mimeType="application/x-troff-ms" />
+            <mimeMap fileExtension=".msi" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".mso" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".mvb" mimeType="application/x-msmediaview" />
+            <mimeMap fileExtension=".mvc" mimeType="application/x-miva-compiled" />
+            <mimeMap fileExtension=".nc" mimeType="application/x-netcdf" />
+            <mimeMap fileExtension=".nsc" mimeType="video/x-ms-asf" />
+            <mimeMap fileExtension=".nws" mimeType="message/rfc822" />
+            <mimeMap fileExtension=".ocx" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".oda" mimeType="application/oda" />
+            <mimeMap fileExtension=".odc" mimeType="text/x-ms-odc" />
+            <mimeMap fileExtension=".ods" mimeType="application/oleobject" />
+            <mimeMap fileExtension=".oga" mimeType="audio/ogg" />
+            <mimeMap fileExtension=".ogg" mimeType="video/ogg" />
+            <mimeMap fileExtension=".ogv" mimeType="video/ogg" />
+            <mimeMap fileExtension=".one" mimeType="application/onenote" />
+            <mimeMap fileExtension=".onea" mimeType="application/onenote" />
+            <mimeMap fileExtension=".onetoc" mimeType="application/onenote" />
+            <mimeMap fileExtension=".onetoc2" mimeType="application/onenote" />
+            <mimeMap fileExtension=".onetmp" mimeType="application/onenote" />
+            <mimeMap fileExtension=".onepkg" mimeType="application/onenote" />
+            <mimeMap fileExtension=".osdx" mimeType="application/opensearchdescription+xml" />
+            <mimeMap fileExtension=".otf" mimeType="font/otf" />
+            <mimeMap fileExtension=".p10" mimeType="application/pkcs10" />
+            <mimeMap fileExtension=".p12" mimeType="application/x-pkcs12" />
+            <mimeMap fileExtension=".p7b" mimeType="application/x-pkcs7-certificates" />
+            <mimeMap fileExtension=".p7c" mimeType="application/pkcs7-mime" />
+            <mimeMap fileExtension=".p7m" mimeType="application/pkcs7-mime" />
+            <mimeMap fileExtension=".p7r" mimeType="application/x-pkcs7-certreqresp" />
+            <mimeMap fileExtension=".p7s" mimeType="application/pkcs7-signature" />
+            <mimeMap fileExtension=".pbm" mimeType="image/x-portable-bitmap" />
+            <mimeMap fileExtension=".pcx" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".pcz" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".pdf" mimeType="application/pdf" />
+            <mimeMap fileExtension=".pfb" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".pfm" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".pfx" mimeType="application/x-pkcs12" />
+            <mimeMap fileExtension=".pgm" mimeType="image/x-portable-graymap" />
+            <mimeMap fileExtension=".pko" mimeType="application/vnd.ms-pki.pko" />
+            <mimeMap fileExtension=".pma" mimeType="application/x-perfmon" />
+            <mimeMap fileExtension=".pmc" mimeType="application/x-perfmon" />
+            <mimeMap fileExtension=".pml" mimeType="application/x-perfmon" />
+            <mimeMap fileExtension=".pmr" mimeType="application/x-perfmon" />
+            <mimeMap fileExtension=".pmw" mimeType="application/x-perfmon" />
+            <mimeMap fileExtension=".png" mimeType="image/png" />
+            <mimeMap fileExtension=".pnm" mimeType="image/x-portable-anymap" />
+            <mimeMap fileExtension=".pnz" mimeType="image/png" />
+            <mimeMap fileExtension=".pot" mimeType="application/vnd.ms-powerpoint" />
+            <mimeMap fileExtension=".potm" mimeType="application/vnd.ms-powerpoint.template.macroEnabled.12" />
+            <mimeMap fileExtension=".potx" mimeType="application/vnd.openxmlformats-officedocument.presentationml.template" />
+            <mimeMap fileExtension=".ppam" mimeType="application/vnd.ms-powerpoint.addin.macroEnabled.12" />
+            <mimeMap fileExtension=".ppm" mimeType="image/x-portable-pixmap" />
+            <mimeMap fileExtension=".pps" mimeType="application/vnd.ms-powerpoint" />
+            <mimeMap fileExtension=".ppsm" mimeType="application/vnd.ms-powerpoint.slideshow.macroEnabled.12" />
+            <mimeMap fileExtension=".ppsx" mimeType="application/vnd.openxmlformats-officedocument.presentationml.slideshow" />
+            <mimeMap fileExtension=".ppt" mimeType="application/vnd.ms-powerpoint" />
+            <mimeMap fileExtension=".pptm" mimeType="application/vnd.ms-powerpoint.presentation.macroEnabled.12" />
+            <mimeMap fileExtension=".pptx" mimeType="application/vnd.openxmlformats-officedocument.presentationml.presentation" />
+            <mimeMap fileExtension=".prf" mimeType="application/pics-rules" />
+            <mimeMap fileExtension=".prm" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".prx" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".ps" mimeType="application/postscript" />
+            <mimeMap fileExtension=".psd" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".psm" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".psp" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".pub" mimeType="application/x-mspublisher" />
+            <mimeMap fileExtension=".qt" mimeType="video/quicktime" />
+            <mimeMap fileExtension=".qtl" mimeType="application/x-quicktimeplayer" />
+            <mimeMap fileExtension=".qxd" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".ra" mimeType="audio/x-pn-realaudio" />
+            <mimeMap fileExtension=".ram" mimeType="audio/x-pn-realaudio" />
+            <mimeMap fileExtension=".rar" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".ras" mimeType="image/x-cmu-raster" />
+            <mimeMap fileExtension=".rf" mimeType="image/vnd.rn-realflash" />
+            <mimeMap fileExtension=".rgb" mimeType="image/x-rgb" />
+            <mimeMap fileExtension=".rm" mimeType="application/vnd.rn-realmedia" />
+            <mimeMap fileExtension=".rmi" mimeType="audio/mid" />
+            <mimeMap fileExtension=".roff" mimeType="application/x-troff" />
+            <mimeMap fileExtension=".rpm" mimeType="audio/x-pn-realaudio-plugin" />
+            <mimeMap fileExtension=".rtf" mimeType="application/rtf" />
+            <mimeMap fileExtension=".rtx" mimeType="text/richtext" />
+            <mimeMap fileExtension=".scd" mimeType="application/x-msschedule" />
+            <mimeMap fileExtension=".sct" mimeType="text/scriptlet" />
+            <mimeMap fileExtension=".sea" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".setpay" mimeType="application/set-payment-initiation" />
+            <mimeMap fileExtension=".setreg" mimeType="application/set-registration-initiation" />
+            <mimeMap fileExtension=".sgml" mimeType="text/sgml" />
+            <mimeMap fileExtension=".sh" mimeType="application/x-sh" />
+            <mimeMap fileExtension=".shar" mimeType="application/x-shar" />
+            <mimeMap fileExtension=".sit" mimeType="application/x-stuffit" />
+            <mimeMap fileExtension=".sldm" mimeType="application/vnd.ms-powerpoint.slide.macroEnabled.12" />
+            <mimeMap fileExtension=".sldx" mimeType="application/vnd.openxmlformats-officedocument.presentationml.slide" />
+            <mimeMap fileExtension=".smd" mimeType="audio/x-smd" />
+            <mimeMap fileExtension=".smi" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".smx" mimeType="audio/x-smd" />
+            <mimeMap fileExtension=".smz" mimeType="audio/x-smd" />
+            <mimeMap fileExtension=".snd" mimeType="audio/basic" />
+            <mimeMap fileExtension=".snp" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".spc" mimeType="application/x-pkcs7-certificates" />
+            <mimeMap fileExtension=".spl" mimeType="application/futuresplash" />
+            <mimeMap fileExtension=".spx" mimeType="audio/ogg" />
+            <mimeMap fileExtension=".src" mimeType="application/x-wais-source" />
+            <mimeMap fileExtension=".ssm" mimeType="application/streamingmedia" />
+            <mimeMap fileExtension=".sst" mimeType="application/vnd.ms-pki.certstore" />
+            <mimeMap fileExtension=".stl" mimeType="application/vnd.ms-pki.stl" />
+            <mimeMap fileExtension=".sv4cpio" mimeType="application/x-sv4cpio" />
+            <mimeMap fileExtension=".sv4crc" mimeType="application/x-sv4crc" />
+            <mimeMap fileExtension=".svg" mimeType="image/svg+xml" />
+            <mimeMap fileExtension=".svgz" mimeType="image/svg+xml" />
+            <mimeMap fileExtension=".swf" mimeType="application/x-shockwave-flash" />
+            <mimeMap fileExtension=".t" mimeType="application/x-troff" />
+            <mimeMap fileExtension=".tar" mimeType="application/x-tar" />
+            <mimeMap fileExtension=".tcl" mimeType="application/x-tcl" />
+            <mimeMap fileExtension=".tex" mimeType="application/x-tex" />
+            <mimeMap fileExtension=".texi" mimeType="application/x-texinfo" />
+            <mimeMap fileExtension=".texinfo" mimeType="application/x-texinfo" />
+            <mimeMap fileExtension=".tgz" mimeType="application/x-compressed" />
+            <mimeMap fileExtension=".thmx" mimeType="application/vnd.ms-officetheme" />
+            <mimeMap fileExtension=".thn" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".tif" mimeType="image/tiff" />
+            <mimeMap fileExtension=".tiff" mimeType="image/tiff" />
+            <mimeMap fileExtension=".toc" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".tr" mimeType="application/x-troff" />
+            <mimeMap fileExtension=".trm" mimeType="application/x-msterminal" />
+            <mimeMap fileExtension=".ts" mimeType="video/vnd.dlna.mpeg-tts" />
+            <mimeMap fileExtension=".tsv" mimeType="text/tab-separated-values" />
+            <mimeMap fileExtension=".ttf" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".tts" mimeType="video/vnd.dlna.mpeg-tts" />
+            <mimeMap fileExtension=".txt" mimeType="text/plain" />
+            <mimeMap fileExtension=".u32" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".uls" mimeType="text/iuls" />
+            <mimeMap fileExtension=".ustar" mimeType="application/x-ustar" />
+            <mimeMap fileExtension=".vbs" mimeType="text/vbscript" />
+            <mimeMap fileExtension=".vcf" mimeType="text/x-vcard" />
+            <mimeMap fileExtension=".vcs" mimeType="text/plain" />
+            <mimeMap fileExtension=".vdx" mimeType="application/vnd.ms-visio.viewer" />
+            <mimeMap fileExtension=".vml" mimeType="text/xml" />
+            <mimeMap fileExtension=".vsd" mimeType="application/vnd.visio" />
+            <mimeMap fileExtension=".vss" mimeType="application/vnd.visio" />
+            <mimeMap fileExtension=".vst" mimeType="application/vnd.visio" />
+            <mimeMap fileExtension=".vsto" mimeType="application/x-ms-vsto" />
+            <mimeMap fileExtension=".vsw" mimeType="application/vnd.visio" />
+            <mimeMap fileExtension=".vsx" mimeType="application/vnd.visio" />
+            <mimeMap fileExtension=".vtx" mimeType="application/vnd.visio" />
+            <mimeMap fileExtension=".wasm" mimeType="application/wasm" />
+            <mimeMap fileExtension=".wav" mimeType="audio/wav" />
+            <mimeMap fileExtension=".wax" mimeType="audio/x-ms-wax" />
+            <mimeMap fileExtension=".wbmp" mimeType="image/vnd.wap.wbmp" />
+            <mimeMap fileExtension=".wcm" mimeType="application/vnd.ms-works" />
+            <mimeMap fileExtension=".wdb" mimeType="application/vnd.ms-works" />
+            <mimeMap fileExtension=".webm" mimeType="video/webm" />
+            <mimeMap fileExtension=".wks" mimeType="application/vnd.ms-works" />
+            <mimeMap fileExtension=".wm" mimeType="video/x-ms-wm" />
+            <mimeMap fileExtension=".wma" mimeType="audio/x-ms-wma" />
+            <mimeMap fileExtension=".wmd" mimeType="application/x-ms-wmd" />
+            <mimeMap fileExtension=".wmf" mimeType="application/x-msmetafile" />
+            <mimeMap fileExtension=".wml" mimeType="text/vnd.wap.wml" />
+            <mimeMap fileExtension=".wmlc" mimeType="application/vnd.wap.wmlc" />
+            <mimeMap fileExtension=".wmls" mimeType="text/vnd.wap.wmlscript" />
+            <mimeMap fileExtension=".wmlsc" mimeType="application/vnd.wap.wmlscriptc" />
+            <mimeMap fileExtension=".wmp" mimeType="video/x-ms-wmp" />
+            <mimeMap fileExtension=".wmv" mimeType="video/x-ms-wmv" />
+            <mimeMap fileExtension=".wmx" mimeType="video/x-ms-wmx" />
+            <mimeMap fileExtension=".wmz" mimeType="application/x-ms-wmz" />
+            <mimeMap fileExtension=".woff" mimeType="font/x-woff" />
+            <mimeMap fileExtension=".woff2" mimeType="application/font-woff2" />
+            <mimeMap fileExtension=".wps" mimeType="application/vnd.ms-works" />
+            <mimeMap fileExtension=".wri" mimeType="application/x-mswrite" />
+            <mimeMap fileExtension=".wrl" mimeType="x-world/x-vrml" />
+            <mimeMap fileExtension=".wrz" mimeType="x-world/x-vrml" />
+            <mimeMap fileExtension=".wsdl" mimeType="text/xml" />
+            <mimeMap fileExtension=".wtv" mimeType="video/x-ms-wtv" />
+            <mimeMap fileExtension=".wvx" mimeType="video/x-ms-wvx" />
+            <mimeMap fileExtension=".x" mimeType="application/directx" />
+            <mimeMap fileExtension=".xaf" mimeType="x-world/x-vrml" />
+            <mimeMap fileExtension=".xaml" mimeType="application/xaml+xml" />
+            <mimeMap fileExtension=".xap" mimeType="application/x-silverlight-app" />
+            <mimeMap fileExtension=".xbap" mimeType="application/x-ms-xbap" />
+            <mimeMap fileExtension=".xbm" mimeType="image/x-xbitmap" />
+            <mimeMap fileExtension=".xdr" mimeType="text/plain" />
+            <mimeMap fileExtension=".xht" mimeType="application/xhtml+xml" />
+            <mimeMap fileExtension=".xhtml" mimeType="application/xhtml+xml" />
+            <mimeMap fileExtension=".xla" mimeType="application/vnd.ms-excel" />
+            <mimeMap fileExtension=".xlam" mimeType="application/vnd.ms-excel.addin.macroEnabled.12" />
+            <mimeMap fileExtension=".xlc" mimeType="application/vnd.ms-excel" />
+            <mimeMap fileExtension=".xlm" mimeType="application/vnd.ms-excel" />
+            <mimeMap fileExtension=".xls" mimeType="application/vnd.ms-excel" />
+            <mimeMap fileExtension=".xlsb" mimeType="application/vnd.ms-excel.sheet.binary.macroEnabled.12" />
+            <mimeMap fileExtension=".xlsm" mimeType="application/vnd.ms-excel.sheet.macroEnabled.12" />
+            <mimeMap fileExtension=".xlsx" mimeType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" />
+            <mimeMap fileExtension=".xlt" mimeType="application/vnd.ms-excel" />
+            <mimeMap fileExtension=".xltm" mimeType="application/vnd.ms-excel.template.macroEnabled.12" />
+            <mimeMap fileExtension=".xltx" mimeType="application/vnd.openxmlformats-officedocument.spreadsheetml.template" />
+            <mimeMap fileExtension=".xlw" mimeType="application/vnd.ms-excel" />
+            <mimeMap fileExtension=".xml" mimeType="text/xml" />
+            <mimeMap fileExtension=".xof" mimeType="x-world/x-vrml" />
+            <mimeMap fileExtension=".xpm" mimeType="image/x-xpixmap" />
+            <mimeMap fileExtension=".xps" mimeType="application/vnd.ms-xpsdocument" />
+            <mimeMap fileExtension=".xsd" mimeType="text/xml" />
+            <mimeMap fileExtension=".xsf" mimeType="text/xml" />
+            <mimeMap fileExtension=".xsl" mimeType="text/xml" />
+            <mimeMap fileExtension=".xslt" mimeType="text/xml" />
+            <mimeMap fileExtension=".xsn" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".xtp" mimeType="application/octet-stream" />
+            <mimeMap fileExtension=".xwd" mimeType="image/x-xwindowdump" />
+            <mimeMap fileExtension=".z" mimeType="application/x-compress" />
+            <mimeMap fileExtension=".zip" mimeType="application/x-zip-compressed" />
+        </system.webServer-staticContent>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/trace" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-trace />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.ftpServer/providerDefinitions" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.ftpServer-providerDefinitions>
+            <activation>
+            </activation>
+        </system.ftpServer-providerDefinitions>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/profile" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-profile>
+            <properties>
+            </properties>
+            <providers>
+                <add name="AspNetSqlProfileProvider" type="System.Web.Profile.SqlProfileProvider, System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" connectionStringName="LocalSqlServer" applicationName="/" />
+            </providers>
+        </system.web-profile>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.applicationHost/sites" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.applicationHost-sites>
+            <siteDefaults>
+                <bindings>
+                </bindings>
+                <limits />
+                <logFile logFormat="W3C" directory="%SystemDrive%\inetpub\logs\LogFiles">
+                    <customFields>
+                    </customFields>
+                </logFile>
+                <traceFailedRequestsLogging directory="%SystemDrive%\inetpub\logs\FailedReqLogFiles" />
+                <hsts />
+                <ftpServer>
+                    <connections />
+                    <security>
+                        <dataChannelSecurity />
+                        <commandFiltering>
+                        </commandFiltering>
+                        <ssl />
+                        <sslClientCertificates />
+                        <authentication>
+                            <anonymousAuthentication />
+                            <basicAuthentication />
+                            <clientCertAuthentication />
+                            <customAuthentication>
+                                <providers>
+                                </providers>
+                            </customAuthentication>
+                        </authentication>
+                        <customAuthorization>
+                            <provider />
+                        </customAuthorization>
+                    </security>
+                    <customFeatures>
+                        <providers>
+                        </providers>
+                    </customFeatures>
+                    <messages />
+                    <fileHandling />
+                    <firewallSupport />
+                    <userIsolation>
+                        <activeDirectory />
+                    </userIsolation>
+                    <directoryBrowse />
+                    <logFile />
+                </ftpServer>
+            </siteDefaults>
+            <applicationDefaults applicationPool="DefaultAppPool" />
+            <virtualDirectoryDefaults allowSubDirConfig="true" />
+            <site name="Default Web Site" id="1" serverAutoStart="true">
+                <bindings>
+                    <binding protocol="http" bindingInformation="*:80:" />
+                </bindings>
+                <limits />
+                <logFile>
+                    <customFields>
+                    </customFields>
+                </logFile>
+                <traceFailedRequestsLogging />
+                <hsts />
+                <applicationDefaults />
+                <virtualDirectoryDefaults />
+                <ftpServer>
+                    <connections />
+                    <security>
+                        <dataChannelSecurity />
+                        <commandFiltering>
+                        </commandFiltering>
+                        <ssl />
+                        <sslClientCertificates />
+                        <authentication>
+                            <anonymousAuthentication />
+                            <basicAuthentication />
+                            <clientCertAuthentication />
+                            <customAuthentication>
+                                <providers>
+                                </providers>
+                            </customAuthentication>
+                        </authentication>
+                        <customAuthorization>
+                            <provider />
+                        </customAuthorization>
+                    </security>
+                    <customFeatures>
+                        <providers>
+                        </providers>
+                    </customFeatures>
+                    <messages />
+                    <fileHandling />
+                    <firewallSupport />
+                    <userIsolation>
+                        <activeDirectory />
+                    </userIsolation>
+                    <directoryBrowse />
+                    <logFile />
+                </ftpServer>
+                <application path="/">
+                    <virtualDirectoryDefaults />
+                    <virtualDirectory path="/" physicalPath="%SystemDrive%\inetpub\wwwroot" />
+                    <virtualDirectory path="/Serving" physicalPath="E:\AllMyProjects\Saving" />
+                    <virtualDirectory path="/Meduyeket" physicalPath="E:\AllMyProjects\MeduyeketEx2\MeduyeketEx\app" />
+                    <virtualDirectory path="/LsFinanceAdvisor" physicalPath="E:\AllMyProjects\ls-financial-advisor\dist\ls-financial-advisor" />
+                </application>
+            </site>
+        </system.applicationHost-sites>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/webSocket" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-webSocket />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/membership" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-membership>
+            <providers>
+                <add name="AspNetSqlMembershipProvider" type="System.Web.Security.SqlMembershipProvider, System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" connectionStringName="LocalSqlServer" enablePasswordRetrieval="false" enablePasswordReset="true" requiresQuestionAndAnswer="true" applicationName="/" requiresUniqueEmail="false" passwordFormat="Hashed" maxInvalidPasswordAttempts="5" minRequiredPasswordLength="7" minRequiredNonalphanumericCharacters="1" passwordAttemptWindow="10" passwordStrengthRegularExpression="" />
+            </providers>
+        </system.web-membership>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/processModel" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="true">
+        <system.web-processModel autoConfig="true" />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/applicationInitialization" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-applicationInitialization>
+        </system.webServer-applicationInitialization>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.applicationHost/log" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.applicationHost-log>
+            <centralBinaryLogFile enabled="true" directory="%SystemDrive%\inetpub\logs\LogFiles" />
+            <centralW3CLogFile enabled="true" directory="%SystemDrive%\inetpub\logs\LogFiles" />
+        </system.applicationHost-log>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.ftpServer/security/authorization" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.ftpServer-security-authorization>
+        </system.ftpServer-security-authorization>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/security/access" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-security-access sslFlags="None" />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/xhtmlConformance" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-xhtmlConformance />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.ftpServer/firewallSupport" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.ftpServer-firewallSupport />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/rewrite/rules" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-rewrite-rules>
+        </system.webServer-rewrite-rules>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/security/requestFiltering" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-security-requestFiltering>
+            <fileExtensions allowUnlisted="true" applyToWebDAV="true">
+            </fileExtensions>
+            <requestLimits>
+                <headerLimits>
+                </headerLimits>
+            </requestLimits>
+            <verbs allowUnlisted="true" applyToWebDAV="true">
+            </verbs>
+            <hiddenSegments applyToWebDAV="true">
+                <add segment="web.config" />
+            </hiddenSegments>
+            <alwaysAllowedUrls>
+            </alwaysAllowedUrls>
+            <alwaysAllowedQueryStrings>
+            </alwaysAllowedQueryStrings>
+            <denyUrlSequences>
+            </denyUrlSequences>
+            <denyQueryStringSequences>
+            </denyQueryStringSequences>
+            <filteringRules>
+            </filteringRules>
+        </system.webServer-security-requestFiltering>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/webServices" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-webServices>
+            <conformanceWarnings>
+            </conformanceWarnings>
+            <diagnostics />
+            <protocols>
+            </protocols>
+            <serviceDescriptionFormatExtensionTypes>
+            </serviceDescriptionFormatExtensionTypes>
+            <soapEnvelopeProcessing />
+            <soapExtensionImporterTypes>
+            </soapExtensionImporterTypes>
+            <soapExtensionReflectorTypes>
+            </soapExtensionReflectorTypes>
+            <soapExtensionTypes>
+            </soapExtensionTypes>
+            <soapServerProtocolFactory />
+            <soapTransportImporterTypes>
+            </soapTransportImporterTypes>
+            <wsdlHelpGenerator />
+        </system.web-webServices>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.data" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.data>
+            <DbProviderFactories>
+            </DbProviderFactories>
+        </system.data>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/machineKey" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-machineKey />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.diagnostics" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.diagnostics>
+            <assert />
+            <performanceCounters />
+            <sharedListeners>
+            </sharedListeners>
+            <sources>
+            </sources>
+            <switches>
+            </switches>
+            <trace>
+                <listeners>
+                </listeners>
+            </trace>
+        </system.diagnostics>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/handlers" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-handlers accessPolicy="Read, Script">
+            <add name="TRACEVerbHandler" path="*" verb="TRACE" modules="ProtocolSupportModule" requireAccess="None" />
+            <add name="OPTIONSVerbHandler" path="*" verb="OPTIONS" modules="ProtocolSupportModule" requireAccess="None" />
+            <add name="StaticFile" path="*" verb="*" modules="StaticFileModule,DefaultDocumentModule,DirectoryListingModule" resourceType="Either" requireAccess="Read" />
+        </system.webServer-handlers>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/httpHandlers" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-httpHandlers>
+            <add path="eurl.axd" type="System.Web.HttpNotFoundHandler" validate="true" verb="*" />
+            <add path="trace.axd" type="System.Web.Handlers.TraceHandler" validate="true" verb="*" />
+            <add path="WebResource.axd" type="System.Web.Handlers.AssemblyResourceLoader" validate="true" verb="GET" />
+            <add path="*_AppService.axd" type="System.Web.Script.Services.ScriptHandlerFactory, System.Web.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" validate="false" verb="*" />
+            <add path="ScriptResource.axd" type="System.Web.Handlers.ScriptResourceHandler, System.Web.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" validate="false" verb="GET,HEAD" />
+            <add path="*.axd" type="System.Web.HttpNotFoundHandler" validate="true" verb="*" />
+            <add path="*.aspx" type="System.Web.UI.PageHandlerFactory" validate="true" verb="*" />
+            <add path="*.ashx" type="System.Web.UI.SimpleHandlerFactory" validate="true" verb="*" />
+            <add path="*.asmx" type="System.Web.Script.Services.ScriptHandlerFactory, System.Web.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" validate="false" verb="*" />
+            <add path="*.rem" type="System.Runtime.Remoting.Channels.Http.HttpRemotingHandlerFactory, System.Runtime.Remoting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" validate="false" verb="*" />
+            <add path="*.soap" type="System.Runtime.Remoting.Channels.Http.HttpRemotingHandlerFactory, System.Runtime.Remoting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" validate="false" verb="*" />
+            <add path="*.asax" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.ascx" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.master" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.skin" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.browser" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.sitemap" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.dll.config" type="System.Web.StaticFileHandler" validate="true" verb="GET,HEAD" />
+            <add path="*.exe.config" type="System.Web.StaticFileHandler" validate="true" verb="GET,HEAD" />
+            <add path="*.config" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.cs" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.csproj" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.vb" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.vbproj" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.webinfo" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.licx" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.resx" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.resources" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.mdb" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.vjsproj" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.java" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.jsl" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.ldb" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.ad" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.dd" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.ldd" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.sd" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.cd" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.adprototype" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.lddprototype" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.sdm" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.sdmDocument" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.mdf" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.ldf" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.exclude" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.refresh" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.svc" type="System.ServiceModel.Activation.HttpHandler, System.ServiceModel.Activation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" validate="false" verb="*" />
+            <add path="*.rules" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.xoml" type="System.ServiceModel.Activation.HttpHandler, System.ServiceModel.Activation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" validate="false" verb="*" />
+            <add path="*.xamlx" type="System.Xaml.Hosting.XamlHttpHandlerFactory, System.Xaml.Hosting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" validate="false" verb="*" />
+            <add path="*.aspq" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.cshtm" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.cshtml" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.vbhtm" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*.vbhtml" type="System.Web.HttpForbiddenHandler" validate="true" verb="*" />
+            <add path="*" type="System.Web.DefaultHttpHandler" validate="true" verb="GET,HEAD,POST" />
+            <add path="*" type="System.Web.HttpMethodNotAllowedHandler" validate="true" verb="*" />
+        </system.web-httpHandlers>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/healthMonitoring" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-healthMonitoring>
+            <bufferModes>
+                <add maxBufferSize="100" maxBufferThreads="1" maxFlushSize="20" name="Critical Notification" regularFlushInterval="Infinite" urgentFlushInterval="00:01:00" urgentFlushThreshold="1" />
+                <add maxBufferSize="300" maxBufferThreads="1" maxFlushSize="20" name="Notification" regularFlushInterval="Infinite" urgentFlushInterval="00:01:00" urgentFlushThreshold="1" />
+                <add maxBufferSize="1000" maxBufferThreads="1" maxFlushSize="100" name="Analysis" regularFlushInterval="00:05:00" urgentFlushInterval="00:01:00" urgentFlushThreshold="100" />
+                <add maxBufferSize="1000" maxBufferThreads="1" maxFlushSize="200" name="Logging" regularFlushInterval="00:30:00" urgentFlushInterval="00:05:00" urgentFlushThreshold="800" />
+            </bufferModes>
+            <eventMappings>
+                <add endEventCode="2147483647" name="All Events" startEventCode="0" type="System.Web.Management.WebBaseEvent,System.Web,Version=4.0.0.0,Culture=neutral,PublicKeyToken=b03f5f7f11d50a3a" />
+                <add endEventCode="2147483647" name="Heartbeats" startEventCode="0" type="System.Web.Management.WebHeartbeatEvent,System.Web,Version=4.0.0.0,Culture=neutral,PublicKeyToken=b03f5f7f11d50a3a" />
+                <add endEventCode="2147483647" name="Application Lifetime Events" startEventCode="0" type="System.Web.Management.WebApplicationLifetimeEvent,System.Web,Version=4.0.0.0,Culture=neutral,PublicKeyToken=b03f5f7f11d50a3a" />
+                <add endEventCode="2147483647" name="Request Processing Events" startEventCode="0" type="System.Web.Management.WebRequestEvent,System.Web,Version=4.0.0.0,Culture=neutral,PublicKeyToken=b03f5f7f11d50a3a" />
+                <add endEventCode="2147483647" name="All Errors" startEventCode="0" type="System.Web.Management.WebBaseErrorEvent,System.Web,Version=4.0.0.0,Culture=neutral,PublicKeyToken=b03f5f7f11d50a3a" />
+                <add endEventCode="2147483647" name="Infrastructure Errors" startEventCode="0" type="System.Web.Management.WebErrorEvent,System.Web,Version=4.0.0.0,Culture=neutral,PublicKeyToken=b03f5f7f11d50a3a" />
+                <add endEventCode="2147483647" name="Request Processing Errors" startEventCode="0" type="System.Web.Management.WebRequestErrorEvent,System.Web,Version=4.0.0.0,Culture=neutral,PublicKeyToken=b03f5f7f11d50a3a" />
+                <add endEventCode="2147483647" name="All Audits" startEventCode="0" type="System.Web.Management.WebAuditEvent,System.Web,Version=4.0.0.0,Culture=neutral,PublicKeyToken=b03f5f7f11d50a3a" />
+                <add endEventCode="2147483647" name="Failure Audits" startEventCode="0" type="System.Web.Management.WebFailureAuditEvent,System.Web,Version=4.0.0.0,Culture=neutral,PublicKeyToken=b03f5f7f11d50a3a" />
+                <add endEventCode="2147483647" name="Success Audits" startEventCode="0" type="System.Web.Management.WebSuccessAuditEvent,System.Web,Version=4.0.0.0,Culture=neutral,PublicKeyToken=b03f5f7f11d50a3a" />
+            </eventMappings>
+            <profiles>
+                <add custom="" maxLimit="Infinite" minInstances="1" minInterval="00:01:00" name="Default" />
+                <add custom="" maxLimit="Infinite" minInstances="1" minInterval="00:00:00" name="Critical" />
+            </profiles>
+            <providers>
+                <add name="EventLogProvider" type="System.Web.Management.EventLogWebEventProvider,System.Web,Version=4.0.0.0,Culture=neutral,PublicKeyToken=b03f5f7f11d50a3a" />
+                <add name="SqlWebEventProvider" type="System.Web.Management.SqlWebEventProvider,System.Web,Version=4.0.0.0,Culture=neutral,PublicKeyToken=b03f5f7f11d50a3a" connectionStringName="LocalSqlServer" maxEventDetailsLength="1073741823" buffer="false" bufferMode="Notification" />
+                <add name="WmiWebEventProvider" type="System.Web.Management.WmiWebEventProvider,System.Web,Version=4.0.0.0,Culture=neutral,PublicKeyToken=b03f5f7f11d50a3a" />
+            </providers>
+            <rules>
+                <add custom="" eventName="All Errors" maxLimit="Infinite" minInstances="1" minInterval="00:01:00" name="All Errors Default" profile="Default" provider="EventLogProvider" />
+                <add custom="" eventName="Failure Audits" maxLimit="Infinite" minInstances="1" minInterval="00:01:00" name="Failure Audits Default" profile="Default" provider="EventLogProvider" />
+            </rules>
+        </system.web-healthMonitoring>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/siteMap" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-siteMap>
+            <providers>
+                <add name="AspNetXmlSiteMapProvider" type="System.Web.XmlSiteMapProvider, System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" siteMapFile="web.sitemap" />
+            </providers>
+        </system.web-siteMap>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="appSettings" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <appSettings>
+        </appSettings>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/asp" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-asp>
+            <session />
+            <comPlus />
+            <cache />
+            <limits />
+        </system.webServer-asp>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/httpProtocol" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-httpProtocol>
+            <customHeaders>
+            </customHeaders>
+            <redirectHeaders>
+            </redirectHeaders>
+        </system.webServer-httpProtocol>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/httpModules" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-httpModules>
+            <add name="OutputCache" type="System.Web.Caching.OutputCacheModule" />
+            <add name="Session" type="System.Web.SessionState.SessionStateModule" />
+            <add name="WindowsAuthentication" type="System.Web.Security.WindowsAuthenticationModule" />
+            <add name="FormsAuthentication" type="System.Web.Security.FormsAuthenticationModule" />
+            <add name="PassportAuthentication" type="System.Web.Security.PassportAuthenticationModule" />
+            <add name="RoleManager" type="System.Web.Security.RoleManagerModule" />
+            <add name="UrlAuthorization" type="System.Web.Security.UrlAuthorizationModule" />
+            <add name="FileAuthorization" type="System.Web.Security.FileAuthorizationModule" />
+            <add name="AnonymousIdentification" type="System.Web.Security.AnonymousIdentificationModule" />
+            <add name="Profile" type="System.Web.Profile.ProfileModule" />
+            <add name="ErrorHandlerModule" type="System.Web.Mobile.ErrorHandlerModule, System.Web.Mobile, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+            <add name="ServiceModel" type="System.ServiceModel.Activation.HttpModule, System.ServiceModel.Activation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+            <add name="UrlRoutingModule-4.0" type="System.Web.Routing.UrlRoutingModule" />
+            <add name="ScriptModule-4.0" type="System.Web.Handlers.ScriptModule, System.Web.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+        </system.web-httpModules>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/httpRuntime" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-httpRuntime />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/serverSideInclude" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-serverSideInclude />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/defaultDocument" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-defaultDocument enabled="true">
+            <files>
+                <add value="Default.htm" />
+                <add value="Default.asp" />
+                <add value="index.htm" />
+                <add value="index.html" />
+                <add value="iisstart.htm" />
+            </files>
+        </system.webServer-defaultDocument>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/hostingEnvironment" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-hostingEnvironment />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/globalization" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-globalization />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/httpRedirect" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-httpRedirect>
+        </system.webServer-httpRedirect>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.ftpServer/caching" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.ftpServer-caching>
+            <credentialsCache />
+        </system.ftpServer-caching>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.net/connectionManagement" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.net-connectionManagement>
+        </system.net-connectionManagement>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/rewrite/outboundRules" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-rewrite-outboundRules>
+            <customTags>
+            </customTags>
+            <preConditions>
+            </preConditions>
+        </system.webServer-rewrite-outboundRules>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/security/authentication/basicAuthentication" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-security-authentication-basicAuthentication />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/httpCookies" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-httpCookies />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/clientTarget" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-clientTarget>
+            <add alias="uplevel" userAgent="Mozilla/5.0 (compatible; MSIE 6.0; Windows NT 5.1)" />
+            <add alias="downlevel" userAgent="Generic Downlevel" />
+        </system.web-clientTarget>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/urlCompression" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-urlCompression />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/webdav/globalSettings" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-webdav-globalSettings>
+            <propertyStores>
+            </propertyStores>
+            <lockStores>
+            </lockStores>
+        </system.webServer-webdav-globalSettings>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/security/authentication/windowsAuthentication" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-security-authentication-windowsAuthentication>
+            <providers>
+            </providers>
+            <extendedProtection>
+            </extendedProtection>
+        </system.webServer-security-authentication-windowsAuthentication>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/security/ipSecurity" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-security-ipSecurity>
+        </system.webServer-security-ipSecurity>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/security/dynamicIpSecurity" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-security-dynamicIpSecurity>
+            <denyByConcurrentRequests />
+            <denyByRequestRate />
+        </system.webServer-security-dynamicIpSecurity>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.transactions/machineSettings" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="true">
+        <system.transactions-machineSettings />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/trust" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-trust level="Full" originUrl="" />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/caching/outputCacheSettings" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-caching-outputCacheSettings>
+            <outputCacheProfiles>
+            </outputCacheProfiles>
+        </system.web-caching-outputCacheSettings>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.ftpServer/security/authentication" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.ftpServer-security-authentication>
+            <denyByFailure />
+        </system.ftpServer-security-authentication>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="connectionStrings" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <connectionStrings>
+            <add connectionString="data source=.\SQLEXPRESS;Integrated Security=SSPI;AttachDBFilename=|DataDirectory|aspnetdb.mdf;User Instance=true" name="LocalSqlServer" providerName="System.Data.SqlClient" />
+        </connectionStrings>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/deviceFilters" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-deviceFilters>
+        </system.web-deviceFilters>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.transactions/defaultSettings" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.transactions-defaultSettings />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/deployment" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="true">
+        <system.web-deployment />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/globalModules" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-globalModules>
+            <add name="HttpLoggingModule" image="%windir%\System32\inetsrv\loghttp.dll" />
+            <add name="UriCacheModule" image="%windir%\System32\inetsrv\cachuri.dll" />
+            <add name="FileCacheModule" image="%windir%\System32\inetsrv\cachfile.dll" />
+            <add name="TokenCacheModule" image="%windir%\System32\inetsrv\cachtokn.dll" />
+            <add name="HttpCacheModule" image="%windir%\System32\inetsrv\cachhttp.dll" />
+            <add name="StaticCompressionModule" image="%windir%\System32\inetsrv\compstat.dll" />
+            <add name="DefaultDocumentModule" image="%windir%\System32\inetsrv\defdoc.dll" />
+            <add name="DirectoryListingModule" image="%windir%\System32\inetsrv\dirlist.dll" />
+            <add name="ProtocolSupportModule" image="%windir%\System32\inetsrv\protsup.dll" />
+            <add name="StaticFileModule" image="%windir%\System32\inetsrv\static.dll" />
+            <add name="AnonymousAuthenticationModule" image="%windir%\System32\inetsrv\authanon.dll" />
+            <add name="RequestFilteringModule" image="%windir%\System32\inetsrv\modrqflt.dll" />
+            <add name="CustomErrorModule" image="%windir%\System32\inetsrv\custerr.dll" />
+            <add name="RewriteModule" image="%SystemRoot%\system32\inetsrv\rewrite.dll" />
+        </system.webServer-globalModules>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/anonymousIdentification" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-anonymousIdentification />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/caching/cache" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-caching-cache>
+            <providers>
+            </providers>
+        </system.web-caching-cache>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/mobileControls" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-mobileControls cookielessDataDictionaryType="System.Web.Mobile.CookielessData" sessionStateHistorySize="6">
+            <device name="XhtmlDeviceAdapters" pageAdapter="System.Web.UI.MobileControls.Adapters.XhtmlAdapters.XhtmlPageAdapter" predicateClass="System.Web.UI.MobileControls.Adapters.XhtmlAdapters.XhtmlPageAdapter" predicateMethod="DeviceQualifies">
+                <control adapter="System.Web.UI.MobileControls.Adapters.XhtmlAdapters.XhtmlPanelAdapter" name="System.Web.UI.MobileControls.Panel" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.XhtmlAdapters.XhtmlFormAdapter" name="System.Web.UI.MobileControls.Form" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.XhtmlAdapters.XhtmlTextBoxAdapter" name="System.Web.UI.MobileControls.TextBox" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.XhtmlAdapters.XhtmlLabelAdapter" name="System.Web.UI.MobileControls.Label" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.XhtmlAdapters.XhtmlLiteralTextAdapter" name="System.Web.UI.MobileControls.LiteralText" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.XhtmlAdapters.XhtmlLinkAdapter" name="System.Web.UI.MobileControls.Link" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.XhtmlAdapters.XhtmlCommandAdapter" name="System.Web.UI.MobileControls.Command" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.XhtmlAdapters.XhtmlPhoneCallAdapter" name="System.Web.UI.MobileControls.PhoneCall" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.XhtmlAdapters.XhtmlListAdapter" name="System.Web.UI.MobileControls.List" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.XhtmlAdapters.XhtmlSelectionListAdapter" name="System.Web.UI.MobileControls.SelectionList" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.XhtmlAdapters.XhtmlObjectListAdapter" name="System.Web.UI.MobileControls.ObjectList" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.XhtmlAdapters.XhtmlImageAdapter" name="System.Web.UI.MobileControls.Image" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.XhtmlAdapters.XhtmlValidationSummaryAdapter" name="System.Web.UI.MobileControls.ValidationSummary" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.XhtmlAdapters.XhtmlCalendarAdapter" name="System.Web.UI.MobileControls.Calendar" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.XhtmlAdapters.XhtmlTextViewAdapter" name="System.Web.UI.MobileControls.TextView" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.XhtmlAdapters.XhtmlControlAdapter" name="System.Web.UI.MobileControls.MobileControl" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.XhtmlAdapters.XhtmlValidatorAdapter" name="System.Web.UI.MobileControls.BaseValidator" />
+            </device>
+            <device name="HtmlDeviceAdapters" pageAdapter="System.Web.UI.MobileControls.Adapters.HtmlPageAdapter" predicateClass="System.Web.UI.MobileControls.Adapters.HtmlPageAdapter" predicateMethod="DeviceQualifies">
+                <control adapter="System.Web.UI.MobileControls.Adapters.HtmlPanelAdapter" name="System.Web.UI.MobileControls.Panel" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.HtmlFormAdapter" name="System.Web.UI.MobileControls.Form" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.HtmlTextBoxAdapter" name="System.Web.UI.MobileControls.TextBox" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.HtmlLabelAdapter" name="System.Web.UI.MobileControls.Label" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.HtmlLiteralTextAdapter" name="System.Web.UI.MobileControls.LiteralText" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.HtmlLinkAdapter" name="System.Web.UI.MobileControls.Link" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.HtmlCommandAdapter" name="System.Web.UI.MobileControls.Command" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.HtmlPhoneCallAdapter" name="System.Web.UI.MobileControls.PhoneCall" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.HtmlListAdapter" name="System.Web.UI.MobileControls.List" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.HtmlSelectionListAdapter" name="System.Web.UI.MobileControls.SelectionList" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.HtmlObjectListAdapter" name="System.Web.UI.MobileControls.ObjectList" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.HtmlImageAdapter" name="System.Web.UI.MobileControls.Image" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.HtmlValidatorAdapter" name="System.Web.UI.MobileControls.BaseValidator" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.HtmlValidationSummaryAdapter" name="System.Web.UI.MobileControls.ValidationSummary" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.HtmlCalendarAdapter" name="System.Web.UI.MobileControls.Calendar" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.HtmlTextViewAdapter" name="System.Web.UI.MobileControls.TextView" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.HtmlControlAdapter" name="System.Web.UI.MobileControls.MobileControl" />
+            </device>
+            <device inheritsFrom="WmlDeviceAdapters" name="UpWmlDeviceAdapters" pageAdapter="System.Web.UI.MobileControls.Adapters.UpWmlPageAdapter" predicateClass="System.Web.UI.MobileControls.Adapters.UpWmlPageAdapter" predicateMethod="DeviceQualifies">
+            </device>
+            <device name="WmlDeviceAdapters" pageAdapter="System.Web.UI.MobileControls.Adapters.WmlPageAdapter" predicateClass="System.Web.UI.MobileControls.Adapters.WmlPageAdapter" predicateMethod="DeviceQualifies">
+                <control adapter="System.Web.UI.MobileControls.Adapters.WmlPanelAdapter" name="System.Web.UI.MobileControls.Panel" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.WmlFormAdapter" name="System.Web.UI.MobileControls.Form" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.WmlTextBoxAdapter" name="System.Web.UI.MobileControls.TextBox" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.WmlLabelAdapter" name="System.Web.UI.MobileControls.Label" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.WmlLiteralTextAdapter" name="System.Web.UI.MobileControls.LiteralText" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.WmlLinkAdapter" name="System.Web.UI.MobileControls.Link" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.WmlCommandAdapter" name="System.Web.UI.MobileControls.Command" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.WmlPhoneCallAdapter" name="System.Web.UI.MobileControls.PhoneCall" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.WmlListAdapter" name="System.Web.UI.MobileControls.List" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.WmlSelectionListAdapter" name="System.Web.UI.MobileControls.SelectionList" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.WmlObjectListAdapter" name="System.Web.UI.MobileControls.ObjectList" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.WmlImageAdapter" name="System.Web.UI.MobileControls.Image" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.WmlValidatorAdapter" name="System.Web.UI.MobileControls.BaseValidator" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.WmlValidationSummaryAdapter" name="System.Web.UI.MobileControls.ValidationSummary" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.WmlCalendarAdapter" name="System.Web.UI.MobileControls.Calendar" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.WmlTextViewAdapter" name="System.Web.UI.MobileControls.TextView" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.WmlControlAdapter" name="System.Web.UI.MobileControls.MobileControl" />
+            </device>
+            <device inheritsFrom="HtmlDeviceAdapters" name="ChtmlDeviceAdapters" pageAdapter="System.Web.UI.MobileControls.Adapters.ChtmlPageAdapter" predicateClass="System.Web.UI.MobileControls.Adapters.ChtmlPageAdapter" predicateMethod="DeviceQualifies">
+                <control adapter="System.Web.UI.MobileControls.Adapters.ChtmlFormAdapter" name="System.Web.UI.MobileControls.Form" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.ChtmlCalendarAdapter" name="System.Web.UI.MobileControls.Calendar" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.ChtmlImageAdapter" name="System.Web.UI.MobileControls.Image" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.ChtmlTextBoxAdapter" name="System.Web.UI.MobileControls.TextBox" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.ChtmlSelectionListAdapter" name="System.Web.UI.MobileControls.SelectionList" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.ChtmlCommandAdapter" name="System.Web.UI.MobileControls.Command" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.ChtmlPhoneCallAdapter" name="System.Web.UI.MobileControls.PhoneCall" />
+                <control adapter="System.Web.UI.MobileControls.Adapters.ChtmlLinkAdapter" name="System.Web.UI.MobileControls.Link" />
+            </device>
+        </system.web-mobileControls>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/sessionPageState" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-sessionPageState />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.windows.forms" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.windows.forms />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/validation" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-validation />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.codedom" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.codedom>
+            <compilers>
+                <compiler language="c#;cs;csharp" extension=".cs" type="Microsoft.CSharp.CSharpCodeProvider, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" warningLevel="4">
+                    <providerOption name="CompilerVersion" value="v4.0" />
+                    <providerOption name="WarnAsError" value="false" />
+                </compiler>
+                <compiler language="vb;vbs;visualbasic;vbscript" extension=".vb" type="Microsoft.VisualBasic.VBCodeProvider, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" warningLevel="4">
+                    <providerOption name="CompilerVersion" value="v4.0" />
+                    <providerOption name="OptionInfer" value="true" />
+                    <providerOption name="WarnAsError" value="false" />
+                </compiler>
+            </compilers>
+        </system.codedom>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.applicationHost/applicationPools" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.applicationHost-applicationPools>
+            <applicationPoolDefaults managedRuntimeVersion="v4.0">
+                <processModel identityType="ApplicationPoolIdentity" loadUserProfile="true" setProfileEnvironment="false" />
+                <recycling>
+                    <periodicRestart>
+                        <schedule>
+                        </schedule>
+                    </periodicRestart>
+                </recycling>
+                <failure />
+                <cpu />
+                <environmentVariables>
+                </environmentVariables>
+            </applicationPoolDefaults>
+            <add name="DefaultAppPool" managedRuntimeVersion="v4.0">
+                <processModel />
+                <recycling>
+                    <periodicRestart>
+                        <schedule>
+                        </schedule>
+                    </periodicRestart>
+                </recycling>
+                <failure />
+                <cpu />
+                <environmentVariables>
+                </environmentVariables>
+            </add>
+        </system.applicationHost-applicationPools>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/compilation" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-compilation>
+            <assemblies>
+                <add assembly="mscorlib" />
+                <add assembly="Microsoft.CSharp, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+                <add assembly="System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+                <add assembly="System.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+                <add assembly="System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+                <add assembly="System.Data, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+                <add assembly="System.Web.Services, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+                <add assembly="System.Xml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+                <add assembly="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+                <add assembly="System.EnterpriseServices, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+                <add assembly="System.IdentityModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+                <add assembly="System.Runtime.Serialization, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+                <add assembly="System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+                <add assembly="System.ServiceModel.Activation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+                <add assembly="System.ServiceModel.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+                <add assembly="System.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+                <add assembly="System.ServiceModel.Activities, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+                <add assembly="System.WorkflowServices, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+                <add assembly="System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+                <add assembly="System.Web.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+                <add assembly="System.Data.DataSetExtensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+                <add assembly="System.Xml.Linq, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+                <add assembly="System.ComponentModel.DataAnnotations, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+                <add assembly="System.Web.DynamicData, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+                <add assembly="System.Web.ApplicationServices, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+                <add assembly="*" />
+            </assemblies>
+            <buildProviders>
+                <add extension=".aspx" type="System.Web.Compilation.PageBuildProvider" />
+                <add extension=".ascx" type="System.Web.Compilation.UserControlBuildProvider" />
+                <add extension=".master" type="System.Web.Compilation.MasterPageBuildProvider" />
+                <add extension=".asmx" type="System.Web.Compilation.WebServiceBuildProvider" />
+                <add extension=".ashx" type="System.Web.Compilation.WebHandlerBuildProvider" />
+                <add extension=".soap" type="System.Web.Compilation.WebServiceBuildProvider" />
+                <add extension=".resx" type="System.Web.Compilation.ResXBuildProvider" />
+                <add extension=".resources" type="System.Web.Compilation.ResourcesBuildProvider" />
+                <add extension=".wsdl" type="System.Web.Compilation.WsdlBuildProvider" />
+                <add extension=".xsd" type="System.Web.Compilation.XsdBuildProvider" />
+                <add extension=".js" type="System.Web.Compilation.ForceCopyBuildProvider" />
+                <add extension=".lic" type="System.Web.Compilation.IgnoreFileBuildProvider" />
+                <add extension=".licx" type="System.Web.Compilation.IgnoreFileBuildProvider" />
+                <add extension=".exclude" type="System.Web.Compilation.IgnoreFileBuildProvider" />
+                <add extension=".refresh" type="System.Web.Compilation.IgnoreFileBuildProvider" />
+                <add extension=".edmx" type="System.Data.Entity.Design.AspNet.EntityDesignerBuildProvider" />
+                <add extension=".xoml" type="System.ServiceModel.Activation.WorkflowServiceBuildProvider, System.WorkflowServices, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+                <add extension=".svc" type="System.ServiceModel.Activation.ServiceBuildProvider, System.ServiceModel.Activation, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+                <add extension=".xamlx" type="System.Xaml.Hosting.XamlBuildProvider, System.Xaml.Hosting, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+            </buildProviders>
+            <codeSubDirectories>
+            </codeSubDirectories>
+            <expressionBuilders>
+                <add expressionPrefix="Resources" type="System.Web.Compilation.ResourceExpressionBuilder" />
+                <add expressionPrefix="ConnectionStrings" type="System.Web.Compilation.ConnectionStringsExpressionBuilder" />
+                <add expressionPrefix="AppSettings" type="System.Web.Compilation.AppSettingsExpressionBuilder" />
+                <add expressionPrefix="RouteUrl" type="System.Web.Compilation.RouteUrlExpressionBuilder" />
+                <add expressionPrefix="RouteValue" type="System.Web.Compilation.RouteValueExpressionBuilder" />
+            </expressionBuilders>
+            <folderLevelBuildProviders>
+                <add name="DataServiceBuildProvider" type="System.Data.Services.BuildProvider.DataServiceBuildProvider, System.Data.Services.Design, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+            </folderLevelBuildProviders>
+        </system.web-compilation>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/webdav/authoringRules" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-webdav-authoringRules>
+        </system.webServer-webdav-authoringRules>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/httpTracing" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-httpTracing>
+            <traceUrls>
+            </traceUrls>
+        </system.webServer-httpTracing>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/authentication" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-authentication>
+            <forms>
+                <credentials>
+                </credentials>
+            </forms>
+            <passport />
+        </system.web-authentication>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/rewrite/providers" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-rewrite-providers>
+        </system.webServer-rewrite-providers>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.applicationHost/listenerAdapters" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.applicationHost-listenerAdapters>
+            <add name="http" />
+        </system.applicationHost-listenerAdapters>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/fastCgi" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-fastCgi>
+        </system.webServer-fastCgi>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/rewrite/rewriteMaps" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-rewrite-rewriteMaps>
+        </system.webServer-rewrite-rewriteMaps>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.net/mailSettings/smtp" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.net-mailSettings-smtp>
+            <network />
+            <specifiedPickupDirectory />
+        </system.net-mailSettings-smtp>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/modules" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-modules>
+            <add name="HttpLoggingModule" />
+            <add name="HttpCacheModule" />
+            <add name="StaticCompressionModule" />
+            <add name="DefaultDocumentModule" />
+            <add name="DirectoryListingModule" />
+            <add name="ProtocolSupportModule" />
+            <add name="StaticFileModule" />
+            <add name="AnonymousAuthenticationModule" />
+            <add name="RequestFilteringModule" />
+            <add name="CustomErrorModule" />
+            <add name="RewriteModule" />
+        </system.webServer-modules>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/security/authentication/digestAuthentication" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-security-authentication-digestAuthentication />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/security/authentication/iisClientCertificateMappingAuthentication" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-security-authentication-iisClientCertificateMappingAuthentication>
+            <manyToOneMappings>
+            </manyToOneMappings>
+            <oneToOneMappings>
+            </oneToOneMappings>
+        </system.webServer-security-authentication-iisClientCertificateMappingAuthentication>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/customErrors" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-customErrors>
+        </system.web-customErrors>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.net/webRequestModules" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.net-webRequestModules>
+        </system.net-webRequestModules>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/security/authentication/clientCertificateMappingAuthentication" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-security-authentication-clientCertificateMappingAuthentication />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/rewrite/allowedServerVariables" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-rewrite-allowedServerVariables>
+        </system.webServer-rewrite-allowedServerVariables>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/caching/outputCache" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-caching-outputCache />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/webControls" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-webControls clientScriptsLocation="/aspnet_client/{0}/{1}/" />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/isapiFilters" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-isapiFilters>
+        </system.webServer-isapiFilters>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/sessionState" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-sessionState>
+            <providers>
+            </providers>
+        </system.web-sessionState>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.ftpServer/security/ipSecurity" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.ftpServer-security-ipSecurity>
+        </system.ftpServer-security-ipSecurity>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.net/defaultProxy" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.net-defaultProxy>
+            <bypasslist>
+            </bypasslist>
+            <module />
+            <proxy usesystemdefault="true" />
+        </system.net-defaultProxy>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/identity" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-identity />
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/tracing/traceProviderDefinitions" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-tracing-traceProviderDefinitions>
+            <add name="WWW Server" guid="{3a2a4e84-4c21-4981-ae10-3fda0d9b0f83}">
+                <areas>
+                    <add name="Rewrite" value="1024" />
+                </areas>
+            </add>
+        </system.webServer-tracing-traceProviderDefinitions>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.net/authenticationModules" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.net-authenticationModules>
+        </system.net-authenticationModules>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/roleManager" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-roleManager>
+            <providers>
+                <add name="AspNetSqlRoleProvider" type="System.Web.Security.SqlRoleProvider, System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" connectionStringName="LocalSqlServer" applicationName="/" />
+                <add name="AspNetWindowsTokenRoleProvider" type="System.Web.Security.WindowsTokenRoleProvider, System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" applicationName="/" />
+            </providers>
+        </system.web-roleManager>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="configProtectedData" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <configProtectedData defaultProvider="RsaProtectedConfigurationProvider">
+            <providers>
+                <add name="RsaProtectedConfigurationProvider" type="System.Configuration.RsaProtectedConfigurationProvider,System.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" description="Uses RsaCryptoServiceProvider to encrypt and decrypt" keyContainerName="NetFrameworkConfigurationKey" cspProviderName="" useMachineContainer="true" useOAEP="true" />
+                <add name="DataProtectionConfigurationProvider" type="System.Configuration.DpapiProtectedConfigurationProvider,System.Configuration, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" description="Uses CryptProtectData and CryptUnProtectData Windows APIs to encrypt and decrypt" useMachineProtection="true" keyEntropy="" />
+                <add name="IISCngProvider" type="Microsoft.ApplicationHost.CngProtectedConfigurationProvider" description="Uses Win32 Crypto CNG to encrypt and decrypt" keyContainerName="iisCngConfigurationKey" useMachineContainer="true" />
+                <add name="IISWASOnlyCngProvider" type="Microsoft.ApplicationHost.CngProtectedConfigurationProvider" description="(WAS Only) Uses Win32 Crypto CNG to encrypt and decrypt" keyContainerName="iisCngWasKey" useMachineContainer="true" />
+            </providers>
+        </configProtectedData>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.web/pages" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.web-pages>
+            <controls>
+                <add assembly="System.Web, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" namespace="System.Web.UI.WebControls.WebParts" tagPrefix="asp" />
+                <add assembly="System.Web.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" namespace="System.Web.UI" tagPrefix="asp" />
+                <add assembly="System.Web.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" namespace="System.Web.UI.WebControls" tagPrefix="asp" />
+                <add assembly="System.Web.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" namespace="System.Web.UI.WebControls.Expressions" tagPrefix="asp" />
+                <add assembly="System.Web.DynamicData, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" namespace="System.Web.DynamicData" tagPrefix="asp" />
+                <add assembly="System.Web.Entity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" namespace="System.Web.UI.WebControls" tagPrefix="asp" />
+            </controls>
+            <namespaces>
+                <add namespace="System" />
+                <add namespace="System.Collections" />
+                <add namespace="System.Collections.Generic" />
+                <add namespace="System.Collections.Specialized" />
+                <add namespace="System.ComponentModel.DataAnnotations" />
+                <add namespace="System.Configuration" />
+                <add namespace="System.Linq" />
+                <add namespace="System.Text" />
+                <add namespace="System.Text.RegularExpressions" />
+                <add namespace="System.Web" />
+                <add namespace="System.Web.Caching" />
+                <add namespace="System.Web.DynamicData" />
+                <add namespace="System.Web.SessionState" />
+                <add namespace="System.Web.Security" />
+                <add namespace="System.Web.Profile" />
+                <add namespace="System.Web.UI" />
+                <add namespace="System.Web.UI.WebControls" />
+                <add namespace="System.Web.UI.WebControls.WebParts" />
+                <add namespace="System.Web.UI.HtmlControls" />
+                <add namespace="System.Xml.Linq" />
+            </namespaces>
+            <tagMapping>
+            </tagMapping>
+        </system.web-pages>
+    </CONFIG>
+    <CONFIG CONFIG.SECTION="system.webServer/rewrite/globalRules" path="MACHINE/WEBROOT/APPHOST" overrideMode="Inherit" locked="false">
+        <system.webServer-rewrite-globalRules>
+        </system.webServer-rewrite-globalRules>
+    </CONFIG>
+</appcmd>

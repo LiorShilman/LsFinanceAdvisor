@@ -1,0 +1,497 @@
+<div class="container-fluid">
+  <!-- Cash Flow Section -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card text-white mb-4">
+        <div class="card-body alert alert-primary">
+          <div class="card-header">
+            <span>
+              <i class="bi bi-cash-stack me-3"></i>
+              תזרים עו"ש
+            </span>
+            <i class="fs-1 text-success fa fa-plus" (click)="AddRow()" title="הוסף פעולה חדשה"></i>
+          </div>
+          
+          <div class="table-responsive table-striped">
+            <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-center text-success col-md-2 blockquote fw-bold fs-5">
+                    <i class="bi bi-calendar-date me-2"></i>
+                    יום ביצוע
+                  </th>
+                  <th scope="col" class="text-center text-success col-md-2 blockquote fw-bold fs-5">
+                    <i class="bi bi-tag me-2"></i>
+                    השקעה/הכנסה/הוצאה
+                  </th>
+                  <th scope="col" class="text-center text-success col-md-2 blockquote fw-bold fs-5">
+                    <i class="bi bi-currency-shekel me-2"></i>
+                    סכום
+                  </th>
+                  <th scope="col" class="text-center text-success col-md-2 blockquote fw-bold fs-5">
+                    <i class="bi bi-calculator me-2"></i>
+                    מצב ביניים
+                  </th>
+                  <th scope="col" class="text-center text-success col-md-4 blockquote fw-bold fs-5">
+                    <i class="bi bi-chat-text me-2"></i>
+                    הערות
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor='let item of this.generalInfoService.AllInfo.CurrentFlowViewInfo.itemsRows; let i = index'>
+                  <tr>
+                    <!-- Date -->
+                    <td>
+                      <input type="text" 
+                             name="flow-date-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold fs-5 text-info" 
+                             id="flow-date-{{i+1}}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.CurrentFlowViewInfo.itemsRows[i].Date"
+                             (ngModelChange)="onDataChange()"
+                             placeholder="יום בחודש">
+                    </td>
+                    
+                    <!-- Type -->
+                    <td>
+                      <input type="text" 
+                             name="flow-type-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-center fs-5" 
+                             id="flow-type-{{i+1}}"
+                             [ngStyle]="{'color': this.getStyleFromVal(this.generalInfoService.AllInfo.CurrentFlowViewInfo.itemsRows[i].Type)}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.CurrentFlowViewInfo.itemsRows[i].Type"
+                             (ngModelChange)="onDataChange()"
+                             placeholder="סוג הפעולה">
+                    </td>
+                    
+                    <!-- Amount -->
+                    <td>
+                      <input type="text" 
+                             name="flow-amount-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-center fs-5" 
+                             numbersOnly
+                             id="flow-amount-{{i+1}}"
+                             [ngStyle]="{'color': this.getStyleFromVal(this.generalInfoService.AllInfo.CurrentFlowViewInfo.itemsRows[i].Type)}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.CurrentFlowViewInfo.itemsRows[i].CurrAmount"
+                             (ngModelChange)="onDataChange()"
+                             placeholder="0">
+                    </td>
+                    
+                    <!-- Interim Balance -->
+                    <td>
+                      <input type="text" 
+                             name="flow-balance-{{i+1}}" 
+                             autocomplete="off" 
+                             disabled
+                             class="form-control fw-bold text-center fs-5"
+                             id="flow-balance-{{i+1}}"
+                             [ngStyle]="{'color': this.getStyleFromValBG(this.generalInfoService.AllInfo.CurrentFlowViewInfo.CalcNetSum(i))}"
+                             [value]="this.generalInfoService.AllInfo.CurrentFlowViewInfo.CalcNetSum(i) | currency:'ILS':'symbol':'.0'"
+                             [ngClass]="this.generalInfoService.AllInfo.CurrentFlowViewInfo.CalcNetSum(i) >= 0 ? 'bg-lim-success' : 'custom-red-bg'">
+                    </td>
+                    
+                    <!-- Comments -->
+                    <td>
+                      <input type="text" 
+                             name="flow-comment-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-info align-middle fs-5"
+                             id="flow-comment-{{i+1}}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.CurrentFlowViewInfo.itemsRows[i].Comment"
+                             placeholder="הערות נוספות">
+                    </td>
+                  </tr>
+                </ng-container>
+                
+                <!-- Chart Row -->
+                <tr>
+                  <td colspan="5" class="chart-container text-center">
+                    <div class="chart-wrapper">
+                      <h3 class="chart-title">
+                        <i class="bi bi-graph-up me-2"></i>
+                        גרף תזרים חודשי
+                      </h3>
+                      <highcharts-chart 
+                        [Highcharts]="highcharts" 
+                        [(update)]="updateFlag"
+                        [options]="chartOptions"
+                        class="cash-flow-chart enlarged-chart">
+                      </highcharts-chart>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Recommended Cash Amount Section -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="summary-section">
+        <div class="summary-item">
+          <div class="summary-label">
+            <i class="bi bi-lightbulb me-3"></i>
+            <span>עו"ש מומלץ בתחילת החודש</span>
+          </div>
+          <div class="summary-value">
+            <i class="bi bi-currency-shekel me-2"></i>
+            {{this.generalInfoService.AllInfo.CurrentFlowViewInfo.CalcNeedInFirstDay() | currency:'ILS':'symbol':'.0'}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Current Cash Check Section -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="cash-check-section">
+        <div class="cash-check-container">
+          <div class="cash-input-group">
+            <label class="cash-label" >
+              <i class="bi bi-wallet2 me-2" style="padding-left: 15px"></i>
+              עו"ש עכשווי?
+            </label>
+            <div class="cash-input-wrapper">
+              <input type="text" 
+                     name="current-cash" 
+                     autocomplete="off"
+                     class="form-control cash-input fw-bold fs-5 text-primary text-center"
+                     id="current-cash"
+                     [(ngModel)]="this.generalInfoService.AllInfo.CurrentFlowViewInfo.CurrCash"
+                     (ngModelChange)="onCurrentCashChange()"
+                     placeholder="הכנס סכום">
+              <button type="button" 
+                      class="btn cash-check-btn fs-5 fw-bold"
+                      (click)="this.generalInfoService.AllInfo.CurrentFlowViewInfo.CheckExistCash()">
+                <i class="bi bi-search me-2"></i>
+                לבדיקה
+              </button>
+            </div>
+          </div>
+          
+          <!-- Recommendation Result -->
+          <div class="recommendation-result" 
+               *ngIf="this.generalInfoService.AllInfo.CurrentFlowViewInfo.RecommendedAdd2CashDate != ''">
+            <div class="recommendation-card">
+              <div class="recommendation-icon">
+                <i class="bi bi-exclamation-triangle"></i>
+              </div>
+              <div class="recommendation-content">
+                <h4 class="recommendation-title">המלצה להוספת כסף</h4>
+                <div class="recommendation-details">
+                  <span class="recommendation-amount">
+                    <i class="bi bi-currency-shekel me-1"></i>
+                    {{this.generalInfoService.AllInfo.CurrentFlowViewInfo.RecommendedAdd2Cash | currency:'ILS':'symbol':'.0'}}
+                  </span>
+                  <span class="recommendation-date">
+                    <i class="bi bi-calendar-event me-1"></i>
+                    {{this.generalInfoService.AllInfo.CurrentFlowViewInfo.RecommendedAdd2CashDate}}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAPE Calculator Section -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card text-white mb-4">
+        <div class="card-body">
+          <div class="card-header">
+            <span>
+              <i class="bi bi-calculator me-3"></i>
+              מחשבון MAPE - תכנון קנייה חכם
+            </span>
+            <i class="fs-1 text-success fa fa-refresh" (click)="syncMapeCalculator()" title="סנכרן נתונים"></i>
+          </div>
+
+          <!-- מידע בסיסי -->
+          <div class="summary-section">
+            <h3 class="section-title">
+              <i class="bi bi-info-circle me-2"></i>
+              נתוני בסיס לחישוב
+            </h3>
+            
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="mape-current-balance">יתרת עו"ש נוכחית:</label>
+                <input type="number" 
+                       id="mape-current-balance"
+                       class="form-control fw-bold fs-5 text-primary text-center"
+                       [(ngModel)]="mapeCalculator.currentBalance"
+                       placeholder="0">
+              </div>
+              
+              <div class="form-group">
+                <label for="mape-monthly-income">הכנסה חודשית:</label>
+                <input type="number" 
+                       id="mape-monthly-income"
+                       class="form-control fw-bold fs-5 text-success text-center"
+                       [(ngModel)]="mapeCalculator.monthlyIncome"
+                       placeholder="0">
+              </div>
+              
+              <div class="form-group">
+                <label for="mape-income-day">יום כניסת המשכורת:</label>
+                <input type="number" 
+                       id="mape-income-day"
+                       class="form-control fw-bold fs-5 text-info text-center"
+                       [(ngModel)]="mapeCalculator.incomeDay"
+                       min="1" max="31"
+                       placeholder="9">
+              </div>
+              
+              <div class="form-group">
+                <label for="mape-safety-buffer">מאגר ביטחון:</label>
+                <input type="number" 
+                       id="mape-safety-buffer"
+                       class="form-control fw-bold fs-5 text-warning text-center"
+                       [(ngModel)]="mapeCalculator.safetyBuffer"
+                       placeholder="3000">
+              </div>
+            </div>
+          </div>
+
+          <!-- הוצאות מהטבלה -->
+          <div class="summary-section">
+            <h3 class="section-title">
+              <i class="bi bi-list-check me-2"></i>
+              הוצאות מזוהות מהטבלה (עודכן אוטומטית)
+            </h3>
+            
+            <div class="table-responsive">
+              <table class="table table-borderless">
+                <thead>
+                  <tr>
+                    <th class="text-center">תאריך</th>
+                    <th class="text-center">סוג</th>
+                    <th class="text-center">סכום</th>
+                    <th class="text-center">הערות</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let expense of mapeCalculator.autoExpenses; let i = index"
+                      [ngClass]="getExpenseRowClass(expense.type)">
+                    <td class="text-center fw-bold">{{expense.date}}</td>
+                    <td class="text-center fw-bold" [ngStyle]="{'color': getStyleFromVal(expense.type)}">
+                      {{expense.type}}
+                    </td>
+                    <td class="text-center fw-bold" [ngStyle]="{'color': getStyleFromVal(expense.type)}">
+                      {{expense.amount | currency:'ILS':'symbol':'.0'}}
+                    </td>
+                    <td class="text-center">{{expense.comment}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- הוצאות נוספות -->
+          <div class="summary-section">
+            <h3 class="section-title">
+              <i class="bi bi-plus-circle me-2"></i>
+              הוצאות נוספות (אופציונלי)
+            </h3>
+            
+            <div class="expense-row" *ngFor="let expense of mapeCalculator.additionalExpenses; let i = index">
+              <div class="form-grid" style="grid-template-columns: 2fr 1fr 1fr 80px; align-items: end;">
+                <div class="form-group">
+                  <label>שם ההוצאה:</label>
+                  <input type="text" 
+                         class="form-control expense-input"
+                         [(ngModel)]="expense.name"
+                         placeholder="למשל: ביטוח רכב">
+                </div>
+                <div class="form-group">
+                  <label>סכום (ש"ח):</label>
+                  <input type="number" 
+                         class="form-control expense-input"
+                         [(ngModel)]="expense.amount"
+                         placeholder="0">
+                </div>
+                <div class="form-group">
+                  <label>יום בחודש:</label>
+                  <input type="number" 
+                         class="form-control expense-input"
+                         [(ngModel)]="expense.date"
+                         min="1" max="31"
+                         placeholder="1">
+                </div>
+                <div class="form-group">
+                  <button type="button" 
+                          class="btn btn-danger fw-bold"
+                          (click)="removeAdditionalExpense(i)">
+                    🗑️
+                  </button>
+                </div>
+              </div>
+            </div>
+            
+            <div class="text-center">
+              <button type="button" 
+                      class="btn btn-warning fw-bold"
+                      (click)="addAdditionalExpense()">
+                ➕ הוסף הוצאה נוספת
+              </button>
+            </div>
+          </div>
+
+          <!-- פרטי הקנייה -->
+          <div class="summary-section">
+            <h3 class="section-title">
+              <i class="bi bi-cart me-2"></i>
+              פרטי הקנייה המתוכננת
+            </h3>
+            
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="mape-purchase-full-date">תאריך קנייה מתוכנן:</label>
+                <input type="date"
+                      id="mape-purchase-full-date"
+                      class="form-control fw-bold fs-5 text-warning text-center"
+                      [(ngModel)]="mapeCalculator.purchaseFullDate">
+              </div>
+              
+              <div class="form-group">
+                <label for="installments">מספר תשלומים:</label>
+                <select id="installments" 
+                        class="form-control purchase-input"
+                        [(ngModel)]="mapeCalculator.installments">
+                  <option value="1">תשלום יחיד</option>
+                  <option value="2">2 תשלומים</option>
+                  <option value="3">3 תשלומים</option>
+                  <option value="4" selected>4 תשלומים</option>
+                  <option value="6">6 תשלומים</option>
+                  <option value="12">12 תשלומים</option>
+                </select>
+              </div>
+              
+              <div class="form-group">
+                <label for="planning-horizon">אופק תכנון:</label>
+                <select id="planning-horizon" 
+                        class="form-control purchase-input"
+                        [(ngModel)]="mapeCalculator.planningHorizon">
+                  <option value="1">תשלום יחיד (זהיר מאוד)</option>
+                  <option value="2">עד 2 תשלומים (זהיר)</option>
+                  <option value="3">עד 3 תשלומים (מתון)</option>
+                  <option value="4" selected>עד 4 תשלומים (רגיל)</option>
+                  <option value="6">עד 6 תשלומים (אמיץ)</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- כפתור חישוב -->
+          <div class="text-center" style="margin: 2rem 0;">
+            <button type="button" 
+                    class="btn btn-success fw-bold fs-4"
+                    style="padding: 1rem 3rem;"
+                    (click)="calculateMAPE()">
+              🚀 חשב MAPE - האם אוכל לקנות?
+            </button>
+          </div>
+
+          <!-- תוצאות -->
+          <div class="summary-section" *ngIf="mapeResult.showResults">
+            <h3 class="section-title" [ngStyle]="{'color': mapeResult.statusColor}">
+              <i class="bi bi-graph-up me-2"></i>
+              תוצאות החישוב
+            </h3>
+            
+            <div class="result-grid">
+              <div class="result-item">
+                <div class="result-number" [ngStyle]="{'color': mapeResult.statusColor}">
+                  {{mapeResult.mape | currency:'ILS':'symbol':'.0'}}
+                </div>
+                <div class="result-label">תשלום מקסימלי</div>
+                <div class="result-sublabel">ש"ח לתשלום</div>
+              </div>
+              
+              <div class="result-item">
+                <div class="result-number" [ngStyle]="{'color': mapeResult.statusColor}">
+                  {{mapeResult.maxPurchase | currency:'ILS':'symbol':'.0'}}
+                </div>
+                <div class="result-label">סה"כ קנייה מותרת</div>
+                <div class="result-sublabel">ש"ח</div>
+              </div>
+              
+              <div class="result-item">
+                <div class="result-number" [ngStyle]="{'color': mapeResult.statusColor, 'font-size': '1.8em'}">
+                  {{mapeResult.statusText}}
+                </div>
+                <div class="result-label">סטטוס כספי</div>
+                <div class="result-sublabel">רמת סיכון: {{mapeResult.riskLevel}}</div>
+              </div>
+            </div>
+
+            <!-- פירוט התזרים -->
+            <div class="cashflow-details">
+              <h4 style="color: #4a90e2; margin-bottom: 15px;">
+                <i class="bi bi-graph-up-arrow me-2"></i>
+                פירוט התזרים עד יום הקנייה:
+              </h4>
+              
+              <div class="cashflow-item" *ngFor="let detail of mapeResult.cashflowDetails" [innerHTML]="detail">
+              </div>
+              
+              <div style="margin-top: 15px; padding: 15px; background: rgba(74, 144, 226, 0.2); border-radius: 8px; border: 1px solid #4a90e2;">
+                <strong style="color: #4a90e2;">💰 יתרה זמינה לקנייה:</strong>
+                <span style="color: white; font-size: 1.3em; font-weight: bold;">
+                  {{mapeResult.availableAmount | currency:'ILS':'symbol':'.0'}}
+                </span>
+                <div style="color: #aaa; font-size: 0.9em; margin-top: 5px;">
+                  (אחרי שמירת {{mapeCalculator.safetyBuffer | currency:'ILS':'symbol':'.0'}} למאגר ביטחון)
+                </div>
+              </div>
+            </div>
+
+            <!-- המלצה -->
+            <div class="recommendation-box">
+              <h4 [ngStyle]="{'color': mapeResult.statusColor}" style="margin-bottom: 10px;">
+                💡 המלצה:
+              </h4>
+              <p style="color: white; font-size: 1.1em;">{{mapeResult.recommendation}}</p>
+              
+              <div *ngIf="mapeResult.mape > 0" 
+                   style="margin-top: 15px; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 8px;">
+                <strong style="color: white;">📋 פרטי התשלומים:</strong>
+                <ul style="margin-top: 10px; color: #ccc;">
+                  <li>
+                    <strong>{{mapeResult.actualInstallments}} תשלומים</strong> של 
+                    <strong>{{mapeResult.mape | currency:'ILS':'symbol':'.0'}}</strong> כל אחד
+                  </li>
+                  <li *ngIf="mapeResult.actualInstallments < mapeCalculator.installments" style="color: #f39c12;">
+                    ⚠️ הוגבל מ-{{mapeCalculator.installments}} תשלומים ל-{{mapeResult.actualInstallments}} (לפי אופק התכנון)
+                  </li>
+                  <li *ngIf="mapeResult.actualInstallments === mapeCalculator.installments" style="color: #27ae60;">
+                    ✅ מספר התשלומים מתאים לאופק התכנון
+                  </li>
+                  <li>
+                    יתרה משוערת אחרי הקנייה: 
+                    <strong>{{(mapeResult.projectedBalance - mapeResult.maxPurchase) | currency:'ILS':'symbol':'.0'}}</strong>
+                  </li>
+                  <li>
+                    מאגר ביטחון נשמר: 
+                    <strong>{{mapeCalculator.safetyBuffer | currency:'ILS':'symbol':'.0'}}</strong>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

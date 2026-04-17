@@ -1,0 +1,93 @@
+<div class="card text-white mb-3 " style="background-color: black;">
+  <div class="card-body alert alert-primary">
+    <div class="card-header fs-1 text-center blockquote fw-bold ">קרובי משפחה - {{Name}}</div>
+    <form name="personalDataForm" class="alert alert-primary" autocomplete="off" #personalDataForm="ngForm">
+      <div class="mb-6 row" style="padding-bottom: 80px;">
+        <legend class="mt-2 blockquote fw-bold fs-5">אבא</legend>
+        <div class="col-xl-2 col-md-6 position-relative">
+          <label for="validationServepersonal-data1-ager03" class="form-label">גיל</label>
+          <input type="text" name="FatherAge" class="form-control fw-bold text-primary text-center"
+            style="border-color: white;background-color: black;" autocomplete="off" id="personal-data1-age"
+            [ngClass]="GetClassValidation('Age1')" [ngModel]="this.FatherAge"
+            (ngModelChange)="OnModelChange($event,'FatherAge')" required>
+        </div>
+        <div class="w-100 mt-3"></div>
+        <div class="col-xl-2 col-md-6  position-relative align-middle" *ngIf="this.FatherAge != ''">
+          <label for="relative-can-help-father-1" class="form-label">האם הקרוב יכול לעזור? -
+            {{this.FatherCanHelp}}</label>
+          <input type="range" class="form-range  fw-bold text-center text-white  h-50" min="1" max="10" step="1"
+            style="border-color: white;background-color: black;" style="border-color: white;border-color: white;"
+            autocomplete="off" name="can-help-father-1" id="relative-can-help-father-1"
+            [ngModel]="this.FatherCanHelp" (ngModelChange)="OnModelChange($event,'FatherCanHelp')" required>
+        </div>
+        <div class="col-xl-2 col-md-6  position-relative align-middle" *ngIf="this.FatherAge != ''">
+          <label for="relative-need-help-father-1" class="form-label">האם יש צורך בעזרה? -
+            {{this.FatherNeedHelp}}</label>
+          <input type="range" class="form-range  fw-bold text-center text-white  h-50" min="1" max="10" step="1"
+            autocomplete="off" name="need-help-father-1" id="relative-need-help-father-1" style="border-color: white;"
+            [ngModel]="this.FatherNeedHelp" (ngModelChange)="OnModelChange($event,'FatherNeedHelp')" required>
+        </div>
+        <div class="col-xl-2 col-md-6  position-relative" *ngIf="this.FatherAge != ''">
+          <label for="relative-getF1" class="form-label">העברת נכסים מדור לדור</label>
+          <input type="text" name="FatherGetF" class="form-control fw-bold text-primary text-center"
+            style="border-color: white;background-color: black;" autocomplete="off" id="relative-getF1"
+            [ngClass]="GetClassValidation('FatherGetF1')" [ngModel]="this.FatherGetF"
+            (ngModelChange)="OnModelChange($event,'FatherGetF')" required>
+        </div>
+        <div class="col-xl-4 col-md-6  position-relative" *ngIf="this.FatherAge != ''">
+          <label for="personal-data1-comment-father" class="form-label">הערות</label>
+          <input type="text" name="personal-data1-comment-father" autocomplete="off"
+            style="border-color: white;background-color: black;" class="form-control fw-bold text-primary text-center"
+            id="personal-data1-comment-father" [ngClass]="GetClassValidation('CommentFather1')"
+            [ngModel]="this.CommentFather" (ngModelChange)="OnModelChange($event,'CommentFather')" required>
+          <div class="invalid-tooltip">
+            שדה חובה!
+          </div>
+        </div>
+      </div>
+      <div class="mb-6 row" style="padding-bottom: 80px;">
+        <legend class="mt-2 blockquote fw-bold fs-5">אמא</legend>
+        <div class="col-xl-2 col-md-6 position-relative">
+          <label for="relative-mother-age" class="form-label">גיל</label>
+          <input type="text" name="relative-mother-age" class="form-control fw-bold text-primary text-center"
+            style="border-color: white;background-color: black;" autocomplete="off" id="relative-mother-age"
+            [ngClass]="GetClassValidation('MotherAge2')" [ngModel]="this.MotherAge"
+            (ngModelChange)="OnModelChange($event,'MotherAge')" required>
+        </div>
+        <div class="w-100 mt-3"></div>
+        <div class="col-xl-2 col-md-6  position-relative align-middle" *ngIf="this.MotherAge != ''">
+          <label for="relative-can-help-mother-1" class="form-label">האם הקרוב יכול לעזור? -
+            {{this.MotherCanHelp}}</label>
+          <input type="range" class="form-range fw-bold text-white h-50" min="1" max="10" step="1"
+            style="border-color: white;" autocomplete="off" name="relative-can-help-mother-1"
+            id="relative-can-help-mother-1" [ngModel]="this.MotherCanHelp"
+            (ngModelChange)="OnModelChange($event,'MotherCanHelp')" required>
+        </div>
+        <div class="col-xl-2 col-md-6  position-relative align-bottom" *ngIf="this.MotherAge != ''">
+          <label for="relative-need-help-mother-1" class="form-label">האם יש צורך בעזרה? -
+            {{this.MotherNeedHelp}}</label>
+          <input type="range" class="form-range  fw-bold text-white h-50" min="1" max="10" step="1"
+            autocomplete="off" name="relative-need-help-mother-1" id="elative-need-help-mother-1"
+            [ngModel]="this.MotherNeedHelp" (ngModelChange)="OnModelChange($event,'MotherNeedHelp')" required>
+        </div>
+        <div class="col-xl-2 col-md-6  position-relative" *ngIf="this.MotherAge != ''">
+          <label for="relative-motherGetF" class="form-label">העברת נכסים מדור לדור</label>
+          <input type="text" name="relative-motherGetF" class="form-control fw-bold text-primary text-center"
+            style="border-color: white;background-color: black;" autocomplete="off" id="relative-motherGetF"
+            [ngClass]="GetClassValidation(' MotherGetF2')" [ngModel]="this.MotherGetF"
+            (ngModelChange)="OnModelChange($event,'MotherGetF')" required>
+        </div>
+        <div class="col-xl-4 col-md-6  position-relative" *ngIf="this.MotherAge != ''">
+          <label for="relative-comment-mother" class="form-label">הערות</label>
+          <input type="text" name="rrelative-comment-mother" class="form-control fw-bold text-primary text-center"
+            autocomplete="off" id="relative-comment-mother" [ngClass]="GetClassValidation('CommentMother2')"
+            style="border-color: white;background-color: black;" [ngModel]="this.CommentMother"
+            (ngModelChange)="OnModelChange($event,'CommentMother')" required>
+          <div class="invalid-tooltip">
+            שדה חובה!
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

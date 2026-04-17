@@ -1,0 +1,61 @@
+PS E:\AllMyProjects\ls-financial-advisor\dist\win-unpacked> cd..                                                   
+PS E:\AllMyProjects\ls-financial-advisor\dist> cd..      
+PS E:\AllMyProjects\ls-financial-advisor> npm run electron:serve-tsc
+PS E:\AllMyProjects\ls-financial-advisor> npm run electron:build-dev  
+PS E:\AllMyProjects\ls-financial-advisor> cd .\dist\
+PS E:\AllMyProjects\ls-financial-advisor\dist> cd .\win-unpacked\
+PS E:\AllMyProjects\ls-financial-advisor\dist\win-unpacked> .\ls-finance-advisor.exe --remote-debugging-port=8315 --remote-allow-origins=* --force-ui-direction=rtl
+
+npm start
+
+http://localhost:8315/
+
+SERVER: node index.js
+
+If you're looking to export the entire IIS configuration including all sites, applications, virtual directories, and server-level settings, you can achieve this using the appcmd command-line tool provided by IIS. Here's how you can do it:
+
+Exporting Configuration:
+Open Command Prompt: Open a command prompt with administrative privileges.
+
+Navigate to appcmd: Navigate to the directory containing appcmd.exe. Typically, it's located in C:\Windows\System32\inetsrv\.
+
+Run Export Command: Use the following command to export the entire IIS configuration to an XML file:
+
+bash
+Copy code
+appcmd.exe list config /xml > IIS_Configuration.xml
+This command lists the entire configuration of IIS in XML format and redirects the output to a file named IIS_Configuration.xml.
+
+Verify Export: Once the command completes, you should find the IIS_Configuration.xml file in the directory where you ran the command. This file contains the exported IIS configuration.
+
+Importing Configuration:
+To import the configuration on another server:
+
+Copy Configuration File: Transfer the IIS_Configuration.xml file to the target server where you want to import the configuration.
+
+Open Command Prompt: Open a command prompt with administrative privileges on the target server.
+
+Navigate to appcmd: Navigate to the directory containing appcmd.exe.
+
+Run Import Command: Use the following command to import the configuration from the XML file:
+
+bash
+Copy code
+appcmd.exe add backup IIS_Configuration < IIS_Configuration.xml
+This command reads the configuration from the IIS_Configuration.xml file and applies it to the IIS server.
+
+Verify Import: After the command completes, verify that the configuration has been successfully imported by checking the IIS Manager or using appcmd.exe to view the configuration.
+
+By following these steps, you can export the entire configuration of IIS to a file and import it onto another server. This is useful for replicating configurations across multiple servers or for backup purposes.
+
+
+// Powershell administrator
+Set-ExecutionPolicy RemoteSigned
+
+E:\AllMyProjects\ls-financial-advisor\src\app\components> ng g c numerology
+
+
+
+
+
+

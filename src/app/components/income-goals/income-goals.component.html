@@ -1,0 +1,174 @@
+<div class="bg-dark container-fluid" style="background-color: black;">
+  <div class="row" style="background-color: black;">
+    <div class="col-xl-12" style="background-color: black;">
+      <div class="card text-white mb-3" style="background-color: black;">
+        <div class="card-body alert alert-primary">
+          <div class="card-header fs-1 blockquote fw-bold">
+            הכנסות שקשורות לתיכנון יעדים
+            <i class="fs-1 text-success fa fa-plus" (click)="AddRow()" title="הוסף הכנסה חדשה"></i>
+          </div>
+
+          <div class="container-fluid row" style="background-color: black;">
+            <div class="card-body alert alert-info">
+              <div class="card-header fs-1 blockquote fw-bold" style="text-align: right;">
+                בעוד כמה שנים מתוכננת ההכנסה?
+              </div>
+
+              <!-- Table with Horizontal Scroll -->
+              <div class="table-responsive table-striped" style="background-color: black;">
+                <table class="table table-borderless" style="background-color: black;">
+                  <thead style="background-color: black;">
+                    <tr style="background-color: black;">
+                      <th scope="col" class="text-center text-success blockquote fw-bold fs-5 first-col"
+                        style="background-color: black;">
+                        מקור ההכנסה
+                      </th>
+                      <ng-container *ngFor='let item of [].constructor(this.MaxYear()); let i=index'>
+                        <th *ngIf="i == 0" scope="col" class="text-center text-success blockquote fw-bold fs-5"
+                          style="background-color: black;">
+                          {{GetYear(i)}}
+                        </th>
+                        <th *ngIf="i > 0" scope="col" class="text-center text-success blockquote fw-bold fs-5"
+                          style="background-color: black;">
+                          {{GetYear(i)}} - ({{i}})
+                        </th>
+                      </ng-container>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container
+                      *ngFor='let row of this.generalInfoService.AllInfo.IncomesGoalsViewInfo.IncomesGoalsRows; let i = index'>
+                      <tr>
+                        <td class="first-col" style="background-color: black;">
+                          <input type="text" name="income-source-{{i}}" autocomplete="off"
+                            style="background-color: black; width: 100%;" class="form-control fw-bold fs-4 text-info"
+                            id="income-source-{{i}}"
+                            [(ngModel)]="this.generalInfoService.AllInfo.IncomesGoalsViewInfo.IncomesGoalsRows[i].IncomeSrc"
+                            placeholder="מקור ההכנסה">
+                        </td>
+                        <ng-container *ngFor='let item of [].constructor(this.MaxYear()); let j = index'>
+                          <td style="background-color: black;">
+                            <input dir="ltr" type="text" name="income-amount-{{i}}-{{j}}" autocomplete="off"
+                              style="background-color: black; width: 100%; border-color: white;"
+                              class="form-control fw-bold text-center fs-4 text-primary" id="income-amount-{{i}}-{{j}}"
+                              [(ngModel)]="this.generalInfoService.AllInfo.IncomesGoalsViewInfo.IncomesGoalsRows[i].AmountInYear[j]"
+                              placeholder="0">
+                          </td>
+                        </ng-container>
+                      </tr>
+                    </ng-container>
+
+                    <!-- Summary Row -->
+                    <tr>
+                      <td class="first-col" style="background-color: black;">
+                        <input type="text" name="incomes-summary" disabled
+                          style="background-color: limegreen; width: 100%;"
+                          class="form-control fw-bold text-black  fw-bold fs-4" id="incomes-summary"
+                          value="סיכום ביניים">
+                      </td>
+                      <ng-container *ngFor='let item of [].constructor(this.MaxYear()); let j = index'>
+                        <td style="background-color: black;">
+                          <input dir="ltr" type="text" name="income-total-{{j}}" autocomplete="off" disabled
+                            style="background-color: limegreen; width: 100%;"
+                            class="form-control fw-bold text-center fs-4 text-black" id="income-total-{{j}}"
+                            [value]="CalcYear(j) | currency:'ILS':'symbol':'.0'">
+                        </td>
+                      </ng-container>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Additional Information Rows -->
+        <div class="row">
+          <div class="col-xl-5">
+            <p class="h1 text-white" style="background-color: black;">
+              כמה כסף כבר יש בחסכונות?
+            </p>
+          </div>
+          <div class="col-xl-1 px-0">
+            <input type="text" name="existing-savings" autocomplete="off"
+              style="background-color: limegreen; width: 7em; border-color: black; color: black;"
+              class="form-control fw-bold text-center fs-5" id="existing-savings" data-bs-toggle="tooltip"
+              data-bs-custom-class="custom-tooltip" disabled data-bs-title='הון זה מוקצה אך ורק לתוכנית היעדים העתידיים'
+              data-bs-placement="right"
+              [value]="this.generalInfoService.AllInfo.CalculateData.FutureExpenses | currency:'ILS':'symbol':'.0'">
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xl-5">
+            <p class="h1 text-white" style="background-color: black;">
+              מהי התשואה על החסכונות?
+            </p>
+          </div>
+          <div class="col-xl-3 px-0">
+            <input type="text" name="return-on-savings" autocomplete="off"
+              style="background-color: black; width: 7em; border-color: white;"
+              class="text-center form-control fw-bold fs-5 text-primary" id="return-on-savings" data-bs-toggle="tooltip"
+              data-bs-custom-class="custom-tooltip" data-bs-title='יש להסתכל על העשור הבא, ברירת מחדל 3 אחוז'
+              data-bs-placement="right"
+              [(ngModel)]="this.generalInfoService.AllInfo.IncomesGoalsViewInfo.ReturnOnSavings" placeholder="3%">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Financial Projection Summary -->
+<div class="row">
+  <div class="col-xl-12">
+    <div class="pension-summary-section">
+      <div class="text-center">
+        <h2 class="h1 text-white mb-4">
+          <i class="bi bi-graph-up me-3"></i>
+          תחזית פיננסית ליעדים עתידיים
+        </h2>
+
+        <div class="row">
+          <div class="col-xl-4">
+            <div class="projection-card current-savings">
+              <i class="bi bi-piggy-bank display-4 mb-3"></i>
+              <h4>חסכונות נוכחיים</h4>
+              <div class="amount">
+                {{this.generalInfoService.AllInfo.CalculateData.FutureExpenses | currency:'ILS':'symbol':'.0'}}
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-4">
+            <div class="projection-card expected-returns">
+              <i class="bi bi-graph-up-arrow display-4 mb-3"></i>
+              <h4>תשואה צפויה</h4>
+              <div class="amount">
+                {{this.generalInfoService.AllInfo.IncomesGoalsViewInfo.ReturnOnSavings || '3'}}%
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-4">
+            <div class="projection-card future-value">
+              <i class="bi bi-trophy display-4 mb-3"></i>
+              <h4>יעד עתידי</h4>
+              <div class="amount text-success">
+                <i class="bi bi-arrow-up-circle me-2"></i>
+                יעדים מתוכננים
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-4">
+          <p class="text-primary fs-5">
+            <i class="bi bi-info-circle me-2"></i>
+            החישובים מבוססים על הנתונים שהוזנו ועשויים להשתנות בהתאם לתנאי השוק
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

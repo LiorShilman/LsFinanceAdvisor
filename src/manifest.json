@@ -1,0 +1,16 @@
+{
+    "name": "Google Translate Extenstion",
+    "version": "1.0",
+    "description": "Build an Extension with Angular",
+    "manifest_version": 3,
+    "permissions": [
+        "activeTab",
+        "webNavigation"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "action": {
+        "default_popup": "index.html"
+    }
+}

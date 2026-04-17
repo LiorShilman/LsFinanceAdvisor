@@ -1,0 +1,439 @@
+<!-- one-off-family-goals.component.html - Enhanced Blue Design -->
+<div class="container-fluid">
+  <!-- Main Goals Planning Table -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card text-white mb-4">
+        <div class="card-body alert alert-info">
+          <div class="card-header">
+            <span class="gradient-text">
+              <i class="bi bi-family me-3"></i>
+              יעדים משפחתיים חד-פעמיים
+            </span>
+          </div>
+
+          <!-- Goals Planning Subtitle -->
+          <div class="card-header fw-bold" style="text-align: right; font-size: 1.8rem; margin-bottom: 1rem;">
+            <i class="bi bi-calendar-event me-2"></i>
+            בעוד כמה שנים מתוכננת ההוצאה?
+          </div>
+
+          <!-- Main Goals Table -->
+          <div class="table-responsive">
+            <table class="fixed_col table table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-center text-white blockquote fw-bold fs-5">
+                    <i class="bi bi-bullseye me-2"></i>
+                    היעד
+                  </th>
+                  <th scope="col" class="text-center text-white blockquote fw-bold fs-5">
+                    <i class="bi bi-calculator me-2"></i>
+                    ממוצע
+                  </th>
+                  <th scope="col" class="text-center text-white blockquote fw-bold fs-5">
+                    <i class="bi bi-sum me-2"></i>
+                    סה"כ
+                  </th>
+                  <ng-container *ngFor='let item of [].constructor(this.MaxYear()); let i=index'>
+                    <th *ngIf="i == 0" scope="col" class="text-center text-white blockquote fw-bold fs-5">
+                      <i class="bi bi-calendar-date me-1"></i>
+                      {{GetYear(i)}}
+                    </th>
+                    <th *ngIf="i > 0" scope="col" class="text-center text-white blockquote fw-bold fs-5">
+                      <i class="bi bi-calendar-plus me-1"></i>
+                      {{GetYear(i)}} (+{{i}})
+                    </th>
+                  </ng-container>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Goals Rows with Blue Colors -->
+                <ng-container *ngFor='let row of [].constructor(15); let i = index'>
+                  <tr class="color-{{i}}"
+                    [ngStyle]="{'background': 'linear-gradient(135deg, ' + this.ColorArray[i] + '90 0%, ' + this.ColorArray[i] + '70 100%)'}">
+                    <!-- Goal Target -->
+                    <td class="color-{{i}}"
+                      [ngStyle]="{'background': 'linear-gradient(135deg, ' + this.ColorArray[i] + '90 0%, ' + this.ColorArray[i] + '70 100%)'}">
+                      <input type="text" name="goal-target-{{i}}" autocomplete="off" class="form-control fw-bold fs-5"
+                        [ngStyle]="{'background': 'linear-gradient(135deg, ' + this.ColorArray[i] + '90 0%, ' + this.ColorArray[i] + '70 100%)', 'color': 'white', 'border-color': this.ColorArray[i]}"
+                        disabled
+                        [(ngModel)]="this.generalInfoService.AllInfo.OneOffFamilyGoalsViewInfo.OneOffFamilyGoalsRows[i].Target"
+                        placeholder="הזן יעד">
+                    </td>
+
+                    <!-- Average -->
+                    <td class="color-{{i}}"
+                      [ngStyle]="{'background': 'linear-gradient(135deg, ' + this.ColorArray[i] + '90 0%, ' + this.ColorArray[i] + '70 100%)'}">
+                      <input type="text" name="goal-common-{{i}}" autocomplete="off"
+                        class="text-center form-control fw-bold fs-5"
+                        [ngStyle]="{'background': 'linear-gradient(135deg, ' + this.ColorArray[i] + '90 0%, ' + this.ColorArray[i] + '70 100%)', 'color': 'white', 'border-color': this.ColorArray[i]}"
+                        disabled
+                        [(ngModel)]="this.generalInfoService.AllInfo.OneOffFamilyGoalsViewInfo.OneOffFamilyGoalsRows[i].CommonCostSrc"
+                        placeholder="ממוצע">
+                    </td>
+
+                    <!-- Total -->
+                    <td class="color-{{i}}"
+                      [ngStyle]="{'background': 'linear-gradient(135deg, ' + this.ColorArray[i] + '90 0%, ' + this.ColorArray[i] + '70 100%)'}">
+                      <input type="text" name="goal-total-{{i}}" autocomplete="off"
+                        class="text-center form-control fw-bold fs-5" disabled
+                        [value]="CalcCategory(i) | currency:'ILS':'symbol':'.0'"
+                        [ngClass]="this.generalInfoService.AllInfo.OneOffFamilyGoalsViewInfo.OneOffFamilyGoalsRows[i].SumOfCategory > 0 ? 'custom-red-bg' : ''"
+                        [ngStyle]="this.generalInfoService.AllInfo.OneOffFamilyGoalsViewInfo.OneOffFamilyGoalsRows[i].SumOfCategory <= 0 ? {'background': 'linear-gradient(135deg, ' + this.ColorArray[i] + '90 0%, ' + this.ColorArray[i] + '70 100%)', 'color': 'white', 'border-color': this.ColorArray[i]} : {}">
+                    </td>
+
+                    <!-- Year Columns -->
+                    <ng-container *ngFor='let item of [].constructor(this.MaxYear()); let j = index'>
+                      <td class="color-{{i}}"
+                        [ngStyle]="{'background': 'linear-gradient(135deg, ' + this.ColorArray[i] + '90 0%, ' + this.ColorArray[i] + '70 100%)'}">
+                        <input type="text" name="goal-year-{{i}}-{{j}}" autocomplete="off"
+                          class="form-control fw-bold text-center fs-5 custom-red-text"
+                          [(ngModel)]="this.generalInfoService.AllInfo.OneOffFamilyGoalsViewInfo.OneOffFamilyGoalsRows[i].AmountInYear[j]"
+                          placeholder="0">
+                      </td>
+                    </ng-container>
+                  </tr>
+                </ng-container>
+
+                <!-- Need Row -->
+                <tr class="summary-row color-13">
+                  <td class="color-13"
+                    [ngStyle]="{'background': 'linear-gradient(135deg, ' + this.ColorArray[13] + '90 0%, ' + this.ColorArray[13] + '70 100%)'}">
+                    <input type="text" name="need-title" autocomplete="off" class="form-control fw-bold fs-5"
+                      [ngStyle]="{'background': 'linear-gradient(135deg, ' + this.ColorArray[13] + '90 0%, ' + this.ColorArray[13] + '70 100%)', 'color': 'white', 'border-color': this.ColorArray[13]}"
+                      disabled
+                      [value]="this.generalInfoService.AllInfo.OneOffFamilyGoalsViewInfo.NeedOneOffFamilyGoalsRow.Title">
+                  </td>
+                  <td class="color-13"
+                    [ngStyle]="{'background': 'linear-gradient(135deg, ' + this.ColorArray[13] + '90 0%, ' + this.ColorArray[13] + '70 100%)'}">
+                  </td>
+                  <td class="color-13"
+                    [ngStyle]="{'background': 'linear-gradient(135deg, ' + this.ColorArray[13] + '90 0%, ' + this.ColorArray[13] + '70 100%)'}">
+                  </td>
+                  <ng-container *ngFor='let item of [].constructor(this.MaxYear()); let j = index'>
+                    <td class="color-13"
+                      [ngStyle]="{'background': 'linear-gradient(135deg, ' + this.ColorArray[13] + '90 0%, ' + this.ColorArray[13] + '70 100%)'}">
+                      <input dir="ltr" type="text" name="need-year-{{j}}" autocomplete="off"
+                        class="form-control fw-bold text-center fs-5" disabled
+                        [value]="CalcNeedOnYear(j) | currency:'ILS':'symbol':'.0'"
+                        [ngClass]="this.generalInfoService.AllInfo.OneOffFamilyGoalsViewInfo.NeedOneOffFamilyGoalsRow.AmountInYear[j] < 0 ? 'custom-red-bg' : ''"
+                        [ngStyle]="this.generalInfoService.AllInfo.OneOffFamilyGoalsViewInfo.NeedOneOffFamilyGoalsRow.AmountInYear[j] >= 0 ? {'background': 'linear-gradient(135deg, ' + this.ColorArray[13] + '90 0%, ' + this.ColorArray[13] + '70 100%)', 'color': 'white', 'border-color': this.ColorArray[13]} : {}">
+                    </td>
+                  </ng-container>
+                </tr>
+
+                <!-- Deposit from Funds Row -->
+                <tr class="summary-row color-11">
+                  <td class="color-11"
+                    [ngStyle]="{'background': 'linear-gradient(135deg, ' + this.ColorArray[11] + '90 0%, ' + this.ColorArray[11] + '70 100%)'}">
+                    <input type="text" name="deposit-funds-title" autocomplete="off" class="form-control fw-bold fs-5"
+                      [ngStyle]="{'background': 'linear-gradient(135deg, ' + this.ColorArray[11] + '90 0%, ' + this.ColorArray[11] + '70 100%)', 'color': 'white', 'border-color': this.ColorArray[11]}"
+                      disabled
+                      [value]="this.generalInfoService.AllInfo.OneOffFamilyGoalsViewInfo.DepositFromFundsOneOffFamilyGoalsRow.Title">
+                  </td>
+                  <td class="color-11"></td>
+                  <td class="color-11"></td>
+                  <ng-container *ngFor='let item of [].constructor(this.MaxYear()); let j = index'>
+                    <td class="color-11">
+                      <input dir="ltr" type="text" name="deposit-funds-{{j}}" autocomplete="off"
+                        class="form-control fw-bold text-center fs-5 text-primary"
+                        [(ngModel)]="this.generalInfoService.AllInfo.OneOffFamilyGoalsViewInfo.DepositFromFundsOneOffFamilyGoalsRow.AmountInYear[j]"
+                        (input)="this.generalInfoService.AllInfo.OneOffFamilyGoalsViewInfo.DepositFromFundsOneOffFamilyGoalsRow.UpdateRow(j)"
+                        placeholder="0">
+                    </td>
+                  </ng-container>
+                </tr>
+
+                <!-- Additional Deposit Row -->
+                <tr class="summary-row color-11">
+                  <td class="color-11"
+                    [ngStyle]="{'background': 'linear-gradient(135deg, ' + this.ColorArray[11] + '90 0%, ' + this.ColorArray[11] + '70 100%)'}">
+                    <input type="text" name="additional-deposit-title" autocomplete="off"
+                      class="form-control fw-bold fs-5"
+                      [ngStyle]="{'background': 'linear-gradient(135deg, ' + this.ColorArray[11] + '90 0%, ' + this.ColorArray[11] + '70 100%)', 'color': 'white', 'border-color': this.ColorArray[11]}"
+                      disabled
+                      [value]="this.generalInfoService.AllInfo.OneOffFamilyGoalsViewInfo.AdditionalDepositOneOffFamilyGoalsRow.Title">
+                  </td>
+                  <td class="color-11"></td>
+                  <td class="color-11">
+                    <input dir="ltr" type="text" name="additional-deposit-recommended" autocomplete="off"
+                      class="form-control fw-bold text-center fs-5" disabled
+                      [value]="this.generalInfoService.AllInfo.OneOffFamilyGoalsViewInfo.AdditionalDepositOneOffFamilyGoalsRow.Recomanded | currency:'ILS':'symbol':'.0'"
+                      [ngClass]="this.generalInfoService.AllInfo.OneOffFamilyGoalsViewInfo.AdditionalDepositOneOffFamilyGoalsRow.Recomanded <= this.generalInfoService.AllInfo.OneOffFamilyGoalsViewInfo.AdditionalDepositOneOffFamilyGoalsRow.AmountInYear[0] ? 'bg-lim-success' : 'custom-red-bg'">
+                  </td>
+                  <ng-container *ngFor='let item of [].constructor(this.MaxYear()); let j = index'>
+                    <td class="color-11">
+                      <input dir="ltr" type="text" name="additional-deposit-{{j}}" autocomplete="off"
+                        class="form-control fw-bold text-center fs-5 text-primary"
+                        [(ngModel)]="this.generalInfoService.AllInfo.OneOffFamilyGoalsViewInfo.AdditionalDepositOneOffFamilyGoalsRow.AmountInYear[j]"
+                        (input)="this.generalInfoService.AllInfo.OneOffFamilyGoalsViewInfo.AdditionalDepositOneOffFamilyGoalsRow.UpdateRow(j)"
+                        placeholder="0">
+                    </td>
+                  </ng-container>
+                </tr>
+
+                <!-- Total Monthly Savings Row -->
+                <tr class="summary-row color-11">
+                  <td class="color-11"
+                    [ngStyle]="{'background': 'linear-gradient(135deg, ' + this.ColorArray[11] + '90 0%, ' + this.ColorArray[11] + '70 100%)'}">
+                    <input type="text" name="total-monthly-title" autocomplete="off" class="form-control fw-bold fs-5"
+                      [ngStyle]="{'background': 'linear-gradient(135deg, ' + this.ColorArray[11] + '90 0%, ' + this.ColorArray[11] + '70 100%)', 'color': 'white', 'border-color': this.ColorArray[11]}"
+                      disabled
+                      [value]="this.generalInfoService.AllInfo.OneOffFamilyGoalsViewInfo.TotalMonthlySavingsOneOffFamilyGoalsRow.Title">
+                  </td>
+                  <td class="color-11"></td>
+                  <td class="color-11"></td>
+                  <ng-container *ngFor='let item of [].constructor(this.MaxYear()); let j = index'>
+                    <td class="color-11">
+                      <input dir="ltr" type="text" name="total-monthly-{{j}}" autocomplete="off"
+                        class="form-control fw-bold text-center fs-5" disabled
+                        [value]="CalcTotalMonthlySavings(j) | currency:'ILS':'symbol':'.0'"
+                        [ngClass]="this.generalInfoService.AllInfo.OneOffFamilyGoalsViewInfo.TotalMonthlySavingsOneOffFamilyGoalsRow.AmountInYear[j] >= 0 ? 'bg-lim-success' : 'custom-red-bg'">
+                    </td>
+                  </ng-container>
+                </tr>
+
+                <!-- Total Yearly Savings Row -->
+                <tr class="summary-row color-11">
+                  <td class="color-11"
+                    [ngStyle]="{'background': 'linear-gradient(135deg, ' + this.ColorArray[11] + '90 0%, ' + this.ColorArray[11] + '70 100%)'}">
+                    <input type="text" name="total-yearly-title" autocomplete="off" class="form-control fw-bold fs-5"
+                      [ngStyle]="{'background': 'linear-gradient(135deg, ' + this.ColorArray[11] + '90 0%, ' + this.ColorArray[11] + '70 100%)', 'color': 'white', 'border-color': this.ColorArray[11]}"
+                      disabled
+                      [value]="this.generalInfoService.AllInfo.OneOffFamilyGoalsViewInfo.TotalYearlySavingsOneOffFamilyGoalsRow.Title">
+                  </td>
+                  <td class="color-11"></td>
+                  <td class="color-11"></td>
+                  <ng-container *ngFor='let item of [].constructor(this.MaxYear()); let j = index'>
+                    <td class="color-11">
+                      <input dir="ltr" type="text" name="total-yearly-{{j}}" autocomplete="off"
+                        class="form-control fw-bold text-center fs-5" disabled
+                        [value]="CalcTotalYearlySavings(j) | currency:'ILS':'symbol':'.0'"
+                        [ngClass]="(this.generalInfoService.AllInfo.OneOffFamilyGoalsViewInfo.TotalMonthlySavingsOneOffFamilyGoalsRow.AmountInYear[j] * 12) >= 0 ? 'bg-lim-success' : 'custom-red-bg'">
+                    </td>
+                  </ng-container>
+                </tr>
+
+                <!-- Cumulative Row -->
+                <tr class="summary-row color-11">
+                  <td class="color-11"
+                    [ngStyle]="{'background': 'linear-gradient(135deg, ' + this.ColorArray[11] + '90 0%, ' + this.ColorArray[11] + '70 100%)'}">
+                    <input type="text" name="cumulative-title" autocomplete="off" class="form-control fw-bold fs-5"
+                      [ngStyle]="{'background': 'linear-gradient(135deg, ' + this.ColorArray[11] + '90 0%, ' + this.ColorArray[11] + '70 100%)', 'color': 'white', 'border-color': this.ColorArray[11]}"
+                      disabled
+                      [value]="this.generalInfoService.AllInfo.OneOffFamilyGoalsViewInfo.CumulativeOneOffFamilyGoalsRow.Title">
+                  </td>
+                  <td class="color-11"></td>
+                  <td class="color-11">
+                    <input dir="ltr" type="text" name="cumulative-exist" autocomplete="off"
+                      class="form-control fw-bold text-center fs-5 bg-lim-success" disabled
+                      [value]="CalcExist() | currency:'ILS':'symbol':'.0'">
+                  </td>
+                  <ng-container *ngFor='let item of [].constructor(this.MaxYear()); let j = index'>
+                    <td class="color-11">
+                      <input dir="ltr" type="text" name="cumulative-{{j}}" autocomplete="off"
+                        class="form-control fw-bold text-center fs-5" disabled
+                        [value]="CalcCumulative(j) | currency:'ILS':'symbol':'.0'"
+                        [ngClass]="this.generalInfoService.AllInfo.OneOffFamilyGoalsViewInfo.CumulativeOneOffFamilyGoalsRow.AmountInYear[j] >= 0 ? 'bg-lim-success' : 'custom-red-bg'">
+                    </td>
+                  </ng-container>
+                </tr>
+
+                <!-- Put Aside Row -->
+                <tr class="summary-row color-11">
+                  <td class="color-11"
+                    [ngStyle]="{'background': 'linear-gradient(135deg, ' + this.ColorArray[11] + '90 0%, ' + this.ColorArray[11] + '70 100%)'}">
+                    <input type="text" name="put-aside-title" autocomplete="off" class="form-control fw-bold fs-5"
+                      [ngStyle]="{'background': 'linear-gradient(135deg, ' + this.ColorArray[11] + '90 0%, ' + this.ColorArray[11] + '70 100%)', 'color': 'white', 'border-color': this.ColorArray[11]}"
+                      disabled
+                      [value]="this.generalInfoService.AllInfo.OneOffFamilyGoalsViewInfo.PutAsideOneOffFamilyGoalsRow.Title">
+                  </td>
+                  <td class="color-11"></td>
+                  <td colspan="2" class="color-11">
+                    <input dir="ltr" type="text" name="put-aside-amount" autocomplete="off"
+                      class="form-control fw-bold text-center fs-5 text-primary"
+                      [(ngModel)]="this.generalInfoService.AllInfo.OneOffFamilyGoalsViewInfo.PutAsideOneOffFamilyGoalsRow.PutAside"
+                      placeholder="סכום להנחה בצד">
+                  </td>
+                </tr>
+
+                <!-- Savings for Children Row -->
+                <tr class="summary-row color-11">
+                  <td class="color-11"
+                    [ngStyle]="{'background': 'linear-gradient(135deg, ' + this.ColorArray[11] + '90 0%, ' + this.ColorArray[11] + '70 100%)'}">
+                    <input type="text" name="savings-children-title" autocomplete="off"
+                      class="form-control fw-bold fs-5"
+                      [ngStyle]="{'background': 'linear-gradient(135deg, ' + this.ColorArray[11] + '90 0%, ' + this.ColorArray[11] + '70 100%)', 'color': 'white', 'border-color': this.ColorArray[11]}"
+                      disabled
+                      [value]="this.generalInfoService.AllInfo.OneOffFamilyGoalsViewInfo.SavingsExistForChildrenOneOffFamilyGoalsRow.Title">
+                  </td>
+                  <td class="color-11"></td>
+                  <td colspan="2" class="color-11">
+                    <input dir="ltr" type="text" name="savings-children-amount" autocomplete="off"
+                      class="form-control fw-bold text-center fs-5 text-primary"
+                      [(ngModel)]="this.generalInfoService.AllInfo.OneOffFamilyGoalsViewInfo.SavingsExistForChildrenOneOffFamilyGoalsRow.SavingsExistForChildren"
+                      placeholder="חיסכון קיים לילדים">
+                  </td>
+                </tr>
+
+                <!-- Return on Investment Row -->
+                <tr class="summary-row color-11">
+                  <td class="color-11"
+                    [ngStyle]="{'background': 'linear-gradient(135deg, ' + this.ColorArray[11] + '90 0%, ' + this.ColorArray[11] + '70 100%)'}">
+                    <input type="text" name="roi-title" autocomplete="off" class="form-control fw-bold fs-5"
+                      [ngStyle]="{'background': 'linear-gradient(135deg, ' + this.ColorArray[11] + '90 0%, ' + this.ColorArray[11] + '70 100%)', 'color': 'white', 'border-color': this.ColorArray[11]}"
+                      disabled
+                      [value]="this.generalInfoService.AllInfo.OneOffFamilyGoalsViewInfo.CumulativeReturnOnInvestmentOneOffFamilyGoalsRow.Title">
+                  </td>
+                  <td class="color-11"></td>
+                  <td colspan="2" class="color-11">
+                    <input dir="ltr" type="text" name="roi-percentage" autocomplete="off"
+                      class="form-control fw-bold text-center fs-5 text-primary"
+                      [(ngModel)]="this.generalInfoService.AllInfo.OneOffFamilyGoalsViewInfo.CumulativeReturnOnInvestmentOneOffFamilyGoalsRow.CumulativeReturnOnInvestment"
+                      placeholder="תשואה שנתית %">
+                  </td>
+                  <td colspan="2" class="color-11">
+                    <input dir="rtl" type="text" name="rule-72" autocomplete="off"
+                      class="form-control fw-bold text-center fs-5 bg-lim-success" disabled [value]="Calc72Rule()">
+                  </td>
+                </tr>
+
+                <!-- Total Capital Needed Row -->
+                <tr class="summary-row color-11">
+                  <td class="color-11"
+                    [ngStyle]="{'background': 'linear-gradient(135deg, ' + this.ColorArray[11] + '90 0%, ' + this.ColorArray[11] + '70 100%)'}">
+                    <input type="text" name="total-capital-title" autocomplete="off" class="form-control fw-bold fs-5"
+                      [ngStyle]="{'background': 'linear-gradient(135deg, ' + this.ColorArray[11] + '90 0%, ' + this.ColorArray[11] + '70 100%)', 'color': 'white', 'border-color': this.ColorArray[11]}"
+                      disabled
+                      [value]="this.generalInfoService.AllInfo.OneOffFamilyGoalsViewInfo.TotalNominalCapitalNeededForAllGoalsOneOffFamilyGoalsRow.Title">
+                  </td>
+                  <td class="color-11"></td>
+                  <td colspan="2" class="color-11">
+                    <input dir="ltr" type="text" name="total-capital-amount" autocomplete="off"
+                      class="form-control fw-bold text-center fs-5 custom-red-bg" disabled
+                      [value]="CalcSumNeed() | currency:'ILS':'symbol':'.0'">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Charts Section -->
+  <div class="row">
+    <!-- Current Planning Chart -->
+    <div class="col-xl-6">
+      <div class="card text-white mb-4">
+        <div class="card-body alert alert-info">
+          <div class="card-header">
+            <span class="gradient-text">
+              <i class="bi bi-graph-up me-3"></i>
+              תכנון יעדים ארוכי טווח - נוכחי
+            </span>
+            <div class="badge bg-primary">
+              <i class="bi bi-currency-shekel me-2"></i>
+              {{this.generalInfoService.AllInfo.OneOffFamilyGoalsViewInfo.AdditionalDepositOneOffFamilyGoalsRow.AmountInYear[0]
+              | currency:'ILS':'symbol':'.0'}}
+            </div>
+          </div>
+
+          <div class="chart-container">
+            <canvas id="MyChart" height="500px">{{ chart }}</canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Future Recommended Planning Chart -->
+    <div class="col-xl-6">
+      <div class="card text-white mb-4">
+        <div class="card-body alert alert-info">
+          <div class="card-header">
+            <span class="gradient-text">
+              <i class="bi bi-graph-up-arrow me-3"></i>
+              תכנון יעדים ארוכי טווח - עתידי מומלץ
+            </span>
+            <div class="badge bg-success">
+              <i class="bi bi-currency-shekel me-2"></i>
+              {{this.generalInfoService.AllInfo.OneOffFamilyGoalsViewInfo.AdditionalDepositOneOffFamilyGoalsRow.Recomanded
+              | currency:'ILS':'symbol':'.0'}}
+            </div>
+          </div>
+
+          <div class="chart-container">
+            <canvas id="MyChartF" height="500px">{{ chartF }}</canvas>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary Information Cards -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="summary-section">
+        <h1 class="gradient-text" style="font-size: 2.5rem; margin-bottom: 2rem;">
+          <i class="bi bi-info-circle me-3"></i>
+          מידע חשוב על תכנון יעדים משפחתיים
+        </h1>
+
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <div class="card"
+              style="background: linear-gradient(135deg, rgba(59, 130, 246, 0.9) 0%, rgba(37, 99, 235, 0.8) 100%); border-color: rgba(59, 130, 246, 0.5);">
+              <div class="card-body text-center">
+                <i class="bi bi-calculator-fill" style="font-size: 3rem; margin-bottom: 1rem; color: white;"></i>
+                <h5 style="color: white; font-weight: 800;">כלל 72</h5>
+                <p style="color: white; font-size: 1.2rem; font-weight: 700; margin: 0;">
+                  {{Calc72Rule()}}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <div class="card"
+              style="background: linear-gradient(135deg, rgba(96, 165, 250, 0.9) 0%, rgba(59, 130, 246, 0.8) 100%); border-color: rgba(96, 165, 250, 0.5);">
+              <div class="card-body text-center">
+                <i class="bi bi-currency-shekel" style="font-size: 3rem; margin-bottom: 1rem; color: white;"></i>
+                <h5 style="color: white; font-weight: 800;">הפקדה מומלצת</h5>
+                <p style="color: white; font-size: 1.2rem; font-weight: 700; margin: 0;">
+                  {{this.generalInfoService.AllInfo.OneOffFamilyGoalsViewInfo.AdditionalDepositOneOffFamilyGoalsRow.Recomanded
+                  | currency:'ILS':'symbol':'.0'}}
+                  לחודש
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4 mb-3">
+            <div class="card"
+              style="background: linear-gradient(135deg, rgba(147, 197, 253, 0.9) 0%, rgba(96, 165, 250, 0.8) 100%); border-color: rgba(147, 197, 253, 0.5);">
+              <div class="card-body text-center">
+                <i class="bi bi-exclamation-triangle-fill"
+                  style="font-size: 3rem; margin-bottom: 1rem; color: white;"></i>
+                <h5 style="color: white; font-weight: 800;">סה"כ הון נדרש</h5>
+                <p style="color: white; font-size: 1.2rem; font-weight: 700; margin: 0;direction: ltr;">{{ CalcSumNeed() |
+                  currency:'ILS':'symbol':'.0' }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    
+<div class="panel">
+  <h2>🏆 מטרות פיננסיות</h2>
+  <app-one-off-family-goals-embed
+    srcPath="/LsFinanceAdvisor/assets/one-off-family-goals/GoalsFinancialCalculator/GoalsFinancialCalculator.html">
+  </app-one-off-family-goals-embed>
+</div>
+
+
+</div>

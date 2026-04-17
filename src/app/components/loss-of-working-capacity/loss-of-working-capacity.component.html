@@ -1,0 +1,411 @@
+<!-- loss-of-working-capacity.component.html - Enhanced Modern Design -->
+<div class="container-fluid" dir="rtl">
+    <!-- Loss of Working Capacity Section - Spouse 1 -->
+    <div class="row">
+      <div class="col-xl-12">
+        <div class="card text-white mb-4 spouse1-card">
+          <div class="card-body alert alert-primary">
+            <div class="card-header"
+                 data-bs-toggle="tooltip" 
+                 data-bs-custom-class="custom-tooltip" 
+                 autocomplete="off"
+                 data-bs-title="ביטוח אבדן כושר עבודה בא לטפל במצב בו נפגעת ההכנסה החודשית עקב אבדן כושר העבודה" 
+                 data-bs-placement="right">
+              <i class="bi bi-person-x me-3"></i>
+              אובדן כושר עבודה - {{this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1}}
+            </div>
+            
+            <!-- Analysis Card -->
+            <div class="card-body alert alert-info analysis-card">
+              <div class="card-header fs-1 blockquote fw-bold" style="text-align: right;">
+                <i class="bi bi-calculator me-2"></i>
+                כמה אבדן כושר עבודה אקבל?
+                
+                <div class="table-responsive table-striped">
+                  <table class="table table-borderless">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-2">
+                          <i class="bi bi-cash me-2"></i>
+                          ברוטו לפנסיה
+                        </th>
+                        <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-2">
+                          <i class="bi bi-shield-check me-2"></i>
+                          ביטוח לאומי
+                        </th>
+                        <th scope="col" class="text-center text-success col-xl-2 blockquote fw-bold fs-5">
+                          <i class="bi bi-piggy-bank me-2"></i>
+                          קרן פנסיה
+                        </th>
+                        <th scope="col" class="text-center text-success col-xl-2 blockquote fw-bold fs-5">
+                          <i class="bi bi-person-badge me-2"></i>
+                          ביטוח מנהלים
+                        </th>
+                        <th scope="col" class="text-center text-success col-xl-2 blockquote fw-bold fs-5">
+                          <i class="bi bi-shield-fill me-2"></i>
+                          ביטוח פרטי
+                        </th>
+                        <th scope="col" class="text-center text-success col-xl-2 blockquote fw-bold fs-5">
+                          <i class="bi bi-percent me-2"></i>
+                          סכום מקסימלי (75% מהשכר)
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <!-- Gross for Pension -->
+                        <td>
+                          <input type="text" 
+                                 name="spouse1-gross-pension" 
+                                 numbersOnly
+                                 autocomplete="off"
+                                 class="form-control text-center fw-bold fs-5 text-info blockquote"
+                                 id="spouse1-gross-pension"
+                                 [(ngModel)]="this.generalInfoService.AllInfo.LossOfWorkingCapacity.GrossForPension[0]"
+                                 placeholder="0">
+                        </td>
+                        
+                        <!-- Social Security -->
+                        <td>
+                          <input type="text" 
+                                 name="spouse1-social-security" 
+                                 numbersOnly
+                                 autocomplete="off"
+                                 class="form-control text-center fw-bold fs-5 text-info blockquote"
+                                 id="spouse1-social-security"
+                                 [(ngModel)]="this.generalInfoService.AllInfo.LossOfWorkingCapacity.SocialSecurity[0]"
+                                 placeholder="0">
+                        </td>
+                        
+                        <!-- Pension Fund -->
+                        <td>
+                          <input type="text" 
+                                 name="spouse1-pension-fund" 
+                                 numbersOnly
+                                 autocomplete="off"
+                                 class="form-control text-center fw-bold fs-5 text-info blockquote"
+                                 id="spouse1-pension-fund"
+                                 [(ngModel)]="this.generalInfoService.AllInfo.LossOfWorkingCapacity.PensionFund[0]"
+                                 placeholder="0">
+                        </td>
+                        
+                        <!-- Manager Insurance -->
+                        <td>
+                          <input type="text" 
+                                 name="spouse1-manager-insurance" 
+                                 numbersOnly
+                                 autocomplete="off"
+                                 class="form-control text-center fw-bold fs-5 text-info blockquote"
+                                 id="spouse1-manager-insurance"
+                                 [(ngModel)]="this.generalInfoService.AllInfo.LossOfWorkingCapacity.ManagerInsurance[0]"
+                                 placeholder="0">
+                        </td>
+                        
+                        <!-- Private Insurance -->
+                        <td>
+                          <input type="text" 
+                                 name="spouse1-private-insurance" 
+                                 numbersOnly
+                                 autocomplete="off"
+                                 class="form-control text-center fw-bold fs-5 text-info blockquote"
+                                 id="spouse1-private-insurance"
+                                 [(ngModel)]="this.generalInfoService.AllInfo.LossOfWorkingCapacity.PrivateInsurance[0]"
+                                 placeholder="0">
+                        </td>
+                        
+                        <!-- Maximum Amount (Calculated) -->
+                        <td>
+                          <input type="text" 
+                                 name="spouse1-maximum-amount"
+                                 class="form-control bg-warning fw-bold text-black text-center fs-5"
+                                 id="spouse1-maximum-amount" 
+                                 disabled
+                                 [value]="Calc75Percents(0) | currency:'ILS':'symbol':'.0'">
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Summary for Spouse 1 -->
+    <div class="row">
+      <div class="col-xl-6 col-md-6">
+        <div class="summary-section">
+          <h4 class="summary-label">
+            <i class="bi bi-collection me-2"></i>
+            סה"כ מקורות:
+          </h4>
+          <input type="text" 
+                 name="spouse1-total-sources" 
+                 class="form-control summary-input"
+                 disabled
+                 [value]="CalcSumSource(0) | currency:'ILS':'symbol':'.0'"
+                 [ngClass]="CalcSumSource(0) >= 0 ? 'bg-lim-success' : 'custom-red-bg'">
+        </div>
+      </div>
+      
+      <div class="col-xl-6 col-md-6">
+        <div class="summary-section">
+          <h4 class="summary-label">
+            <i class="bi bi-graph-down me-2"></i>
+            סה"כ פער / עודף ביטוחי:
+          </h4>
+          <input type="text" 
+                 name="spouse1-gap" 
+                 class="form-control summary-input"
+                 disabled
+                 [value]="CalcGap(0) | currency:'ILS':'symbol':'.0'"
+                 [ngClass]="CalcGap(0) >= 0 ? 'bg-lim-success' : 'custom-red-bg'">
+        </div>
+      </div>
+    </div>
+  
+    <!-- Loss of Working Capacity Section - Spouse 2 (Only if married) -->
+    <div class="row" *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Marride">
+      <div class="col-xl-12">
+        <div class="card text-white mb-4 spouse2-card">
+          <div class="card-body alert alert-info">
+            <div class="card-header">
+              <i class="bi bi-people me-3"></i>
+              אובדן כושר עבודה - {{this.generalInfoService.AllInfo.PersonalDataViewInfo.Name2}}
+            </div>
+            
+            <!-- Analysis Card for Spouse 2 -->
+            <div class="card-body alert alert-warning analysis-card">
+              <div class="card-header fs-1 blockquote fw-bold" style="text-align: right;">
+                <i class="bi bi-calculator me-2"></i>
+                כמה אבדן כושר עבודה אקבל?
+                
+                <div class="table-responsive table-striped">
+                  <table class="table table-borderless">
+                    <thead>
+                      <tr>
+                        <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-2">
+                          <i class="bi bi-cash me-2"></i>
+                          ברוטו לפנסיה
+                        </th>
+                        <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-2">
+                          <i class="bi bi-shield-check me-2"></i>
+                          ביטוח לאומי
+                        </th>
+                        <th scope="col" class="text-center text-success col-xl-2 blockquote fw-bold fs-5">
+                          <i class="bi bi-piggy-bank me-2"></i>
+                          קרן פנסיה
+                        </th>
+                        <th scope="col" class="text-center text-success col-xl-2 blockquote fw-bold fs-5">
+                          <i class="bi bi-person-badge me-2"></i>
+                          ביטוח מנהלים
+                        </th>
+                        <th scope="col" class="text-center text-success col-xl-2 blockquote fw-bold fs-5">
+                          <i class="bi bi-shield-fill me-2"></i>
+                          ביטוח פרטי
+                        </th>
+                        <th scope="col" class="text-center text-success col-xl-2 blockquote fw-bold fs-5">
+                          <i class="bi bi-percent me-2"></i>
+                          סכום מקסימלי (75% מהשכר)
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <!-- Gross for Pension -->
+                        <td>
+                          <input type="text" 
+                                 name="spouse2-gross-pension" 
+                                 numbersOnly
+                                 autocomplete="off"
+                                 class="form-control text-center fw-bold fs-5 text-info blockquote"
+                                 id="spouse2-gross-pension"
+                                 [(ngModel)]="this.generalInfoService.AllInfo.LossOfWorkingCapacity.GrossForPension[1]"
+                                 placeholder="0">
+                        </td>
+                        
+                        <!-- Social Security -->
+                        <td>
+                          <input type="text" 
+                                 name="spouse2-social-security" 
+                                 numbersOnly
+                                 autocomplete="off"
+                                 class="form-control text-center fw-bold fs-5 text-info blockquote"
+                                 id="spouse2-social-security"
+                                 [(ngModel)]="this.generalInfoService.AllInfo.LossOfWorkingCapacity.SocialSecurity[1]"
+                                 placeholder="0">
+                        </td>
+                        
+                        <!-- Pension Fund -->
+                        <td>
+                          <input type="text" 
+                                 name="spouse2-pension-fund" 
+                                 numbersOnly
+                                 autocomplete="off"
+                                 class="form-control text-center fw-bold fs-5 text-info blockquote"
+                                 id="spouse2-pension-fund"
+                                 [(ngModel)]="this.generalInfoService.AllInfo.LossOfWorkingCapacity.PensionFund[1]"
+                                 placeholder="0">
+                        </td>
+                        
+                        <!-- Manager Insurance -->
+                        <td>
+                          <input type="text" 
+                                 name="spouse2-manager-insurance" 
+                                 numbersOnly
+                                 autocomplete="off"
+                                 class="form-control text-center fw-bold fs-5 text-info blockquote"
+                                 id="spouse2-manager-insurance"
+                                 [(ngModel)]="this.generalInfoService.AllInfo.LossOfWorkingCapacity.ManagerInsurance[1]"
+                                 placeholder="0">
+                        </td>
+                        
+                        <!-- Private Insurance -->
+                        <td>
+                          <input type="text" 
+                                 name="spouse2-private-insurance" 
+                                 numbersOnly
+                                 autocomplete="off"
+                                 class="form-control text-center fw-bold fs-5 text-info blockquote"
+                                 id="spouse2-private-insurance"
+                                 [(ngModel)]="this.generalInfoService.AllInfo.LossOfWorkingCapacity.PrivateInsurance[1]"
+                                 placeholder="0">
+                        </td>
+                        
+                        <!-- Maximum Amount (Calculated) -->
+                        <td>
+                          <input type="text" 
+                                 name="spouse2-maximum-amount"
+                                 class="form-control bg-warning fw-bold text-black text-center fs-5"
+                                 id="spouse2-maximum-amount" 
+                                 disabled
+                                 [value]="Calc75Percents(1) | currency:'ILS':'symbol':'.0'">
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Summary for Spouse 2 (Only if married) -->
+    <div class="row" *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Marride">
+      <div class="col-xl-6 col-md-6">
+        <div class="summary-section">
+          <h4 class="summary-label">
+            <i class="bi bi-collection me-2"></i>
+            סה"כ מקורות:
+          </h4>
+          <input type="text" 
+                 name="spouse2-total-sources" 
+                 class="form-control summary-input"
+                 disabled
+                 [value]="CalcSumSource(1) | currency:'ILS':'symbol':'.0'"
+                 [ngClass]="CalcSumSource(1) >= 0 ? 'bg-lim-success' : 'custom-red-bg'">
+        </div>
+      </div>
+      
+      <div class="col-xl-6 col-md-6">
+        <div class="summary-section">
+          <h4 class="summary-label">
+            <i class="bi bi-graph-down me-2"></i>
+            סה"כ פער / עודף ביטוחי:
+          </h4>
+          <input type="text" 
+                 name="spouse2-gap" 
+                 class="form-control summary-input"
+                 disabled
+                 [value]="CalcGap(1) | currency:'ILS':'symbol':'.0'"
+                 [ngClass]="CalcGap(1) >= 0 ? 'bg-lim-success' : 'custom-red-bg'">
+        </div>
+      </div>
+    </div>
+  
+    <!-- Final Summary Section -->
+    <div class="row">
+      <div class="col-xl-12">
+        <div class="summary-section">
+          <h1 class="summary-title">
+            <i class="bi bi-shield-exclamation me-3"></i>
+            סיכום אובדן כושר עבודה
+          </h1>
+          
+          <!-- Additional Info Cards -->
+          <div class="info-cards-grid">
+            <!-- Spouse 1 Cards -->
+            <div class="info-card-small">
+              <div class="info-icon disability-icon">
+                <i class="bi bi-person"></i>
+              </div>
+              <div class="info-content">
+                <h4>{{this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1}} - מקורות</h4>
+                <p class="sources-amount">{{CalcSumSource(0) | currency:'ILS':'symbol':'.0'}}</p>
+              </div>
+            </div>
+            
+            <div class="info-card-small">
+              <div class="info-icon gap-icon">
+                <i class="bi bi-graph-down"></i>
+              </div>
+              <div class="info-content">
+                <h4>{{this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1}} - פער</h4>
+                <p class="gap-amount">{{CalcGap(0) | currency:'ILS':'symbol':'.0'}}</p>
+              </div>
+            </div>
+            
+            <!-- Spouse 2 Cards (Only if married) -->
+            <div class="info-card-small" *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Marride">
+              <div class="info-icon disability-icon">
+                <i class="bi bi-people"></i>
+              </div>
+              <div class="info-content">
+                <h4>{{this.generalInfoService.AllInfo.PersonalDataViewInfo.Name2}} - מקורות</h4>
+                <p class="sources-amount">{{CalcSumSource(1) | currency:'ILS':'symbol':'.0'}}</p>
+              </div>
+            </div>
+            
+            <div class="info-card-small" *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Marride">
+              <div class="info-icon gap-icon">
+                <i class="bi bi-graph-down"></i>
+              </div>
+              <div class="info-content">
+                <h4>{{this.generalInfoService.AllInfo.PersonalDataViewInfo.Name2}} - פער</h4>
+                <p class="gap-amount">{{CalcGap(1) | currency:'ILS':'symbol':'.0'}}</p>
+              </div>
+            </div>
+            
+            <!-- Total Cards -->
+            <div class="info-card-small">
+              <div class="info-icon sources-icon">
+                <i class="bi bi-collection"></i>
+              </div>
+              <div class="info-content">
+                <h4>סה"כ מקורות כולל</h4>
+                <p class="sources-amount">
+                  {{(CalcSumSource(0) + (this.generalInfoService.AllInfo.PersonalDataViewInfo.Marride ? CalcSumSource(1) : 0)) | currency:'ILS':'symbol':'.0'}}
+                </p>
+              </div>
+            </div>
+            
+            <div class="info-card-small">
+              <div class="info-icon gap-icon">
+                <i class="bi bi-exclamation-triangle"></i>
+              </div>
+              <div class="info-content">
+                <h4>סה"כ פער כולל</h4>
+                <p class="gap-amount">
+                  {{(CalcGap(0) + (this.generalInfoService.AllInfo.PersonalDataViewInfo.Marride ? CalcGap(1) : 0)) | currency:'ILS':'symbol':'.0'}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,928 @@
+/* commitments.component.css - Enhanced Modern Design */
+
+/* ===== Container Styling ===== */
+.container-fluid {
+    min-height: 100vh;
+    padding: 2rem;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+  
+  /* ===== Row Styling ===== */
+  .row {
+    background: transparent !important;
+    margin-bottom: 2rem;
+  }
+  
+  /* ===== Column Styling ===== */
+  .col-md-12, .col-xl-12 {
+    background: transparent !important;
+  }
+  
+  /* ===== Card Styling ===== */
+  .card {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.9) 50%, rgba(71, 85, 105, 0.9) 100%) !important;
+    border: 2px solid rgba(220, 38, 38, 0.3) !important;
+    border-radius: 20px !important;
+    box-shadow: 
+      0 4px 20px rgba(0, 0, 0, 0.15),
+      0 8px 32px rgba(220, 38, 38, 0.15),
+      0 16px 64px rgba(239, 68, 68, 0.2) !important;
+    backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-bottom: 2rem;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(239, 68, 68, 0.5) !important;
+    box-shadow: 
+      0 0 20px rgba(220, 38, 38, 0.4),
+      0 25px 50px -12px rgba(0, 0, 0, 0.7),
+      0 0 40px rgba(239, 68, 68, 0.3) !important;
+  }
+  
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 30%, #991b1b 70%, #7f1d1d 100%);
+    opacity: 0.1;
+    border-radius: 20px;
+    z-index: -1;
+  }
+  
+  .card-body {
+    background: transparent !important;
+    padding: 3rem !important;
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* ===== Special styling for liquidation cards ===== */
+  .card.liquidation-card {
+    border-color: rgba(16, 185, 129, 0.3) !important;
+    margin: 1rem;
+  }
+  
+  .card.liquidation-card::before {
+    background: linear-gradient(135deg, #10b981 0%, #059669 30%, #047857 70%, #065f46 100%);
+  }
+  
+  .card.liquidation-card:hover {
+    border-color: rgba(16, 185, 129, 0.5) !important;
+    box-shadow: 
+      0 0 20px rgba(16, 185, 129, 0.4),
+      0 25px 50px -12px rgba(0, 0, 0, 0.7),
+      0 0 40px rgba(16, 185, 129, 0.3) !important;
+  }
+  
+  /* ===== Header Styling ===== */
+  .card-header {
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.15) 0%, rgba(239, 68, 68, 0.1) 100%) !important;
+    border-bottom: 2px solid rgba(220, 38, 38, 0.3) !important;
+    color: #f8fafc !important;
+    font-weight: 800 !important;
+    font-size: 2.5rem !important;
+    text-align: center;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border-radius: 16px;
+    backdrop-filter: blur(20px);
+    position: relative;
+    background-clip: padding-box;
+    text-shadow: 0 0 20px rgba(220, 38, 38, 0.4);
+    border: 2px solid rgba(220, 38, 38, 0.3) !important;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .card-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 30%, #991b1b 70%, #7f1d1d 100%);
+    opacity: 0.1;
+    border-radius: 16px;
+    z-index: -1;
+  }
+  
+  .liquidation-card .card-header {
+    background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(34, 197, 94, 0.1) 100%) !important;
+    border-color: rgba(16, 185, 129, 0.3) !important;
+    text-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+  }
+  
+  .liquidation-card .card-header::before {
+    background: linear-gradient(135deg, #10b981 0%, #059669 30%, #047857 70%, #065f46 100%);
+  }
+  
+  /* ===== Add Button Styling ===== */
+  .fa-plus {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+    border-radius: 50%;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 
+      0 4px 15px rgba(220, 38, 38, 0.3),
+      0 0 20px rgba(220, 38, 38, 0.2);
+    border: 2px solid rgba(220, 38, 38, 0.3);
+    filter: drop-shadow(0 0 10px rgba(220, 38, 38, 0.4));
+  }
+  
+  .fa-plus:hover {
+    transform: scale(1.15) rotate(90deg);
+    box-shadow: 
+      0 0 25px rgba(220, 38, 38, 0.5),
+      0 8px 30px rgba(220, 38, 38, 0.4);
+    border-color: rgba(220, 38, 38, 0.5);
+  }
+  
+  /* ===== Table Container ===== */
+  .table-responsive {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(51, 65, 85, 0.8) 100%) !important;
+    border-radius: 16px;
+    padding: 1.5rem;
+    border: 2px solid rgba(220, 38, 38, 0.3);
+    backdrop-filter: blur(20px);
+    box-shadow: 
+      0 4px 20px rgba(0, 0, 0, 0.15),
+      0 8px 32px rgba(220, 38, 38, 0.15);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+  
+  .table-responsive::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 30%, rgba(220, 38, 38, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(239, 68, 68, 0.03) 0%, transparent 50%);
+    z-index: -1;
+  }
+  
+  .liquidation-card .table-responsive {
+    border-color: rgba(16, 185, 129, 0.3);
+    box-shadow: 
+      0 4px 20px rgba(0, 0, 0, 0.15),
+      0 8px 32px rgba(16, 185, 129, 0.15);
+  }
+  
+  .liquidation-card .table-responsive::before {
+    background: 
+      radial-gradient(circle at 20% 30%, rgba(16, 185, 129, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(34, 197, 94, 0.03) 0%, transparent 50%);
+  }
+  
+  /* ===== Table Styling ===== */
+  .table {
+    background: transparent !important;
+    color: #f8fafc !important;
+    border-collapse: separate;
+    border-spacing: 0;
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* ===== Table Header ===== */
+  .table thead th {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 30%, #991b1b 70%, #7f1d1d 100%) !important;
+    color: white !important;
+    font-weight: 800 !important;
+    font-size: 1rem !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 1.25rem 0.75rem !important;
+    border: none !important;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    position: relative;
+    box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+    text-align: center;
+  }
+  
+  .liquidation-card .table thead th {
+    background: linear-gradient(135deg, #10b981 0%, #059669 30%, #047857 70%, #065f46 100%) !important;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+  }
+  
+  .table thead th:first-child {
+    border-top-right-radius: 8px !important;
+    border-bottom-right-radius: 8px !important;
+    border-top-left-radius: 0 !important;
+    border-bottom-left-radius: 0 !important;
+  }
+  
+  .table thead th:last-child {
+    border-top-left-radius: 8px !important;
+    border-bottom-left-radius: 8px !important;
+    border-top-right-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+  
+  .table thead th::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+    border-radius: inherit;
+    z-index: -1;
+  }
+  
+  /* ===== Table Body ===== */
+ tr {
+    background: rgba(30, 41, 59, 0.5) !important;
+    border: 1px solid rgba(220, 38, 38, 0.2) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-bottom: 0.5rem;
+  }
+  
+  .table tbody tr:hover {
+    background: rgba(220, 38, 38, 0.1) !important;
+    border-color: rgba(239, 68, 68, 0.4) !important;
+    transform: translateX(4px);
+    box-shadow: 
+      0 4px 20px rgba(0, 0, 0, 0.15),
+      0 0 25px rgba(220, 38, 38, 0.2);
+  }
+  
+  .liquidation-card .table tbody tr {
+    border-color: rgba(16, 185, 129, 0.2) !important;
+  }
+  
+  .liquidation-card .table tbody tr:hover {
+    background: rgba(16, 185, 129, 0.1) !important;
+    border-color: rgba(34, 197, 94, 0.4) !important;
+    box-shadow: 
+      0 4px 20px rgba(0, 0, 0, 0.15),
+      0 0 25px rgba(16, 185, 129, 0.2);
+  }
+  
+  .table tbody td {
+    background: transparent !important;
+    color: #f8fafc !important;
+    font-weight: 600 !important;
+    padding: 1rem 0.5rem !important;
+    border: none !important;
+    vertical-align: middle;
+    position: relative;
+  }
+  
+  /* ===== Form Controls ===== */
+  .form-control {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(51, 65, 85, 0.8) 100%) !important;
+    border: 2px solid rgba(220, 38, 38, 0.3) !important;
+    border-radius: 8px !important;
+    color: #f8fafc !important;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-control:focus {
+    border-color: rgba(220, 38, 38, 0.6) !important;
+    box-shadow: 
+      0 0 0 3px rgba(220, 38, 38, 0.2),
+      0 0 20px rgba(220, 38, 38, 0.4) !important;
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.9) 100%) !important;
+  }
+  
+  .form-control:hover {
+    border-color: rgba(220, 38, 38, 0.5);
+    transform: translateY(-1px);
+    box-shadow: 0 0 15px rgba(220, 38, 38, 0.3);
+  }
+  
+  .liquidation-card .form-control {
+    border-color: rgba(16, 185, 129, 0.3) !important;
+  }
+  
+  .liquidation-card .form-control:focus {
+    border-color: rgba(16, 185, 129, 0.6) !important;
+    box-shadow: 
+      0 0 0 3px rgba(16, 185, 129, 0.2),
+      0 0 20px rgba(16, 185, 129, 0.4) !important;
+  }
+  
+  .liquidation-card .form-control:hover {
+    border-color: rgba(16, 185, 129, 0.5);
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+  }
+  
+  /* ===== Text Color Classes ===== */
+  .text-info {
+    color: #60a5fa !important;
+    text-shadow: 0 0 8px rgba(96, 165, 250, 0.4);
+  }
+  
+  .text-primary {
+    color: #10b981 !important;
+    text-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+  }
+  
+  .text-success {
+    color: #10b981 !important;
+    text-shadow: 0 0 8px rgba(16, 185, 129, 0.4);
+  }
+  
+  .text-white {
+    color: #f8fafc !important;
+    text-shadow: 0 0 8px rgba(248, 250, 252, 0.4);
+  }
+  
+  .custom-red-text {
+    color: #ef4444 !important;
+    text-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
+  }
+  
+  /* ===== Status Background Classes ===== */
+  .bg-lim-success {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+    color: white !important;
+    font-weight: 800 !important;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    border-color: rgba(16, 185, 129, 0.5) !important;
+    box-shadow: 
+      0 4px 15px rgba(16, 185, 129, 0.3),
+      0 0 20px rgba(16, 185, 129, 0.2);
+  }
+  
+  .custom-red-bg {
+    direction: rtl;
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%) !important;
+    color: white !important;
+    font-weight: 800 !important;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    border-color: rgba(220, 38, 38, 0.5) !important;
+    box-shadow: 
+      0 4px 15px rgba(220, 38, 38, 0.3),
+      0 0 20px rgba(220, 38, 38, 0.2);
+  }
+  
+  .bg-dark {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(51, 65, 85, 0.8) 100%) !important;
+    color: #f8fafc !important;
+    border-color: rgba(220, 38, 38, 0.3) !important;
+  }
+  
+  /* ===== Average/Summary Cells ===== */
+  .form-control[disabled] {
+    font-weight: 800 !important;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .form-control[disabled]:hover {
+    transform: scale(1.02);
+  }
+  
+  /* ===== Summary Section Enhancement ===== */
+  .summary-section {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.9) 50%, rgba(71, 85, 105, 0.9) 100%);
+    border: 2px solid rgba(220, 38, 38, 0.3);
+    border-radius: 20px;
+    padding: 3rem;
+    margin: 2rem 0;
+    box-shadow: 
+      0 4px 20px rgba(0, 0, 0, 0.15),
+      0 8px 32px rgba(220, 38, 38, 0.15),
+      0 16px 64px rgba(239, 68, 68, 0.2);
+    backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
+  }
+  
+  .summary-section:hover {
+    transform: translateY(-5px);
+    border-color: rgba(239, 68, 68, 0.5);
+    box-shadow: 
+      0 0 20px rgba(220, 38, 38, 0.4),
+      0 25px 50px -12px rgba(0, 0, 0, 0.7),
+      0 0 40px rgba(239, 68, 68, 0.3);
+  }
+  
+  .summary-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 30%, #991b1b 70%, #7f1d1d 100%);
+    opacity: 0.1;
+    border-radius: 20px;
+    z-index: -1;
+  }
+  
+  /* ===== Summary Title ===== */
+  .summary-title {
+    color: #f8fafc !important;
+    font-weight: 800 !important;
+    font-size: 2.5rem !important;
+    text-shadow: 0 0 20px rgba(220, 38, 38, 0.4);
+    margin-bottom: 2rem !important;
+    background: linear-gradient(135deg, #f8fafc 0%, #dc2626 50%, #ef4444 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    display: inline-block;
+  }
+  
+  /* ===== Summary Badge Styling ===== */
+  .badge {
+    font-size: 1.6rem !important;
+    font-weight: 800 !important;
+    padding: 1rem 1.5rem !important;
+    border-radius: 16px !important;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    border: 2px solid rgba(220, 38, 38, 0.3) !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin: 0 1rem;
+    box-shadow: 
+      0 4px 15px rgba(220, 38, 38, 0.3),
+      0 0 20px rgba(220, 38, 38, 0.2);
+    display: inline-block;
+  }
+  
+  .badge:hover {
+    transform: scale(1.05);
+    box-shadow: 
+      0 0 25px rgba(220, 38, 38, 0.5),
+      0 6px 20px rgba(220, 38, 38, 0.4);
+    border-color: rgba(220, 38, 38, 0.5) !important;
+  }
+  
+  .badge.bg-lim-success {
+    border-color: rgba(16, 185, 129, 0.3) !important;
+    box-shadow: 
+      0 4px 15px rgba(16, 185, 129, 0.3),
+      0 0 20px rgba(16, 185, 129, 0.2);
+  }
+  
+  .badge.bg-lim-success:hover {
+    box-shadow: 
+      0 0 25px rgba(16, 185, 129, 0.5),
+      0 6px 20px rgba(16, 185, 129, 0.4);
+    border-color: rgba(16, 185, 129, 0.5) !important;
+  }
+  
+  /* ===== Info Cards Grid ===== */
+  .info-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+  
+  .info-card-small {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(51, 65, 85, 0.7) 100%);
+    border: 2px solid rgba(220, 38, 38, 0.3);
+    border-radius: 16px;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .info-card-small:hover {
+    border-color: rgba(239, 68, 68, 0.5);
+    transform: translateY(-3px);
+    box-shadow: 
+      0 8px 25px rgba(220, 38, 38, 0.2),
+      0 0 30px rgba(239, 68, 68, 0.2);
+  }
+  
+  .info-card-small::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 30%, rgba(220, 38, 38, 0.1) 0%, transparent 50%);
+    z-index: -1;
+    border-radius: 16px;
+  }
+  
+  /* ===== Debt Icons ===== */
+  .debt-icon {
+    background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 
+      0 4px 15px rgba(220, 38, 38, 0.3),
+      0 0 20px rgba(220, 38, 38, 0.2);
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+  }
+  
+  .debt-icon:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 
+      0 0 25px rgba(220, 38, 38, 0.5),
+      0 6px 20px rgba(220, 38, 38, 0.4);
+  }
+  
+  .payment-icon {
+    background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%) !important;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 
+      0 4px 15px rgba(220, 38, 38, 0.3),
+      0 0 20px rgba(220, 38, 38, 0.2);
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+  }
+  
+  .optimization-icon {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%) !important;
+    color: white;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    box-shadow: 
+      0 4px 15px rgba(220, 38, 38, 0.3),
+      0 0 20px rgba(220, 38, 38, 0.2);
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+  }
+  
+  /* ===== Info Content ===== */
+  .info-content {
+    flex: 1;
+    text-align: right;
+  }
+  
+  .info-content h4 {
+    color: #cbd5e1;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 8px rgba(59, 130, 246, 0.3);
+  }
+  
+  .info-content p {
+    color: #f8fafc;
+    font-size: 1.4rem;
+    font-weight: 800;
+    margin: 0;
+    text-shadow: 0 0 10px rgba(220, 38, 38, 0.4);
+  }
+  
+  .debt-amount {
+    color: #ef4444 !important;
+    text-shadow: 0 0 10px rgba(239, 68, 68, 0.4) !important;
+  }
+  
+  .payment-amount {
+    color: #f59e0b !important;
+    text-shadow: 0 0 10px rgba(245, 158, 11, 0.4) !important;
+  }
+  
+  .optimization-amount {
+    color: #10b981 !important;
+    text-shadow: 0 0 10px rgba(16, 185, 129, 0.4) !important;
+  }
+  
+  /* ===== Summary Row Enhancement ===== */
+  .summary-row {
+    background: linear-gradient(135deg, rgba(220, 38, 38, 0.1) 0%, rgba(239, 68, 68, 0.1) 100%) !important;
+    border: 2px solid rgba(220, 38, 38, 0.3) !important;
+    border-radius: 12px;
+    margin: 1rem 0;
+  }
+  
+  .summary-row td {
+    padding: 1.5rem 1rem !important;
+  }
+  
+  .summary-row .form-control {
+    font-size: 1.1rem !important;
+    font-weight: 800 !important;
+  }
+  
+  /* ===== Input Section Styling ===== */
+  .input-section {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.8) 0%, rgba(51, 65, 85, 0.7) 100%);
+    border: 2px solid rgba(16, 185, 129, 0.3);
+    border-radius: 16px;
+    padding: 2rem;
+    margin: 2rem 0;
+    backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .input-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 30%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+    z-index: -1;
+    border-radius: 16px;
+  }
+  
+  .input-title {
+    color: #f8fafc !important;
+    font-weight: 800 !important;
+    font-size: 1.8rem !important;
+    text-shadow: 0 0 15px rgba(16, 185, 129, 0.4);
+    margin-bottom: 1rem !important;
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* ===== Animation Classes ===== */
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeInRight {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+  
+  @keyframes pulseRed {
+    0%, 100% {
+      box-shadow: 
+        0 4px 20px rgba(220, 38, 38, 0.3),
+        0 0 30px rgba(220, 38, 38, 0.2);
+    }
+    50% {
+      box-shadow: 
+        0 4px 20px rgba(220, 38, 38, 0.5),
+        0 0 40px rgba(220, 38, 38, 0.4);
+    }
+  }
+  
+  @keyframes debtGlow {
+    0%, 100% {
+      box-shadow: 
+        0 4px 20px rgba(220, 38, 38, 0.3),
+        0 0 30px rgba(239, 68, 68, 0.2);
+    }
+    50% {
+      box-shadow: 
+        0 4px 20px rgba(239, 68, 68, 0.4),
+        0 0 40px rgba(220, 38, 38, 0.3);
+    }
+  }
+  
+  /* ===== Apply Animations ===== */
+  .card {
+    animation: slideInUp 0.6s ease-out;
+  }
+  
+  .table tbody tr {
+    animation: fadeInRight 0.5s ease-out;
+    animation-fill-mode: both;
+  }
+  
+  .table tbody tr:nth-child(1) { animation-delay: 0.1s; }
+  .table tbody tr:nth-child(2) { animation-delay: 0.2s; }
+  .table tbody tr:nth-child(3) { animation-delay: 0.3s; }
+  .table tbody tr:nth-child(4) { animation-delay: 0.4s; }
+  .table tbody tr:nth-child(5) { animation-delay: 0.5s; }
+  
+  .badge {
+    animation: debtGlow 3s ease-in-out infinite;
+  }
+  
+  .summary-section {
+    animation: pulseRed 4s ease-in-out infinite;
+  }
+  
+  /* ===== Responsive Design ===== */
+  @media (max-width: 1200px) {
+    .container-fluid {
+      padding: 1.5rem;
+    }
+    
+    .card-body {
+      padding: 2rem !important;
+    }
+    
+    .card-header {
+      font-size: 2rem !important;
+      padding: 1.5rem;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .table-responsive {
+      padding: 1rem;
+    }
+    
+    .table thead th,
+    .table tbody td {
+      padding: 0.75rem 0.5rem !important;
+      font-size: 0.9rem !important;
+    }
+    
+    .info-cards-grid {
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+    
+    .liquidation-card {
+      margin: 0.5rem;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .container-fluid {
+      padding: 1rem;
+    }
+    
+    .card-header {
+      font-size: 1.5rem !important;
+    }
+    
+    .table thead th,
+    .table tbody td {
+      padding: 0.5rem 0.25rem !important;
+      font-size: 0.8rem !important;
+    }
+    
+    .badge {
+      font-size: 1.2rem !important;
+      padding: 0.5rem 1rem !important;
+    }
+    
+    .summary-title {
+      font-size: 2rem !important;
+    }
+    
+    .table-responsive {
+      overflow-x: auto;
+    }
+    
+    .info-cards-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .summary-section {
+      padding: 2rem;
+    }
+    
+    .liquidation-card {
+      margin: 0.25rem;
+    }
+    
+    .input-section {
+      padding: 1.5rem;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .card-header {
+      font-size: 1.2rem !important;
+    }
+    
+    .badge {
+      font-size: 1rem !important;
+      padding: 0.4rem 0.8rem !important;
+      margin: 0.5rem;
+      display: block;
+      text-align: center;
+    }
+    
+    .summary-section {
+      padding: 1.5rem;
+    }
+    
+    .info-card-small {
+      flex-direction: column;
+      text-align: center;
+      padding: 1.5rem;
+    }
+    
+    .info-content {
+      text-align: center;
+    }
+    
+    .input-section {
+      padding: 1rem;
+    }
+    
+    .input-title {
+      font-size: 1.5rem !important;
+    }
+  }
+  
+  /* ===== Focus States ===== */
+  .form-control:focus-visible,
+  .fa-plus:focus-visible {
+    outline: 2px solid #dc2626;
+    outline-offset: 2px;
+  }
+  
+  .liquidation-card .form-control:focus-visible,
+  .liquidation-card .fa-plus:focus-visible {
+    outline-color: #10b981;
+  }
+  
+  /* ===== High Contrast Mode Support ===== */
+  @media (prefers-contrast: high) {
+    .card,
+    .table-responsive {
+      border-color: rgba(255, 255, 255, 0.5) !important;
+    }
+    
+    .form-control {
+      color: #E0E0E0 !important;
+    }
+  }
+  
+  /* ===== Reduced Motion Support ===== */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+  
+  /* ===== Print Styles ===== */
+  @media print {
+    .container-fluid {
+      background: white !important;
+    }
+    
+    .card,
+    .table-responsive {
+      background: white !important;
+      border: 1px solid #ccc !important;
+      box-shadow: none !important;
+    }
+    
+    .form-control,
+    .badge {
+      background: white !important;
+      color: black !important;
+      border: 1px solid #ccc !important;
+    }
+    
+    .fa-plus {
+      display: none !important;
+    }
+  }

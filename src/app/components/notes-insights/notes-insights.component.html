@@ -1,0 +1,532 @@
+<div class="notes-insights-container">
+  <!-- Header Section -->
+  <div class="header-section">
+    <div class="header-content">
+      <div class="header-title">
+        <h1 class="main-title">
+          <i class="bi bi-journal-check title-icon"></i>
+          הערות ותובנות פיננסיות
+        </h1>
+        <p class="subtitle">ניהול הערות, תובנות וניתוח נתונים פיננסיים</p>
+      </div>
+      
+      <div class="header-actions">
+        <button class="btn btn-primary" (click)="openAddNoteModal()">
+          <i class="bi bi-plus-lg"></i>
+          הערה חדשה
+        </button>
+        
+        <button class="btn btn-accent" (click)="openAddInsightModal()">
+          <i class="bi bi-lightbulb"></i>
+          תובנה חדשה
+        </button>
+
+        <button class="btn btn-ai" (click)="generateAIInsights()" [disabled]="isAiAnalyzing">
+          <i class="bi bi-robot" *ngIf="!isAiAnalyzing"></i>
+          <div class="loading-spinner" *ngIf="isAiAnalyzing"></div>
+          {{ isAiAnalyzing ? 'מנתח...' : 'ניתוח AI' }}
+        </button>
+      </div>
+    </div>
+
+    <!-- Statistics Cards -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon stat-notes">
+          <i class="bi bi-file-text"></i>
+        </div>
+        <div class="stat-content">
+          <div class="stat-value">{{ getStatistics().activeNotes }}</div>
+          <div class="stat-label">הערות פעילות</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon stat-insights">
+          <i class="bi bi-lightbulb"></i>
+        </div>
+        <div class="stat-content">
+          <div class="stat-value">{{ getStatistics().totalInsights }}</div>
+          <div class="stat-label">תובנות</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon stat-priority">
+          <i class="bi bi-exclamation-triangle"></i>
+        </div>
+        <div class="stat-content">
+          <div class="stat-value">{{ getStatistics().highPriorityItems }}</div>
+          <div class="stat-label">עדיפות גבוהה</div>
+        </div>
+      </div>
+
+      <div class="stat-card">
+        <div class="stat-icon stat-action">
+          <i class="bi bi-check-circle"></i>
+        </div>
+        <div class="stat-content">
+          <div class="stat-value">{{ getStatistics().actionRequiredItems }}</div>
+          <div class="stat-label">דורש פעולה</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navigation Tabs -->
+  <div class="tab-navigation">
+    <button 
+      class="tab-button" 
+      [class.active]="activeTab === 'overview'"
+      (click)="activeTab = 'overview'">
+      <i class="bi bi-grid-3x3-gap"></i>
+      סקירה כללית
+    </button>
+    
+    <button 
+      class="tab-button" 
+      [class.active]="activeTab === 'notes'"
+      (click)="activeTab = 'notes'; applyFilters()">
+      <i class="bi bi-file-text"></i>
+      הערות ({{ getStatistics().activeNotes }})
+    </button>
+    
+    <button 
+      class="tab-button" 
+      [class.active]="activeTab === 'insights'"
+      (click)="activeTab = 'insights'; applyFilters()">
+      <i class="bi bi-lightbulb"></i>
+      תובנות ({{ getStatistics().totalInsights }})
+    </button>
+  </div>
+
+  <!-- Filters Section -->
+  <div class="filters-section" *ngIf="activeTab !== 'overview'">
+    <div class="filters-grid">
+      <div class="filter-group">
+        <label>חיפוש</label>
+        <div class="search-input">
+          <i class="bi bi-search search-icon"></i>
+          <input 
+            type="text" 
+            placeholder="חיפוש בכותרות ותוכן..."
+            [(ngModel)]="searchTerm"
+            (ngModelChange)="applyFilters()"
+            class="form-input">
+        </div>
+      </div>
+
+      <div class="filter-group">
+        <label>סעיף פיננסי</label>
+        <select [(ngModel)]="selectedSection" (ngModelChange)="applyFilters()" class="filter-select">
+          <option value="all">כל הסעיפים</option>
+          <option *ngFor="let section of financialSections" [value]="section.id">
+            {{ section.name }}
+          </option>
+        </select>
+      </div>
+
+      <div class="filter-group" *ngIf="activeTab === 'notes'">
+        <label>סוג הערה</label>
+        <select [(ngModel)]="selectedNoteType" (ngModelChange)="applyFilters()" class="filter-select">
+          <option value="all">כל הסוגים</option>
+          <option value="advisor">יועץ פיננסי</option>
+          <option value="ai">ניתוח AI</option>
+          <option value="client">לקוח</option>
+        </select>
+      </div>
+
+      <div class="filter-group" *ngIf="activeTab === 'notes'">
+        <label>עדיפות</label>
+        <select [(ngModel)]="selectedPriority" (ngModelChange)="applyFilters()" class="filter-select">
+          <option value="all">כל הרמות</option>
+          <option value="critical">קריטי</option>
+          <option value="high">גבוה</option>
+          <option value="medium">בינוני</option>
+          <option value="low">נמוך</option>
+        </select>
+      </div>
+
+      <div class="filter-actions">
+        <button class="btn btn-secondary btn-sm" (click)="exportData()">
+          <i class="bi bi-download"></i>
+          יצוא
+        </button>
+        
+        <label class="btn btn-secondary btn-sm import-btn">
+          <i class="bi bi-upload"></i>
+          יבוא
+          <input type="file" accept=".json" (change)="importData($event)" hidden>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Content Sections -->
+  
+  <!-- Overview Tab -->
+  <div class="content-section" *ngIf="activeTab === 'overview'">
+    <div class="overview-grid">
+      <!-- Recent Activity -->
+      <div class="overview-card">
+        <div class="card-header">
+          <h3>פעילות אחרונה</h3>
+          <i class="bi bi-clock-history"></i>
+        </div>
+        <div class="recent-items">
+          <div class="recent-item" *ngFor="let note of filteredNotes.slice(0, 5)">
+            <div class="item-icon" [style.background-color]="getSectionColor(note.sectionId)">
+              <i class="bi bi-file-text"></i>
+            </div>
+            <div class="item-content">
+              <div class="item-title">{{ note.title }}</div>
+              <div class="item-meta">{{ getSectionName(note.sectionId) }} • {{ formatDate(note.updatedAt) }}</div>
+            </div>
+            <div class="item-priority" [style.background-color]="getPriorityColor(note.priority)"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Insights Summary -->
+      <div class="overview-card">
+        <div class="card-header">
+          <h3>תובנות חשובות</h3>
+          <i class="bi bi-lightbulb"></i>
+        </div>
+        <div class="insights-summary">
+          <div class="insight-item" *ngFor="let insight of filteredInsights.slice(0, 3)">
+            <div class="insight-header">
+              <div class="insight-title">{{ insight.title }}</div>
+              <div class="insight-confidence">{{ insight.confidence }}%</div>
+            </div>
+            <div class="insight-description">{{ insight.description }}</div>
+            <div class="insight-meta">
+              <span class="insight-impact" [style.color]="getImpactColor(insight.impact)">
+                {{ insight.impact === 'positive' ? 'חיובי' : insight.impact === 'negative' ? 'שלילי' : insight.impact === 'warning' ? 'אזהרה' : 'נייטרלי' }}
+              </span>
+              <span class="insight-section">{{ getSectionName(insight.sectionId) }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Section Distribution -->
+      <div class="overview-card full-width">
+        <div class="card-header">
+          <h3>התפלגות לפי סעיפים</h3>
+          <i class="bi bi-bar-chart"></i>
+        </div>
+        <div class="section-distribution">
+          <div class="section-bar" *ngFor="let stat of getNotesBySection()">
+            <div class="section-info">
+              <span class="section-name">{{ stat.section }}</span>
+              <span class="section-count">{{ stat.count }}</span>
+            </div>
+            <div class="section-progress">
+              <div class="progress-bar" 
+                   [style.width.%]="(stat.count / getStatistics().activeNotes) * 100"
+                   [style.background-color]="stat.color">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notes Tab -->
+  <div class="content-section" *ngIf="activeTab === 'notes'">
+    <div class="notes-grid">
+      <div class="note-card" *ngFor="let note of filteredNotes" [class.archived]="note.isArchived">
+        <div class="note-header">
+          <div class="note-meta">
+            <div class="note-section" [style.color]="getSectionColor(note.sectionId)">
+              {{ getSectionName(note.sectionId) }}
+            </div>
+            <div class="note-type">
+              <i class="bi bi-person-circle"></i>
+              {{ note.type === 'advisor' ? 'יועץ' : note.type === 'ai' ? 'AI' : 'לקוח' }}
+            </div>
+          </div>
+          
+          <div class="note-actions">
+            <button class="action-btn" (click)="editNote(note)" title="עריכה">
+              <i class="bi bi-pencil"></i>
+            </button>
+            
+            <button class="action-btn" (click)="toggleArchiveNote(note.id)" [title]="note.isArchived ? 'שחזור' : 'ארכיון'">
+              <i class="bi bi-archive" *ngIf="!note.isArchived"></i>
+              <i class="bi bi-arrow-counterclockwise" *ngIf="note.isArchived"></i>
+            </button>
+            
+            <button class="action-btn delete-btn" (click)="deleteNote(note.id)" title="מחיקה">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="note-body">
+          <h3 class="note-title">{{ note.title }}</h3>
+          <p class="note-content">{{ note.content }}</p>
+          
+          <div class="note-tags" *ngIf="note.tags.length > 0">
+            <span class="tag" *ngFor="let tag of note.tags">{{ tag }}</span>
+          </div>
+        </div>
+
+        <div class="note-footer">
+          <div class="note-author">{{ note.author }}</div>
+          <div class="note-date">{{ formatDate(note.updatedAt) }}</div>
+          <div class="note-priority" [style.background-color]="getPriorityColor(note.priority)">
+            {{ note.priority === 'critical' ? 'קריטי' : note.priority === 'high' ? 'גבוה' : note.priority === 'medium' ? 'בינוני' : 'נמוך' }}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="filteredNotes.length === 0">
+      <i class="bi bi-file-text empty-icon"></i>
+      <h3>אין הערות להצגה</h3>
+      <p>התחל בהוספת הערה חדשה או שנה את המסננים</p>
+      <button class="btn btn-primary" (click)="openAddNoteModal()">הוסף הערה ראשונה</button>
+    </div>
+  </div>
+
+  <!-- Insights Tab -->
+  <div class="content-section" *ngIf="activeTab === 'insights'">
+    <div class="insights-grid">
+      <div class="insight-card" *ngFor="let insight of filteredInsights">
+        <div class="insight-header">
+          <div class="insight-meta">
+            <div class="insight-section" [style.color]="getSectionColor(insight.sectionId)">
+              {{ getSectionName(insight.sectionId) }}
+            </div>
+            <div class="insight-source">
+              <i class="bi bi-lightbulb"></i>
+              {{ insight.source === 'ai_analysis' ? 'ניתוח AI' : insight.source === 'advisor_expertise' ? 'מומחיות יועץ' : 'נתוני שוק' }}
+            </div>
+          </div>
+          
+          <div class="insight-actions">
+            <button class="action-btn" (click)="editInsight(insight)" title="עריכה">
+              <i class="bi bi-pencil"></i>
+            </button>
+            
+            <button class="action-btn delete-btn" (click)="deleteInsight(insight.id)" title="מחיקה">
+              <i class="bi bi-trash"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="insight-body">
+          <div class="insight-title-row">
+            <h3 class="insight-title">{{ insight.title }}</h3>
+            <div class="insight-confidence-badge">{{ insight.confidence }}%</div>
+          </div>
+          
+          <p class="insight-description">{{ insight.description }}</p>
+          
+          <div class="insight-recommendation">
+            <div class="recommendation-label">המלצה:</div>
+            <p>{{ insight.recommendation }}</p>
+          </div>
+        </div>
+
+        <div class="insight-footer">
+          <div class="insight-indicators">
+            <div class="insight-impact" [style.color]="getImpactColor(insight.impact)">
+              <i class="bi bi-arrow-up-circle" *ngIf="insight.impact === 'positive'"></i>
+              <i class="bi bi-arrow-down-circle" *ngIf="insight.impact === 'negative'"></i>
+              <i class="bi bi-dash-circle" *ngIf="insight.impact === 'neutral'"></i>
+              <i class="bi bi-exclamation-triangle" *ngIf="insight.impact === 'warning'"></i>
+              {{ insight.impact === 'positive' ? 'חיובי' : insight.impact === 'negative' ? 'שלילי' : insight.impact === 'warning' ? 'אזהרה' : 'נייטרלי' }}
+            </div>
+            
+            <div class="insight-priority">
+              עדיפות: {{ insight.priority }}/5
+            </div>
+          </div>
+          
+          <div class="insight-date">{{ formatDate(insight.createdAt) }}</div>
+          
+          <div class="action-required" *ngIf="insight.actionRequired">
+            <i class="bi bi-clock"></i>
+            דורש פעולה
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Empty State -->
+    <div class="empty-state" *ngIf="filteredInsights.length === 0">
+      <i class="bi bi-lightbulb empty-icon"></i>
+      <h3>אין תובנות להצגה</h3>
+      <p>התחל בהוספת תובנה חדשה או הפעל ניתוח AI</p>
+      <button class="btn btn-accent" (click)="openAddInsightModal()">הוסף תובנה ראשונה</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Note Modal -->
+<div class="modal-overlay" *ngIf="showAddNoteModal" (click)="closeAddNoteModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>{{ editingNote ? 'עריכת הערה' : 'הערה חדשה' }}</h2>
+      <button class="close-btn" (click)="closeAddNoteModal()">
+        <i class="bi bi-x"></i>
+      </button>
+    </div>
+
+    <form [formGroup]="noteForm" (ngSubmit)="saveNote()" class="modal-form">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="sectionId">סעיף פיננסי *</label>
+          <select id="sectionId" formControlName="sectionId" class="form-select">
+            <option value="">בחר סעיף...</option>
+            <option *ngFor="let section of financialSections" [value]="section.id">
+              {{ section.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="type">סוג הערה *</label>
+          <select id="type" formControlName="type" class="form-select">
+            <option value="advisor">יועץ פיננסי</option>
+            <option value="ai">ניתוח AI</option>
+            <option value="client">לקוח</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="priority">עדיפות *</label>
+          <select id="priority" formControlName="priority" class="form-select">
+            <option value="low">נמוכה</option>
+            <option value="medium">בינונית</option>
+            <option value="high">גבוהה</option>
+            <option value="critical">קריטית</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="author">כותב *</label>
+          <input id="author" type="text" formControlName="author" class="form-input" placeholder="שם הכותב">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="title">כותרת *</label>
+        <input id="title" type="text" formControlName="title" class="form-input" placeholder="כותרת ההערה">
+      </div>
+
+      <div class="form-group">
+        <label for="content">תוכן *</label>
+        <textarea id="content" formControlName="content" class="form-textarea" rows="5" placeholder="תוכן ההערה..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="tags">תגיות (מופרדות בפסיקים)</label>
+        <input id="tags" type="text" formControlName="tags" class="form-input" placeholder="תגית1, תגית2, תגית3">
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" (click)="closeAddNoteModal()">ביטול</button>
+        <button type="submit" class="btn btn-primary" [disabled]="!noteForm.valid">
+          {{ editingNote ? 'עדכן הערה' : 'שמור הערה' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Add Insight Modal -->
+<div class="modal-overlay" *ngIf="showAddInsightModal" (click)="closeAddInsightModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>{{ editingInsight ? 'עריכת תובנה' : 'תובנה חדשה' }}</h2>
+      <button class="close-btn" (click)="closeAddInsightModal()">
+        <i class="bi bi-x"></i>
+      </button>
+    </div>
+
+    <form [formGroup]="insightForm" (ngSubmit)="saveInsight()" class="modal-form">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="insightSectionId">סעיף פיננסי *</label>
+          <select id="insightSectionId" formControlName="sectionId" class="form-select">
+            <option value="">בחר סעיף...</option>
+            <option *ngFor="let section of financialSections" [value]="section.id">
+              {{ section.name }}
+            </option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="impact">השפעה *</label>
+          <select id="impact" formControlName="impact" class="form-select">
+            <option value="positive">חיובית</option>
+            <option value="negative">שלילית</option>
+            <option value="neutral">נייטרלית</option>
+            <option value="warning">אזהרה</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="source">מקור *</label>
+          <select id="source" formControlName="source" class="form-select">
+            <option value="advisor_expertise">מומחיות יועץ</option>
+            <option value="ai_analysis">ניתוח AI</option>
+            <option value="market_data">נתוני שוק</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="confidence">רמת ביטחון (%) *</label>
+          <input id="confidence" type="number" min="0" max="100" formControlName="confidence" class="form-input">
+        </div>
+
+        <div class="form-group">
+          <label for="insightPriority">עדיפות (1-5) *</label>
+          <select id="insightPriority" formControlName="priority" class="form-select">
+            <option value="1">1 - נמוכה</option>
+            <option value="2">2 - נמוכה-בינונית</option>
+            <option value="3">3 - בינונית</option>
+            <option value="4">4 - גבוהה</option>
+            <option value="5">5 - קריטית</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="checkbox-label">
+            <input type="checkbox" formControlName="actionRequired">
+            <span class="checkbox-custom"></span>
+            דורש פעולה
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="insightTitle">כותרת *</label>
+        <input id="insightTitle" type="text" formControlName="title" class="form-input" placeholder="כותרת התובנה">
+      </div>
+
+      <div class="form-group">
+        <label for="description">תיאור *</label>
+        <textarea id="description" formControlName="description" class="form-textarea" rows="4" placeholder="תיאור התובנה..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="recommendation">המלצה *</label>
+        <textarea id="recommendation" formControlName="recommendation" class="form-textarea" rows="4" placeholder="המלצות לפעולה..."></textarea>
+      </div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn btn-secondary" (click)="closeAddInsightModal()">ביטול</button>
+        <button type="submit" class="btn btn-accent" [disabled]="!insightForm.valid">
+          {{ editingInsight ? 'עדכן תובנה' : 'שמור תובנה' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

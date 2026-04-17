@@ -1,0 +1,753 @@
+<!-- pension2.component.html - Enhanced Modern Design -->
+<div class="container-fluid" dir="rtl">
+  
+  <!-- Main Pension Section -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card text-white mb-4">
+        <div class="card-body alert alert-primary">
+          <div class="card-header">
+            <span>
+              <i class="bi bi-bank me-3"></i>
+              נתוני פנסיה - {{this.generalInfoService.AllInfo.PersonalDataViewInfo.Name2}}
+            </span>
+          </div>
+          
+          <!-- Manager Insurance Section -->
+          <div class="card-body alert alert-warning manager-insurance-card">
+            <div class="card-header fs-1 blockquote fw-bold" style="text-align: right;">
+              <span>
+                <i class="bi bi-briefcase-fill me-2"></i>
+                ביטוח מנהלים
+              </span>
+              <i class="fs-1 text-success fa fa-plus" (click)="AddRowManagerInsurance()"></i>
+            </div>
+            
+            <div class="table-responsive table-striped">
+              <table class="table table-borderless">
+                <thead>
+                  <tr>
+                    <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-2">
+                      <i class="bi bi-card-text me-2"></i>
+                      שם הביטוח
+                    </th>
+                    <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-1"
+                        data-bs-toggle="tooltip"
+                        data-bs-custom-class="custom-tooltip" 
+                        data-bs-title='יש למלא את הסכום שנצבר עד היום'
+                        data-bs-placement="right">
+                      <i class="bi bi-cash-stack me-2"></i>
+                      סכום הוני נוכחי
+                    </th>
+                    <th scope="col" class="text-center text-success col-xl-1 blockquote fw-bold fs-5"
+                        data-bs-toggle="tooltip" 
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title='יש לרשום את הסכום הנטו שנצבר לפנסיה , לא כולל דמי ניהול , ותשלום עבור מרכיבי הביטוח '
+                        data-bs-placement="right">
+                      <i class="bi bi-calendar-month me-2"></i>
+                      סכום הפקדה חודשי
+                    </th>
+                    <th scope="col" class="text-center text-success col-xl-1 blockquote fw-bold fs-5"
+                        data-bs-toggle="tooltip" 
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title='סכום חד פעמי למקרה מוות' 
+                        data-bs-placement="right">
+                      <i class="bi bi-shield-heart me-2"></i>
+                      ב.חיים - סכום חד פעמי
+                    </th>
+                    <th scope="col" class="text-center text-success col-xl-1 blockquote fw-bold fs-5">
+                      <i class="bi bi-calculator me-2"></i>
+                      מקדם קצבה
+                    </th>
+                    <th scope="col" class="text-center text-success col-xl-1 blockquote fw-bold fs-5"
+                        data-bs-toggle="tooltip" 
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title='ההון שנצבר בביטוח עד היום + הסכום החד פעמי למקרה מוות'
+                        data-bs-placement="right">
+                      <i class="bi bi-heart-fill me-2"></i>
+                      הוני למקרה מוות
+                    </th>
+                    <th scope="col" class="text-center text-success col-xl-1 blockquote fw-bold fs-5"
+                        data-bs-toggle="tooltip" 
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title='הערך העתידי של הסכום שנצבר בביטוח עד היום + הערך העתדי של הצבירות עד גיל הפנסיה'
+                        data-bs-placement="right">
+                      <i class="bi bi-piggy-bank me-2"></i>
+                      הוני לגיל פנסיה
+                    </th>
+                    <th scope="col" class="text-center text-success col-xl-1 blockquote fw-bold fs-5"
+                        data-bs-toggle="tooltip" 
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title='הערך העתידי של הסכום שנצבר בביטוח עד היום + הערך העתדי של הצבירות עד גיל הפנסיה , לפי מקדם הקצבה'
+                        data-bs-placement="right">
+                      <i class="bi bi-cash me-2"></i>
+                      קצבה חודשית
+                    </th>
+                    <th scope="col" class="text-center text-success col-xl-1 blockquote fw-bold fs-5"
+                        data-bs-toggle="tooltip" 
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title='מחושב לפי הסכום ההוני למקרה מוות , כקצבה חודשית עד גיל 90 של בן \ בת הזוג'
+                        data-bs-placement="right">
+                      <i class="bi bi-heart-pulse me-2"></i>
+                      ב.חיים - קצבה חודשית
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor='let income of this.generalInfoService.AllInfo.PensiaViewInfo.ManagerInsurance[1].ManagerInsuranceRows; let i = index'>
+                    <tr>
+                      <td>
+                        <input type="text" 
+                               name="manager-insurance-name-{{i+1}}" 
+                               numbersOnly 
+                               autocomplete="off"
+                               class="form-control fw-bold fs-5 text-info blockquote" 
+                               id="manager-insurance-name-{{i+1}}"
+                               [(ngModel)]="this.generalInfoService.AllInfo.PensiaViewInfo.ManagerInsurance[1].ManagerInsuranceRows[i].NameOfInsurance"
+                               placeholder="שם הביטוח">
+                      </td>
+                      <td>
+                        <input type="text" 
+                               name="manager-current-capital-{{i+1}}" 
+                               autocomplete="off"
+                               class="form-control fw-bold text-center fs-5 blockquote text-primary"
+                               numbersOnly 
+                               id="manager-current-capital-{{i+1}}"
+                               [(ngModel)]="this.generalInfoService.AllInfo.PensiaViewInfo.ManagerInsurance[1].ManagerInsuranceRows[i].CurrentCapitalAmount"
+                               placeholder="0">
+                      </td>
+                      <td>
+                        <input type="text" 
+                               name="manager-monthly-deposit-{{i+1}}"
+                               class="form-control fw-bold text-center fs-5 blockquote text-primary"
+                               id="manager-monthly-deposit-{{i+1}}"
+                               [(ngModel)]="this.generalInfoService.AllInfo.PensiaViewInfo.ManagerInsurance[1].ManagerInsuranceRows[i].MonthlyDepositAmount"
+                               placeholder="0">
+                      </td>
+                      <td>
+                        <input type="text" 
+                               name="manager-lump-sum-{{i+1}}" 
+                               numbersOnly 
+                               autocomplete="off"
+                               class="form-control fw-bold fs-5 text-center text-primary blockquote"
+                               id="manager-lump-sum-{{i+1}}"
+                               [(ngModel)]="this.generalInfoService.AllInfo.PensiaViewInfo.ManagerInsurance[1].ManagerInsuranceRows[i].LumpSum"
+                               placeholder="0">
+                      </td>
+                      <td>
+                        <input type="text" 
+                               name="manager-allowance-factor-{{i+1}}" 
+                               numbersOnly 
+                               autocomplete="off"
+                               class="form-control fw-bold bg-warning fs-5 text-center text-black blockquote"
+                               id="manager-allowance-factor-{{i+1}}"
+                               [(ngModel)]="this.generalInfoService.AllInfo.PensiaViewInfo.ManagerInsurance[1].ManagerInsuranceRows[i].AllowanceFactor"
+                               placeholder="מקדם">
+                      </td>
+                      <td>
+                        <input type="text" 
+                               name="manager-capital-death-{{i+1}}" 
+                               disabled
+                               class="form-control fw-bold text-black text-center blockquote fs-5"
+                               id="manager-capital-death-{{i+1}}"
+                               [value]="(this.generalInfoService.AllInfo.PensiaViewInfo.ManagerInsurance[1].ManagerInsuranceRows[i].CurrentCapitalAmount != '') ? (this.generalInfoService.AllInfo.PensiaViewInfo.ManagerInsurance[1].ManagerInsuranceRows[i].CalcCapitalAmountInCaseOfDeath() | currency:'ILS':'symbol':'.0') : ''"
+                               [ngClass]="this.generalInfoService.AllInfo.PensiaViewInfo.ManagerInsurance[1].ManagerInsuranceRows[i].CapitalAmountInCaseOfDeath > 0 ? 'bg-lim-success' : this.generalInfoService.AllInfo.PensiaViewInfo.ManagerInsurance[1].ManagerInsuranceRows[i].CapitalAmountInCaseOfDeath == 0 ? 'bg-dark' : 'custom-red-bg'">
+                      </td>
+                      <td>
+                        <input type="text" 
+                               name="manager-capital-pension-{{i+1}}" 
+                               disabled
+                               class="form-control fw-bold text-black text-center blockquote fs-5"
+                               id="manager-capital-pension-{{i+1}}"
+                               [value]="(this.generalInfoService.AllInfo.PensiaViewInfo.ManagerInsurance[1].ManagerInsuranceRows[i].CurrentCapitalAmount != '') ? (this.generalInfoService.AllInfo.PensiaViewInfo.ManagerInsurance[1].ManagerInsuranceRows[i].CalcCapitalAmountInCasePension(this.generalInfoService.AllInfo.PersonalDataViewInfo.AnnualInterest,this.generalInfoService.AllInfo.PersonalDataViewInfo.RetirementAge1,this.generalInfoService.AllInfo.PersonalDataViewInfo.Age1) | currency:'ILS':'symbol':'.0') : ''"
+                               [ngClass]="this.generalInfoService.AllInfo.PensiaViewInfo.ManagerInsurance[1].ManagerInsuranceRows[i].CapitalAmountInCasePension > 0 ? 'bg-lim-success' : this.generalInfoService.AllInfo.PensiaViewInfo.ManagerInsurance[1].ManagerInsuranceRows[i].CapitalAmountInCasePension == 0 ? 'bg-dark' : 'custom-red-bg'">
+                      </td>
+                      <td>
+                        <input type="text" 
+                               name="manager-monthly-allowance-{{i+1}}" 
+                               disabled
+                               class="form-control fw-bold text-black text-center blockquote fs-5"
+                               id="manager-monthly-allowance-{{i+1}}"
+                               [value]="(this.generalInfoService.AllInfo.PensiaViewInfo.ManagerInsurance[1].ManagerInsuranceRows[i].CurrentCapitalAmount != '') ? (this.generalInfoService.AllInfo.PensiaViewInfo.ManagerInsurance[1].ManagerInsuranceRows[i].CalcMonthlyAllowance() | currency:'ILS':'symbol':'.0') : ''"
+                               [ngClass]="this.generalInfoService.AllInfo.PensiaViewInfo.ManagerInsurance[1].ManagerInsuranceRows[i].MonthlyAllowance > 0 ? 'bg-lim-success' : this.generalInfoService.AllInfo.PensiaViewInfo.ManagerInsurance[1].ManagerInsuranceRows[i].MonthlyAllowance == 0 ? 'bg-dark' : 'custom-red-bg'">
+                      </td>
+                      <td>
+                        <input type="text" 
+                               name="manager-life-allowance-{{i+1}}" 
+                               disabled
+                               class="form-control fw-bold text-black text-center blockquote fs-5"
+                               id="manager-life-allowance-{{i+1}}"
+                               [value]="(this.generalInfoService.AllInfo.PensiaViewInfo.ManagerInsurance[1].ManagerInsuranceRows[i].CurrentCapitalAmount != '') ? (this.generalInfoService.AllInfo.PensiaViewInfo.ManagerInsurance[1].ManagerInsuranceRows[i].CalcManagerInsuranceMonthlyAllowance(this.generalInfoService.AllInfo.PersonalDataViewInfo.Age2) | currency:'ILS':'symbol':'.0') : ''"
+                               [ngClass]="this.generalInfoService.AllInfo.PensiaViewInfo.ManagerInsurance[1].ManagerInsuranceRows[i].ManagerInsuranceMonthlyAllowance >= 0 ? 'bg-lim-success' : this.generalInfoService.AllInfo.PensiaViewInfo.ManagerInsurance[1].ManagerInsuranceRows[i].ManagerInsuranceMonthlyAllowance == 0 ? 'bg-dark' : 'custom-red-bg'">
+                      </td>
+                    </tr>
+                  </ng-container>
+                  
+                  <!-- Manager Insurance Summary Row -->
+                  <tr>
+                    <td>
+                      <input type="text" 
+                             name="manager-summary" 
+                             disabled 
+                             class="pension-summary-input"
+                             id="manager-summary"
+                             value="סיכום ביניים">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="manager-summary-capital"
+                             class="pension-summary-input" 
+                             id="manager-summary-capital" 
+                             disabled
+                             [value]="CalcManagerInsuranceCurrentCapitalAmounts(1) | currency:'ILS':'symbol':'.0'">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="manager-summary-monthly"
+                             class="pension-summary-input" 
+                             id="manager-summary-monthly" 
+                             disabled
+                             [value]="CalcManagerInsuranceMonthlyDepositAmounts(1) | currency:'ILS':'symbol':'.0'">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="manager-summary-lump"
+                             class="pension-summary-input" 
+                             id="manager-summary-lump" 
+                             disabled
+                             [value]="CalcManagerInsuranceLumpSums(1) | currency:'ILS':'symbol':'.0'">
+                    </td>
+                    <td></td>
+                    <td>
+                      <input type="text" 
+                             name="manager-summary-death"
+                             class="pension-summary-input" 
+                             id="manager-summary-death" 
+                             disabled
+                             [value]="CalcManagerInsuranceCapitalAmountInCaseOfDeaths(1) | currency:'ILS':'symbol':'.0'">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="manager-summary-pension"
+                             class="pension-summary-input" 
+                             id="manager-summary-pension" 
+                             disabled
+                             [value]="CalcManagerInsuranceCapitalAmountInCasePensions(1) | currency:'ILS':'symbol':'.0'">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="manager-summary-allowance"
+                             class="pension-summary-input" 
+                             id="manager-summary-allowance" 
+                             disabled
+                             [value]="CalcManagerInsuranceMonthlyAllowances(1) | currency:'ILS':'symbol':'.0'">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="manager-summary-life"
+                             class="pension-summary-input" 
+                             id="manager-summary-life" 
+                             disabled
+                             [value]="CalcManagerInsuranceManagerInsuranceMonthlyAllowances(1) | currency:'ILS':'symbol':'.0'">
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <!-- Pension Fund Section -->
+          <div class="card-body alert alert-success pension-fund-card">
+            <div class="card-header fs-1 blockquote fw-bold" style="text-align: right;">
+              <span>
+                <i class="bi bi-piggy-bank-fill me-2"></i>
+                קרן פנסיה
+              </span>
+              <i class="fs-1 text-success fa fa-plus" (click)="AddRowPensia()"></i>
+            </div>
+            
+            <div class="table-responsive table-striped">
+              <table class="table table-borderless">
+                <thead>
+                  <tr>
+                    <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-1">
+                      <i class="bi bi-card-text me-2"></i>
+                      שם הביטוח
+                    </th>
+                    <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-1"
+                        data-bs-toggle="tooltip"
+                        data-bs-custom-class="custom-tooltip" 
+                        data-bs-title='יש למלא את הסכום שנצבר עד היום'
+                        data-bs-placement="right">
+                      <i class="bi bi-cash-stack me-2"></i>
+                      סכום הוני נוכחי
+                    </th>
+                    <th scope="col" class="text-center text-success col-xl-1 blockquote fw-bold fs-5"
+                        data-bs-toggle="tooltip" 
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title='יש לרשום את הסכום הנטו שנצבר לפנסיה , לא כולל דמי ניהול , ותשלום עבור מרכיבי הביטוח '
+                        data-bs-placement="right">
+                      <i class="bi bi-calendar-month me-2"></i>
+                      סכום הפקדה חודשי
+                    </th>
+                    <th scope="col" class="text-center text-success col-xl-1 blockquote fw-bold fs-5"
+                        data-bs-toggle="tooltip" 
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title='הערך העתידי של הסכום שנצבר בביטוח עד היום + הערך העתדי של הצבירות עד גיל הפנסיה'
+                        data-bs-placement="right">
+                      <i class="bi bi-graph-up-arrow me-2"></i>
+                      סכום עתידי לגיל הפנסיה
+                    </th>
+                    <th scope="col" class="text-center text-success col-xl-1 blockquote fw-bold fs-5"
+                        data-bs-toggle="tooltip" 
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title='הערך העתידי של הסכום שנצבר בביטוח עד היום + הערך העתדי של הצבירות עד גיל הפנסיה , לפי מקדם 220 נכון להיום'
+                        data-bs-placement="right">
+                      <i class="bi bi-cash me-2"></i>
+                      קצבה חודשית מחושבת
+                    </th>
+                    <th scope="col" class="text-center text-success col-xl-1 blockquote fw-bold fs-5"
+                        data-bs-toggle="tooltip" 
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title='יש לרשום את הסכום הנטו שנצבר לפנסיה , לא כולל דמי ניהול , ותשלום עבור מרכיבי הביטוח '
+                        data-bs-placement="right">
+                      <i class="bi bi-calendar-event me-2"></i>
+                      מועד סיום
+                    </th>
+                    <th scope="col" class="text-center text-success col-xl-1 blockquote fw-bold fs-5"
+                        data-bs-toggle="tooltip" 
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title='שיעור קצבה לאלמן\ה ' 
+                        data-bs-placement="right">
+                      <i class="bi bi-heart me-2"></i>
+                      קצבת אלמן
+                    </th>
+                    <th scope="col" class="text-center text-success col-xl-1 blockquote fw-bold fs-5"
+                        data-bs-toggle="tooltip" 
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title='שיעור קצבה ליתום ' 
+                        data-bs-placement="right">
+                      <i class="bi bi-people me-2"></i>
+                      קצבה ליתום
+                    </th>
+                    <th scope="col" class="text-center text-success col-xl-1 blockquote fw-bold fs-5"
+                        data-bs-toggle="tooltip" 
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title='שיעור קצבה ליתום ' 
+                        data-bs-placement="right">
+                      <i class="bi bi-shield me-2"></i>
+                      קצבת נכות
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor='let income of this.generalInfoService.AllInfo.PensiaViewInfo.PensionFund[1].PensionFundRows; let i = index'>
+                    <tr>
+                      <td>
+                        <input type="text" 
+                               name="pension-name-{{i+1}}" 
+                               numbersOnly 
+                               autocomplete="off"
+                               class="form-control fw-bold fs-5 text-info blockquote" 
+                               id="pension-name-{{i+1}}"
+                               [(ngModel)]="this.generalInfoService.AllInfo.PensiaViewInfo.PensionFund[1].PensionFundRows[i].NameOfInsurance"
+                               placeholder="שם הביטוח">
+                      </td>
+                      <td>
+                        <input type="text" 
+                               name="pension-current-{{i+1}}" 
+                               autocomplete="off"
+                               class="form-control fw-bold text-center fs-5 blockquote text-primary" 
+                               numbersOnly
+                               id="pension-current-{{i+1}}"
+                               [(ngModel)]="this.generalInfoService.AllInfo.PensiaViewInfo.PensionFund[1].PensionFundRows[i].CurrentCapitalAmount"
+                               placeholder="0">
+                      </td>
+                      <td>
+                        <input type="text" 
+                               name="pension-monthly-{{i+1}}"
+                               class="form-control fw-bold text-center fs-5 blockquote text-primary"
+                               id="pension-monthly-{{i+1}}"
+                               [(ngModel)]="this.generalInfoService.AllInfo.PensiaViewInfo.PensionFund[1].PensionFundRows[i].MonthlyDepositAmount"
+                               placeholder="0">
+                      </td>
+                      <td>
+                        <input type="text" 
+                               name="pension-future-{{i+1}}" 
+                               disabled
+                               class="form-control fw-bold text-black text-center blockquote fs-5"
+                               style="background-color: limegreen;" 
+                               id="pension-future-{{i+1}}"
+                               [value]="(this.generalInfoService.AllInfo.PensiaViewInfo.PensionFund[1].PensionFundRows[i].CurrentCapitalAmount != '') ? (this.generalInfoService.AllInfo.PensiaViewInfo.PensionFund[1].PensionFundRows[i].CalcFutureAmount(this.generalInfoService.AllInfo.PersonalDataViewInfo.AnnualInterest,this.generalInfoService.AllInfo.PersonalDataViewInfo.RetirementAge1,this.generalInfoService.AllInfo.PersonalDataViewInfo.Age1) | currency:'ILS':'symbol':'.0') : ''">
+                      </td>
+                      <td>
+                        <input type="text" 
+                               name="pension-calculated-{{i+1}}" 
+                               disabled
+                               class="form-control fw-bold text-black text-center blockquote fs-5"
+                               style="background-color: limegreen;" 
+                               id="pension-calculated-{{i+1}}"
+                               [value]="(this.generalInfoService.AllInfo.PensiaViewInfo.PensionFund[1].PensionFundRows[i].CurrentCapitalAmount != '') ? (this.generalInfoService.AllInfo.PensiaViewInfo.PensionFund[1].PensionFundRows[i].CalcCalculatedMonthlyAllowance() | currency:'ILS':'symbol':'.0') : ''">
+                      </td>
+                      <td>
+                        <input type="text" 
+                               name="pension-end-date-{{i+1}}"
+                               class="form-control fw-bold text-primary text-center blockquote fs-5"
+                               id="pension-end-date-{{i+1}}"
+                               [(ngModel)]="this.generalInfoService.AllInfo.PensiaViewInfo.PensionFund[1].PensionFundRows[i].EndDate"
+                               placeholder="תאריך">
+                      </td>
+                      <td>
+                        <input type="text" 
+                               name="pension-widow-{{i+1}}"
+                               class="form-control fw-bold text-primary text-center blockquote fs-5"
+                               id="pension-widow-{{i+1}}"
+                               [(ngModel)]="this.generalInfoService.AllInfo.PensiaViewInfo.PensionFund[1].PensionFundRows[i].WidowsAllowance"
+                               placeholder="0">
+                      </td>
+                      <td>
+                        <input type="text" 
+                               name="pension-orphan-{{i+1}}"
+                               class="form-control fw-bold text-primary text-center blockquote fs-5"
+                               id="pension-orphan-{{i+1}}"
+                               [(ngModel)]="this.generalInfoService.AllInfo.PensiaViewInfo.PensionFund[1].PensionFundRows[i].OrphanAllowance"
+                               placeholder="0">
+                      </td>
+                      <td>
+                        <input type="text" 
+                               name="pension-disability-{{i+1}}"
+                               class="form-control fw-bold text-primary text-center blockquote fs-5"
+                               id="pension-disability-{{i+1}}"
+                               [(ngModel)]="this.generalInfoService.AllInfo.PensiaViewInfo.PensionFund[1].PensionFundRows[i].DisabilityFund"
+                               placeholder="0">
+                      </td>
+                    </tr>
+                  </ng-container>
+                  
+                  <!-- Pension Fund Summary Row -->
+                  <tr>
+                    <td>
+                      <input type="text" 
+                             name="pension-summary" 
+                             disabled 
+                             class="pension-summary-input"
+                             id="pension-summary"
+                             value="סיכום ביניים">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="pension-summary-current"
+                             class="pension-summary-input" 
+                             id="pension-summary-current" 
+                             disabled
+                             [value]="CalcPensionCurrentCapitalAmounts(1) | currency:'ILS':'symbol':'.0'">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="pension-summary-monthly"
+                             class="pension-summary-input" 
+                             id="pension-summary-monthly" 
+                             disabled
+                             [value]="CalcPensionMonthlyDepositAmounts(1) | currency:'ILS':'symbol':'.0'">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="pension-summary-allowances"
+                             class="pension-summary-input" 
+                             id="pension-summary-allowances" 
+                             disabled
+                             [value]="CalcPensionMonthlyAllowances(1) | currency:'ILS':'symbol':'.0'">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="pension-summary-insurance"
+                             class="pension-summary-input" 
+                             id="pension-summary-insurance" 
+                             disabled
+                             [value]="CalcPensionManagerInsuranceMonthlyAllowances(1) | currency:'ILS':'symbol':'.0'">
+                    </td>
+                    <td></td>
+                    <td>
+                      <input type="text" 
+                             name="pension-summary-widow"
+                             class="pension-summary-input" 
+                             id="pension-summary-widow" 
+                             disabled
+                             [value]="CalcPensionWidowsAllowances(1) | currency:'ILS':'symbol':'.0'">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="pension-summary-orphan"
+                             class="pension-summary-input" 
+                             id="pension-summary-orphan" 
+                             disabled
+                             [value]="CalcPensionOrphanAllowances(1) | currency:'ILS':'symbol':'.0'">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="pension-summary-disability"
+                             class="pension-summary-input" 
+                             id="pension-summary-disability" 
+                             disabled
+                             [value]="CalcPensionDisabilityFund(1) | currency:'ILS':'symbol':'.0'">
+                    </td>
+                  </tr>
+                  
+                  <!-- Chart Row -->
+                  <tr>
+                    <td colspan="2"></td>
+                    <td colspan="5" class="col-md-6">
+                      <canvas class="col-xl-3" id="MyChart" height="150px">{{ chart }}</canvas>
+                    </td>
+                    <td colspan="2"></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <!-- Social Security Benefits Section -->
+          <div class="card-body alert alert-primary col-xl-4 social-security-card">
+            <div class="card-header fs-1 blockquote fw-bold" style="text-align: right;">
+              <i class="bi bi-shield-fill-check me-2"></i>
+              קצבאות ביטוח לאומי
+            </div>
+              
+            <div class="table-responsive table-striped">
+              <table class="table table-borderless">
+                <thead>
+                  <tr>
+                    <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-6">
+                      <i class="bi bi-card-text me-2"></i>
+                      שם הביטוח
+                    </th>
+                    <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-6"
+                        data-bs-toggle="tooltip"
+                        data-bs-custom-class="custom-tooltip" 
+                        data-bs-title='יתרת הכספים בקרן'
+                        data-bs-placement="right">
+                      <i class="bi bi-cash me-2"></i>
+                      סכום
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor='let income of this.generalInfoService.AllInfo.PensiaViewInfo.SocialSecurityBenefits[1].SocialSecurityBenefitsRows ; let i = index'>
+                    <tr>
+                      <td>
+                        <input type="text" 
+                               name="social-name-{{i+1}}" 
+                               numbersOnly 
+                               autocomplete="off"
+                               class="form-control text-center fw-bold bg-dark fs-5 text-info blockquote"
+                               id="social-name-{{i+1}}" 
+                               disabled
+                               [(ngModel)]="this.generalInfoService.AllInfo.PensiaViewInfo.SocialSecurityBenefits[1].SocialSecurityBenefitsRows[i].NameOfInsurance">
+                      </td>
+                      <td>
+                        <input type="text" 
+                               name="social-amount-{{i+1}}" 
+                               autocomplete="off"
+                               class="form-control fw-bold text-center fs-5 blockquote text-primary" 
+                               numbersOnly
+                               id="social-amount-{{i+1}}"
+                               [(ngModel)]="this.generalInfoService.AllInfo.PensiaViewInfo.SocialSecurityBenefits[1].SocialSecurityBenefitsRows[i].Amount"
+                               placeholder="0">
+                      </td>
+                    </tr>
+                  </ng-container>
+                  <tr>
+                    <td>
+                      <input type="text" 
+                             name="social-summary" 
+                             disabled 
+                             class="pension-summary-input"
+                             id="social-summary"
+                             value="סיכום ביניים">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="social-summary-amount"
+                             class="pension-summary-input" 
+                             id="social-summary-amount" 
+                             disabled
+                             [value]="CalcSocialSecurityBenefitsAmounts(1) | currency:'ILS':'symbol':'.0'">
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <!-- Old Pension Fund Section -->
+          <div class="card-body alert alert-info col-xl-8 old-pension-card">
+            <div class="card-header fs-1 blockquote fw-bold" style="text-align: right;">
+              <span>
+                <i class="bi bi-archive me-2"></i>
+                פנסיה תקציבית או ישנה
+              </span>
+              <i class="fs-1 text-success fa fa-plus" (click)="AddRowOld()"></i>
+            </div>
+              
+            <div class="table-responsive table-striped">
+              <table class="table table-borderless">
+                <thead>
+                  <tr>
+                    <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-3">
+                      <i class="bi bi-card-text me-2"></i>
+                      שם הפנסיה
+                    </th>
+                    <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-3"
+                        data-bs-toggle="tooltip"
+                        data-bs-custom-class="custom-tooltip" 
+                        data-bs-title='בדרך כלל 2% מהשכר הקובע על כל שנת עבודה'
+                        data-bs-placement="right">
+                      <i class="bi bi-cash me-2"></i>
+                      סכום הקצבה
+                    </th>
+                    <th scope="col" class="text-center text-success col-xl-3 blockquote fw-bold fs-5"
+                        data-bs-toggle="tooltip" 
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title='שיעור קצבה לאלמן\ה ' 
+                        data-bs-placement="right">
+                      <i class="bi bi-heart me-2"></i>
+                      קצבת אלמן
+                    </th>
+                    <th scope="col" class="text-center text-success col-xl-3 blockquote fw-bold fs-5"
+                        data-bs-toggle="tooltip" 
+                        data-bs-custom-class="custom-tooltip"
+                        data-bs-title='הקצבה משולמת עד גיל 21' 
+                        data-bs-placement="right">
+                      <i class="bi bi-people me-2"></i>
+                      קצבה ליתום
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor='let income of this.generalInfoService.AllInfo.PensiaViewInfo.OldPensionFund[1].OldPensionFundRows; let i = index'>
+                    <tr>
+                      <td>
+                        <input type="text" 
+                               name="old-pension-name-{{i+1}}" 
+                               numbersOnly 
+                               autocomplete="off"
+                               class="form-control fw-bold fs-5 col-xl-3 text-info blockquote" 
+                               id="old-pension-name-{{i+1}}"
+                               [(ngModel)]="this.generalInfoService.AllInfo.PensiaViewInfo.OldPensionFund[1].OldPensionFundRows[i].NameOfInsurance"
+                               placeholder="שם הפנסיה">
+                      </td>
+                      <td>
+                        <input type="text" 
+                               name="old-pension-allowance-{{i+1}}" 
+                               autocomplete="off"
+                               class="form-control fw-bold text-center col-xl-3 fs-5 blockquote text-primary"
+                               numbersOnly
+                               id="old-pension-allowance-{{i+1}}"
+                               [(ngModel)]="this.generalInfoService.AllInfo.PensiaViewInfo.OldPensionFund[1].OldPensionFundRows[i].AllowanceAmount"
+                               placeholder="0">
+                      </td>
+                      <td>
+                        <input type="text" 
+                               name="old-pension-widow-{{i+1}}" 
+                               autocomplete="off"
+                               class="form-control fw-bold text-center fs-5 col-xl-3 blockquote text-primary"
+                               numbersOnly
+                               id="old-pension-widow-{{i+1}}"
+                               [(ngModel)]="this.generalInfoService.AllInfo.PensiaViewInfo.OldPensionFund[1].OldPensionFundRows[i].WidowsAllowance"
+                               placeholder="0">
+                      </td>
+                      <td>
+                        <input type="text" 
+                               name="old-pension-orphan-{{i+1}}" 
+                               autocomplete="off"
+                               class="form-control fw-bold text-primary text-center col-xl-3 blockquote align-middle fs-5"
+                               id="old-pension-orphan-{{i+1}}"
+                               [(ngModel)]="this.generalInfoService.AllInfo.PensiaViewInfo.OldPensionFund[1].OldPensionFundRows[i].OrphanAllowance"
+                               placeholder="0">
+                      </td>
+                    </tr>
+                  </ng-container>
+                  <tr>
+                    <td>
+                      <input type="text" 
+                             name="old-pension-summary" 
+                             disabled 
+                             class="pension-summary-input"
+                             id="old-pension-summary"
+                             value="סיכום ביניים">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="old-pension-summary-allowance"
+                             class="pension-summary-input" 
+                             id="old-pension-summary-allowance" 
+                             disabled
+                             [value]="CalcOldPensionAllowanceAmount(1) | currency:'ILS':'symbol':'.0'">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="old-pension-summary-widow"
+                             class="pension-summary-input" 
+                             id="old-pension-summary-widow" 
+                             disabled
+                             [value]="CalcOldPensionWidowsAllowances(1) | currency:'ILS':'symbol':'.0'">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="old-pension-summary-orphan"
+                             class="pension-summary-input" 
+                             id="old-pension-summary-orphan" 
+                             disabled
+                             [value]="CalcOldPensionOrphanAllowances(1) | currency:'ILS':'symbol':'.0'">
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary Section -->
+  <div class="row">
+    <div class="col-xl-3 col-md-6">
+      <div class="pension-summary-section">
+        <h2 class="h1 text-white mb-3" style="text-align: start;">
+          <i class="bi bi-calculator-fill me-2"></i>
+          סה"כ פנסיה חודשית
+        </h2>
+        <div class="col-xl-12 px-0" style="text-align: start; padding: 3px;">
+          <input dir="ltr" 
+                 type="text" 
+                 name="total-monthly-pension" 
+                 class="pension-summary-input"
+                 id="total-monthly-pension" 
+                 disabled
+                 [value]="CalcSumMonthlyPensia(1) | currency:'ILS':'symbol':'.0'"
+                 [ngClass]="CalcSumMonthlyPensia(1) >= 0 ? 'bg-lim-success' : 'custom-red-bg'">
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-xl-3 col-md-6">
+      <div class="pension-summary-section">
+        <h2 class="h1 text-white mb-3" style="text-align: start;">
+          <i class="bi bi-gap me-2"></i>
+          סה"כ פער ביטוחי
+        </h2>
+        <div class="col-xl-12 px-0" style="text-align: start; padding: 3px;">
+          <input dir="ltr" 
+                 type="text" 
+                 name="total-insurance-gap" 
+                 class="pension-summary-input"
+                 id="total-insurance-gap" 
+                 disabled
+                 [value]="CalcGapSumMonthlyPensia(1) | currency:'ILS':'symbol':'.0'"
+                 [ngClass]="CalcGapSumMonthlyPensia(1) >= 0 ? 'bg-lim-success' : 'custom-red-bg'">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

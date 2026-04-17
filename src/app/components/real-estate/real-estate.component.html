@@ -1,0 +1,199 @@
+<div class="container-fluid">
+  <!-- Real Estate Section -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card text-white mb-4">
+        <div class="card-body alert alert-primary">
+          <div class="card-header">
+            <span>
+              <i class="bi bi-house-door me-3"></i>
+              נכסים - נדל"ן
+            </span>
+            <i class="fs-1 text-success fa fa-plus" (click)="AddRow()" title="הוסף נכס חדש"></i>
+          </div>
+          
+          <div class="table-responsive table-striped tbody_div">
+            <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-center text-success col-xl-3 blockquote fw-bold fs-5">
+                    <i class="bi bi-building me-2"></i>
+                    תיאור הנכס
+                  </th>
+                  <th scope="col" class="text-center text-success blockquote fw-bold fs-5 col-xl-2">
+                    <i class="bi bi-cash-stack me-2"></i>
+                    שווי הנכס
+                  </th>
+                  <th scope="col" class="text-center text-success blockquote fw-bold fs-5">
+                    <i class="bi bi-bank me-2"></i>
+                    יתרת משכנתה
+                  </th>
+                  <th scope="col" class="text-center text-success blockquote fw-bold fs-5">
+                    <i class="bi bi-calculator me-2"></i>
+                    שווי הנכס נטו
+                  </th>
+                  <th scope="col" class="text-center text-success col-xl-3 blockquote fw-bold fs-5">
+                    <i class="bi bi-chat-text me-2"></i>
+                    הערות
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor='let property of this.generalInfoService.AllInfo.RealEstateViewInfo.RealEstateRows; let i = index'>
+                  <tr>
+                    <!-- Property Description -->
+                    <td>
+                      <input type="text" 
+                             name="property-description-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold fs-5 text-info" 
+                             id="property-description-{{i+1}}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.RealEstateViewInfo.RealEstateRows[i].Description"
+                             placeholder="תיאור הנכס (דירה, בית, קרקע)">
+                    </td>
+                    
+                    <!-- Asset Value -->
+                    <td>
+                      <input type="text" 
+                             name="asset-value-{{i+1}}" 
+                             autocomplete="off"
+                             style="color: limegreen"
+                             [field]="this.generalInfoService.AllInfo.RealEstateViewInfo.RealEstateRows[i].AssetValue"
+                             class="form-control fw-bold text-center fs-5" 
+                             numbersOnly
+                             id="asset-value-{{i+1}}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.RealEstateViewInfo.RealEstateRows[i].AssetValue"
+                             placeholder="0">
+                    </td>
+                    
+                    <!-- Mortgage Balance -->
+                    <td>
+                      <input type="text" 
+                             name="mortgage-balance-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-center fs-5 custom-red-text" 
+                             numbersOnly
+                             [field]="this.generalInfoService.AllInfo.RealEstateViewInfo.RealEstateRows[i].NortgageBalance"
+                             id="mortgage-balance-{{i+1}}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.RealEstateViewInfo.RealEstateRows[i].NortgageBalance"
+                             placeholder="0">
+                    </td>
+                    
+                    <!-- Net Worth -->
+                    <td>
+                      <input type="text" 
+                             name="net-worth-{{i+1}}" 
+                             disabled
+                             class="form-control fw-bold text-center fs-5" 
+                             id="net-worth-{{i+1}}"
+                             [value]="this.generalInfoService.AllInfo.RealEstateViewInfo.RealEstateRows[i].CalcNetNetWorth() | currency:'ILS':'symbol':'.0'"
+                             [ngClass]="this.generalInfoService.AllInfo.RealEstateViewInfo.RealEstateRows[i].NetWorth > 0 ? 'bg-lim-success' : this.generalInfoService.AllInfo.RealEstateViewInfo.RealEstateRows[i].NetWorth == 0 ? 'bg-dark' : 'custom-red-bg'">
+                    </td>
+                    
+                    <!-- Comments -->
+                    <td>
+                      <input type="text" 
+                             name="property-comment-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-info align-middle fs-5" 
+                             id="property-comment-{{i+1}}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.RealEstateViewInfo.RealEstateRows[i].Comment"
+                             placeholder="הערות נוספות">
+                    </td>
+                  </tr>
+                </ng-container>
+                
+                <!-- Summary Row -->
+                <tr class="summary-row">
+                  <td>
+                    <input type="text" 
+                           disabled 
+                           class="form-control fw-bold  fw-bold fs-5"
+                           value="סיכום ביניים"
+                           [ngClass]="this.generalInfoService.AllInfo.RealEstateViewInfo.NetWorths >= 0 ? 'bg-lim-success' : 'custom-red-bg'">
+                  </td>
+                  <td>
+                    <input type="text" 
+                           disabled
+                           class="form-control fw-bold text-center fs-5"
+                           [value]="CalcAssetValues() | currency:'ILS':'symbol':'.0'"
+                           [ngClass]="this.generalInfoService.AllInfo.RealEstateViewInfo.NetWorths >= 0 ? 'bg-lim-success' : 'custom-red-bg'">
+                  </td>
+                  <td>
+                    <input type="text" 
+                           disabled
+                           class="form-control fw-bold text-center fs-5 custom-red-bg"
+                           [value]="CalcNortgageBalances() | currency:'ILS':'symbol':'.0'">
+                  </td>
+                  <td>
+                    <input type="text" 
+                           disabled
+                           class="form-control fw-bold text-center fs-5"
+                           [value]="CalcNetWorths() | currency:'ILS':'symbol':'.0'"
+                           [ngClass]="this.generalInfoService.AllInfo.RealEstateViewInfo.NetWorths >= 0 ? 'bg-lim-success' : 'custom-red-bg'">
+                  </td>
+                  <td></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Final Summary Section -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="summary-section">
+        <h1 class="summary-title">
+          <i class="bi bi-house-check me-3"></i>
+          סה"כ נכסי נדל"ן
+        </h1>
+        <div class="summary-value">
+          <span class="badge" 
+                [ngClass]="this.generalInfoService.AllInfo.RealEstateViewInfo.NetWorths >= 0 ? 'bg-lim-success' : 'custom-red-bg'">
+            <i class="bi bi-currency-shekel me-2"></i>
+            {{this.generalInfoService.AllInfo.RealEstateViewInfo.NetWorths | currency:'ILS':'symbol':'.0'}}
+          </span>
+        </div>
+        
+        <!-- Additional Info Cards -->
+        <div class="info-cards-grid">
+          <div class="info-card-small">
+            <div class="info-icon">
+              <i class="bi bi-graph-up"></i>
+            </div>
+            <div class="info-content">
+              <h4>סה"כ שווי נכסים</h4>
+              <p>{{CalcAssetValues() | currency:'ILS':'symbol':'.0'}}</p>
+            </div>
+          </div>
+          
+          <div class="info-card-small">
+            <div class="info-icon mortgage-icon">
+              <i class="bi bi-bank2"></i>
+            </div>
+            <div class="info-content">
+              <h4>סה"כ יתרות משכנתאות</h4>
+              <p class="mortgage-amount">{{CalcNortgageBalances() | currency:'ILS':'symbol':'.0'}}</p>
+            </div>
+          </div>
+          
+          <div class="info-card-small">
+            <div class="info-icon" 
+                 [ngClass]="this.generalInfoService.AllInfo.RealEstateViewInfo.NetWorths >= 0 ? 'profit-icon' : 'loss-icon'">
+              <i class="bi bi-wallet2"></i>
+            </div>
+            <div class="info-content">
+              <h4>ערך נטו</h4>
+              <p [ngClass]="this.generalInfoService.AllInfo.RealEstateViewInfo.NetWorths >= 0 ? 'profit-text' : 'loss-text'">
+                {{CalcNetWorths() | currency:'ILS':'symbol':'.0'}}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

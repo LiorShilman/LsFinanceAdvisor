@@ -1,0 +1,520 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card text-white mb-4 h-100">
+        <div class="card-body">
+          <div class="card-header">
+            <i class="bi bi-people me-3"></i>נתונים משפחתיים
+          </div>
+          <form name="personalDataForm" autocomplete="off" #personalDataForm="ngForm">
+            <div class="mb-6">
+              <legend class="mt-4">
+                <i class="bi bi-person-badge me-2"></i>פרטי זיהוי
+              </legend>
+
+              <div class="row">
+                <div class="col-12 col-md-6 position-relative">
+                  <label for="personal-data1-mail" class="form-label">
+                    <i class="bi bi-envelope me-2"></i>מייל אישי
+                  </label>
+                  <input type="email" name="mail" #partnerName1="ngModel" autocomplete="off"
+                    class="form-control fw-bold" [ngClass]="GetClassValidation('Mail')" id="personal-data1-mail"
+                    [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.Mail"
+                    placeholder="example@domain.com" required [attr.aria-describedby]="'mail-help'">
+                  <div class="invalid-tooltip" role="alert">
+                    <i class="bi bi-exclamation-triangle me-1"></i>
+                    כתובת הדואר האלקטרוני לא תקינה!
+                  </div>
+                </div>
+
+                <div class="col-12 col-md-6 position-relative">
+                  <label for="personal-data1-id" class="form-label">
+                    <i class="bi bi-card-text me-2"></i>תעודת זהות
+                  </label>
+                  <input type="text" name="id" class="form-control fw-bold" autocomplete="off" id="personal-data1-id"
+                    [ngClass]="GetClassValidation('Id')"
+                    [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.Id" placeholder="123456789"
+                    required maxlength="9" pattern="[0-9]{9}" [attr.aria-describedby]="'id-help'">
+                  <div class="invalid-tooltip" role="alert">
+                    <i class="bi bi-exclamation-triangle me-1"></i>
+                    מספר תעודת הזהות שגוי!
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Partner Information Section -->
+            <div class="mb-6">
+              <legend class="mt-4">
+                <i class="bi bi-heart me-2"></i>פרטי בן/בת הזוג
+              </legend>
+
+              <div class="row">
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3 position-relative">
+                  <label for="personal-data1-name" class="form-label">
+                    <i class="bi bi-person me-2"></i>שם מלא
+                  </label>
+                  <input type="text" name="partnerName1" #partnerName1="ngModel" autocomplete="off"
+                    class="form-control fw-bold" [ngClass]="GetClassValidation('Name1')" id="personal-data1-name"
+                    [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name1" placeholder="הכנס שם מלא"
+                    required [attr.aria-describedby]="'name-help'">
+                  <div class="invalid-tooltip" role="alert">
+                    <i class="bi bi-exclamation-triangle me-1"></i>שדה חובה!
+                  </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3 position-relative">
+                  <label for="personal-data1-sex" class="form-label">
+                    <i class="bi bi-gender-ambiguous me-2"></i>מין
+                  </label>
+                  <select [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.SelectedSex1" name="sex"
+                    [ngClass]="GetClassValidation('Sex1')" class="form-select fw-bold" id="personal-data1-sex" required
+                    [attr.aria-describedby]="'sex-help'">
+                    <option value="" selected disabled>בחר מין...</option>
+                    <option *ngFor="let sex of ['זכר','נקבה']" [value]="sex">{{sex}}</option>
+                  </select>
+                  <div class="invalid-tooltip" role="alert">
+                    <i class="bi bi-exclamation-triangle me-1"></i>שדה חובה!
+                  </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3 position-relative">
+                  <label for="personal-data1-age" class="form-label">
+                    <i class="bi bi-calendar-event me-2"></i>גיל
+                  </label>
+                  <input type="number" name="age" class="form-control fw-bold" autocomplete="off"
+                    id="personal-data1-age" [ngClass]="GetClassValidation('Age1')"
+                    [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.Age1" placeholder="גיל" min="18"
+                    max="120" required [attr.aria-describedby]="'age-help'">
+                  <div class="invalid-tooltip" role="alert">
+                    <i class="bi bi-exclamation-triangle me-1"></i>שדה חובה!
+                  </div>
+                </div>
+
+                <div class="col-12 col-sm-6 col-md-6 col-lg-3 position-relative">
+                  <label for="personal-data1-status" class="form-label">
+                    <i class="bi bi-heart-fill me-2"></i>מצב משפחתי
+                  </label>
+                  <select [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.SelectedStatus1"
+                    name="status" [ngClass]="GetClassValidation('Status1')" class="form-select fw-bold"
+                    id="personal-data1-status" required (ngModelChange)="onStatusOfPartner1Change($event)"
+                    [attr.aria-describedby]="'status-help'">
+                    <option value="" selected disabled>בחר מצב...</option>
+                    <option *ngFor="let status of ['רווק','נשוי','גרוש','אלמן']" [value]="status">{{status}}</option>
+                  </select>
+                  <div class="invalid-tooltip" role="alert">
+                    <i class="bi bi-exclamation-triangle me-1"></i>שדה חובה!
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Children Section -->
+            <div class="mb-6">
+              <legend class="mt-4">
+                <i class="bi bi-person-plus me-2"></i>רשימת ילדים
+              </legend>
+
+              <div class="row">
+                <div class="col-12 col-md-8 col-lg-6 position-relative">
+                  <label for="personal-data1-number-of-children" class="form-label">
+                    <i class="bi bi-people me-2"></i>מספר ילדים:
+                    <span
+                      class="badge bg-primary ms-2">{{this.generalInfoService.AllInfo.PersonalDataViewInfo.NumberOfChildren1}}</span>
+                  </label>
+                  <input type="range" class="form-range fw-bold" min="0" max="10" step="1" autocomplete="off"
+                    name="number-of-children" id="personal-data1-number-of-children"
+                    [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.NumberOfChildren1"
+                    (ngModelChange)="onNumberOfChildrenChange($event)" required
+                    [attr.aria-describedby]="'children-count-help'">
+                </div>
+              </div>
+
+              <!-- Children Details -->
+              <ng-container
+                *ngFor='let column of this.generalInfoService.AllInfo.PersonalDataViewInfo.Child; let i = index'>
+                <div class="row mt-4">
+                  <div class="col-12">
+                    <div class="child-card p-3 rounded-3 border">
+                      <h6 class="text-primary mb-3">
+                        <i class="bi bi-person-plus-fill me-2"></i>ילד {{i + 1}}
+                      </h6>
+                      <div class="row">
+                        <div class="col-12 col-md-4 position-relative">
+                          <label for="child-name{{i+1}}" class="form-label">שם</label>
+                          <input type="text" class="form-control fw-bold" id="child-name{{i+1}}" autocomplete="off"
+                            name="child-name{{i+1}}"
+                            [ngClass]="this.generalInfoService.AllInfo.PersonalDataViewInfo.Child[i].GetClassValidation('Name')"
+                            [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.Child[i].Name"
+                            placeholder="שם הילד" required [attr.aria-describedby]="'child-name-help-' + (i+1)">
+                          <div class="invalid-tooltip" role="alert">
+                            <i class="bi bi-exclamation-triangle me-1"></i>שדה חובה!
+                          </div>
+                        </div>
+
+                        <div class="col-12 col-md-4 position-relative">
+                          <label for="child-sex{{i+1}}" class="form-label">מין</label>
+                          <select
+                            [ngClass]="this.generalInfoService.AllInfo.PersonalDataViewInfo.Child[i].GetClassValidation('Sex')"
+                            [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.Child[i].SelectedSex"
+                            name="child-sex{{i+1}}" class="form-select fw-bold" id="child-sex{{i+1}}" required
+                            [attr.aria-describedby]="'child-sex-help-' + (i+1)">
+                            <option value="" selected disabled>בחר...</option>
+                            <option *ngFor="let sex of ['זכר','נקבה']" [value]="sex">{{sex}}</option>
+                          </select>
+                          <div class="invalid-tooltip" role="alert">
+                            <i class="bi bi-exclamation-triangle me-1"></i>שדה חובה!
+                          </div>
+                        </div>
+
+                        <div class="col-12 col-md-4 position-relative">
+                          <label for="child-age{{i+1}}" class="form-label">גיל</label>
+                          <input type="number" class="form-control fw-bold" id="child-age{{i+1}}" autocomplete="off"
+                            name="child-age{{i+1}}"
+                            [ngClass]="this.generalInfoService.AllInfo.PersonalDataViewInfo.Child[i].GetClassValidation('Age')"
+                            [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.Child[i].Age"
+                            placeholder="גיל" min="0" max="30" required
+                            [attr.aria-describedby]="'child-age-help-' + (i+1)">
+                          <div class="invalid-tooltip" role="alert">
+                            <i class="bi bi-exclamation-triangle me-1"></i>שדה חובה!
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-container>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Additional Data Section -->
+  <div class="row">
+    <div class="col-12">
+      <div class="card text-white mb-4 h-100">
+        <div class="card-body">
+          <div class="card-header">
+            <i class="bi bi-speedometer2 me-2"></i>נתונים נוספים לחישוב המערכת
+          </div>
+
+          <form name="personalDataForm" autocomplete="off" #personalDataForm="ngForm">
+            
+            <!-- Retirement Age Section -->
+            <div class="mb-6">
+              <legend class="mt-4">
+                <i class="bi bi-clock me-2"></i>גיל יציאה לפנסיה
+              </legend>
+              
+              <div class="row">
+                <div class="col-12 col-md-6 col-lg-4 position-relative">
+                  <label for="personal-data1-retirement-age" class="form-label">
+                    <i class="bi bi-user-clock me-2"></i>גיל פרישה
+                  </label>
+                  <input type="number" class="form-control fw-bold" autocomplete="off"
+                    id="personal-data1-retirement-age" name="personal-data1-retirement-age"
+                    [ngClass]="GetClassValidation('RetirementAge1')"
+                    [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.RetirementAge1" 
+                    placeholder="67" min="60" max="75" required
+                    [attr.aria-describedby]="'retirement-age-help'">
+                  <div class="invalid-tooltip" role="alert">
+                    <i class="bi bi-exclamation-triangle me-1"></i>שדה חובה!
+                  </div>
+                </div>
+
+                <!-- Partner 2 Details (if married) -->
+                <ng-container *ngIf="this.generalInfoService.AllInfo.PersonalDataViewInfo.Marride">
+                  <div class="col-12 col-md-6 col-lg-2 position-relative">
+                    <label for="personal-data2-name" class="form-label">
+                      <i class="bi bi-user me-2"></i>שם בן/בת זוג
+                    </label>
+                    <input type="text" name="partnerName2" #partnerName2="ngModel"
+                      class="form-control fw-bold" autocomplete="off"
+                      id="personal-data2-name" [ngClass]="GetClassValidation('Name2')"
+                      [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.Name2" 
+                      placeholder="שם מלא" required
+                      [attr.aria-describedby]="'partner-name-help'">
+                    <div class="invalid-tooltip" role="alert">
+                      <i class="bi bi-exclamation-triangle me-1"></i>שדה חובה!
+                    </div>
+                  </div>
+                  
+                  <div class="col-12 col-md-6 col-lg-2 position-relative">
+                    <label for="persona2-data1-sex" class="form-label">
+                      <i class="bi bi-venus-mars me-2"></i>מין
+                    </label>
+                    <select [ngClass]="GetClassValidation('Sex2')"
+                      [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.SelectedSex2" name="sex2"
+                      class="form-select fw-bold" id="persona2-data1-sex" required
+                      [attr.aria-describedby]="'partner-sex-help'">
+                      <option value="" selected disabled>בחר...</option>
+                      <option *ngFor="let sex of ['זכר','נקבה']" [value]="sex">{{sex}}</option>
+                    </select>
+                    <div class="invalid-tooltip" role="alert">
+                      <i class="bi bi-exclamation-triangle me-1"></i>שדה חובה!
+                    </div>
+                  </div>
+                  
+                  <div class="col-12 col-md-6 col-lg-2 position-relative">
+                    <label for="persona2-data1-age" class="form-label">
+                      <i class="bi bi-birthday-cake me-2"></i>גיל
+                    </label>
+                    <input type="number" name="persona2-data1-age" class="form-control fw-bold"
+                      autocomplete="off" id="persona2-data1-age"
+                      [ngClass]="GetClassValidation('Age2')"
+                      [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.Age2" 
+                      placeholder="גיל" min="18" max="120" required
+                      [attr.aria-describedby]="'partner-age-help'">
+                    <div class="invalid-tooltip" role="alert">
+                      <i class="bi bi-exclamation-triangle me-1"></i>שדה חובה!
+                    </div>
+                  </div>
+                  
+                  <div class="col-12 col-md-6 col-lg-2 position-relative">
+                    <label for="personal-data2-retirement-age" class="form-label">
+                      <i class="bi bi-user-clock me-2"></i>גיל פרישה
+                    </label>
+                    <input type="number" class="form-control fw-bold" id="personal-data2-retirement-age"
+                      autocomplete="off" name="personal-data2-retirement-age"
+                      [ngClass]="GetClassValidation('RetirementAge2')"
+                      [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.RetirementAge2" 
+                      placeholder="67" min="60" max="75" required
+                      [attr.aria-describedby]="'partner-retirement-age-help'">
+                    <div class="invalid-tooltip" role="alert">
+                      <i class="bi bi-exclamation-triangle me-1"></i>שדה חובה!
+                    </div>
+                  </div>
+                </ng-container>
+              </div>
+            </div>
+
+            <!-- Saudi Insurance Section -->
+            <div class="mb-6">
+              <legend class="mt-4">
+                <i class="bi bi-shield-alt me-2"></i>ביטוח סיעודי
+              </legend>
+              
+              <div class="row">
+                <div class="col-12 col-md-6 position-relative">
+                  <label for="SaudiInsuranceInHome" class="form-label">
+                    <i class="bi bi-house me-2"></i>כיסוי אשפוז בבית
+                  </label>
+                  <div class="input-group">
+                    <input type="text" class="form-control fw-bold" id="SaudiInsuranceInHome"
+                      autocomplete="off" name="SaudiInsuranceInHome"
+                      [ngClass]="GetClassValidation('SaudiInsuranceInHome')"
+                      [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.SaudiInsuranceInHome" 
+                      placeholder="10,000" required
+                      [attr.aria-describedby]="'home-insurance-help'">
+                    <span class="input-group-text">₪</span>
+                  </div>
+                  <div class="invalid-tooltip" role="alert">
+                    <i class="bi bi-exclamation-triangle me-1"></i>שדה חובה!
+                  </div>
+                </div>
+                
+                <div class="col-12 col-md-6 position-relative">
+                  <label for="SaudiinsuranceInMossad" class="form-label">
+                    <i class="bi bi-hospital me-2"></i>כיסוי אשפוז במוסד
+                  </label>
+                  <div class="input-group">
+                    <input type="text" class="form-control fw-bold" autocomplete="off"
+                      id="SaudiinsuranceInMossad" name="SaudiinsuranceInMossad"
+                      [ngClass]="GetClassValidation('SaudiinsuranceInMossad')"
+                      [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.SaudiinsuranceInMossad" 
+                      placeholder="15,000" required
+                      [attr.aria-describedby]="'institution-insurance-help'">
+                    <span class="input-group-text">₪</span>
+                  </div>
+                  <div class="invalid-tooltip" role="alert">
+                    <i class="bi bi-exclamation-triangle me-1"></i>שדה חובה!
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Interest Rates Section -->
+            <div class="mb-6">
+              <legend class="mt-4">
+                <i class="bi bi-percentage me-2"></i>ריביות
+              </legend>
+              
+              <div class="row">
+                <div class="col-12 col-md-6 col-lg-4 position-relative">
+                  <label for="AnnualInterest" class="form-label">
+                    <i class="bi bi-graph-up me-2"></i>ריבית שנתית לחישוב ביטוחים
+                    <i class="bi bi-info-circle ms-1" data-bs-toggle="tooltip" 
+                       data-bs-custom-class="custom-tooltip"
+                       data-bs-title="ריבית ארוכת הטווח המקובלת בשוק הביטוח והפנסיה"
+                       data-bs-placement="right"
+                       tabindex="0" role="button" aria-label="מידע נוסף"></i>
+                  </label>
+                  <div class="input-group">
+                    <input type="number" step="0.01" class="form-control fw-bold"
+                      id="AnnualInterest" name="AnnualInterest" [ngClass]="GetClassValidation('AnnualInterest')"
+                      [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.AnnualInterest" 
+                      placeholder="3.74" min="0" max="20" required
+                      [attr.aria-describedby]="'annual-interest-help'">
+                    <span class="input-group-text">%</span>
+                  </div>
+                  <div class="invalid-tooltip" role="alert">
+                    <i class="bi bi-exclamation-triangle me-1"></i>שדה חובה!
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Emergency Fund Section -->
+            <div class="mb-6">
+              <legend class="mt-4">
+                <i class="bi bi-piggy-bank me-2"></i>בלת"מ (בלתי צפוי)
+              </legend>
+              
+              <div class="row">
+                <div class="col-12 col-md-6 col-lg-4 position-relative">
+                  <label for="Unplanned" class="form-label">
+                    <i class="bi bi-piggy-bank me-2"></i>אחוז הפרשה לבלת"מ
+                    <i class="bi bi-info-circle ms-1" data-bs-toggle="tooltip" 
+                       data-bs-custom-class="custom-tooltip"
+                       data-bs-title='אחוז מההכנסה המשפחתית לטובת בלת"מ'
+                       data-bs-placement="right"
+                       tabindex="0" role="button" aria-label="מידע נוסף"></i>
+                  </label>
+                  <div class="input-group">
+                    <input type="number" step="0.1" class="form-control fw-bold" id="Unplanned"
+                      name="Unplanned" [ngClass]="GetClassValidation('Unplanned')"
+                      [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.Unplanned" 
+                      placeholder="5" min="0" max="50" required
+                      [attr.aria-describedby]="'unplanned-help'">
+                    <span class="input-group-text">%</span>
+                  </div>
+                  <div class="invalid-tooltip" role="alert">
+                    <i class="bi bi-exclamation-triangle me-1"></i>שדה חובה!
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Credit Rating Section -->
+            <div class="mb-6">
+              <legend class="mt-4">
+                <i class="bi bi-star me-2"></i>דירוג אשראי
+              </legend>
+              
+              <div class="row">
+                <div class="col-12 col-md-6 col-lg-4 position-relative">
+                  <label for="CreditRating" class="form-label">
+                    <i class="bi bi-credit-card me-2"></i>ציון אשראי
+                    <i class="bi bi-info-circle ms-1" data-bs-toggle="tooltip" 
+                       data-bs-custom-class="custom-tooltip"
+                       data-bs-title='דירוג אשראי לפי אפליקציית קפטן כרדיט'
+                       data-bs-placement="right"
+                       tabindex="0" role="button" aria-label="מידע נוסף"></i>
+                  </label>
+                  <input type="number" class="form-control fw-bold single-input" id="CreditRating"
+                    name="CreditRating" [ngClass]="GetClassValidation('CreditRating')"
+                    [(ngModel)]="this.generalInfoService.AllInfo.PersonalDataViewInfo.CreditRating"
+                    (ngModelChange)="OnModelChange($event,'CreditRating')" 
+                    placeholder="750" min="0" max="1000" required
+                    [attr.aria-describedby]="'credit-rating-help'">
+                  <div class="invalid-tooltip" role="alert">
+                    <i class="bi bi-exclamation-triangle me-1"></i>שדה חובה!
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Chart Section -->
+            <div class="chart-container mt-4 p-3 rounded-3">
+              <div class="row justify-content-center">
+                <div class="col-12">
+                  <div class="d-flex justify-content-center">
+                    <highcharts-chart class="credit-chart" [Highcharts]="highcharts" [(update)]="updateFlag"
+                      style="width: 100%; height: 400px; display: block;" [options]="chartOptions"
+                      role="img" aria-label="גרף דירוג אשראי">
+                    </highcharts-chart>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Custom Legend -->
+              <div class="custom-legend d-flex justify-content-center flex-wrap mt-3 gap-2" role="list" aria-label="מקרא הגרף">
+                <div class="legend-item d-flex align-items-center" role="listitem" tabindex="0">
+                  <span class="legend-text">🔴 נמוך מאוד</span>
+                </div>
+                <div class="legend-item d-flex align-items-center" role="listitem" tabindex="0">
+                  <span class="legend-text">🟠 נמוך</span>
+                </div>
+                <div class="legend-item d-flex align-items-center" role="listitem" tabindex="0">
+                  <span class="legend-text">🟡 סביר</span>
+                </div>
+                <div class="legend-item d-flex align-items-center" role="listitem" tabindex="0">
+                  <span class="legend-text">🟢 טוב</span>
+                </div>
+                <div class="legend-item d-flex align-items-center" role="listitem" tabindex="0">
+                  <span class="legend-text">⭐ מצויין</span>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Credit Rating Display -->
+  <div class="row">
+    <div class="col-12">
+      <div class="card text-white h-100">
+        <div class="card-body p-3">
+          <div class="row align-items-center">
+            <div class="col-12 col-md-4 col-xl-12 mb-3 mb-md-0">
+              <div class="credit-rating-label">
+                <i class="bi bi-chart-bar me-2"></i>
+                <span class="h5 mb-0">דירוג אשראי נוכחי</span>
+              </div>
+            </div>
+            <div class="col-12 col-md-8 col-xl-12 ">
+              <div class="credit-description-display p-3 rounded-3">
+                <div class="d-flex align-items-center justify-content-center">
+                  <i class="bi bi-info-circle me-3 text-primary"></i>
+                  <span class="fw-bold fs-5 text-center flex-grow-1"
+                        [ngStyle]="{'color': getStyleFromVal(generalInfoService.AllInfo.PersonalDataViewInfo.CreditRating)}"
+                        role="status" aria-live="polite">
+                    {{BDIDescription()}}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Accessibility Helper Text (Screen Reader Only) -->
+  <div class="visually-hidden" aria-live="polite" id="form-status"></div>
+
+  <!-- Help Text for Screen Readers -->
+  <div class="visually-hidden">
+    <div id="mail-help">הזן כתובת מייל תקינה בפורמט example&#64;domain.com</div>
+    <div id="id-help">הזן מספר תעודת זהות בן 9 ספרות</div>
+    <div id="name-help">הזן שם מלא של בן/בת הזוג</div>
+    <div id="sex-help">בחר מין: זכר או נקבה</div>
+    <div id="age-help">הזן גיל בין 18 ל-120</div>
+    <div id="status-help">בחר מצב משפחתי: רווק, נשוי, גרוש או אלמן</div>
+    <div id="children-count-help">בחר מספר ילדים באמצעות הסליידר</div>
+    <div id="retirement-age-help">הזן גיל פרישה בין 60 ל-75</div>
+    <div id="partner-name-help">הזן שם מלא של בן/בת הזוג השני</div>
+    <div id="partner-sex-help">בחר מין של בן/בת הזוג השני</div>
+    <div id="partner-age-help">הזן גיל של בן/בת הזוג השני בין 18 ל-120</div>
+    <div id="partner-retirement-age-help">הזן גיל פרישה של בן/בת הזוג השני בין 60 ל-75</div>
+    <div id="home-insurance-help">הזן סכום כיסוי אשפוז בבית בשקלים</div>
+    <div id="institution-insurance-help">הזן סכום כיסוי אשפוז במוסד בשקלים</div>
+    <div id="annual-interest-help">הזן ריבית שנתית בין 0 ל-20 אחוזים</div>
+    <div id="unplanned-help">הזן אחוז הפרשה לבלתי צפוי בין 0 ל-50 אחוזים</div>
+    <div id="credit-rating-help">הזן ציון אשראי בין 0 ל-1000</div>
+  </div>
+</div>

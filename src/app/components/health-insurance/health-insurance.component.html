@@ -1,0 +1,149 @@
+<!-- health-insurance.component.html - Enhanced Modern Design -->
+<div class="container-fluid" dir="rtl">
+  
+  <!-- Health Insurance Section -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card text-white mb-4">
+        <div class="card-body alert alert-primary">
+          <div class="card-header" 
+               data-bs-toggle="tooltip" 
+               data-bs-custom-class="custom-tooltip" 
+               autocomplete="off"
+               data-bs-title="בא לתת מענה למצב בריאותי המחייב הוצאה גדולה, ולאפשר למשפחה להמשיך הרמת החיים אחיה היא הורגלה, תוך מענה לצורך הבריאותי של בן המשפחה הנזקק לו." 
+               data-bs-placement="right">
+            <span>
+              <i class="bi bi-heart-pulse me-3"></i>
+              ביטוחי בריאות
+            </span>
+            <i class="fs-1 text-success fa fa-plus" (click)="AddRow()"></i>
+          </div>
+          
+          <div class="table-responsive table-striped">
+            <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-center text-success col-xl-3 blockquote fw-bold fs-5">
+                    <i class="bi bi-person-circle me-2"></i>
+                    שם המבוטח
+                  </th>
+                  <th scope="col" class="text-center text-success col-xl-2 blockquote fw-bold fs-5"
+                      data-bs-toggle="tooltip" 
+                      data-bs-custom-class="custom-tooltip" 
+                      autocomplete="off"
+                      data-bs-title="כללית,מכבי,לאומית,מאוחדת" 
+                      data-bs-placement="right">
+                    <i class="bi bi-hospital me-2 mx-1"></i>
+                    שם קופת החולים
+                  </th>
+                  <th scope="col" class="text-center text-success col-xl-1 blockquote fw-bold fs-5"
+                      data-bs-toggle="tooltip" 
+                      data-bs-custom-class="custom-tooltip" 
+                      autocomplete="off"
+                      data-bs-title="ניתן למצוא בדיווח הרבעוני מקופת החולים" 
+                      data-bs-placement="right">
+                    <i class="bi bi-shield-plus me-2 mx-1"></i>
+                    יש ביטוח משלים?
+                  </th>
+                  <th scope="col" class="text-center text-success col-xl-5 blockquote fw-bold fs-5"
+                      data-bs-toggle="tooltip" 
+                      data-bs-custom-class="custom-tooltip" 
+                      autocomplete="off"
+                      data-bs-title="ניתן למצוא בהר ביטוח או אצל סוכן הביטוח" 
+                      data-bs-placement="right">
+                    <i class="bi bi-building me-2 mx-1"></i>
+                    אם יש ביטוח פרטי - באיזה חברה?
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor='let income of this.generalInfoService.AllInfo.HealthInsuranceViewInfo.HealthInsuranceRows; let i = index'>
+                  <tr>
+                    <td>
+                      <input type="text" 
+                             name="insured-name-{{i+1}}" 
+                             numbersOnly 
+                             autocomplete="off"
+                             class="form-control fw-bold fs-5 text-info blockquote" 
+                             id="insured-name-{{i+1}}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.HealthInsuranceViewInfo.HealthInsuranceRows[i].NameOfInsured"
+                             placeholder="שם המבוטח">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="health-fund-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-center fs-5 blockquote text-primary" 
+                             numbersOnly 
+                             id="health-fund-{{i+1}}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.HealthInsuranceViewInfo.HealthInsuranceRows[i].NameOfHealthInsurance"
+                             placeholder="שם קופת החולים">
+                    </td>
+                    <td class="fw-bold text-center fs-5 align-middle form-switch">
+                      <input class="form-check-input position-static mx-0" 
+                             type="checkbox" 
+                             id="supplementary-insurance-{{i+1}}"
+                             value="option1"
+                             aria-label="ביטוח משלים"
+                             [(ngModel)]="this.generalInfoService.AllInfo.HealthInsuranceViewInfo.HealthInsuranceRows[i].SupplementaryInsurance">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="private-insurance-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-info align-middle fs-5 blockquote" 
+                             id="private-insurance-{{i+1}}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.HealthInsuranceViewInfo.HealthInsuranceRows[i].PrivateInsurancDescription"
+                             placeholder="תיאור ביטוח פרטי">
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+          </div>
+          
+          <!-- Summary Section (if needed) -->
+          <div class="row" *ngIf="this.generalInfoService.AllInfo.HealthInsuranceViewInfo.HealthInsuranceRows.length > 0">
+            <div class="col-xl-12">
+              <div class="summary-section">
+                <h3 class="text-white text-center mb-4">
+                  <i class="bi bi-clipboard-data me-2"></i>
+                  סיכום ביטוחי בריאות
+                </h3>
+                
+                <div class="row">
+                  <div class="col-xl-4">
+                    <div class="text-center">
+                      <h5 class="text-white mb-2">סה"כ מבוטחים</h5>
+                      <span class="badge bg-success">
+                        {{this.generalInfoService.AllInfo.HealthInsuranceViewInfo.HealthInsuranceRows.length}}
+                      </span>
+                    </div>
+                  </div>
+                  
+                  <div class="col-xl-4">
+                    <div class="text-center">
+                      <h5 class="text-white mb-2">עם ביטוח משלים</h5>
+                      <span class="badge bg-success">
+                        {{GetSupplementaryInsuranceCount()}}
+                      </span>
+                    </div>
+                  </div>
+                  
+                  <div class="col-xl-4">
+                    <div class="text-center">
+                      <h5 class="text-white mb-2">עם ביטוח פרטי</h5>
+                      <span class="badge bg-success">
+                        {{GetPrivateInsuranceCount()}}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

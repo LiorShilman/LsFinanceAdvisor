@@ -1,0 +1,4570 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>מרוץ לפנסיה Pro – סימולטור פיננסי מתקדם עם פיצויים</title>
+
+  <!-- External Libraries -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"
+    integrity="sha512-ElRFoEQdI5Ht6kZvyzXhYG9NqjtkmlkfYk0wr6wHxU9JEHakS7UJZNeml5ALk+8IKlU6jDgMabC3vkumRokgJA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.jsdelivr.net/npm/date-fns@2.29.3/index.min.js"></script>
+
+  <!-- KaTeX Support for Mathematical Formulas -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+
+  <style>
+    :root {
+      color-scheme: dark;
+      --primary-blue: #3b82f6;
+      --primary-cyan: #06b6d4;
+      --success-green: #10b981;
+      --warning-orange: #f59e0b;
+      --danger-red: #ef4444;
+      --purple-accent: #8b5cf6;
+      --gradient-primary: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-cyan) 100%);
+      --gradient-success: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      --gradient-warning: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+      --gradient-danger: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+      --gradient-purple: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+      --card-bg: linear-gradient(145deg, #1e293b 0%, #0f172a 100%);
+      --glass-bg: rgba(30, 41, 59, 0.8);
+      --glass-border: rgba(255, 255, 255, 0.1);
+      --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      --shadow-xl: 0 35px 60px -20px rgba(0, 0, 0, 0.6);
+    }
+
+    * {
+      scrollbar-width: thin;
+      scrollbar-color: #475569 #1e293b;
+    }
+
+    *::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    *::-webkit-scrollbar-track {
+      background: #1e293b;
+    }
+
+    *::-webkit-scrollbar-thumb {
+      background: #475569;
+      border-radius: 3px;
+    }
+
+    *::-webkit-scrollbar-thumb:hover {
+      background: #64748b;
+    }
+
+    html,
+    body {
+      height: 100%;
+      background: #020617;
+      background-image:
+        radial-gradient(circle at 20% 80%, rgba(30, 41, 59, 0.4) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+    }
+
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-lg);
+      transition: all 0.3s ease;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-xl);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .gradient-primary {
+      background: var(--gradient-primary);
+    }
+
+    .gradient-success {
+      background: var(--gradient-success);
+    }
+
+    .gradient-warning {
+      background: var(--gradient-warning);
+    }
+
+    .gradient-danger {
+      background: var(--gradient-danger);
+    }
+
+    .gradient-purple {
+      background: var(--gradient-purple);
+    }
+
+    .btn-primary {
+      background: var(--gradient-primary);
+      color: white;
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      font-weight: 500;
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin: 6px;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    .input-field {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: white;
+      padding: 12px 16px;
+      border-radius: 10px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .input-field:focus {
+      outline: none;
+      border-color: var(--primary-blue);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    .select-field {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: white;
+      padding: 12px 16px;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .select-field:focus {
+      outline: none;
+      border-color: var(--primary-blue);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    .kpi-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .kpi-card:hover {
+      transform: scale(1.02);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .event-chip {
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+    }
+
+    .event-chip:hover {
+      background: rgba(59, 130, 246, 0.2);
+      border-color: rgba(59, 130, 246, 0.5);
+    }
+
+    .tooltip {
+      position: relative;
+      cursor: help;
+    }
+
+    .tooltip:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(15, 23, 42, 0.95);
+      color: white;
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 12px;
+      white-space: nowrap;
+      z-index: 1000;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--gradient-primary);
+      transition: width 0.5s ease;
+      border-radius: 4px;
+    }
+
+    .animate-pulse-custom {
+      animation: pulse-custom 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    @keyframes pulse-custom {
+
+      0%,
+      100% {
+        opacity: 1;
+      }
+
+      50% {
+        opacity: 0.7;
+      }
+    }
+
+    .chart-container {
+      position: relative;
+      height: 350px;
+      padding: 20px;
+    }
+
+    canvas {
+      max-height: 320px !important;
+    }
+
+    .latex-formula {
+      direction: ltr;
+      text-align: center;
+      margin: 15px 0;
+      padding: 20px;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      border-radius: 12px;
+      backdrop-filter: blur(5px);
+    }
+
+    .formula-container {
+      background: rgba(74, 144, 226, 0.15);
+      padding: 20px;
+      margin: 20px 0;
+      border-radius: 12px;
+      border: 1px solid rgba(74, 144, 226, 0.3);
+      direction: ltr;
+      text-align: center;
+      backdrop-filter: blur(5px);
+    }
+
+    .negative-number {
+      color: var(--danger-red);
+      font-weight: 600;
+      direction: ltr;
+      unicode-bidi: embed;
+    }
+
+    .num {
+      font-variant-numeric: tabular-nums;
+      font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+    }
+
+    .grid-auto {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+
+    .fade-in {
+      animation: fadeIn 0.6s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .status-indicator {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-left: 8px;
+    }
+
+    .status-success {
+      background: var(--success-green);
+    }
+
+    .status-warning {
+      background: var(--warning-orange);
+    }
+
+    .status-danger {
+      background: var(--danger-red);
+    }
+
+    .tab-container {
+      display: flex;
+      gap: 4px;
+      background: rgba(255, 255, 255, 0.05);
+      padding: 4px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+    }
+
+    .tab-button {
+      padding: 10px 20px;
+      border-radius: 8px;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.6);
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .tab-button.active {
+      background: var(--gradient-primary);
+      color: white;
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      justify-content: between;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .icon {
+      width: 20px;
+      height: 20px;
+      margin-left: 8px;
+    }
+
+    .pension-ceiling-warning {
+      background: rgba(255, 193, 7, 0.1);
+      border: 1px solid rgba(255, 193, 7, 0.3);
+      color: #ffc107;
+      padding: 12px;
+      border-radius: 8px;
+      margin-top: 10px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 768px) {
+      .grid-auto {
+        grid-template-columns: 1fr;
+      }
+
+      .chart-container {
+        height: 280px;
+      }
+
+      canvas {
+        max-height: 250px !important;
+      }
+    }
+
+    /* User Guide Modal Styles */
+    #userGuideModal .glass-card {
+      background: rgba(30, 41, 59, 0.95);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    #userGuideModal details>summary {
+      transition: all 0.3s ease;
+    }
+
+    #userGuideModal details[open]>summary {
+      color: #60a5fa;
+      margin-bottom: 8px;
+    }
+
+    #userGuideModal ul li {
+      margin-bottom: 4px;
+    }
+
+    #openGuideBtn {
+      transition: all 0.3s ease;
+    }
+
+    #openGuideBtn:hover {
+      transform: scale(1.05);
+    }
+
+    #userGuideModal .overflow-y-auto::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    #userGuideModal .overflow-y-auto::-webkit-scrollbar-track {
+      background: rgba(30, 41, 59, 0.3);
+    }
+
+    #userGuideModal .overflow-y-auto::-webkit-scrollbar-thumb {
+      background: rgba(59, 130, 246, 0.5);
+      border-radius: 3px;
+    }
+
+    #userGuideModal .overflow-y-auto::-webkit-scrollbar-thumb:hover {
+      background: rgba(59, 130, 246, 0.7);
+    }
+  </style>
+</head>
+
+<body class="text-white antialiased">
+  <!-- Loading Overlay -->
+  <div id="loadingOverlay" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center"
+    style="display: none;">
+    <div class="glass-card p-8 rounded-2xl text-center">
+      <div class="animate-spin w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full mx-auto mb-4"></div>
+      <p class="text-lg">מריץ סימולציה...</p>
+      <div class="progress-bar mt-4">
+        <div id="progressFill" class="progress-fill" style="width: 0%"></div>
+      </div>
+    </div>
+  </div>
+
+  <main class="max-w-[1800px] mx-auto p-4 md:p-8">
+    <!-- Header -->
+    <header class="mb-8 fade-in">
+      <div class="flex items-center justify-between gap-4 flex-wrap">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-2xl gradient-primary flex items-center justify-center text-2xl">🏆</div>
+          <div>
+            <h1
+              class="text-3xl md:text-4xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+              מרוץ לפנסיה Pro
+            </h1>
+            <p class="text-gray-400 text-sm md:text-base">סימולטור פיננסי מתקדם עם מנוע Monte Carlo ופיצויים</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="event-chip">
+            <span class="status-indicator status-success"></span>
+            <span>מנוע עדכני</span>
+          </div>
+          <button id="exportBtn" class="btn-secondary">📊 יצוא דו"ח</button>
+          <button id="helpBtn" class="btn-secondary">❓ עזרה</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Configuration Panel -->
+    <section class="glass-card rounded-2xl p-6 md:p-8 mb-8 fade-in">
+      <div class="section-header">
+        <h2 class="text-2xl font-bold flex items-center">
+          ⚙️ הגדרות סימולציה
+        </h2>
+      </div>
+
+      <!-- Tab Navigation -->
+      <div class="tab-container">
+        <button class="tab-button active" data-tab="basic">📊 נתוני בסיס</button>
+        <button class="tab-button" data-tab="contributions">💰 הפקדות ופיצויים</button>
+        <button class="tab-button" data-tab="market">📈 שוק ויעדים</button>
+        <button class="tab-button" data-tab="advanced">🔬 מתקדם</button>
+      </div>
+
+      <!-- Basic Tab -->
+      <div id="basicTab" class="tab-content active">
+        <div class="grid grid-auto gap-6">
+          <div class="space-y-4">
+            <h3 class="text-lg font-semibold text-blue-400">👤 נתונים אישיים</h3>
+            <div class="grid grid-cols-2 gap-4">
+              <label class="block">
+                <span class="text-gray-300 text-sm mb-2 block tooltip" data-tooltip="גילך הנוכחי">גיל נוכחי</span>
+                <input id="ageNow" type="number" class="input-field" value="35" min="18" max="70" />
+              </label>
+              <label class="block">
+                <span class="text-gray-300 text-sm mb-2 block tooltip" data-tooltip="הגיל בו אתה מתכנן לפרוש">גיל
+                  פרישה</span>
+                <input id="ageRetire" type="number" class="input-field" value="67" min="50" max="75" />
+              </label>
+            </div>
+            <label class="block">
+              <span class="text-gray-300 text-sm mb-2 block tooltip" data-tooltip="הסכום שכבר צברת לפנסיה">צבירה נוכחית
+                (₪)</span>
+              <input id="balanceNow" type="number" step="1000" class="input-field" value="300000" />
+            </label>
+            <label class="block">
+              <span class="text-gray-300 text-sm mb-2 block tooltip" data-tooltip="השכר החודשי הברוטו שלך">בסיס לפנסיה
+                (₪)</span>
+              <input id="salary" type="number" step="100" class="input-field" value="15000" />
+            </label>
+            <label class="block">
+              <span class="text-gray-300 text-sm mb-2 block tooltip"
+                data-tooltip="התקרה החודשית לחישוב פנסיה (כיום ~43,370 ₪)">תקרת שכר פנסיוני (₪)</span>
+              <input id="pensionCeiling" type="number" step="100" class="input-field" value="43370" />
+            </label>
+            <label class="block">
+              <span class="text-gray-300 text-sm mb-2 block tooltip" data-tooltip="קצב גידול השכר השנתי בממוצע">צמיחת
+                שכר שנתית (%)</span>
+              <input id="salaryGrowthPct" type="number" step="0.1" class="input-field" value="2.5" min="0" max="10" />
+            </label>
+          </div>
+
+          <div class="space-y-4">
+            <h3 class="text-lg font-semibold text-green-400">📊 מצב כלכלי נוכחי</h3>
+            <div id="currentStatusDisplay" class="glass-card p-4 rounded-lg">
+              <div class="grid grid-cols-2 gap-4 text-sm">
+                <div>
+                  <span class="text-gray-400">שנים לפרישה:</span>
+                  <span id="yearsToRetire" class="font-semibold text-blue-400">32</span>
+                </div>
+                <div>
+                  <span class="text-gray-400">הפקדה חודשית נוכחית:</span>
+                  <span id="currentContribution" class="font-semibold text-green-400">₪1,875</span>
+                </div>
+                <div>
+                  <span class="text-gray-400">שכר שנתי:</span>
+                  <span id="annualSalary" class="font-semibold">₪180,000</span>
+                </div>
+                <div>
+                  <span class="text-gray-400">אחוז חיסכון מהשכר:</span>
+                  <span id="savingsRate" class="font-semibold text-purple-400">12.5%</span>
+                </div>
+                <div class="col-span-2">
+                  <span class="text-gray-400">שכר פנסיוני (אחרי תקרה):</span>
+                  <span id="pensionableSalary" class="font-semibold text-cyan-400">₪15,000</span>
+                </div>
+              </div>
+              <div id="pensionCeilingWarning" class="pension-ceiling-warning" style="display: none;">
+                ⚠️ השכר שלך עולה על התקרה הפנסיונית. חלק מהשכר לא ייכלל בחישובי הפנסיה.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Contributions Tab -->
+      <div id="contributionsTab" class="tab-content">
+        <div class="grid grid-auto gap-6">
+          <div class="space-y-4">
+            <h3 class="text-lg font-semibold text-green-400">💼 הפקדות חובה</h3>
+            <div class="grid grid-cols-2 gap-4">
+              <label class="block">
+                <span class="text-gray-300 text-sm mb-2 block tooltip"
+                  data-tooltip="אחוז ההפקדה שלך מהשכר הפנסיוני">הפקדת עובד (% משכר פנסיוני)</span>
+                <input id="empPct" type="number" step="0.1" class="input-field" value="7.0" min="0" max="15" />
+              </label>
+              <label class="block">
+                <span class="text-gray-300 text-sm mb-2 block tooltip"
+                  data-tooltip="אחוז ההפקדה של המעסיק משכר פנסיוני">הפקדת מעסיק (% משכר פנסיוני)</span>
+                <input id="erPct" type="number" step="0.1" class="input-field" value="7.5" min="0" max="15" />
+              </label>
+            </div>
+
+            <div class="space-y-4">
+              <h4 class="text-md font-semibold text-orange-400">💼 פיצויים</h4>
+              <div class="grid grid-cols-2 gap-4">
+                <label class="block">
+                  <span class="text-gray-300 text-sm mb-2 block tooltip" data-tooltip="בחר סוג הפיצויים שלך">סוג
+                    פיצויים</span>
+                  <select id="severanceType" class="select-field">
+                    <option value="6">6% (רגיל)</option>
+                    <option value="8.33">8.33% (הפקדה לקופה)</option>
+                  </select>
+                </label>
+                <label class="block">
+                  <span class="text-gray-300 text-sm mb-2 block tooltip"
+                    data-tooltip="האם הפיצויים מופקדים לקופת גמל">יעד הפיצויים</span>
+                  <select id="severanceDestination" class="select-field">
+                    <option value="pension">קופת גמל לפנסיה</option>
+                    <option value="provident">קופת גמל להשתלמות</option>
+                    <option value="separate">קופה נפרדת</option>
+                  </select>
+                </label>
+              </div>
+            </div>
+
+            <label class="block">
+              <span class="text-gray-300 text-sm mb-2 block tooltip" data-tooltip="הפקדה נוספת מרצונך מעבר לחובה">הפקדה
+                חופשית נוספת (₪/חודש)</span>
+              <input id="voluntaryMonthly" type="number" step="50" class="input-field" value="0" />
+            </label>
+
+            <div class="glass-card p-4 rounded-lg bg-blue-500/10">
+              <h4 class="font-semibold text-blue-400 mb-2">💡 המלצות אישיות</h4>
+              <div id="contributionAdvice" class="text-sm text-gray-300">
+                מחשב המלצות בהתאם לנתונים שלך...
+              </div>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <h3 class="text-lg font-semibold text-orange-400">💸 דמי ניהול</h3>
+            <div class="grid grid-cols-2 gap-4">
+              <label class="block">
+                <span class="text-gray-300 text-sm mb-2 block tooltip" data-tooltip="דמי ניהול שנתיים מהצבירה">דמי ניהול
+                  מצבירה (% שנתי)</span>
+                <input id="feeAumPct" type="number" step="0.05" class="input-field" value="0.026" min="0" max="3" />
+              </label>
+              <label class="block">
+                <span class="text-gray-300 text-sm mb-2 block tooltip" data-tooltip="עמלה חד-פעמית מכל הפקדה">דמי ניהול
+                  מהפקדה (%)</span>
+                <input id="feeContribPct" type="number" step="0.1" class="input-field" value="1.86" min="0" max="5" />
+              </label>
+            </div>
+
+            <div class="glass-card p-4 rounded-lg bg-orange-500/10">
+              <h4 class="font-semibold text-orange-400 mb-2">⚠️ השפעת דמי הניהול</h4>
+              <div id="feesImpact" class="text-sm text-gray-300">
+                דמי ניהול גבוהים יכולים להפחית משמעותית את הצבירה לאורך זמן...
+              </div>
+            </div>
+
+            <div class="glass-card p-4 rounded-lg bg-green-500/10">
+              <h4 class="font-semibold text-green-400 mb-2">📊 פירוט הפקדות חודשיות</h4>
+              <div id="contributionBreakdown" class="text-sm text-gray-300">
+                <div class="grid grid-cols-2 gap-2">
+                  <div>הפקדת עובד: <span id="empContribAmount" class="font-bold text-green-400">₪900</span></div>
+                  <div>הפקדת מעסיק: <span id="erContribAmount" class="font-bold text-blue-400">₪975</span></div>
+                  <div>פיצויים: <span id="severanceAmount" class="font-bold text-purple-400">₪900</span></div>
+                  <div>הפקדה חופשית: <span id="voluntaryAmount" class="font-bold text-cyan-400">₪500</span></div>
+                  <div class="col-span-2 border-t border-gray-600 pt-2 mt-2">
+                    <strong>סה"כ חודשי: <span id="totalContribAmount"
+                        class="font-bold text-yellow-400">₪3,275</span></strong>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Market Tab -->
+      <div id="marketTab" class="tab-content">
+        <div class="grid grid-auto gap-6">
+          <div class="space-y-4">
+            <h3 class="text-lg font-semibold text-purple-400">📈 פרמטרי שוק</h3>
+            <div class="grid grid-cols-2 gap-4">
+              <label class="block">
+                <span class="text-gray-300 text-sm mb-2 block tooltip" data-tooltip="התשואה השנתית הממוצעת הצפויה">תשואה
+                  שנתית ממוצעת (%)</span>
+                <input id="retExpPct" type="number" step="0.1" class="input-field" value="5.5" min="2" max="12" />
+              </label>
+              <label class="block">
+                <span class="text-gray-300 text-sm mb-2 block tooltip" data-tooltip="מידת התנודתיות של התשואות">סטיית
+                  תקן שנתית (%)</span>
+                <input id="retVolPct" type=ber" step="0.1" class="input-field" value="12.0" min="5" max="25" />
+              </label>
+            </div>
+            <div class="grid grid-cols-2 gap-4">
+              <label class="block">
+                <span class="text-gray-300 text-sm mb-2 block tooltip" data-tooltip="קצב עליית המחירים השנתי">אינפלציה
+                  שנתית (%)</span>
+                <input id="inflPct" type="number" step="0.1" class="input-field" value="2.5" min="0" max="6" />
+              </label>
+              <label class="block">
+                <span class="text-gray-300 text-sm mb-2 block tooltip"
+                  data-tooltip="שיעור המשיכה הבטוח מההון בפרישה SWR (גבוה = מסוכן יותר, דורש פחות הון ליעד נתון) (%)">שיעור
+                  משיכה בטוח - SWR (%)</span>
+                <input id="swrPct" type="number" step="0.1" class="input-field" value="4" min="2" max="6" />
+
+              </label>
+
+              <label class="block">
+                <span class="text-gray-300 text-sm mb-2 block tooltip"
+                  data-tooltip="שנות הון: כמה שנות קצבה נדרשות מההון (N = 1/SWR). למשל כלל 4% ⇒ N=25.">
+                  שנות הון (N)
+                </span>
+                <input id="withdrawYearsN" type="number" step="0.5" class="input-field" value="25" min="10" max="60" />
+              </label>
+            </div>
+
+            <div class="latex-formula">
+              $$\text{תשואה ריאלית} = \frac{1 + \text{תשואה נומינלית}}{1 + \text{אינפלציה}} - 1$$
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <h3 class="text-lg font-semibold text-cyan-400">🎯 יעדי פרישה</h3>
+            <label class="block">
+              <span class="text-gray-300 text-sm mb-2 block tooltip" data-tooltip="הקצבה החודשית הרצויה בפרישה">יעד קצבה
+                חודשית בפרישה (₪)</span>
+              <input id="targetPensionMonthly" type="number" step="500" class="input-field" value="12000" />
+            </label>
+
+            <div class="glass-card p-4 rounded-lg">
+              <div class="grid grid-cols-2 gap-4 text-sm">
+                <div>
+                  <span class="text-gray-400">הון נדרש ליעד:</span>
+                  <div id="requiredCapital" class="text-xl font-bold text-cyan-400">₪3,428,571</div>
+                </div>
+                <div>
+                  <span class="text-gray-400">פער מהמצב הנוכחי:</span>
+                  <div id="capitalGap" class="text-xl font-bold text-orange-400">₪3,128,571</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Advanced Tab -->
+      <div id="advancedTab" class="tab-content">
+        <div class="grid grid-auto gap-6">
+          <div class="space-y-4">
+            <h3 class="text-lg font-semibold text-red-400">🔬 הגדרות מתקדמות</h3>
+            <label class="block">
+              <span class="text-gray-300 text-sm mb-2 block tooltip"
+                data-tooltip="מספר הסימולציות - יותר = דיוק גבוה יותר">מספר סימולציות Monte Carlo</span>
+              <input id="nSims" type="number" class="input-field" value="1000" min="100" max="5000" step="100" />
+            </label>
+
+            <div class="grid grid-cols-2 gap-4">
+              <label class="block">
+                <span class="text-gray-300 text-sm mb-2 block">זרע אקראיות (seed)</span>
+                <input id="randomSeed" type="number" class="input-field" value="12345" />
+              </label>
+              <label class="block">
+                <span class="text-gray-300 text-sm mb-2 block tooltip"
+                  data-tooltip="תדירות דגימה של תוצאות ביניים">תדירות דגימה (חודשי)</span>
+                <input id="samplingFreq" type="number" class="input-field" value="12" min="1" max="60" />
+              </label>
+            </div>
+
+            <div class="space-y-3">
+              <label class="flex items-center gap-3">
+                <input id="enableStochastic" type="checkbox" class="w-5 h-5 rounded" checked />
+                <span class="text-gray-300">אפשר מודל סטוכסטי מתקדם</span>
+              </label>
+              <label class="flex items-center gap-3">
+                <input id="enableTaxes" type="checkbox" class="w-5 h-5 rounded" />
+                <span class="text-gray-300">כלול מסים ופטורים</span>
+              </label>
+              <label class="flex items-center gap-3">
+                <input id="enableInflationAdjust" type="checkbox" class="w-5 h-5 rounded" checked />
+                <span class="text-gray-300">התאמה דינמית לאינפלציה</span>
+              </label>
+              <label class="flex items-center gap-3">
+                <input id="enableRebalancing" type="checkbox" class="w-5 h-5 rounded" checked />
+                <span class="text-gray-300">איזון תיק אוטומטי</span>
+              </label>
+              <label class="flex items-center gap-3">
+                <input id="includeSeveranceInPension" type="checkbox" class="w-5 h-5 rounded" checked />
+                <span class="text-gray-300">כלול פיצויים בחישוב הפנסיה</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="space-y-4">
+            <h3 class="text-lg font-semibold text-yellow-400">⚡ ביצועים ואופטימיזציה</h3>
+            <div class="glass-card p-4 rounded-lg bg-yellow-500/10">
+              <div class="grid grid-cols-3 gap-4 text-sm">
+                <div>
+                  <span class="text-gray-400">מהירות CPU:</span>
+                  <div id="cpuSpeed" class="font-bold text-yellow-400">גבוהה</div>
+                </div>
+                <div>
+                  <span class="text-gray-400">זיכרון זמין:</span>
+                  <div id="memoryStatus" class="font-bold text-green-400">מספיק</div>
+                </div>
+                <div>
+                  <span class="text-gray-400">זמן סימולציה צפוי:</span>
+                  <div id="estimatedTime" class="font-bold text-blue-400">~3 שניות</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Events Timeline Section -->
+    <section class="glass-card rounded-2xl p-6 md:p-8 mb-8 fade-in">
+      <div class="section-header">
+        <h2 class="text-2xl font-bold flex items-center">
+          📅 מסלול החלטות פיננסיות
+        </h2>
+        <button id="optimizeEventsBtn" class="btn-secondary">🔧 בצע אופטימיזציה</button>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-6">
+        <!-- Event Creation Panel -->
+        <div class="lg:col-span-2 space-y-6">
+          <div class="grid md:grid-cols-4 gap-4">
+            <label class="block">
+              <span class="text-gray-300 text-sm mb-2 block">סוג אירוע</span>
+              <select id="evType" class="select-field">
+                <option value="inc_contrib">💰 הגדלת הפקדה</option>
+                <option value="lump_sum">💎 הפקדה חד־פעמית</option>
+                <option value="switch_fund">🔄 החלפת מסלול/קרן</option>
+                <option value="self_employed">👨‍💼 מעבר לעצמאי</option>
+                <option value="sabbatical">🖖 חופשה ללא תשלום</option>
+                <option value="market_shock">📉 מכת שוק</option>
+                <option value="salary_jump">📈 קפיצת שכר</option>
+                <option value="inheritance">🎁 ירושה/מתנה</option>
+                <option value="severance_payout">💼 תשלום פיצויים</option>
+              </select>
+            </label>
+            <label class="block">
+              <span class="text-gray-300 text-sm mb-2 block">גיל בעת האירוע</span>
+              <input id="evAge" type="number" class="input-field" value="40" min="18" max="75" />
+            </label>
+            <div id="evParams" class="md:col-span-2 grid grid-cols-2 gap-3">
+              <!-- דינמי לפי סוג אירוע -->
+            </div>
+          </div>
+
+          <div class="flex gap-3 flex-wrap">
+            <button id="addEventBtn" class="btn-primary">➕ הוסף אירוע</button>
+            <button id="clearEventsBtn" class="btn-secondary">🗑️ נקה הכל</button>
+            <div class="flex gap-2">
+              <button id="presetAggressive" class="btn-secondary bg-green-600/20 hover:bg-green-600/30">🚀 חיסכון
+                אגרסיבי</button>
+              <button id="presetShock" class="btn-secondary bg-red-600/20 hover:bg-red-600/30">⚡ מכת שוק ושיפור</button>
+              <button id="presetConservative" class="btn-secondary bg-blue-600/20 hover:bg-blue-600/30">🛡️ משפחתי
+                זהיר</button>
+            </div>
+          </div>
+
+          <!-- Events Timeline Display -->
+          <div class="space-y-4">
+            <h3 class="text-lg font-semibold text-blue-400">📊 ציר הזמן של האירועים</h3>
+            <div id="eventsTimeline" class="relative min-h-[100px] glass-card p-4 rounded-lg bg-slate-900/30">
+              <div id="timelineAxis" class="absolute top-4 left-4 right-4 h-1 bg-gray-600 rounded"></div>
+              <div id="timelineEvents" class="relative pt-8">
+                <!-- אירועים יוצגו כאן -->
+              </div>
+            </div>
+            <div id="eventsList" class="flex flex-wrap gap-3"></div>
+          </div>
+        </div>
+
+        <!-- Quick Analysis Panel -->
+        <aside class="space-y-4">
+          <div class="glass-card p-4 rounded-lg">
+            <h3 class="text-lg font-semibold text-green-400 mb-3">⚡ ניתוח מהיר</h3>
+            <button id="quickRunBtn" class="btn-primary w-full mb-4">🏃‍♂️ הרצה מהירה</button>
+
+            <div class="space-y-3">
+              <div class="kpi-card">
+                <div class="text-gray-400 text-sm">השפעה על צביר סופית</div>
+                <div id="quickImpact" class="text-2xl num font-bold text-blue-400">+₪0</div>
+              </div>
+              <div class="kpi-card">
+                <div class="text-gray-400 text-sm">שיפור בהסתברות הצלחה</div>
+                <div id="quickProbImprovement" class="text-2xl num font-bold text-green-400">+0%</div>
+              </div>
+              <div class="kpi-card">
+                <div class="text-gray-400 text-sm">סיכון נוסף</div>
+                <div id="quickRisk" class="text-xl num font-bold text-orange-400">נמוך</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- AI Recommendations -->
+          <div class="glass-card p-4 rounded-lg bg-purple-500/10">
+            <h3 class="text-lg font-semibold text-purple-400 mb-3">🤖 המלצות AI</h3>
+            <div id="aiRecommendations" class="text-sm text-gray-300 space-y-2">
+              <div class="bg-blue-500/20 p-3 rounded-lg">
+                <strong>💡 המלצה:</strong> שקול הגדלת ההפקדה החופשית ב-₪200 החל מגיל 38
+              </div>
+              <div class="bg-green-500/20 p-3 rounded-lg">
+                <strong>✅ יתרון:</strong> עלייה של ₪47,000 בצביר הסופית
+              </div>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- Main Simulation Controls -->
+    <section class="grid md:grid-cols-4 gap-6 mb-8">
+      <div class="md:col-span-3 glass-card rounded-2xl p-6 fade-in">
+        <div class="section-header">
+          <h2 class="text-2xl font-bold flex items-center">
+            🎯 הרצת סימולציה מלאה
+          </h2>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-4 mb-6">
+          <button id="runBtn" class="btn-primary text-lg py-4">
+            🚀 הרץ סימולציה מלאה
+          </button>
+          <button id="compareBtn" class="btn-secondary">📊 השווה תרחישים</button>
+          <button id="stressTestBtn" class="btn-secondary">⚠️ מבחן לחץ</button>
+        </div>
+
+        <div class="flex items-center gap-4 text-sm text-gray-400">
+          <span>⏱️ זמן הרצה אחרון: <span id="lastRunTime" class="text-blue-400">--</span></span>
+          <span>🔄 סימולציות: <span id="simulationCount" class="text-green-400">0</span></span>
+          <span>📈 דיוק: <span id="accuracyLevel" class="text-purple-400">גבוה</span></span>
+        </div>
+      </div>
+
+      <!-- Key Results Panel -->
+      <aside class="glass-card rounded-2xl p-6 fade-in">
+        <h3 class="text-lg font-semibold mb-4 text-center">📊 תוצאות עיקריות</h3>
+        <div class="space-y-4">
+          <div class="kpi-card">
+            <div class="text-gray-400 text-sm">יתרה בפרישה (חציון)</div>
+            <div id="kpiNom" class="text-2xl num font-bold text-blue-400">₪--</div>
+            <div class="text-gray-500 text-xs">נומינלי</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="text-gray-400 text-sm">יתרה ריאלית</div>
+            <div id="kpiReal" class="text-2xl num font-bold text-green-400">₪--</div>
+            <div class="text-gray-500 text-xs">בכח קנייה היום</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="text-gray-400 text-sm">הסתברות הצלחה</div>
+            <div id="kpiProb" class="text-3xl num font-bold text-purple-400">--%</div>
+            <div id="successIndicator" class="status-indicator mx-auto mt-2"></div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="text-gray-400 text-sm">קצבה חודשית צפויה</div>
+            <div id="expectedPension" class="text-xl num font-bold text-cyan-400">₪--</div>
+            <div class="text-gray-500 text-xs">לפי SWR</div>
+          </div>
+
+          <div class="kpi-card">
+            <div class="text-gray-400 text-sm">פיצויים בפרישה</div>
+            <div id="expectedSeverance" class="text-lg num font-bold text-purple-400">₪--</div>
+            <div class="text-gray-500 text-xs">ערך צפוי</div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Charts and Analysis -->
+    <section class="grid lg:grid-cols-2 gap-8 mb-8">
+      <!-- Path Evolution Chart -->
+      <article class="glass-card rounded-2xl p-6 fade-in">
+        <div class="section-header">
+          <h3 class="text-xl font-bold flex items-center">
+            📈 מסלול צמיחה - טווחים הסתברותיים
+          </h3>
+          <div class="flex gap-2">
+            <button id="chartModeToggle" class="btn-secondary text-xs">🔄 ליניארי/לוג</button>
+            <button id="chartExport" class="btn-secondary text-xs">💾 ייצא</button>
+          </div>
+        </div>
+        <div class="chart-container">
+          <canvas id="pathChart"></canvas>
+          <div id="pathLegend" class="mt-4 text-sm text-gray-400"></div>
+        </div>
+
+
+      </article>
+
+      <!-- Composition Analysis -->
+      <article class="glass-card rounded-2xl p-6 fade-in">
+        <div class="section-header">
+          <h3 class="text-xl font-bold flex items-center">
+            🥧 הרכב הצביר הסופית
+          </h3>
+          <select id="compositionView" class="select-field text-sm">
+            <option value="contribution">תרומות מול תשואה</option>
+            <option value="timeline">פילוח לפי תקופות</option>
+            <option value="sources">מקורות הפקדה</option>
+          </select>
+        </div>
+        <div class="chart-container">
+          <canvas id="stackChart"></canvas>
+          <div id="stackLegend" class="mt-4 text-sm text-gray-400"></div>
+        </div>
+
+        <div id="compositionInsights" class="mt-4 glass-card p-3 rounded-lg bg-blue-500/10">
+          <div class="text-sm text-gray-300">
+            <strong class="text-blue-400">💡 תובנה:</strong>
+            <span id="mainInsight">הרץ סימולציה כדי לקבל ניתוח מפורט</span>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <!-- User Guide Modal -->
+    <div id="userGuideModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden">
+      <div class="flex items-center justify-center min-h-screen p-4">
+        <div class="glass-card max-w-6xl w-full max-h-[90vh] overflow-y-auto rounded-2xl">
+          <!-- Header -->
+          <div class="sticky top-0 bg-slate-900/95 backdrop-blur p-6 border-b border-white/10">
+            <div class="flex items-center justify-between">
+              <h2 class="text-2xl font-bold bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
+                📚 מדריך שימוש מפורט - מרוץ לפנסיה Pro עם פיצויים
+              </h2>
+              <button id="closeGuideModal" class="btn-secondary p-2">
+                ✕
+              </button>
+            </div>
+          </div>
+
+          <!-- Content -->
+          <div class="p-6 space-y-8">
+            <!-- Quick Overview -->
+            <section class="glass-card p-6 rounded-lg bg-blue-500/10">
+              <h3 class="text-xl font-semibold text-blue-400 mb-4">🎯 סקירה מהירה</h3>
+              <div class="grid md:grid-cols-2 gap-4 text-sm">
+                <div>
+                  <h4 class="font-semibold text-green-400 mb-2">מה הכלי עושה:</h4>
+                  <ul class="space-y-1 text-gray-300">
+                    <li>• מדמה את צבירת הפנסיה שלך עד הפרישה</li>
+                    <li>• בוחן אלפי תרחישים שונים עם Monte Carlo</li>
+                    <li>• מחשב הסתברות הצלחה להגעה ליעדים</li>
+                    <li>• כולל חישוב מדויק של פיצויים (6% או 8.33%)</li>
+                    <li>• מתחשב בתקרת שכר פנסיוני (43,370 ₪)</li>
+                    <li>• בוחן מבחני עמידות במשברים כלכליים</li>
+                    <li>• מציע המלצות מותאמות אישית</li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-orange-400 mb-2">למי מתאים:</h4>
+                  <ul class="space-y-1 text-gray-300">
+                    <li>• כל מי שחוסך לפנסיה (מגיל 25-65)</li>
+                    <li>• עובדים שכירים ועצמאיים</li>
+                    <li>• מי שרוצה לבחון אסטרטגיות השקעה</li>
+                    <li>• מתכננים פיננסיים ויועצים</li>
+                    <li>• כל מי שרוצה שקיפות בתכנון פנסיוני</li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+
+            <!-- Step by Step Guide -->
+            <section>
+              <h3 class="text-xl font-semibold text-purple-400 mb-6">📋 תהליך שימוש שלב אחר שלב</h3>
+
+              <!-- Step 1 -->
+              <div class="glass-card p-6 rounded-lg mb-6 border-r-4 border-r-blue-400">
+                <h4 class="text-lg font-semibold text-blue-400 mb-3">שלב 1: הזן נתונים בסיסיים</h4>
+                <div class="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <h5 class="font-semibold text-green-400 mb-2">בלשונית "נתוני בסיס":</h5>
+                    <ul class="text-sm text-gray-300 space-y-1">
+                      <li>• גיל נוכחי ומתוכנן לפרישה</li>
+                      <li>• צבירה נוכחית בקופות (₪)</li>
+                      <li>• בסיס לפנסיה (₪)</li>
+                      <li>• תקרת שכר פנסיוני (כיום 43,370 ₪)</li>
+                      <li>• קצב צמיחת שכר שנתי (%)</li>
+                    </ul>
+                  </div>
+                  <div class="bg-slate-800/50 p-4 rounded-lg">
+                    <h6 class="font-semibold text-cyan-400 mb-2">💡 טיפ חשוב:</h6>
+                    <p class="text-sm text-gray-300">
+                      הכנס נתונים מדויקים ככל האפשר. נתונים לא מדויקים יביאו לתחזיות שגויות.
+                      בדוק את הצבירה בכל הקופות שלך לפני הזנת הנתונים.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 2 -->
+              <div class="glass-card p-6 rounded-lg mb-6 border-r-4 border-r-green-400">
+                <h4 class="text-lg font-semibold text-green-400 mb-3">שלב 2: הגדרת הפקדות ופיצויים</h4>
+                <div class="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <h5 class="font-semibold text-orange-400 mb-2">בלשונית "הפקדות ופיצויים":</h5>
+                    <ul class="text-sm text-gray-300 space-y-1">
+                      <li>• הפקדת עובד ומעסיק (בדרך כלל 6-6.5%)</li>
+                      <li>• <strong>סוג פיצויים:</strong> 6% רגילאו 8.33%</li>
+                      <li>• <strong>יעד פיצויים:</strong> קופת גמל או נפרדת</li>
+                      <li>• הפקדה חופשית נוספת (אופציונלי)</li>
+                      <li>• דמי ניהול מצבירה ומהפקדות</li>
+                    </ul>
+                  </div>
+                  <div class="bg-red-900/20 p-4 rounded-lg border border-red-500/30">
+                    <h6 class="font-semibold text-red-400 mb-2">⚠️ חשוב לדעת:</h6>
+                    <ul class="text-sm text-gray-300 space-y-1">
+                      <li>• פיצויים 8.33% יכולים לתת יתרון של עשרות אלפים</li>
+                      <li>• אם השכר עולה על התקרה - חלק לא ייכלל</li>
+                      <li>• דמי ניהול גבוהים (מעל 1%) יכולים לעלות מאות אלפים</li>
+                      <li>• בדוק מה המעסיק משלם ושקול מעבר לקרן זולה</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 3 -->
+              <div class="glass-card p-6 rounded-lg mb-6 border-r-4 border-r-purple-400">
+                <h4 class="text-lg font-semibold text-purple-400 mb-3">שלב 3: הוספת אירועי חיים</h4>
+                <div class="space-y-4">
+                  <p class="text-gray-300">זה החלק הכי חשוב! כאן אתה מוסיף אירועים שעלולים לקרות בחיים:</p>
+
+                  <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <h5 class="font-semibold text-green-400 mb-2">אירועים חיוביים:</h5>
+                      <ul class="text-sm text-gray-300 space-y-1">
+                        <li>• הגדלת הפקדה חופשית (כל כמה שנים)</li>
+                        <li>• קפיצות שכר או קידום</li>
+                        <li>• ירושה או מתנה כספית</li>
+                        <li>• מעבר לקרן עם דמי ניהול נמוכים</li>
+                        <li>• תשלום פיצויים חד-פעמי</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h5 class="font-semibold text-red-400 mb-2">אירועים שליליים:</h5>
+                      <ul class="text-sm text-gray-300 space-y-1">
+                        <li>• מכות שוק (כמו 2008, קורונה)</li>
+                        <li>• חופשה ללא תשלום</li>
+                        <li>• מעבר לעצמאי (בלי הפקדת מעסיק)</li>
+                        <li>• הוצאות חירום גדולות</li>
+                      </ul>
+                    </div>
+                  </div>
+
+                  <div class="bg-blue-900/20 p-4 rounded-lg border border-blue-500/30">
+                    <h6 class="font-semibold text-blue-400 mb-2">💡 רעיון מעשי:</h6>
+                    <p class="text-sm text-gray-300">
+                      התחל עם פריסט "חיסכון אגרסיבי" ואז התאם לפי המצב שלך.
+                      אל תהיה פסימי מדי - זכור שאתה צריך גם לחיות היום!
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 4 -->
+              <div class="glass-card p-6 rounded-lg mb-6 border-r-4 border-r-cyan-400">
+                <h4 class="text-lg font-semibold text-cyan-400 mb-3">שלב 4: הרצת הסימולציה</h4>
+                <div class="grid md:grid-cols-3 gap-4">
+                  <div>
+                    <h5 class="font-semibold text-yellow-400 mb-2">הרצה מהירה:</h5>
+                    <p class="text-sm text-gray-300">
+                      לחץ על "הרצה מהירה" לקבלת תוצאה ראשונית תוך כמה שניות.
+                      טוב להתחלה ולבדיקות מהירות.
+                    </p>
+                  </div>
+                  <div>
+                    <h5 class="font-semibold text-green-400 mb-2">הרצה מלאה:</h5>
+                    <p class="text-sm text-gray-300">
+                      לחץ על "הרץ סימולציה מלאה" לקבלת ניתוח מעמיק עם 1,000+ תרחישים.
+                      לוקח דקה אבל הרבה יותר מדויק.
+                    </p>
+                  </div>
+                  <div>
+                    <h5 class="font-semibold text-purple-400 mb-2">מה לצפות:</h5>
+                    <p class="text-sm text-gray-300">
+                      תקבל צבירה צפויה, הסתברות הצלחה, גרפים מפורטים והמלצות מותאמות.
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 5 -->
+              <div class="glass-card p-6 rounded-lg mb-6 border-r-4 border-r-orange-400">
+                <h4 class="text-lg font-semibold text-orange-400 mb-3">שלב 5: ניתוח התוצאות</h4>
+                <div class="space-y-4">
+                  <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <h5 class="font-semibold text-green-400 mb-2">מדדי הצלחה עיקריים:</h5>
+                      <ul class="text-sm text-gray-300 space-y-1">
+                        <li>• צבירה צפויה (חציון) - כמה תצבור</li>
+                        <li>• צבירה ריאלית - בכח קנייה של היום</li>
+                        <li>• הסתברות הצלחה - % לעמוד ביעדים</li>
+                        <li>• קצבה חודשית צפויה</li>
+                        <li>• פיצויים צפויים בפרישה</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h5 class="font-semibold text-red-400 mb-2">איך לפרש:</h5>
+                      <ul class="text-sm text-gray-300 space-y-1">
+                        <li>• מעל 80% הסתברות = מצוין</li>
+                        <li>• 60-80% = טוב, אבל יש מה לשפר</li>
+                        <li>• מתחת ל-60% = צריך שינויים משמעותיים</li>
+                        <li>• שים לב להשפעת הפיצויים</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 6 -->
+              <div class="glass-card p-6 rounded-lg border-r-4 border-r-red-400">
+                <h4 class="text-lg font-semibold text-red-400 mb-3">שלב 6: מבחני לחץ ופעולות מתקנות</h4>
+                <div class="space-y-4">
+                  <div class="grid md:grid-cols-2 gap-4">
+                    <div>
+                      <h5 class="font-semibold text-blue-400 mb-2">מבחני לחץ חשובים:</h5>
+                      <ul class="text-sm text-gray-300 space-y-1">
+                        <li>• משבר 2008 - ירידה של 40% בשוק</li>
+                        <li>• אינפלציה גבוהה - 8% למשך 5 שנים</li>
+                        <li>• אובדן עבודה - שנתיים אבטלה</li>
+                        <li>• הוצאה חריגה - 100,000 ש"ח בגיל 50</li>
+                      </ul>
+                    </div>
+                    <div>
+                      <h5 class="font-semibold text-green-400 mb-2">פעולות נפוצות לשיפור:</h5>
+                      <ul class="text-sm text-gray-300 space-y-1">
+                        <li>• הגדלת הפקדה חופשית ב-200-500 ש"ח</li>
+                        <li>• מעבר לקרן עם דמי ניהול נמוכים</li>
+                        <li>• הקדמת גיל פרישה או החייתו</li>
+                        <li>• שינוי יעדי הקצבה החודשית</li>
+                        <li>• מעבר לפיצויים 8.33%</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            <!-- Advanced Tips -->
+            <section class="glass-card p-6 rounded-lg bg-purple-500/10">
+              <h3 class="text-xl font-semibold text-purple-400 mb-4">🎓 טיפים מתקדמים</h3>
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h4 class="font-semibold text-green-400 mb-3">אסטרטגיות זכיות:</h4>
+                  <ul class="text-sm text-gray-300 space-y-2">
+                    <li>
+                      <strong>התחל מוקדם:</strong>
+                      כל שנה שמאחרים עולה בכמות הכסף הנדרשת אקספוננציאלית
+                    </li>
+                    <li>
+                      <strong>הגדל הפקדה הדרגתית:</strong>
+                      כל קידום/תוספת שכר - הגדל את ההפקדה החופשית
+                    </li>
+                    <li>
+                      <strong>שים לב לדמי ניהול:</strong>
+                      הפרש של 0.2% בדמי ניהול = עשרות אלפי שקלים לאורך זמן
+                    </li>
+                    <li>
+                      <strong>גיוון מחוץ לפנסיה:</strong>
+                      אל תסמוך רק על קופות הפנסיה - חסוך גם בדרכים אחרות
+                    </li>
+                    <li>
+                      <strong>פיצויים חכמים:</strong>
+                      שקול מעבר ל-8.33% והפקדה לקופת הפנסיה
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-red-400 mb-3">מלכודות נפוצות:</h4>
+                  <ul class="text-sm text-gray-300 space-y-2">
+                    <li>
+                      <strong>העדר מעקב:</strong>
+                      אל תתעלם מהקופה שלך שנים. עדכן נתונים לפחות פעם בשנה
+                    </li>
+                    <li>
+                      <strong>אופטימיות יתר:</strong>
+                      אל תניח שהכל יהיה טוב לנצח. תכנן גם תרחישים קשים
+                    </li>
+                    <li>
+                      <strong>התמקדות רק בתשואה:</strong>
+                      תשואה גבוהה בדרך כלל = סיכון גבוה. איזון חשוב
+                    </li>
+                    <li>
+                      <strong>פסימיות יתר:</strong>
+                      גם אל תהיה פסימי מדי - המשק בדרך כלל צומח לאורך זמן
+                    </li>
+                    <li>
+                      <strong>התעלמות מתקרת השכר:</strong>
+                      אם השכר עולה על התקרה - תצטרך פתרונות נוספים
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+
+            <!-- Severance Guide -->
+            <section class="glass-card p-6 rounded-lg bg-orange-500/10">
+              <h3 class="text-xl font-semibold text-orange-400 mb-4">💼 מדריך פיצויים מפורט</h3>
+              <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                  <h4 class="font-semibold text-purple-400 mb-3">סוגי פיצויים:</h4>
+                  <div class="space-y-3">
+                    <div class="bg-blue-900/20 p-3 rounded-lg">
+                      <h5 class="font-semibold text-blue-400 mb-1">6% רגיל:</h5>
+                      <p class="text-sm text-gray-300">הפיצויים הסטנדרטיים. מופקדים לקרן נפרדת או לקופת גמל.</p>
+                    </div>
+                    <div class="bg-green-900/20 p-3 rounded-lg">
+                      <h5 class="font-semibold text-green-400 mb-1">8.33% מופקד:</h5>
+                      <p class="text-sm text-gray-300">2.33% נוספים! מופקדים לקופת גמל, זכאות מיידית.</p>
+                    </div>
+                  </div>
+                </div>
+                <div>
+                  <h4 class="font-semibold text-cyan-400 mb-3">האם לכלול בפנסיה?</h4>
+                  <div class="space-y-2 text-sm text-gray-300">
+                    <div class="flex items-start gap-2">
+                      <span class="text-green-400">✓</span>
+                      <span><strong>יתרונות:</strong> תשואה מורכבת, הגנה ממס, ניהול מרוכז</span>
+                    </div>
+                    <div class="flex items-start gap-2">
+                      <span class="text-red-400">✗</span>
+                      <span><strong>חסרונות:</strong> נעילה עד הפרישה, פחות גמישות</span>
+                    </div>
+                    <div class="bg-yellow-900/20 p-3 rounded-lg mt-3">
+                      <p class="text-yellow-300">
+                        <strong>המלצה:</strong> לרוב כדאי לכלול בקופת הפנסיה, אלא אם כן אתה סוחר מנוסה או צריך גמישות.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-4 bg-red-900/20 p-4 rounded-lg border border-red-500/30">
+                <h5 class="font-semibold text-red-400 mb-2">⚠️ השפעת תקרת השכר:</h5>
+                <p class="text-sm text-gray-300">
+                  אם השכר שלך מעל 43,370 ₪ חודשי - חלק מהשכר לא יהיה כלול בחישוב הפיצויים.
+                  במקרה כזה שקול הגדלת החיסכון הפנסיוני הפרטי או חיסכון נוסף מחוץ לקופות.
+                </p>
+              </div>
+            </section>
+
+            <!-- FAQ -->
+            <section class="glass-card p-6 rounded-lg bg-gray-500/10">
+              <h3 class="text-xl font-semibold text-gray-300 mb-4">❓ שאלות נפוצות</h3>
+              <div class="space-y-4">
+                <details class="cursor-pointer">
+                  <summary class="font-semibold text-blue-400 mb-2">האם הכלי שומר את הנתונים שלי?</summary>
+                  <p class="text-sm text-gray-300 pr-4">
+                    לא! כל הנתונים נשמרים רק על המכשיר שלך ומעולם לא נשלחים לשרת.
+                    הכל מתבצע בדפדפן שלך במקום.
+                  </p>
+                </details>
+
+                <details class="cursor-pointer">
+                  <summary class="font-semibold text-blue-400 mb-2">כמה מדויקים החישובים?</summary>
+                  <p class="text-sm text-gray-300 pr-4">
+                    החישובים משתמשים בשיטות מתמטיות מתקדמות ונתונים היסטוריים מהשוק הישראלי.
+                    עם זאת, אלו תחזיות ולא ערבות לביצועים עתידיים.
+                  </p>
+                </details>
+
+                <details class="cursor-pointer">
+                  <summary class="font-semibold text-blue-400 mb-2">האם זה מחליף יועץ פיננסי?</summary>
+                  <p class="text-sm text-gray-300 pr-4">
+                    לא! זה כלי עזר לתכנון ולהבנה. לקבלת החלטות פיננסיות חשובות,
+                    תמיד היוועץ עם יועץ פיננסי מוסמך.
+                  </p>
+                </details>
+
+                <details class="cursor-pointer">
+                  <summary class="font-semibold text-blue-400 mb-2">איך אני יודע אם התוצאות הגיוניות?</summary>
+                  <p class="text-sm text-gray-300 pr-4">
+                    השווה לכלי חישוב של החברה שלך או אתר הממשלה. התוצאות צריכות להיות בסדר גודל דומה.
+                    אם יש פער גדול, בדוק שהזנת נכון את הנתונים.
+                  </p>
+                </details>
+
+                <details class="cursor-pointer">
+                  <summary class="font-semibold text-blue-400 mb-2">מה לעשות עם התוצאות?</summary>
+                  <p class="text-sm text-gray-300 pr-4">
+                    1. שמור את הדו"ח (כפתור יצוא)<br>
+                    2. קח צילום מסך של התוצאות העיקריות<br>
+                    3. יישם את ההמלצות הפרקטיות<br>
+                    4. הרץ שוב כל 6-12 חודש או לאחר שינויים משמעותיים<br>
+                    5. התייעץ עם יועץ פיננסי לגבי ההמלצות גדולות
+                  </p>
+                </details>
+              </div>
+            </section>
+
+            <!-- Warning -->
+            <section
+              class="glass-card p-6 rounded-lg bg-gradient-to-r from-orange-500/10 to-red-500/10 border border-orange-500/30">
+              <h3 class="text-lg font-semibold text-orange-400 mb-3">⚠️ הצהרת סיכון</h3>
+              <div class="text-sm text-gray-300 space-y-2">
+                <p>
+                  <strong>כלי זה מיועד למטרות חינוכיות ותכנון בלבד.</strong>
+                  התוצאות מבוססות על הנחות סטטיסטיות ואינן מבטיחות ביצועים עתידיים.
+                </p>
+                <p>
+                  השקעות כרוכות בסיכון, והביצועים העתידיים עלולים להיות שונים מהתחזיות.
+                  תמיד היוועץ עם יועץ פיננסי מוסמך לפני קבלת החלטות השקעה חשובות.
+                </p>
+                <p class="font-semibold text-orange-300">
+                  האחריות על ההחלטות הפיננסיות היא שלך בלבד.
+                </p>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick Access Button -->
+    <button id="openGuideBtn" class="fixed bottom-4 right-4 z-40 btn-primary rounded-full p-3 shadow-lg">
+      📖 מדריך
+    </button>
+
+    <!-- Footer -->
+    <footer class="text-center py-8 text-gray-400 text-sm">
+      <div class="glass-card rounded-lg p-4 inline-block">
+        <div class="flex items-center justify-center gap-4 mb-2">
+          <span>🏆 מרוץ לפנסיה Pro v2.2</span>
+          <span>•</span>
+          <span>נבנה עם ❤️ בישראל</span>
+          <span>•</span>
+          <span>📊 כל הזכויות שמורות © 2025</span>
+        </div>
+        <div class="text-xs">
+          כולל חישוב פיצויים ותקרת שכר פנסיוני • כלי זה נועד למטרות חינוכיות וסימולציה בלבד ואינו מהווה ייעוץ השקעות או
+          פנסיוני מקצועי
+        </div>
+      </div>
+    </footer>
+
+    <!-- Auto-render script for KaTeX -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        renderMathInElement(document.body, {
+          delimiters: [
+            { left: "\\(", right: "\\)", display: false },
+            { left: "\\[", right: "\\]", display: true },
+            { left: "$$", right: "$$", display: true },
+            { left: "$", right: "$", display: false }
+          ],
+          throwOnError: false,
+          errorColor: '#cc0000',
+          strict: false
+        });
+      });
+    </script>
+
+    <!-- Main JavaScript Engine -->
+    <script>
+
+      window.state = window.state || { charts: {}, lastResults: null };
+
+      // תרגום labelים ידידותי
+      const LABEL_MAP = {
+        'P10 (גרוע)': 'P10 (10% הגרועים)',
+        'חציון (P50)': 'חציון (50%)',
+        'P90 (טוב)': 'P90 (10% הטובים)',
+        // השאר נשארים כפי שהם (תרומות/פיצויים/צמיחה)
+      };
+      // בונה אגדה תחתונה מתוך ה-datasets של ה-Chart
+      function renderLegendFromChart(chart, elId = 'stackLegend') {
+        if (!chart) return;
+        const el = document.getElementById(elId);
+        if (!el || !chart.data?.datasets) return;
+
+        const items = chart.data.datasets.map(ds => {
+          const color =
+            (Array.isArray(ds.borderColor) ? ds.borderColor[0] : ds.borderColor) ||
+            (Array.isArray(ds.backgroundColor) ? ds.backgroundColor[0] : ds.backgroundColor) ||
+            '#999';
+          const labelText = LABEL_MAP[ds.label] || ds.label;
+          return `
+            <span class="inline-flex items-center gap-2">
+              <span style="width:12px;height:12px;border-radius:50%;display:inline-block;background:${color}"></span>
+              ${labelText}
+            </span>`;
+        });
+
+        el.innerHTML = `<div class="flex justify-between">${items.join('')}</div>`;
+      }
+
+      function debounce(fn, wait = 400) {
+        let t;
+        return (...args) => { clearTimeout(t); t = setTimeout(() => fn(...args), wait); };
+      }
+
+
+      (function RetirementRaceProComplete() {
+        "use strict";
+
+        // Utility Functions
+        const $ = (id) => document.getElementById(id);
+        const $$ = (selector) => document.querySelectorAll(selector);
+        const fmt = (v, decimals = 0) => v?.toLocaleString('he-IL', {
+          maximumFractionDigits: decimals,
+          minimumFractionDigits: decimals
+        }) || '--';
+        const fmtPercent = (v, decimals = 1) => `${fmt(v * 100, decimals)}%`;
+        const fmtCurrency = (v) => `₪${fmt(v)}`;
+
+        // DOM Elements Cache
+        const els = {
+          // Basic inputs
+          ageNow: $('ageNow'), ageRetire: $('ageRetire'), balanceNow: $('balanceNow'),
+          salary: $('salary'), salaryGrowthPct: $('salaryGrowthPct'),
+          pensionCeiling: $('pensionCeiling'),
+
+          // Enhanced contributions with severance
+          empPct: $('empPct'), erPct: $('erPct'), voluntaryMonthly: $('voluntaryMonthly'),
+          severanceType: $('severanceType'), severanceDestination: $('severanceDestination'),
+          includeSeveranceInPension: $('includeSeveranceInPension'),
+          feeAumPct: $('feeAumPct'), feeContribPct: $('feeContribPct'),
+
+          // Market parameters
+          retExpPct: $('retExpPct'),
+          retVolPct: $('retVolPct'),
+          inflPct: $('inflPct'),
+          swrPct: $('swrPct'),
+          targetPensionMonthly: $('targetPensionMonthly'),
+          withdrawYearsN: $('withdrawYearsN'),
+
+          // Advanced
+          nSims: $('nSims'), randomSeed: $('randomSeed'), samplingFreq: $('samplingFreq'),
+          enableStochastic: $('enableStochastic'), enableTaxes: $('enableTaxes'),
+          enableInflationAdjust: $('enableInflationAdjust'),
+
+          // Events
+          evType: $('evType'), evAge: $('evAge'), evParams: $('evParams'),
+
+          // Buttons
+          addEventBtn: $('addEventBtn'), clearEventsBtn: $('clearEventsBtn'),
+          runBtn: $('runBtn'), quickRunBtn: $('quickRunBtn'),
+
+          // Results with severance
+          kpiNom: $('kpiNom'), kpiReal: $('kpiReal'), kpiProb: $('kpiProb'),
+          expectedSeverance: $('expectedSeverance'),
+
+          // Enhanced status displays
+          yearsToRetire: $('yearsToRetire'), currentContribution: $('currentContribution'),
+          annualSalary: $('annualSalary'), savingsRate: $('savingsRate'),
+          pensionableSalary: $('pensionableSalary'), pensionCeilingWarning: $('pensionCeilingWarning'),
+          requiredCapital: $('requiredCapital'), capitalGap: $('capitalGap'),
+
+          // Contribution breakdown
+          empContribAmount: $('empContribAmount'), erContribAmount: $('erContribAmount'),
+          severanceAmount: $('severanceAmount'), voluntaryAmount: $('voluntaryAmount'),
+          totalContribAmount: $('totalContribAmount')
+        };
+
+        function syncSWRandN(source, opts = { triggerQuick: true }) {
+          const swrEl = els.swrPct;
+          const nEl = els.withdrawYearsN;
+          if (!swrEl || !nEl) return;
+
+          // קריאה בטוחה
+          const parse = (v) => {
+            const x = parseFloat(String(v).replace(',', '.'));
+            return Number.isFinite(x) ? x : NaN;
+          };
+
+          if (source === 'swr') {
+            const swr = parse(swrEl.value);              // אחוזים, למשל 4.0
+            if (swr > 0) nEl.value = (100 / swr).toFixed(1); // N = 100 / SWR%
+          } else if (source === 'n') {
+            const n = parse(nEl.value);                  // שנים, למשל 25
+            if (n > 0) swrEl.value = (100 / n).toFixed(2);   // SWR% = 100 / N
+          }
+
+          // עדכון תצוגות מיידי – נשען על הלוגיקה הקיימת שלך:
+          // updateStatusDisplays משתמש ב-swrPct לחישוב requiredCapital/capitalGap וכו' :contentReference[oaicite:5]{index=5} :contentReference[oaicite:6]{index=6}
+          if (typeof updateStatusDisplays === 'function') {
+            updateStatusDisplays();
+          }
+
+          // אופציונלי: להריץ "הרצה מהירה" אוטומטית (אם יש כפתור/פונקציה קיימת)
+          if (opts.triggerQuick) {
+            const btn = els.quickRunBtn || document.getElementById('quickRunBtn');
+            if (btn && typeof btn.click === 'function') btn.click();
+          }
+        }
+
+
+
+        // Application State
+        let state = {
+          events: [],
+          lastResults: null,
+          charts: {},
+          currentTab: 'basic',
+          isRunning: false,
+          performance: {
+            lastRunTime: 0,
+            totalRuns: 0
+          },
+          severanceAccumulation: {
+            monthly: 0,
+            total: 0,
+            isIncludedInPension: true
+          }
+        };
+
+        // Mathematical Utilities with Enhanced Severance Calculations
+        class MathUtils {
+          static boxMuller() {
+            let u = 0, v = 0;
+            while (u === 0) u = Math.random();
+            while (v === 0) v = Math.random();
+            return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+          }
+
+          static setSeed(seed) {
+            Math.seedrandom = function () {
+              let m = 2147483647, a = 16807, c = 12345;
+              let z = seed || 1;
+              return function () {
+                z = (a * z + c) % m;
+                return z / m;
+              };
+            };
+            Math.random = Math.seedrandom();
+          }
+
+          static percentile(arr, p) {
+            const sorted = [...arr].sort((a, b) => a - b);
+            const index = (p / 100) * (sorted.length - 1);
+            const lower = Math.floor(index);
+            const upper = Math.ceil(index);
+            const weight = index % 1;
+
+            if (upper >= sorted.length) return sorted[sorted.length - 1];
+            return sorted[lower] * (1 - weight) + sorted[upper] * weight;
+          }
+
+          static compoundReturn(rate, periods, contribution = 0) {
+            if (rate === 0) return contribution * periods;
+            return contribution * (Math.pow(1 + rate, periods) - 1) / rate;
+          }
+
+          // Enhanced pension calculations with ceiling
+          static calculatePensionableSalary(grossSalary, ceiling) {
+            return Math.min(grossSalary, ceiling);
+          }
+
+          // Severance calculation based on type
+          static calculateSeverance(pensionableSalary, severanceRate) {
+            return pensionableSalary * (severanceRate / 100);
+          }
+        }
+
+        // Enhanced Status Updates with Severance Calculations
+        function updateStatusDisplays() {
+          const ageNow = parseInt(els.ageNow.value) || 35;
+          const ageRetire = parseInt(els.ageRetire.value) || 67;
+          const salary = parseFloat(els.salary.value) || 15000;
+          const pensionCeiling = parseFloat(els.pensionCeiling.value) || 43370;
+          const empPct = parseFloat(els.empPct.value) || 6.0;
+          const erPct = parseFloat(els.erPct.value) || 6.5;
+          const severanceRate = parseFloat(els.severanceType.value) || 6.0;
+          const voluntary = parseFloat(els.voluntaryMonthly.value) || 0;
+          const targetPension = parseFloat(els.targetPensionMonthly.value) || 12000;
+          const swr = parseFloat(els.swrPct.value) || 3.5;
+
+          // Calculate pensionable salary
+          const pensionableSalary = MathUtils.calculatePensionableSalary(salary, pensionCeiling);
+          const isAboveCeiling = salary > pensionCeiling;
+
+          // Enhanced calculations with severance
+          const yearsToRetire = Math.max(0, ageRetire - ageNow);
+          const annualSalary = salary * 12;
+
+          // Contributions based on pensionable salary
+          const empContrib = pensionableSalary * (empPct / 100);
+          const erContrib = pensionableSalary * (erPct / 100);
+          const severanceContrib = MathUtils.calculateSeverance(pensionableSalary, severanceRate);
+          const totalContrib = empContrib + erContrib + severanceContrib + voluntary;
+
+          const savingsRate = (totalContrib * 12) / annualSalary;
+          const requiredCapital = (targetPension * 12) / (swr / 100);
+          const currentBalance = parseFloat(els.balanceNow.value) || 0;
+          const capitalGap = Math.max(0, requiredCapital - currentBalance);
+
+          // Update main displays
+          els.yearsToRetire.textContent = yearsToRetire;
+          els.currentContribution.textContent = fmtCurrency(totalContrib);
+          els.annualSalary.textContent = fmtCurrency(annualSalary);
+          els.pensionableSalary.textContent = fmtCurrency(pensionableSalary);
+          els.savingsRate.textContent = fmtPercent(savingsRate);
+          els.requiredCapital.textContent = fmtCurrency(requiredCapital);
+          els.capitalGap.textContent = fmtCurrency(capitalGap);
+
+          // Update contribution breakdown
+          if (els.empContribAmount) els.empContribAmount.textContent = fmtCurrency(empContrib);
+          if (els.erContribAmount) els.erContribAmount.textContent = fmtCurrency(erContrib);
+          if (els.severanceAmount) els.severanceAmount.textContent = fmtCurrency(severanceContrib);
+          if (els.voluntaryAmount) els.voluntaryAmount.textContent = fmtCurrency(voluntary);
+          if (els.totalContribAmount) els.totalContribAmount.textContent = fmtCurrency(totalContrib);
+
+          // Show/hide pension ceiling warning
+          if (els.pensionCeilingWarning) {
+            if (isAboveCeiling) {
+              els.pensionCeilingWarning.style.display = 'block';
+              els.pensionCeilingWarning.innerHTML =
+                `השכר שלך (${fmtCurrency(salary)}) עולה על התקרה הפנסיונית (${fmtCurrency(pensionCeiling)}). 
+             ${fmtCurrency(salary - pensionCeiling)} לא ייכלל בחישובי הפנסיה.`;
+            } else {
+              els.pensionCeilingWarning.style.display = 'none';
+            }
+          }
+
+          // Update state
+          state.severanceAccumulation = {
+            monthly: severanceContrib,
+            total: severanceContrib * yearsToRetire * 12,
+            isIncludedInPension: els.includeSeveranceInPension?.checked || true
+          };
+
+          updateContributionAdvice();
+        }
+
+        // Enhanced Contribution Advice with Severance
+        function updateContributionAdvice() {
+          const salary = parseFloat(els.salary.value) || 15000;
+          const pensionCeiling = parseFloat(els.pensionCeiling.value) || 43370;
+          const severanceRate = parseFloat(els.severanceType.value) || 6.0;
+          const severanceDest = els.severanceDestination?.value || 'pension';
+
+          const advice = [];
+
+          if (salary > pensionCeiling) {
+            advice.push(`השכר שלך עולה על התקרה. שקול הגדלת ההפקדה החופשית כדי לפצות על הפער.`);
+          }
+
+          if (severanceRate === 6) {
+            advice.push(`שקול מעבר להפקדת פיצויים 8.33% במקום 6% אם המעסיק מציע זאת.`);
+          }
+
+          if (severanceDest !== 'pension') {
+            advice.push(`שקול הפקדת הפיצויים לקופת הפנסיה לחיסכון מס ותשואה מורכבת.`);
+          }
+
+          const currentSavingsRate = ((salary * 0.125) * 12) / (salary * 12);
+          if (currentSavingsRate < 0.15) {
+            advice.push(`המלצה: הגדל את שיעור החיסכון ל-15% מהשכר לפחות.`);
+          }
+
+          const adviceEl = $('contributionAdvice');
+          if (adviceEl) {
+            adviceEl.innerHTML = advice.length > 0 ? advice.join('<br><br>') : 'הגדרות הפיצויים שלך נראות טובות!';
+          }
+        }
+
+        // Event Parameter Rendering with Severance Events
+        function renderEventParams() {
+          const type = els.evType.value;
+          let html = '';
+
+          const paramInput = (key, label, defaultVal, min, max, step = '0.1') =>
+            `<label class="block">
+          <span class="text-gray-300 text-sm mb-1 block">${label}</span>
+          <input data-param="${key}" type="number" step="${step}" min="${min || ''}" max="${max || ''}" 
+                 class="input-field text-sm" value="${defaultVal}"/>
+        </label>`;
+
+          switch (type) {
+            case 'inc_contrib':
+              html += paramInput('deltaPct', 'תוספת הפקדה (%)', '2.0', '0', '10');
+              break;
+            case 'lump_sum':
+              html += paramInput('amount', 'סכום (₪)', '20000', '1000', '1000000', '1000');
+              break;
+            case 'switch_fund':
+              html += paramInput('retExp', 'תשואה חדשה (%)', '5.8', '2', '12');
+              html += paramInput('retVol', 'סטיית תקן חדשה (%)', '11.0', '5', '25');
+              html += paramInput('feeAum', 'דמי ניהול חדשים (%)', '0.60', '0', '3', '0.01');
+              break;
+            case 'salary_jump':
+              html += paramInput('jumpPct', 'קפיצת שכר (%)', '20', '5', '100');
+              break;
+            case 'inheritance':
+              html += paramInput('amount', 'סכום ירושה (₪)', '100000', '10000', '5000000', '1000');
+              break;
+            case 'sabbatical':
+              html += paramInput('months', 'מספר חודשים', '6', '1', '24', '1');
+              break;
+            case 'market_shock':
+              html += paramInput('shockPct', 'תשואה חריגה (%)', '-20', '-50', '50');
+              break;
+            case 'severance_payout':
+              html += paramInput('amount', 'סכום פיצויים (₪)', '50000', '5000', '500000', '1000');
+              html += '<div class="text-gray-400 text-sm">תשלום פיצויים חד-פעמי</div>';
+              break;
+            case 'self_employed':
+              html += '<div class="text-gray-400 text-sm">ביטול הפקדת מעסיק ופיצויים מהאירוע</div>';
+              break;
+          }
+
+          els.evParams.innerHTML = html;
+        }
+
+        // Enhanced Chart Management with Severance Data
+        class ChartManager {
+          constructor() {
+            this.charts = {};
+            this.setupChartDefaults();
+          }
+
+          setupChartDefaults() {
+            Chart.defaults.color = '#ffffff';
+            Chart.defaults.borderColor = 'rgba(255, 255, 255, 0.1)';
+            Chart.defaults.backgroundColor = 'rgba(255, 255, 255, 0.05)';
+            Chart.defaults.font.family = 'system-ui, -apple-system, sans-serif';
+            Chart.defaults.plugins.legend.labels.usePointStyle = true;
+            Chart.defaults.plugins.tooltip.backgroundColor = 'rgba(15, 23, 42, 0.9)';
+            Chart.defaults.plugins.tooltip.borderColor = 'rgba(59, 130, 246, 0.5)';
+            Chart.defaults.plugins.tooltip.borderWidth = 1;
+          }
+
+          createPathChart(results) {
+            console.log('ChartManager - יוצר גרף נתיב...', results);
+            const ctx = document.getElementById('pathChart');
+            if (!ctx || !results) {
+              console.error('ChartManager - Canvas או נתונים חסרים');
+              return;
+            }
+
+            try {
+              // הרס גרף קיים בצורה בטוחה
+              const existingChart = Chart.getChart(ctx);
+              if (existingChart) {
+                existingChart.destroy();
+              }
+
+              if (!this.charts) this.charts = {};
+              if (!state.charts) state.charts = {};
+
+              const ageNow = parseInt(document.getElementById('ageNow')?.value || '35') || 35;
+              const labels = results.percentiles.p50.map((_, i) =>
+                (ageNow + i / 12).toFixed(1)
+              );
+
+              const datasets = [
+                {
+                  label: 'P10 (גרוע)',
+                  data: results.percentiles.p10,
+                  borderColor: '#ef4444',
+                  backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                  borderWidth: 1,
+                  fill: false,
+                  tension: 0.2
+                },
+                {
+                  label: 'חציון (P50)',
+                  data: results.percentiles.p50,
+                  borderColor: '#10b981',
+                  backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                  borderWidth: 3,
+                  fill: false,
+                  tension: 0.2
+                },
+                {
+                  label: 'P90 (טוב)',
+                  data: results.percentiles.p90,
+                  borderColor: '#3b82f6',
+                  backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                  borderWidth: 1,
+                  fill: false,
+                  tension: 0.2
+                }
+              ];
+
+              this.charts.pathChart = new Chart(ctx, {
+                type: 'line',
+                data: { labels, datasets },
+                options: {
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  interaction: {
+                    mode: 'index',
+                    intersect: false
+                  },
+                  plugins: {
+                    legend: { display: false },
+                    tooltip: {
+                      callbacks: {
+                        label: function (context) {
+                          return `${context.dataset.label}: ${fmtCurrency(context.parsed.y)}`;
+                        }
+                      }
+                    }
+                  },
+                  scales: {
+                    x: {
+                      title: { display: true, text: 'גיל', color: '#ffffff' },
+                      ticks: { color: '#ffffff' },
+                      grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                    },
+                    y: {
+                      title: { display: true, text: 'צבירה (₪)', color: '#ffffff' },
+                      ticks: {
+                        color: '#ffffff',
+                        callback: function (value) { return fmtCurrency(value); }
+                      },
+                      grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                    }
+                  },
+                  elements: {
+                    point: { radius: 0, hoverRadius: 5 }
+                  }
+                }
+              });
+              state.charts.pathChart = this.charts.pathChart;
+
+              // ✅ לבנות אגדה תחתונה רק עכשיו, כשהגרף קיים
+              renderLegendFromChart(state.charts.pathChart, 'pathLegend');
+            } catch (error) {
+              console.error('ChartManager - שגיאה ביצירת גרף נתיב:', error);
+            }
+
+          }
+
+
+          handleCompositionViewChange() {
+            const select = document.getElementById('compositionView');
+            if (!select || !state.lastResults) return;
+
+            switch (select.value) {
+              case 'contribution':
+              case 'timeline':   // כרגע אותה תצוגה; אפשר להרחיב מאוחר יותר
+              case 'sources':    // כרגע אותה תצוגה; אפשר להרחיב מאוחר יותר
+              default:
+                createCompositionChart(state.lastResults);
+            }
+          }
+
+
+
+          createCompositionChart(results) {
+            const canvas = document.getElementById('stackChart');
+            if (!canvas || !results) return;
+
+            // להרוס קודם
+            Chart.getChart(canvas)?.destroy();
+            if (state.charts?.stackChart) state.charts.stackChart.destroy();
+            state.charts ||= {};
+
+            // אינדקס אחרון תקין
+            const lastIdx = Math.max(0, (results.months ?? 0) - 1);
+
+            // נתונים
+            const finalBalance = results.percentiles?.p50?.[lastIdx] ?? 0;
+            const finalSeverance = results.severancePercentiles?.p50?.[lastIdx] ?? 0;
+            const totalContributions = results.contributions?.p50?.[lastIdx] ?? 0;
+            const growth = Math.max(0, finalBalance + finalSeverance - totalContributions);
+
+            // יצירה
+            state.charts.stackChart = new Chart(canvas, {
+              type: 'doughnut',
+              data: {
+                labels: ['תרומות', 'פיצויים', 'צמיחה/תשואה'],
+                datasets: [{
+                  data: [totalContributions, finalSeverance, growth],
+                  backgroundColor: [
+                    'rgba(59,130,246,0.8)',  // תרומות – כחול
+                    'rgba(139,92,246,0.8)',  // פיצויים – סגול
+                    'rgba(16,185,129,0.8)'   // צמיחה – ירוק
+                  ],
+                  borderColor: [
+                    'rgba(59,130,246,1)',
+                    'rgba(139,92,246,1)',
+                    'rgba(16,185,129,1)'
+                  ],
+                  borderWidth: 2
+                }]
+              },
+              options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                  legend: {
+                    position: 'bottom',
+                    labels: { color: '#ffffff', padding: 20, usePointStyle: true }
+                  },
+                  tooltip: {
+                    callbacks: {
+                      label: (ctx) => {
+                        const total = totalContributions + finalSeverance + growth;
+                        const pct = total > 0 ? ((ctx.parsed / total) * 100).toFixed(1) : '0.0';
+                        return `${ctx.label}: ${fmtCurrency(ctx.parsed)} (${pct}%)`;
+                      }
+                    }
+                  }
+                }
+              }
+            });
+
+            // אגדה תחתונה מסונכרנת
+            renderLegendFromChart(state.charts.stackChart, 'stackLegend');
+          }
+        }
+
+        // Enhanced Monte Carlo Simulation Engine with Severance
+        class EnhancedSimulationEngine {
+          constructor(params) {
+            this.params = params;
+            this.results = null;
+          }
+
+          // הוסף בתחילת runSimulation ב-EnhancedSimulationEngine
+          async runSimulation() {
+            console.log('מנוע סימולציה התחיל...');
+            const startTime = performance.now();
+
+            if (this.params.randomSeed) {
+              MathUtils.setSeed(this.params.randomSeed);
+            }
+
+            const { nSims } = this.params;
+            const months = Math.max(12, (this.params.ageRetire - this.params.ageNow) * 12);
+            if (months > 1200) {
+              throw new Error('מספר חודשים לא תקין: ' + months);
+            }
+
+            try {
+              const paths = [];
+              this.showProgress(0);
+
+              const singlePathParams = {
+                months,
+                startBalance: this.params.startBalance,
+                salary: this.params.salary,
+                salaryGrowth: this.params.salaryGrowth,
+                pensionCeiling: this.params.pensionCeiling,
+                empPct: this.params.empPct,
+                erPct: this.params.erPct,
+                voluntary: this.params.voluntary,
+                severanceRate: this.params.severanceRate,
+                severanceDest: this.params.severanceDest,
+                includeSeveranceInPension: this.params.includeSeveranceInPension,
+                monthlyRetExp: this.params.monthlyRetExp,
+                monthlyRetVol: this.params.monthlyRetVol,
+                monthlyFeeAum: this.params.monthlyFeeAum,
+                feeContrib: this.params.feeContrib,
+                eventsByMonth: this.params.eventsByMonth,
+                ageNow: this.params.ageNow
+              };
+
+              for (let sim = 0; sim < nSims; sim++) {
+                const simStartTime = performance.now();
+
+                const path = await this.runSinglePath(singlePathParams);
+                paths.push(path);
+
+                const simEndTime = performance.now();
+                if (simEndTime - simStartTime > 1000) {
+                  console.warn(`סימולציה ${sim} לקחה ${simEndTime - simStartTime} ms`);
+                }
+
+                if (sim % Math.max(1, Math.floor(nSims / 20)) === 0) {
+                  this.showProgress((sim / nSims) * 100);
+                }
+              }
+
+              console.log('סיים את כל הסימולציות, מעבד סטטיסטיקות...');
+              this.results = this.calculateStatistics(
+                paths,
+                months,
+                this.params.monthlyInflation
+              );
+
+              console.log('סיום מנוע סימולציה. זמן ריצה:', performance.now() - startTime, 'ms');
+              return this.results;
+            } catch (err) {
+              console.error('שגיאה במנוע הסימולציה:', err);
+              throw err;
+            }
+          }
+
+          async runSinglePath(params) {
+            const {
+              months, startBalance, salary: initialSalary, salaryGrowth, pensionCeiling,
+              empPct, erPct, voluntary, severanceRate, severanceDest, includeSeveranceInPension,
+              monthlyRetExp, monthlyRetVol, monthlyFeeAum, feeContrib, eventsByMonth, ageNow
+            } = params;
+
+            let balance = startBalance;
+            let severanceBalance = 0;
+            let salary = initialSalary;
+            let currentEmpPct = empPct;
+            let currentErPct = erPct;
+            let currentSeveranceRate = severanceRate;
+            let currentVoluntary = voluntary;
+            let currentRetExp = monthlyRetExp;
+            let currentRetVol = monthlyRetVol;
+            let currentFeeAum = monthlyFeeAum;
+            let sabbaticalMonths = 0;
+
+            const balanceSeries = new Array(months + 1);
+            const contributionSeries = new Array(months + 1);
+            const severanceSeries = new Array(months + 1);
+
+            balanceSeries[0] = balance;
+            contributionSeries[0] = 0;
+            severanceSeries[0] = severanceBalance;
+
+            for (let month = 1; month <= months; month++) {
+              // Apply salary growth annually
+              if (month % 12 === 1 && month > 1) {
+                salary *= (1 + salaryGrowth / 100);
+              }
+
+              // Calculate pensionable salary with ceiling
+              const pensionableSalary = MathUtils.calculatePensionableSalary(salary, pensionCeiling);
+
+              // Apply events for this month
+              if (eventsByMonth[month]) {
+                eventsByMonth[month].forEach(event => {
+                  switch (event.type) {
+                    case 'inc_contrib':
+                      currentEmpPct += event.params.deltaPct || 0;
+                      break;
+                    case 'lump_sum':
+                      balance += event.params.amount || 0;
+                      break;
+                    case 'inheritance':
+                      balance += event.params.amount || 0;
+                      break;
+                    case 'severance_payout':
+                      if (includeSeveranceInPension) {
+                        balance += event.params.amount || 0;
+                      } else {
+                        severanceBalance += event.params.amount || 0;
+                      }
+                      break;
+                    case 'switch_fund':
+                      currentRetExp = Math.log(1 + (event.params.retExp || 5.5) / 100) / 12;
+                      currentRetVol = ((event.params.retVol || 12) / 100) / Math.sqrt(12);
+                      currentFeeAum = (event.params.feeAum || 0.8) / 100 / 12;
+                      break;
+                    case 'self_employed':
+                      currentErPct = 0;
+                      currentSeveranceRate = 0;
+                      break;
+                    case 'sabbatical':
+                      sabbaticalMonths = Math.max(sabbaticalMonths, event.params.months || 0);
+                      break;
+                    case 'salary_jump':
+                      salary *= (1 + (event.params.jumpPct || 0) / 100);
+                      break;
+                  }
+                });
+              }
+
+              // Calculate contributions
+              let monthlyPensionContribution = 0;
+              let monthlySeveranceContribution = 0;
+
+              if (sabbaticalMonths > 0) {
+                sabbaticalMonths--;
+              } else {
+                const empContrib = pensionableSalary * (currentEmpPct / 100);
+                const erContrib = pensionableSalary * (currentErPct / 100);
+                const severanceContrib = pensionableSalary * (currentSeveranceRate / 100);
+
+                monthlyPensionContribution = empContrib + erContrib + currentVoluntary;
+                monthlySeveranceContribution = severanceContrib;
+
+                // Apply contribution fees
+                if (feeContrib > 0) {
+                  monthlyPensionContribution *= (1 - feeContrib / 100);
+                  monthlySeveranceContribution *= (1 - feeContrib / 100);
+                }
+
+                balance += monthlyPensionContribution;
+
+                if (includeSeveranceInPension) {
+                  balance += monthlySeveranceContribution;
+                } else {
+                  severanceBalance += monthlySeveranceContribution;
+                }
+              }
+
+              // Generate random return for pension fund
+              let monthlyReturn = 0;
+              if (currentRetVol > 0) {
+                const z = MathUtils.boxMuller();
+                monthlyReturn = Math.exp((currentRetExp - 0.5 * currentRetVol * currentRetVol) + currentRetVol * z) - 1;
+              } else {
+                monthlyReturn = Math.exp(currentRetExp) - 1;
+              }
+
+              // Apply market shock if applicable
+              if (eventsByMonth[month]) {
+                eventsByMonth[month].forEach(event => {
+                  if (event.type === 'market_shock') {
+                    monthlyReturn += (event.params.shockPct || 0) / 100;
+                  }
+                });
+              }
+
+              // Apply return to pension balance
+              balance *= (1 + monthlyReturn);
+
+              // Apply return to severance (usually lower, more conservative)
+              const severanceReturn = monthlyReturn * 0.6;
+              severanceBalance *= (1 + severanceReturn);
+
+              // Apply fees
+              balance *= (1 - currentFeeAum);
+              severanceBalance *= (1 - currentFeeAum * 0.8);
+
+              // Ensure non-negative balances
+              balance = Math.max(0, balance);
+              severanceBalance = Math.max(0, severanceBalance);
+
+              balanceSeries[month] = balance;
+              contributionSeries[month] = (contributionSeries[month - 1] || 0) + monthlyPensionContribution + monthlySeveranceContribution;
+              severanceSeries[month] = severanceBalance;
+            }
+
+            return { balanceSeries, contributionSeries, severanceSeries };
+          }
+
+          calculateStatistics(paths, months, monthlyInflation) {
+            // Calculate percentiles for each month including severance
+            const percentiles = { p5: [], p10: [], p25: [], p50: [], p75: [], p90: [], p95: [] };
+            const contributions = { p50: [] };
+            const severancePercentiles = { p50: [] };
+
+            for (let month = 0; month <= months; month++) {
+              const totalBalances = paths.map(p => p.balanceSeries[month] + (p.severanceSeries[month] || 0)).sort((a, b) => a - b);
+              const contribs = paths.map(p => p.contributionSeries[month]).sort((a, b) => a - b);
+              const severances = paths.map(p => p.severanceSeries[month] || 0).sort((a, b) => a - b);
+
+              percentiles.p5[month] = MathUtils.percentile(totalBalances, 5);
+              percentiles.p10[month] = MathUtils.percentile(totalBalances, 10);
+              percentiles.p25[month] = MathUtils.percentile(totalBalances, 25);
+              percentiles.p50[month] = MathUtils.percentile(totalBalances, 50);
+              percentiles.p75[month] = MathUtils.percentile(totalBalances, 75);
+              percentiles.p90[month] = MathUtils.percentile(totalBalances, 90);
+              percentiles.p95[month] = MathUtils.percentile(totalBalances, 95);
+
+              contributions.p50[month] = MathUtils.percentile(contribs, 50);
+              severancePercentiles.p50[month] = MathUtils.percentile(severances, 50);
+            }
+
+            // Calculate inflation adjustment series
+            const inflationSeries = new Array(months + 1);
+            inflationSeries[0] = 1;
+            for (let month = 1; month <= months; month++) {
+              inflationSeries[month] = inflationSeries[month - 1] * Math.exp(monthlyInflation);
+            }
+
+            return {
+              paths,
+              percentiles,
+              contributions,
+              severancePercentiles,
+              inflationSeries,
+              months,
+              statistics: this.calculateAdvancedStats(paths, months)
+            };
+          }
+
+          calculateAdvancedStats(paths, months) {
+            const finalBalances = paths.map(p => p.balanceSeries[months] + (p.severanceSeries[months] || 0));
+
+            return {
+              mean: finalBalances.reduce((a, b) => a + b) / finalBalances.length,
+              median: MathUtils.percentile(finalBalances, 50),
+              severanceContribution: this.calculateSeveranceContribution(paths, months)
+            };
+          }
+
+          calculateSeveranceContribution(paths, months) {
+            const finalSeverances = paths.map(p => p.severanceSeries[months] || 0);
+            const avgSeverance = finalSeverances.reduce((a, b) => a + b) / finalSeverances.length;
+            const avgTotal = paths.reduce((sum, p) => sum + p.balanceSeries[months] + (p.severanceSeries[months] || 0), 0) / paths.length;
+
+            return {
+              median: MathUtils.percentile(finalSeverances, 50),
+              mean: avgSeverance,
+              percentage: avgTotal > 0 ? (avgSeverance / avgTotal) : 0
+            };
+          }
+
+          showProgress(percent) {
+            const overlay = $('loadingOverlay');
+            const fill = $('progressFill');
+            if (overlay && fill) {
+              overlay.style.display = 'flex';
+              fill.style.width = `${percent}%`;
+            }
+          }
+
+          hideProgress() {
+            const overlay = $('loadingOverlay');
+            if (overlay) {
+              overlay.style.display = 'none';
+            }
+          }
+
+          sleep(ms) {
+            return new Promise(resolve => setTimeout(resolve, ms));
+          }
+        }
+
+        // Main Simulation Runner with Enhanced Severance Support
+        // פונקציה מחודשת ליצירת גרפים ידנית
+        function createSimpleCharts(results) {
+          if (!results || !results.percentiles) {
+            console.log('אין תוצאות תקינות ליצירת גרפים');
+            return;
+          }
+
+          const pathCanvas = document.getElementById('pathChart');
+          const stackCanvas = document.getElementById('stackChart');
+
+          // יצירת גרף נתיב
+          if (pathCanvas && typeof Chart !== 'undefined') {
+            try {
+              // הרס גרף קיים
+              const existingPathChart = Chart.getChart(pathCanvas);
+              if (existingPathChart) existingPathChart.destroy();
+
+              const ageNow = parseInt(document.getElementById('ageNow')?.value || '35');
+              const labels = results.percentiles.p50.map((_, i) => (ageNow + i / 12).toFixed(1));
+
+              new Chart(pathCanvas, {
+                type: 'line',
+                data: {
+                  labels,
+                  datasets: [
+                    {
+                      label: 'P10 (גרוע)',
+                      data: results.percentiles.p10,
+                      borderColor: '#ef4444',
+                      borderWidth: 1,
+                      fill: false
+                    },
+                    {
+                      label: 'חציון (P50)',
+                      data: results.percentiles.p50,
+                      borderColor: '#10b981',
+                      borderWidth: 3,
+                      fill: false
+                    },
+                    {
+                      label: 'P90 (טוב)',
+                      data: results.percentiles.p90,
+                      borderColor: '#3b82f6',
+                      borderWidth: 1,
+                      fill: false
+                    }
+                  ]
+                },
+                options: {
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  plugins: { legend: { display: true } },
+                  scales: {
+                    x: { title: { display: true, text: 'גיל', color: '#ffffff' } },
+                    y: { title: { display: true, text: 'צבירה (₪)', color: '#ffffff' } }
+                  }
+                }
+              });
+              console.log('גרף נתיב נוצר בהצלחה');
+            } catch (e) {
+              console.error('כשלון ביצירת גרף נתיב:', e);
+            }
+          }
+
+          // יצירת גרף הרכב
+          if (stackCanvas && typeof Chart !== 'undefined') {
+            try {
+              const existingStackChart = Chart.getChart(stackCanvas);
+              if (existingStackChart) existingStackChart.destroy();
+
+              const lastIdx = Math.max(0, results.months - 1);
+              const balance = results.percentiles.p50[lastIdx] || 0;
+              const severance = results.severancePercentiles?.p50?.[lastIdx] || 0;
+              const contributions = results.contributions?.p50?.[lastIdx] || 0;
+              const growth = Math.max(0, balance - contributions);
+
+              new Chart(stackCanvas, {
+                type: 'doughnut',
+                data: {
+                  labels: ['תרומות', 'פיצויים', 'צמיחה'],
+                  datasets: [{
+                    data: [contributions, severance, growth],
+                    backgroundColor: ['#3b82f6', '#8b5cf6', '#10b981']
+                  }]
+                },
+                options: {
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  plugins: { legend: { position: 'bottom' } }
+                }
+              });
+              console.log('גרף הרכב נוצר בהצלחה');
+            } catch (e) {
+              console.error('כשלון ביצירת גרף הרכב:', e);
+            }
+          }
+        }
+
+        // פונקציה לעדכון תוצאות ב-UI
+        function updateSimulationResults(results) {
+          const finalMonth = results.months || 0;
+          const finalNominal = results.percentiles?.p50?.[finalMonth] || 0;
+          const finalSeverance = results.severancePercentiles?.p50?.[finalMonth] || 0;
+          const finalReal = results.inflationSeries?.[finalMonth] ?
+            finalNominal / results.inflationSeries[finalMonth] : finalNominal;
+
+          // עדכון KPIs
+          const kpiNom = document.getElementById('kpiNom');
+          const kpiReal = document.getElementById('kpiReal');
+          const expectedSeverance = document.getElementById('expectedSeverance');
+
+          if (kpiNom) kpiNom.textContent = `₪${finalNominal.toLocaleString('he-IL')}`;
+          if (kpiReal) kpiReal.textContent = `₪${finalReal.toLocaleString('he-IL')}`;
+          if (expectedSeverance) expectedSeverance.textContent = `₪${finalSeverance.toLocaleString('he-IL')}`;
+
+          // חישוב הסתברות הצלחה
+          const targetPension = parseFloat(document.getElementById('targetPensionMonthly')?.value || '12000') || 12000;
+          const swr = parseFloat(document.getElementById('swrPct')?.value || '3.5') / 100 || 0.035;
+          const requiredCapital = (targetPension * 12) / swr;
+
+          const successCount = results.paths?.filter(p => {
+            if (!p?.balanceSeries) return false;
+            const totalBalance = (p.balanceSeries[finalMonth] || 0) + (p.severanceSeries?.[finalMonth] || 0);
+            return totalBalance >= requiredCapital;
+          }).length || 0;
+
+          const successRate = results.paths?.length ? successCount / results.paths.length : 0;
+
+          const kpiProb = document.getElementById('kpiProb');
+          if (kpiProb) kpiProb.textContent = `${(successRate * 100).toFixed(1)}%`;
+
+          // עדכון אינדיקטור
+          const indicator = document.getElementById('successIndicator');
+          if (indicator) {
+            indicator.className = `status-indicator mx-auto mt-2 ${successRate >= 0.8 ? 'status-success' :
+                successRate >= 0.6 ? 'status-warning' : 'status-danger'
+              }`;
+          }
+        }
+
+// מנוע סימולציה מפושט ויציב
+class SimpleSimulationEngine {
+    constructor(params) {
+        this.params = this.validateParams(params);
+    }
+
+    validateParams(params) {
+        // וידוא שכל הפרמטרים הדרושים קיימים עם ערכי ברירת מחדל
+        return {
+            ageNow: Math.max(18, parseInt(params.ageNow) || 35),
+            ageRetire: Math.max(50, parseInt(params.ageRetire) || 67),
+            startBalance: Math.max(0, parseFloat(params.startBalance) || 0),
+            salary: Math.max(1000, parseFloat(params.salary) || 15000),
+            pensionCeiling: Math.max(10000, parseFloat(params.pensionCeiling) || 43370),
+            salaryGrowth: Math.max(0, Math.min(15, parseFloat(params.salaryGrowth) || 2.5)),
+            empPct: Math.max(0, Math.min(20, parseFloat(params.empPct) || 6.0)),
+            erPct: Math.max(0, Math.min(20, parseFloat(params.erPct) || 6.5)),
+            severanceRate: Math.max(0, Math.min(15, parseFloat(params.severanceRate) || 6.0)),
+            includeSeveranceInPension: Boolean(params.includeSeveranceInPension),
+            voluntary: Math.max(0, parseFloat(params.voluntary) || 0),
+            retExp: Math.max(1, Math.min(15, parseFloat(params.retExp) || 5.5)),
+            retVol: Math.max(3, Math.min(30, parseFloat(params.retVol) || 12.0)),
+            inflation: Math.max(0, Math.min(10, parseFloat(params.inflation) || 2.5)),
+            feeAum: Math.max(0, Math.min(5, parseFloat(params.feeAum) || 0.8)),
+            feeContrib: Math.max(0, Math.min(10, parseFloat(params.feeContrib) || 2.0)),
+            nSims: Math.max(10, Math.min(2000, parseInt(params.nSims) || 500)),
+            events: Array.isArray(params.events) ? params.events : []
+        };
+    }
+
+    // יצירת מספר אקראי נורמלי (Box-Muller)
+    normalRandom() {
+        if (this.spare !== undefined) {
+            const temp = this.spare;
+            this.spare = undefined;
+            return temp;
+        }
+        
+        const u = Math.random();
+        const v = Math.random();
+        const mag = Math.sqrt(-2 * Math.log(u));
+        
+        this.spare = mag * Math.cos(2 * Math.PI * v);
+        return mag * Math.sin(2 * Math.PI * v);
+    }
+
+    // חישוב משכורת פנסיונית (עם תקרה)
+    calculatePensionableSalary(salary) {
+        return Math.min(salary, this.params.pensionCeiling);
+    }
+
+    // הרצת נתיב סימולציה יחיד
+    runSinglePath() {
+        const { ageNow, ageRetire, startBalance, salary, salaryGrowth, empPct, erPct, 
+               severanceRate, includeSeveranceInPension, voluntary, retExp, retVol, 
+               inflation, feeAum, feeContrib } = this.params;
+
+        const totalMonths = Math.max(12, (ageRetire - ageNow) * 12);
+        const monthlyRetExp = Math.log(1 + retExp / 100) / 12;
+        const monthlyRetVol = (retVol / 100) / Math.sqrt(12);
+        const monthlyInflation = Math.log(1 + inflation / 100) / 12;
+        const monthlyFeeAum = feeAum / 100 / 12;
+
+        let balance = startBalance;
+        let severanceBalance = 0;
+        let currentSalary = salary;
+        
+        const balanceSeries = new Array(totalMonths + 1);
+        const contributionSeries = new Array(totalMonths + 1);
+        const severanceSeries = new Array(totalMonths + 1);
+        
+        balanceSeries[0] = balance;
+        contributionSeries[0] = 0;
+        severanceSeries[0] = 0;
+
+        for (let month = 1; month <= totalMonths; month++) {
+            // עדכון שכר שנתי
+            if (month % 12 === 1 && month > 1) {
+                currentSalary *= (1 + salaryGrowth / 100);
+            }
+
+            const pensionableSalary = this.calculatePensionableSalary(currentSalary);
+            
+            // חישוב הפקדות חודשיות
+            const empContrib = pensionableSalary * (empPct / 100);
+            const erContrib = pensionableSalary * (erPct / 100);
+            const severanceContrib = pensionableSalary * (severanceRate / 100);
+            
+            let monthlyPensionContrib = empContrib + erContrib + voluntary;
+            let monthlySeveranceContrib = severanceContrib;
+            
+            // החלת עמלות הפקדה
+            if (feeContrib > 0) {
+                monthlyPensionContrib *= (1 - feeContrib / 100);
+                monthlySeveranceContrib *= (1 - feeContrib / 100);
+            }
+            
+            // הפקדה לצבירה
+            balance += monthlyPensionContrib;
+            
+            if (includeSeveranceInPension) {
+                balance += monthlySeveranceContrib;
+            } else {
+                severanceBalance += monthlySeveranceContrib;
+            }
+
+            // חישוב תשואה חודשית
+            let monthlyReturn = 0;
+            if (monthlyRetVol > 0) {
+                const z = this.normalRandom();
+                monthlyReturn = Math.exp((monthlyRetExp - 0.5 * monthlyRetVol * monthlyRetVol) + monthlyRetVol * z) - 1;
+            } else {
+                monthlyReturn = Math.exp(monthlyRetExp) - 1;
+            }
+
+            // החלת תשואה
+            balance *= (1 + monthlyReturn);
+            severanceBalance *= (1 + monthlyReturn * 0.6); // פיצויים בתשואה נמוכה יותר
+
+            // החלת עמלות ניהול
+            balance *= (1 - monthlyFeeAum);
+            severanceBalance *= (1 - monthlyFeeAum * 0.8);
+
+            // וידוא ערכים חיוביים
+            balance = Math.max(0, balance);
+            severanceBalance = Math.max(0, severanceBalance);
+
+            balanceSeries[month] = balance;
+            contributionSeries[month] = (contributionSeries[month - 1] || 0) + monthlyPensionContrib + (includeSeveranceInPension ? monthlySeveranceContrib : 0);
+            severanceSeries[month] = severanceBalance;
+        }
+
+        return { balanceSeries, contributionSeries, severanceSeries };
+    }
+
+    // חישוב אחוזונים
+    calculatePercentile(arr, percentile) {
+        if (!Array.isArray(arr) || arr.length === 0) return 0;
+        
+        const sorted = [...arr].sort((a, b) => a - b);
+        const index = (percentile / 100) * (sorted.length - 1);
+        const lower = Math.floor(index);
+        const upper = Math.ceil(index);
+        const weight = index % 1;
+
+        if (upper >= sorted.length) return sorted[sorted.length - 1];
+        return sorted[lower] * (1 - weight) + sorted[upper] * weight;
+    }
+
+    // הרצת סימולציה מלאה
+    async runSimulation() {
+        console.log(`מריץ ${this.params.nSims} סימולציות...`);
+        
+        const totalMonths = Math.max(12, (this.params.ageRetire - this.params.ageNow) * 12);
+        const paths = [];
+
+        // הצגת התקדמות
+        const progressStep = Math.max(1, Math.floor(this.params.nSims / 20));
+        
+        for (let sim = 0; sim < this.params.nSims; sim++) {
+            if (sim % progressStep === 0) {
+                const progress = (sim / this.params.nSims * 100).toFixed(0);
+                console.log(`התקדמות: ${progress}%`);
+                
+                // מתן זמן לעדכון UI
+                if (sim % (progressStep * 4) === 0) {
+                    await new Promise(resolve => setTimeout(resolve, 1));
+                }
+            }
+            
+            try {
+                const path = this.runSinglePath();
+                paths.push(path);
+            } catch (error) {
+                console.error(`שגיאה בסימולציה ${sim}:`, error);
+                // ממשיך עם סימולציות אחרות
+            }
+        }
+
+        if (paths.length === 0) {
+            throw new Error('כל הסימולציות נכשלו');
+        }
+
+        console.log(`הושלמו ${paths.length} סימולציות, מחשב סטטיסטיקות...`);
+        
+        // חישוב אחוזונים לכל חודש
+        const percentiles = { p5: [], p10: [], p25: [], p50: [], p75: [], p90: [], p95: [] };
+        const contributions = { p50: [] };
+        const severancePercentiles = { p50: [] };
+
+        for (let month = 0; month <= totalMonths; month++) {
+            const totalBalances = paths.map(p => 
+                (p.balanceSeries[month] || 0) + (p.severanceSeries[month] || 0)
+            );
+            const contribs = paths.map(p => p.contributionSeries[month] || 0);
+            const severances = paths.map(p => p.severanceSeries[month] || 0);
+
+            percentiles.p5[month] = this.calculatePercentile(totalBalances, 5);
+            percentiles.p10[month] = this.calculatePercentile(totalBalances, 10);
+            percentiles.p25[month] = this.calculatePercentile(totalBalances, 25);
+            percentiles.p50[month] = this.calculatePercentile(totalBalances, 50);
+            percentiles.p75[month] = this.calculatePercentile(totalBalances, 75);
+            percentiles.p90[month] = this.calculatePercentile(totalBalances, 90);
+            percentiles.p95[month] = this.calculatePercentile(totalBalances, 95);
+
+            contributions.p50[month] = this.calculatePercentile(contribs, 50);
+            severancePercentiles.p50[month] = this.calculatePercentile(severances, 50);
+        }
+
+        // יצירת סדרת אינפלציה
+        const inflationSeries = new Array(totalMonths + 1);
+        const monthlyInflation = Math.log(1 + this.params.inflation / 100) / 12;
+        inflationSeries[0] = 1;
+        for (let month = 1; month <= totalMonths; month++) {
+            inflationSeries[month] = inflationSeries[month - 1] * Math.exp(monthlyInflation);
+        }
+
+        console.log('סימולציה הושלמה בהצלחה!');
+        
+        return {
+            paths,
+            percentiles,
+            contributions,
+            severancePercentiles,
+            inflationSeries,
+            months: totalMonths,
+            statistics: {
+                mean: percentiles.p50[totalMonths],
+                median: percentiles.p50[totalMonths],
+                severanceContribution: {
+                    median: severancePercentiles.p50[totalMonths],
+                    mean: severancePercentiles.p50[totalMonths],
+                    percentage: severancePercentiles.p50[totalMonths] / (percentiles.p50[totalMonths] || 1)
+                }
+            }
+        };
+    }
+}
+
+// פונקציה מעודכנת לסימולציה
+async function runFullSimulation() {
+    console.log('מתחיל סימולציה עם מנוע מפושט...');
+    
+    // בדיקות בסיסיות
+    if (!window.state) {
+        window.state = { isRunning: false, events: [], lastResults: null };
+    }
+    
+    if (window.state.isRunning) {
+        console.log('סימולציה כבר רצה');
+        return;
+    }
+
+    // קבלת פרמטרים
+    let params;
+    try {
+        params = {
+            ageNow: parseInt(document.getElementById('ageNow')?.value || '35'),
+            ageRetire: parseInt(document.getElementById('ageRetire')?.value || '67'),
+            startBalance: parseFloat(document.getElementById('balanceNow')?.value || '0'),
+            salary: parseFloat(document.getElementById('salary')?.value || '15000'),
+            pensionCeiling: parseFloat(document.getElementById('pensionCeiling')?.value || '43370'),
+            salaryGrowth: parseFloat(document.getElementById('salaryGrowthPct')?.value || '2.5'),
+            empPct: parseFloat(document.getElementById('empPct')?.value || '6.0'),
+            erPct: parseFloat(document.getElementById('erPct')?.value || '6.5'),
+            severanceRate: parseFloat(document.getElementById('severanceType')?.value || '6.0'),
+            includeSeveranceInPension: document.getElementById('includeSeveranceInPension')?.checked !== false,
+            voluntary: parseFloat(document.getElementById('voluntaryMonthly')?.value || '0'),
+            retExp: parseFloat(document.getElementById('retExpPct')?.value || '5.5'),
+            retVol: parseFloat(document.getElementById('retVolPct')?.value || '12.0'),
+            inflation: parseFloat(document.getElementById('inflPct')?.value || '2.5'),
+            feeAum: parseFloat(document.getElementById('feeAumPct')?.value || '0.8'),
+            feeContrib: parseFloat(document.getElementById('feeContribPct')?.value || '2.0'),
+            nSims: Math.max(100, Math.min(1000, parseInt(document.getElementById('nSims')?.value || '500'))),
+            events: [...(window.state.events || [])]
+        };
+        console.log('פרמטרים נקבעו בהצלחה');
+    } catch (error) {
+        console.error('שגיאה באיסוף פרמטרים:', error);
+        alert('שגיאה בקריאת הפרמטרים מהטופס');
+        return;
+    }
+
+    // עדכון מצב UI
+    window.state.isRunning = true;
+    const runBtn = document.getElementById('runBtn');
+    if (runBtn) {
+        runBtn.disabled = true;
+        runBtn.textContent = 'מריץ סימולציה...';
+    }
+
+    const loadingOverlay = document.getElementById('loadingOverlay');
+    if (loadingOverlay) loadingOverlay.style.display = 'flex';
+
+    try {
+        console.log('יוצר מנוע סימולציה מפושט...');
+        const engine = new SimpleSimulationEngine(params);
+        
+        console.log('מריץ סימולציה...');
+        const results = await engine.runSimulation();
+        
+        if (!results || !results.percentiles) {
+            throw new Error('תוצאות הסימולציה לא תקינות');
+        }
+
+        console.log('סימולציה הושלמה, מעדכן תוצאות...');
+        
+        // שמירת תוצאות
+        window.state.lastResults = results;
+        
+        // עדכון UI
+        updateSimulationResults(results);
+        
+        // יצירת גרפים
+        console.log('יוצר גרפים...');
+        createSimpleCharts(results);
+        
+        console.log('סימולציה הושלמה בהצלחה!');
+        
+    } catch (error) {
+        console.error('שגיאה בהרצת הסימולציה:', error);
+        
+        let errorMessage = 'שגיאה כללית בהרצת הסימולציה: ' + error.message;
+        if (error.message.includes('timeout') || error.message.includes('זמן מותר')) {
+            errorMessage = 'הסימולציה לקחה יותר מדי זמן. נסה להקטין את מספר הסימולציות.';
+        }
+        
+        alert(errorMessage);
+        
+    } finally {
+        // ניקוי מצב
+        window.state.isRunning = false;
+        
+        if (runBtn) {
+            runBtn.disabled = false;
+            runBtn.textContent = 'הרץ סימולציה מלאה';
+        }
+        
+        if (loadingOverlay) {
+            loadingOverlay.style.display = 'none';
+        }
+        
+        console.log('ניקוי מצב הושלם');
+    }
+}
+
+// פונקציות עזר שנדרשות
+function updateSimulationResults(results) {
+    const finalMonth = results.months || 0;
+    const finalNominal = results.percentiles?.p50?.[finalMonth] || 0;
+    const finalSeverance = results.severancePercentiles?.p50?.[finalMonth] || 0;
+    const finalReal = results.inflationSeries?.[finalMonth] ? 
+        finalNominal / results.inflationSeries[finalMonth] : finalNominal;
+
+    // עדכון KPIs
+    const kpiNom = document.getElementById('kpiNom');
+    const kpiReal = document.getElementById('kpiReal');
+    const expectedSeverance = document.getElementById('expectedSeverance');
+    
+    if (kpiNom) kpiNom.textContent = `₪${finalNominal.toLocaleString('he-IL')}`;
+    if (kpiReal) kpiReal.textContent = `₪${finalReal.toLocaleString('he-IL')}`;
+    if (expectedSeverance) expectedSeverance.textContent = `₪${finalSeverance.toLocaleString('he-IL')}`;
+
+    // חישוב הסתברות הצלחה
+    const targetPension = parseFloat(document.getElementById('targetPensionMonthly')?.value || '12000') || 12000;
+    const swr = parseFloat(document.getElementById('swrPct')?.value || '3.5') / 100 || 0.035;
+    const requiredCapital = (targetPension * 12) / swr;
+
+    const successCount = results.paths?.filter(p => {
+        if (!p?.balanceSeries) return false;
+        const totalBalance = (p.balanceSeries[finalMonth] || 0) + (p.severanceSeries?.[finalMonth] || 0);
+        return totalBalance >= requiredCapital;
+    }).length || 0;
+    
+    const successRate = results.paths?.length ? successCount / results.paths.length : 0;
+    
+    const kpiProb = document.getElementById('kpiProb');
+    if (kpiProb) kpiProb.textContent = `${(successRate * 100).toFixed(1)}%`;
+
+    // עדכון אינדיקטור
+    const indicator = document.getElementById('successIndicator');
+    if (indicator) {
+        indicator.className = `status-indicator mx-auto mt-2 ${
+            successRate >= 0.8 ? 'status-success' :
+            successRate >= 0.6 ? 'status-warning' : 'status-danger'
+        }`;
+    }
+
+    // עדכון פנסיה צפויה
+    const expectedPension = document.getElementById('expectedPension');
+    if (expectedPension) {
+        const monthlyPension = (finalReal * swr) / 12;
+        expectedPension.textContent = `₪${monthlyPension.toLocaleString('he-IL')}`;
+    }
+}
+
+function createSimpleCharts(results) {
+    if (!results || !results.percentiles) {
+        console.log('אין תוצאות תקינות ליצירת גרפים');
+        return;
+    }
+
+    const pathCanvas = document.getElementById('pathChart');
+    const stackCanvas = document.getElementById('stackChart');
+
+    // יצירת גרף נתיב
+    if (pathCanvas && typeof Chart !== 'undefined') {
+        try {
+            // הרס גרף קיים
+            const existingPathChart = Chart.getChart(pathCanvas);
+            if (existingPathChart) existingPathChart.destroy();
+
+            const ageNow = parseInt(document.getElementById('ageNow')?.value || '35');
+            const labels = results.percentiles.p50.map((_, i) => (ageNow + i / 12).toFixed(1));
+
+            new Chart(pathCanvas, {
+                type: 'line',
+                data: {
+                    labels,
+                    datasets: [
+                        {
+                            label: 'P10 (גרוע)',
+                            data: results.percentiles.p10,
+                            borderColor: '#ef4444',
+                            borderWidth: 1,
+                            fill: false
+                        },
+                        {
+                            label: 'חציון (P50)',
+                            data: results.percentiles.p50,
+                            borderColor: '#10b981',
+                            borderWidth: 3,
+                            fill: false
+                        },
+                        {
+                            label: 'P90 (טוב)',
+                            data: results.percentiles.p90,
+                            borderColor: '#3b82f6',
+                            borderWidth: 1,
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: true } },
+                    scales: {
+                        x: { title: { display: true, text: 'גיל', color: '#ffffff' } },
+                        y: { title: { display: true, text: 'צבירה (₪)', color: '#ffffff' } }
+                    }
+                }
+            });
+            console.log('גרף נתיב נוצר בהצלחה');
+        } catch (e) {
+            console.error('כשלון ביצירת גרף נתיב:', e);
+        }
+    }
+
+    // יצירת גרף הרכב
+    if (stackCanvas && typeof Chart !== 'undefined') {
+        try {
+            const existingStackChart = Chart.getChart(stackCanvas);
+            if (existingStackChart) existingStackChart.destroy();
+
+            const lastIdx = Math.max(0, results.months - 1);
+            const balance = results.percentiles.p50[lastIdx] || 0;
+            const severance = results.severancePercentiles?.p50?.[lastIdx] || 0;
+            const contributions = results.contributions?.p50?.[lastIdx] || 0;
+            const growth = Math.max(0, balance - contributions);
+
+            new Chart(stackCanvas, {
+                type: 'doughnut',
+                data: {
+                    labels: ['תרומות', 'פיצויים', 'צמיחה'],
+                    datasets: [{
+                        data: [contributions, severance, growth],
+                        backgroundColor: ['#3b82f6', '#8b5cf6', '#10b981']
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { position: 'bottom' } }
+                }
+            });
+            console.log('גרף הרכב נוצר בהצלחה');
+        } catch (e) {
+            console.error('כשלון ביצירת גרף הרכב:', e);
+        }
+    }
+}
+        function createChartsManually(results) {
+          console.log('יצירה ידנית של גרפים...');
+
+          if (!results || !results.percentiles) {
+            console.error('אין נתונים תקינים לגרפים');
+            return;
+          }
+
+          // גרף נתיב
+          const pathCanvas = document.getElementById('pathChart');
+          if (pathCanvas && typeof Chart !== 'undefined') {
+            try {
+              // הרס גרף קיים
+              Chart.getChart(pathCanvas)?.destroy();
+
+              const ageNow = parseInt(document.getElementById('ageNow')?.value || '35');
+              const labels = results.percentiles.p50.map((_, i) => (ageNow + i / 12).toFixed(1));
+
+              new Chart(pathCanvas, {
+                type: 'line',
+                data: {
+                  labels,
+                  datasets: [
+                    {
+                      label: 'חציון',
+                      data: results.percentiles.p50,
+                      borderColor: '#10b981',
+                      borderWidth: 2,
+                      fill: false
+                    }
+                  ]
+                },
+                options: {
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  plugins: {
+                    legend: { display: true }
+                  },
+                  scales: {
+                    x: { title: { display: true, text: 'גיל' } },
+                    y: { title: { display: true, text: 'צבירה (₪)' } }
+                  }
+                }
+              });
+
+              console.log('גרף נתיב נוצר ידנית');
+            } catch (e) {
+              console.error('כשלון ביצירה ידנית של גרף נתיב:', e);
+            }
+          }
+
+          // גרף הרכב
+          const stackCanvas = document.getElementById('stackChart');
+          if (stackCanvas && typeof Chart !== 'undefined') {
+            try {
+              Chart.getChart(stackCanvas)?.destroy();
+
+              const lastIdx = Math.max(0, results.months - 1);
+              const balance = results.percentiles.p50[lastIdx] || 0;
+              const contributions = results.contributions?.p50?.[lastIdx] || 0;
+              const growth = Math.max(0, balance - contributions);
+
+              new Chart(stackCanvas, {
+                type: 'doughnut',
+                data: {
+                  labels: ['תרומות', 'צמיחה'],
+                  datasets: [{
+                    data: [contributions, growth],
+                    backgroundColor: ['#3b82f6', '#10b981']
+                  }]
+                },
+                options: {
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  plugins: {
+                    legend: { position: 'bottom' }
+                  }
+                }
+              });
+
+              console.log('גרף הרכב נוצר ידנית');
+            } catch (e) {
+              console.error('כשלון ביצירה ידנית של גרף הרכב:', e);
+            }
+          }
+        }
+
+        // 6. **בדיקה מלאה לפתרון בעיות**
+        function runFullChartDiagnostic() {
+          console.log('=== אבחון מלא של בעיות גרפים ===');
+
+          // בדיקות בסיסיות
+          console.log('1. Chart.js נטען:', typeof Chart !== 'undefined');
+          console.log('2. DOM מוכן:', document.readyState);
+
+          // בדיקת containers
+          const pathContainer = document.querySelector('.chart-container');
+          console.log('3. Chart container קיים:', !!pathContainer);
+
+          if (pathContainer) {
+            console.log('   Container visible:', pathContainer.offsetHeight > 0);
+            console.log('   Container style:', getComputedStyle(pathContainer).display);
+          }
+
+          // בדיקת CSS
+          const pathChart = document.getElementById('pathChart');
+          if (pathChart) {
+            const style = getComputedStyle(pathChart);
+            console.log('4. Canvas CSS:');
+            console.log('   display:', style.display);
+            console.log('   width:', style.width);
+            console.log('   height:', style.height);
+            console.log('   visibility:', style.visibility);
+          }
+
+          // בדיקת JavaScript errors
+          window.addEventListener('error', (e) => {
+            if (e.message.includes('Chart') || e.message.includes('canvas')) {
+              console.error('Chart related error:', e.message, e.filename, e.lineno);
+            }
+          });
+        }
+
+        function validateState() {
+          if (!window.state) {
+            window.state = {
+              events: [],
+              lastResults: null,
+              charts: {},
+              isRunning: false,
+              performance: { lastRunTime: 0, totalRuns: 0 }
+            };
+            console.log('state אותחל מחדש');
+          }
+          return window.state;
+        }
+
+        function validateElements() {
+          const requiredElements = [
+            'ageNow', 'ageRetire', 'balanceNow', 'salary', 'runBtn',
+            'kpiNom', 'kpiReal', 'kpiProb'
+          ];
+
+          const missing = [];
+          requiredElements.forEach(id => {
+            if (!document.getElementById(id)) {
+              missing.push(id);
+            }
+          });
+
+          if (missing.length > 0) {
+            console.error('חסרים אלמנטים:', missing);
+            return false;
+          }
+
+          return true;
+        }
+
+        function debugChartFunctions() {
+          console.log('=== בדיקת זמינות פונקציות גרפים ===');
+
+          // בדיקה 1: פונקציות בתוך IIFE
+          console.log('createCharts:', typeof createCharts);
+          console.log('createPathChart:', typeof createPathChart);
+          console.log('createCompositionChart:', typeof createCompositionChart);
+
+          // בדיקה 2: פונקציות ב-Global API
+          console.log('window.RetirementRaceProComplete:', !!window.RetirementRaceProComplete);
+          if (window.RetirementRaceProComplete) {
+            console.log('Global createCharts:', typeof window.RetirementRaceProComplete.createCharts);
+            console.log('Global createPathChart:', typeof window.RetirementRaceProComplete.createPathChart);
+          }
+
+          // בדיקה 3: ChartManager class
+          console.log('ChartManager:', typeof ChartManager);
+
+          // בדיקה 4: Chart.js
+          console.log('Chart.js loaded:', typeof Chart);
+        }
+
+
+        function debugCanvasElements() {
+          console.log('=== בדיקת Canvas Elements ===');
+
+          const pathCanvas = document.getElementById('pathChart');
+          const stackCanvas = document.getElementById('stackChart');
+
+          console.log('pathChart canvas:', !!pathCanvas);
+          console.log('stackChart canvas:', !!stackCanvas);
+
+          if (pathCanvas) {
+            console.log('pathChart size:', pathCanvas.width, 'x', pathCanvas.height);
+            console.log('pathChart visible:', pathCanvas.offsetWidth > 0);
+          }
+
+          if (stackCanvas) {
+            console.log('stackChart size:', stackCanvas.width, 'x', stackCanvas.height);
+            console.log('stackChart visible:', stackCanvas.offsetWidth > 0);
+          }
+        }
+
+        // 3. **בעיות נתונים**
+        function debugResultsData(results) {
+          console.log('=== בדיקת נתוני תוצאות ===');
+
+          if (!results) {
+            console.error('results is null/undefined');
+            return false;
+          }
+
+          console.log('results.percentiles:', !!results.percentiles);
+          console.log('results.months:', results.months);
+
+          if (results.percentiles) {
+            console.log('p10 length:', results.percentiles.p10?.length);
+            console.log('p50 length:', results.percentiles.p50?.length);
+            console.log('p90 length:', results.percentiles.p90?.length);
+
+            // בדיקת ערכים תקינים
+            const p50 = results.percentiles.p50;
+            if (p50 && p50.length > 0) {
+              console.log('First p50 value:', p50[0]);
+              console.log('Last p50 value:', p50[p50.length - 1]);
+              console.log('All values finite:', p50.every(v => Number.isFinite(v)));
+            }
+          }
+
+          console.log('severancePercentiles:', !!results.severancePercentiles);
+          console.log('contributions:', !!results.contributions);
+
+          return true;
+        }
+
+
+        function preSimulationCheck() {
+          console.log('בודק דרישות לפני הרצת סימולציה...');
+
+          // בדיקת Chart.js
+          if (typeof Chart === 'undefined') {
+            console.error('Chart.js לא נטען');
+            return false;
+          }
+
+          // בדיקת אלמנטים
+          if (!validateElements()) {
+            console.error('חסרים אלמנטים נדרשים');
+            return false;
+          }
+
+          // בדיקת state
+          validateState();
+
+          // בדיקת מנוע סימולציה
+          if (typeof EnhancedSimulationEngine !== 'function') {
+            console.error('EnhancedSimulationEngine לא זמין');
+            return false;
+          }
+
+          console.log('כל הבדיקות עברו בהצלחה');
+          return true;
+        }
+
+        // Enhanced Analysis and Recommendations with Severance
+        function updateAnalysisAndRecommendations(results, params) {
+          const finalBalance = results.percentiles.p50[results.months];
+          const finalSeverance = results.severancePercentiles.p50[results.months];
+          const totalBalance = finalBalance + finalSeverance;
+
+          const targetPension = params.targetPension || 12000;
+          const swr = (parseFloat(els.swrPct.value) || 3.5) / 100;
+          const requiredCapital = (targetPension * 12) / swr;
+          const gap = Math.max(0, requiredCapital - totalBalance);
+
+          // Severance impact analysis
+          const severancePercentage = results.statistics.severanceContribution.percentage;
+
+          // Update compositional insights
+          const container = $('mainInsight');
+          if (container) {
+            let insight = '';
+            if (severancePercentage > 0.15) {
+              insight = `הפיצויים מהווים ${fmtPercent(severancePercentage)} משמעותי מהצביר הסופית - ${fmtCurrency(finalSeverance)}. `;
+            }
+
+            const totalContributions = results.contributions.p50[results.months];
+            const growth = Math.max(0, totalBalance - totalContributions);
+            const growthRate = totalContributions > 0 ? (growth / totalContributions) : 0;
+
+            if (growthRate > 3) {
+              insight += `מצוין! התשואה הניבה פי ${fmt(growthRate + 1, 1)} מההפקדות המקוריות.`;
+            } else if (growthRate > 1.5) {
+              insight += `טוב! ההשקעה הכפילה את ההפקדות. התשואה מהווה ${fmt(growth / totalBalance * 100, 1)}% מהצביר הסופית.`;
+            } else {
+              insight += `התשואה נמוכה יחסית. שקול אסטרטגיה אגרסיבית יותר אם הגיל מאפשר.`;
+            }
+
+            container.textContent = insight;
+          }
+        }
+
+        // Event Management with Severance Events
+        function addEvent() {
+          const type = els.evType.value;
+          const age = parseInt(els.evAge.value) || 0;
+          const params = {};
+
+          $$('#evParams [data-param]').forEach(input => {
+            params[input.dataset.param] = parseFloat(input.value) || 0;
+          });
+
+          state.events.push({ type, age, params, id: Date.now() });
+          state.events.sort((a, b) => a.age - b.age);
+          renderEvents();
+          updateQuickAnalysis();
+        }
+
+        function removeEvent(id) {
+          state.events = state.events.filter(ev => ev.id !== id);
+          renderEvents();
+          updateQuickAnalysis();
+        }
+
+        function clearEvents() {
+          state.events = [];
+          renderEvents();
+          updateQuickAnalysis();
+        }
+
+        function renderEvents() {
+          const eventsList = $('eventsList');
+          $('timelineEvents').innerHTML = '';
+          eventsList.innerHTML = '';
+
+          if (state.events.length === 0) {
+            $('timelineEvents').innerHTML = '<div class="text-center text-gray-400 text-sm py-4">אין אירועים מתוכננים</div>';
+            return;
+          }
+
+          const ageNow = parseInt(els.ageNow.value) || 35;
+          const ageRetire = parseInt(els.ageRetire.value) || 67;
+          const ageSpan = ageRetire - ageNow;
+
+          state.events.forEach(event => {
+            const position = ((event.age - ageNow) / ageSpan) * 100;
+            const eventEl = document.createElement('div');
+            eventEl.className = 'absolute transform -translate-x-1/2';
+            eventEl.style.left = `${Math.max(5, Math.min(95, position))}%`;
+            eventEl.innerHTML = `
+          <div class="w-4 h-4 bg-blue-500 rounded-full border-2 border-white shadow-lg"></div>
+          <div class="text-xs text-center mt-1 font-semibold">${event.age}</div>
+        `;
+            $('timelineEvents').appendChild(eventEl);
+
+            const chip = document.createElement('div');
+            chip.className = 'event-chip';
+            chip.innerHTML = `
+          <span>${getEventEmoji(event.type)} ${getEventLabel(event)}</span>
+          <button class="btn-secondary text-xs px-2 py-1" onclick="RetirementRaceProComplete.removeEvent(${event.id})">✕</button>
+        `;
+            eventsList.appendChild(chip);
+          });
+        }
+
+        function getEventEmoji(type) {
+          const emojis = {
+            'inc_contrib': '💰', 'lump_sum': '💎', 'switch_fund': '🔄',
+            'self_employed': '👨‍💼', 'sabbatical': '🖖', 'market_shock': '📉',
+            'salary_jump': '📈', 'inheritance': '🎁', 'severance_payout': '💼'
+          };
+          return emojis[type] || '📅';
+        }
+
+        function getEventLabel(event) {
+          const { type, age, params } = event;
+          const base = `גיל ${age}: `;
+
+          switch (type) {
+            case 'inc_contrib': return base + `הגדלת הפקדה +${params.deltaPct}%`;
+            case 'lump_sum': return base + `הפקדה ${fmtCurrency(params.amount)}`;
+            case 'switch_fund': return base + `החלפת קרן (${params.retExp}% תשואה)`;
+            case 'salary_jump': return base + `קפיצת שכר +${params.jumpPct}%`;
+            case 'inheritance': return base + `ירושה ${fmtCurrency(params.amount)}`;
+            case 'sabbatical': return base + `חופשה ${params.months} חודש`;
+            case 'market_shock': return base + `מכת שוק ${params.shockPct}%`;
+            case 'severance_payout': return base + `פיצויים ${fmtCurrency(params.amount)}`;
+            case 'self_employed': return base + 'מעבר לעצמאי';
+            default: return base + type;
+          }
+        }
+
+        // Enhanced Quick Analysis with Severance Impact
+        function updateQuickAnalysis() {
+          let impactSum = 0;
+          let riskLevel = 'נמוך';
+          let probImprovement = 0;
+
+          state.events.forEach(event => {
+            switch (event.type) {
+              case 'inc_contrib':
+                impactSum += event.params.deltaPct * 15000;
+                probImprovement += 5;
+                break;
+              case 'lump_sum':
+                impactSum += event.params.amount * 2;
+                probImprovement += 3;
+                break;
+              case 'severance_payout':
+                impactSum += event.params.amount * 1.5;
+                probImprovement += 2;
+                break;
+              case 'switch_fund':
+                if (event.params.feeAum < 0.8) {
+                  impactSum += 50000;
+                  probImprovement += 4;
+                }
+                break;
+              case 'market_shock':
+                riskLevel = event.params.shockPct < -15 ? 'גבוה' : 'בינוני';
+                impactSum -= Math.abs(event.params.shockPct) * 10000;
+                break;
+              case 'self_employed':
+                impactSum -= 100000;
+                riskLevel = 'גבוה';
+                break;
+            }
+          });
+
+          // Update quick analysis displays
+          const quickImpact = $('quickImpact');
+          const quickProb = $('quickProbImprovement');
+          const quickRisk = $('quickRisk');
+
+          if (quickImpact) {
+            quickImpact.textContent = `${impactSum >= 0 ? '+' : ''}${fmtCurrency(impactSum)}`;
+            quickImpact.className = `text-2xl num font-bold ${impactSum >= 0 ? 'text-green-400' : 'text-red-400'}`;
+          }
+          if (quickProb) {
+            quickProb.textContent = `+${Math.min(25, Math.max(0, probImprovement))}%`;
+          }
+          if (quickRisk) {
+            quickRisk.textContent = riskLevel;
+            quickRisk.className = `text-xl num font-bold ${riskLevel === 'נמוך' ? 'text-green-400' :
+              riskLevel === 'בינוני' ? 'text-orange-400' : 'text-red-400'
+              }`;
+          }
+        }
+
+        // Enhanced Presets with Severance Considerations
+        function setPreset(preset) {
+          clearEvents();
+
+          switch (preset) {
+            case 'aggressive':
+              state.events = [
+                { type: 'inc_contrib', age: 38, params: { deltaPct: 2 }, id: Date.now() },
+                { type: 'inc_contrib', age: 42, params: { deltaPct: 2 }, id: Date.now() + 1 },
+                { type: 'switch_fund', age: 40, params: { retExp: 6.2, retVol: 13.0, feeAum: 0.60 }, id: Date.now() + 2 },
+                { type: 'lump_sum', age: 45, params: { amount: 30000 }, id: Date.now() + 3 }
+              ];
+              if (els.severanceType) els.severanceType.value = '8.33';
+              if (els.severanceDestination) els.severanceDestination.value = 'pension';
+              break;
+
+            case 'shock':
+              state.events = [
+                { type: 'market_shock', age: 40, params: { shockPct: -20 }, id: Date.now() },
+                { type: 'switch_fund', age: 41, params: { retExp: 6.2, retVol: 11.0, feeAum: 0.60 }, id: Date.now() + 1 },
+                { type: 'severance_payout', age: 50, params: { amount: 80000 }, id: Date.now() + 2 }
+              ];
+              break;
+
+            case 'conservative':
+              state.events = [
+                { type: 'inc_contrib', age: 40, params: { deltaPct: 1 }, id: Date.now() },
+                { type: 'inheritance', age: 50, params: { amount: 50000 }, id: Date.now() + 1 },
+                { type: 'switch_fund', age: 55, params: { retExp: 4.5, retVol: 8.0, feeAum: 0.70 }, id: Date.now() + 2 }
+              ];
+              if (els.severanceType) els.severanceType.value = '6';
+              if (els.severanceDestination) els.severanceDestination.value = 'separate';
+              break;
+          }
+          renderEvents();
+          updateQuickAnalysis();
+          updateStatusDisplays();
+        }
+
+        // Tab Management
+        function setupTabs() {
+          const tabButtons = $$('.tab-button');
+          const tabContents = $$('.tab-content');
+
+          tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+              const targetTab = button.dataset.tab;
+
+              tabButtons.forEach(btn => btn.classList.remove('active'));
+              button.classList.add('active');
+
+              tabContents.forEach(content => {
+                if (content.id === `${targetTab}Tab`) {
+                  content.classList.add('active');
+                } else {
+                  content.classList.remove('active');
+                }
+              });
+
+              state.currentTab = targetTab;
+            });
+          });
+        }
+
+        // User Guide Modal Management
+        function setupUserGuide() {
+          const modal = $('userGuideModal');
+          const openBtn = $('openGuideBtn');
+          const closeBtn = $('closeGuideModal');
+
+          const closeModal = () => {
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+          };
+
+          openBtn?.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+          });
+
+          closeBtn?.addEventListener('click', closeModal);
+
+          modal?.addEventListener('click', (e) => {
+            if (e.target === modal) closeModal();
+          });
+
+          document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && !modal.classList.contains('hidden')) {
+              closeModal();
+            }
+          });
+        }
+
+        // Export Enhanced Results with Severance Data
+        function exportResults() {
+          if (!state.lastResults) {
+            alert('אין תוצאות ליצוא. הרץ תחילה סימולציה.');
+            return;
+          }
+
+          const params = getSimulationParams();
+          const finalSeverance = state.lastResults.severancePercentiles.p50[state.lastResults.months];
+
+          const report = {
+            metadata: {
+              timestamp: new Date().toISOString(),
+              version: '2.2',
+              simulations: state.lastResults.paths.length,
+              includesSeverance: true
+            },
+            parameters: {
+              ...params,
+              pensionCeiling: params.pensionCeiling,
+              severanceRate: params.severanceRate,
+              severanceDestination: params.severanceDest
+            },
+            results: {
+              finalBalanceMedian: state.lastResults.percentiles.p50[state.lastResults.months],
+              finalSeveranceMedian: finalSeverance,
+              totalBalanceMedian: state.lastResults.percentiles.p50[state.lastResults.months] + finalSeverance,
+              successProbability: els.kpiProb.textContent,
+              severanceContribution: state.lastResults.statistics.severanceContribution
+            },
+            severanceAnalysis: {
+              monthlyContribution: state.severanceAccumulation.monthly,
+              expectedTotal: finalSeverance,
+              percentageOfTotal: state.lastResults.statistics.severanceContribution.percentage
+            }
+          };
+
+          const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
+          const url = URL.createObjectURL(blob);
+
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `retirement-simulation-severance-${new Date().getTime()}.json`;
+          document.body.appendChild(a);
+          a.click();
+          document.body.removeChild(a);
+          URL.revokeObjectURL(url);
+        }
+
+
+
+        function getSimulationParams() {
+          return {
+            ageNow: parseInt(els.ageNow.value) || 35,
+            ageRetire: parseInt(els.ageRetire.value) || 67,
+            startBalance: parseFloat(els.balanceNow.value) || 0,
+            salary: parseFloat(els.salary.value) || 15000,
+            pensionCeiling: parseFloat(els.pensionCeiling.value) || 43370,
+            salaryGrowth: parseFloat(els.salaryGrowthPct.value) || 2.5,
+            empPct: parseFloat(els.empPct.value) || 6.0,
+            erPct: parseFloat(els.erPct.value) || 6.5,
+            severanceRate: parseFloat(els.severanceType.value) || 6.0,
+            severanceDest: els.severanceDestination?.value || 'pension',
+            includeSeveranceInPension: els.includeSeveranceInPension?.checked || true,
+            voluntary: parseFloat(els.voluntaryMonthly.value) || 0,
+            retExp: parseFloat(els.retExpPct.value) || 5.5,
+            retVol: parseFloat(els.retVolPct.value) || 12.0,
+            inflation: parseFloat(els.inflPct.value) || 2.5,
+            feeAum: parseFloat(els.feeAumPct.value) || 0.8,
+            feeContrib: parseFloat(els.feeContribPct.value) || 2.0,
+            nSims: Math.max(100, Math.min(5000, parseInt(els.nSims.value) || 1000)),
+            randomSeed: parseInt(els.randomSeed.value) || null,
+            events: [...state.events]
+          };
+        }
+
+        // Setup Event Listeners
+
+        function setupEventListeners() {
+          const $ = (id) => document.getElementById(id);
+          const inputs = [
+            'ageNow', 'ageRetire', 'balanceNow', 'salary', 'salaryGrowthPct', 'pensionCeiling',
+            'empPct', 'erPct', 'voluntaryMonthly', 'severanceType', 'severanceDestination',
+            'targetPensionMonthly', 'swrPct', 'withdrawYearsN', 'feeAumPct', 'feeContribPct'
+          ];
+
+          inputs.forEach(id => {
+            const el = $(id);
+            if (!el) return;
+            el.addEventListener('input', () => {
+              if (id === 'swrPct') return;           // נמנע כפילות - סנכרון יופעל בנפרד
+              if (id === 'withdrawYearsN') return;   // נמנע כפילות - סנכרון יופעל בנפרד
+              if (typeof updateStatusDisplays === 'function') updateStatusDisplays();
+            });
+            el.addEventListener('change', () => {
+              if (id === 'swrPct') return;
+              if (id === 'withdrawYearsN') return;
+              if (typeof updateStatusDisplays === 'function') updateStatusDisplays();
+            });
+          });
+
+          // סנכרון דו-כיווני SWR↔N
+          const swrEl = $('swrPct');
+          const nEl = $('withdrawYearsN');
+          if (swrEl) {
+            const onSWR = () => (typeof syncSWRandN === 'function') && syncSWRandN('swr');
+            swrEl.addEventListener('input', onSWR);
+            swrEl.addEventListener('change', onSWR);
+          }
+          if (nEl) {
+            const onN = () => (typeof syncSWRandN === 'function') && syncSWRandN('n');
+            nEl.addEventListener('input', onN);
+            nEl.addEventListener('change', onN);
+          }
+
+          // includeSeveranceInPension
+          if (typeof els !== 'undefined' && els && els.includeSeveranceInPension) {
+            els.includeSeveranceInPension.addEventListener('change', () => {
+              if (typeof updateStatusDisplays === 'function') updateStatusDisplays();
+            });
+          }
+
+          // Event management
+          $('evType')?.addEventListener('change', () => typeof renderEventParams === 'function' && renderEventParams());
+          $('addEventBtn')?.addEventListener('click', () => typeof addEvent === 'function' && addEvent());
+          $('clearEventsBtn')?.addEventListener('click', () => typeof clearEvents === 'function' && clearEvents());
+
+          // Presets
+          $('presetAggressive')?.addEventListener('click', () => typeof setPreset === 'function' && setPreset('aggressive'));
+          $('presetShock')?.addEventListener('click', () => typeof setPreset === 'function' && setPreset('shock'));
+          $('presetConservative')?.addEventListener('click', () => typeof setPreset === 'function' && setPreset('conservative'));
+
+          // Simulation controls
+          $('runBtn')?.addEventListener('click', () => typeof runFullSimulation === 'function' && runFullSimulation());
+          $('quickRunBtn')?.addEventListener('click', () => typeof runQuickSimulation === 'function' && runQuickSimulation());
+
+          // Export and utility
+          $('exportBtn')?.addEventListener('click', () => typeof exportResults === 'function' && exportResults());
+          $('helpBtn')?.addEventListener('click', () => typeof showHelp === 'function' && showHelp());
+
+          // Optimization
+          $('optimizeEventsBtn')?.addEventListener('click', () => typeof optimizeEvents === 'function' && optimizeEvents());
+
+          // Quick run אוטומטי לפרמטרי השוק
+          const quick = $('quickRunBtn');
+          const triggerQuick = debounce(() => quick && typeof quick.click === 'function' && quick.click(), 400);
+          ['retExpPct', 'retVolPct', 'inflPct'].forEach(id => {
+            const el = $(id);
+            if (!el) return;
+            el.addEventListener('input', triggerQuick);
+            el.addEventListener('change', triggerQuick);
+          });
+        }
+
+
+        async function runQuickSimulation() {
+          const quickParams = {
+            ...getSimulationParams(),
+            nSims: 100
+          };
+
+          const engine = new EnhancedSimulationEngine(quickParams);
+          const results = await engine.runSimulation();
+          updateQuickAnalysis();
+        }
+
+        function showHelp() {
+          alert(`
+מדריך מהיר למרוץ לפנסיה Pro עם פיצויים:
+
+🎯 מטרה: לחזות את הצבירה הצפויה לפנסיה ולבחון תרחישים שונים
+
+📊 שלבי השימוש:
+1. הזן את הנתונים האישיים שלך בלשוניות השונות
+2. הגדר תקרת שכר פנסיוני (כיום ~43,370 ש"ח)
+3. בחר סוג פיצויים (6% או 8.33%) ויעד ההפקדה
+4. הוסף אירועים צפויים במסלול החיים
+5. הרץ סימולציה מלאה לקבלת תוצאות מפורטות
+6. בחן מבחני לחץ להערכת סיכונים
+
+💡 טיפים:
+• התחל עם פריסט מתאים לגילך ומצבך
+• שים לב להשפעת הפיצויים על הצבירה הכוללת
+• עדכן נתונים אחת לשנה או בעת שינויים משמעותיים
+• בדוק תרחישים שמרניים ואופטימיסטיים
+• השתמש באופטימיזציה האוטומטית לשיפור המסלול
+
+⚠️ זכור: זה כלי סימולציה בלבד, לא תחליף ליועץ מקצועי
+      `);
+        }
+
+        function optimizeEvents() {
+          const currentAge = parseInt(els.ageNow.value) || 35;
+          const salary = parseFloat(els.salary.value) || 15000;
+          const pensionCeiling = parseFloat(els.pensionCeiling.value) || 43370;
+
+          clearEvents();
+
+          if (salary > pensionCeiling) {
+            const excessSalary = salary - pensionCeiling;
+            const compensationContrib = Math.round(excessSalary * 0.125 / 100) * 100;
+
+            alert(`השכר שלך עולה על התקרה. המערכת מוסיפה הפקדה חופשית של ${fmtCurrency(compensationContrib)} לפיצוי.`);
+
+            if (els.voluntaryMonthly) {
+              els.voluntaryMonthly.value = (parseFloat(els.voluntaryMonthly.value) || 0) + compensationContrib;
+            }
+          }
+
+          // Optimize severance settings
+          if (els.severanceType) els.severanceType.value = '8.33';
+          if (els.severanceDestination) els.severanceDestination.value = 'pension';
+          if (els.includeSeveranceInPension) els.includeSeveranceInPension.checked = true;
+
+          // Add progressive events
+          if (currentAge < 45) {
+            state.events.push({
+              type: 'inc_contrib',
+              age: Math.max(currentAge + 2, 37),
+              params: { deltaPct: 1.5 },
+              id: Date.now()
+            });
+          }
+
+          if (currentAge < 50) {
+            state.events.push({
+              type: 'inc_contrib',
+              age: Math.max(currentAge + 7, 42),
+              params: { deltaPct: 1.5 },
+              id: Date.now() + 1
+            });
+          }
+
+          state.events.push({
+            type: 'switch_fund',
+            age: Math.max(currentAge + 5, 40),
+            params: { retExp: 5.8, retVol: 11.5, feeAum: 0.6 },
+            id: Date.now() + 2
+          });
+
+          renderEvents();
+          updateQuickAnalysis();
+          updateStatusDisplays();
+
+          alert('אופטימיזציה הושלמה! נוספו אירועים מומלצים כולל אופטימיזציה של הפיצויים.');
+        }
+
+        /** 1) ידעו את ההורה שהאפליקציה מוכנה להאזנה */
+        function notifyReady() {
+          try {
+            window.parent.postMessage({ type: 'child-ready' }, '*');
+          } catch (e) { /* no-op */ }
+        }
+
+        /** 2) החלת קונפיג חיצוני על השדות (partial, רק מה שמסופק) */
+        function applyConfig(cfg = {}) {
+          const map = {
+            ageNow: 'ageNow',
+            ageRetire: 'ageRetire',
+            salary: 'salary',
+            balanceNow: 'balanceNow',
+            swrPct: 'swrPct',
+            // הוסף כאן שדות נוספים לפי הצורך...
+          };
+          Object.entries(map).forEach(([key, id]) => {
+            if (cfg[key] !== undefined) {
+              const el = document.getElementById(id);
+              if (el && 'value' in el) el.value = cfg[key];
+            }
+          });
+          // עדכונים נגזרים תצוגה/חישובים
+          if (typeof updateStatusDisplays === 'function') updateStatusDisplays();
+        }
+
+        /** 3) החזרת מצב/פרמטרים נוכחיים ל־parent */
+        function getCurrentParams() {
+          // אם קיימת אצלך getSimulationParams – נצל אותה; אחרת שלוף ידנית
+          if (typeof getSimulationParams === 'function') return getSimulationParams();
+          return {
+            ageNow: parseInt(document.getElementById('ageNow')?.value || 35),
+            ageRetire: parseInt(document.getElementById('ageRetire')?.value || 67),
+            startBalance: parseFloat(document.getElementById('balanceNow')?.value || 0),
+            salary: parseFloat(document.getElementById('salary')?.value || 15000),
+            retExp: parseFloat(document.getElementById('retExpPct')?.value || 5.5),
+            retVol: parseFloat(document.getElementById('retVolPct')?.value || 12.0),
+            infl: parseFloat(document.getElementById('inflPct')?.value || 2.5),
+            feeAum: parseFloat(document.getElementById('feeAumPct')?.value || 0.8),
+            feeContrib: parseFloat(document.getElementById('feeContribPct')?.value || 2.0),
+            swr: parseFloat(document.getElementById('swrPct')?.value || 3.5),
+            voluntary: parseFloat(document.getElementById('voluntaryMonthly')?.value || 0),
+            events: (window.state?.events ?? []).slice(),
+          };
+        }
+
+        /** 4) שליחת תוצאות ל־parent (נקרא מתוך runFullSimulation אחרי שיש results) */
+        function postSimResultsToParent(results, params) {
+          try {
+            window.parent.postMessage({
+              type: 'SIM_RESULTS',
+              payload: { params, results }
+            }, '*');
+          } catch (e) { /* no-op */ }
+
+          // טריגר פנימי אופציונלי למאזינים בדף העוטף (ללא postMessage)
+          try {
+            const evt = new CustomEvent('rrp:results', { detail: { params, results } });
+            window.dispatchEvent(evt);
+          } catch (e) { /* no-op */ }
+        }
+
+        /** 5) מאזין להודעות מההורה */
+        window.addEventListener('message', async (event) => {
+          const data = event.data || {};
+          switch (data.type) {
+            case 'PING':
+              // keep-alive/בדיקת זמינות
+              try { window.parent.postMessage({ type: 'PONG' }, event.origin || '*'); } catch (_) { }
+              break;
+
+            case 'INIT_CONFIG':
+              // הגדרת קונפיג ראשוני/מלא
+              applyConfig(data.payload || {});
+              break;
+
+            case 'SET_FIELDS':
+              // עדכון חלקי של שדות (שימושי לטפסים דינמיים)
+              applyConfig(data.payload || {});
+              break;
+
+            case 'GET_STATE':
+              // החזרת מצב/פרמטרים נוכחיים
+              try {
+                window.parent.postMessage({
+                  type: 'STATE',
+                  payload: { params: getCurrentParams(), lastResults: window.state?.lastResults ?? null }
+                }, event.origin || '*');
+              } catch (_) { }
+              break;
+
+            case 'RUN_SIM':
+              // להריץ סימולציה עכשיו, עם/בלי override לפרמטרים
+              if (data.payload && typeof data.payload === 'object') {
+                applyConfig(data.payload); // החלה לפני הרצה
+              }
+              if (typeof runFullSimulation === 'function') {
+                await runFullSimulation();
+                // אחרי runFullSimulation אמור להיות state.lastResults מעודכן:
+                const params = getCurrentParams();
+                const results = window.state?.lastResults ?? null;
+                postSimResultsToParent(results, params);
+              }
+              break;
+          }
+        });
+
+        /** 6) API גלובלי נוח לשימוש ישיר (ללא postMessage) */
+        window.RetirementRacePro = {
+          setFields: applyConfig,                         // קבל/החל חלקית
+          getState: () => ({ params: getCurrentParams(), lastResults: window.state?.lastResults ?? null }),
+          run: async (override = null) => {
+            if (override) applyConfig(override);
+            await runFullSimulation();
+            const params = getCurrentParams();
+            const results = window.state?.lastResults ?? null;
+            return { params, results };
+          },
+          onResults: (handler) => {
+            // אפשר להאזין לתוצאות גם בלי parent.postMessage
+            window.addEventListener('rrp:results', (e) => handler?.(e.detail));
+          }
+        };
+
+        // פונקציות חסרות - להוסיף בסוף הסקריפט לפני ה-init()
+
+        // 1. השוואת תרחישים (מתוקן)
+        async function compareScenarios() {
+          if (!state.lastResults) {
+            alert('הרץ תחילה סימולציה בסיסית לפני ההשוואה');
+            return;
+          }
+
+          // יצירת תרחיש אלטרנטיבי
+          const originalParams = getSimulationParams();
+          const alternativeParams = { ...originalParams };
+
+          // הצגת דיאלוג לבחירת תרחיש חלופי
+          const choice = prompt(`בחר תרחיש להשוואה:
+1 - הגדלת הפקדה ב-500₪/חודש
+2 - מעבר לקרן עם דמי ניהול נמוכים יותר (0.6%)
+3 - השוואה עם פיצויים 8.33% במקום 6%
+4 - השוואה עם פרישה מוקדמת (65 במקום 67)
+5 - השוואה עם תשואה שמרנית יותר (4% במקום 5.5%)
+
+הזן מספר (1-5):`, '1');
+
+          switch (choice) {
+            case '1':
+              alternativeParams.voluntary += 500;
+              break;
+            case '2':
+              alternativeParams.feeAum = 0.6;
+              break;
+            case '3':
+              alternativeParams.severanceRate = 8.33;
+              break;
+            case '4':
+              alternativeParams.ageRetire = 65;
+              break;
+            case '5':
+              alternativeParams.retExp = 4.0;
+              alternativeParams.retVol = 8.0;
+              break;
+            default:
+              return;
+          }
+
+          try {
+            // בדיקת null לפני שימוש באלמנטים
+            const runBtn = $('runBtn');
+            const compareBtn = $('compareBtn');
+
+            if (runBtn) runBtn.disabled = true;
+            if (compareBtn) compareBtn.textContent = 'מחשב השוואה...';
+
+            // הרצת תרחיש חלופי
+            const altEngine = new EnhancedSimulationEngine(alternativeParams);
+            const altResults = await altEngine.runSimulation();
+
+            // יצירת דוח השוואה
+            ChartManager.createComparisonReport(state.lastResults, altResults, originalParams, alternativeParams, choice);
+
+          } catch (error) {
+            console.error('שגיאה בהשוואת תרחישים:', error);
+            alert('שגיאה בהרצת ההשוואה');
+          } finally {
+            const runBtn = $('runBtn');
+            const compareBtn = $('compareBtn');
+
+            if (runBtn) runBtn.disabled = false;
+            if (compareBtn) compareBtn.textContent = '📊 השווה תרחישים';
+          }
+        }
+
+        // יצירת דוח השוואה (זהה לקודם)
+        function createComparisonReport(baseResults, altResults, baseParams, altParams, scenario) {
+          const modal = document.createElement('div');
+          modal.className = 'fixed inset-0 bg-black/80 backdrop-blur-sm z-50';
+
+          const finalMonth = baseResults.months;
+          const baseBalance = baseResults.percentiles.p50[finalMonth];
+          const altBalance = altResults.percentiles.p50[finalMonth];
+          const difference = altBalance - baseBalance;
+          const percentDiff = ((difference / baseBalance) * 100).toFixed(1);
+
+          const baseSeverance = baseResults.severancePercentiles?.p50[finalMonth] || 0;
+          const altSeverance = altResults.severancePercentiles?.p50[finalMonth] || 0;
+          const severanceDiff = altSeverance - baseSeverance;
+
+          const scenarios = {
+            '1': 'הגדלת הפקדה ב-500₪/חודש',
+            '2': 'מעבר לקרן עם דמי ניהול נמוכים (0.6%)',
+            '3': 'שינוי לפיצויים 8.33%',
+            '4': 'פרישה מוקדמת בגיל 65',
+            '5': 'השקעה שמרנית יותר (4% תשואה)'
+          };
+
+          modal.innerHTML = `
+    <div class="flex items-center justify-center min-h-screen p-4">
+      <div class="glass-card max-w-4xl w-full rounded-2xl p-6">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-2xl font-bold text-blue-400">השוואת תרחישים</h2>
+          <button class="btn-secondary" onclick="this.closest('.fixed').remove()">✕</button>
+        </div>
+        
+        <div class="mb-6">
+          <h3 class="text-lg font-semibold text-green-400 mb-3">תרחיש נבדק: ${scenarios[scenario]}</h3>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-6 mb-6">
+          <div class="glass-card p-4 rounded-lg">
+            <h4 class="font-semibold text-white mb-3">תרחיש בסיסי</h4>
+            <div class="space-y-2 text-sm">
+              <div>יתרה סופית: <span class="font-bold text-blue-400">${fmtCurrency(baseBalance)}</span></div>
+              <div>פיצויים: <span class="font-bold text-purple-400">${fmtCurrency(baseSeverance)}</span></div>
+              <div>סה"כ: <span class="font-bold text-cyan-400">${fmtCurrency(baseBalance + baseSeverance)}</span></div>
+            </div>
+          </div>
+          
+          <div class="glass-card p-4 rounded-lg">
+            <h4 class="font-semibold text-white mb-3">תרחיש חלופי</h4>
+            <div class="space-y-2 text-sm">
+              <div>יתרה סופית: <span class="font-bold text-blue-400">${fmtCurrency(altBalance)}</span></div>
+              <div>פיצויים: <span class="font-bold text-purple-400">${fmtCurrency(altSeverance)}</span></div>
+              <div>סה"כ: <span class="font-bold text-cyan-400">${fmtCurrency(altBalance + altSeverance)}</span></div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="glass-card p-4 rounded-lg mb-6 ${difference >= 0 ? 'bg-green-500/10 border-green-500/30' : 'bg-red-500/10 border-red-500/30'}">
+          <h4 class="font-semibold mb-3 ${difference >= 0 ? 'text-green-400' : 'text-red-400'}">
+            ${difference >= 0 ? '🎉' : '⚠️'} השפעה כוללת
+          </h4>
+          <div class="text-lg">
+            <div>הפרש ביתרה: <span class="font-bold ${difference >= 0 ? 'text-green-400' : 'text-red-400'}">${difference >= 0 ? '+' : ''}${fmtCurrency(difference)}</span></div>
+            <div>הפרש בפיצויים: <span class="font-bold">${severanceDiff >= 0 ? '+' : ''}${fmtCurrency(severanceDiff)}</span></div>
+            <div>שינוי אחוזי: <span class="font-bold">${percentDiff}%</span></div>
+          </div>
+        </div>
+        
+        <div class="glass-card p-4 rounded-lg bg-blue-500/10">
+          <h4 class="font-semibold text-blue-400 mb-2">📊 המלצה</h4>
+          <p class="text-sm text-gray-300">
+            ${getComparisonRecommendation(difference, scenario, percentDiff)}
+          </p>
+        </div>
+      </div>
+    </div>
+  `;
+
+          document.body.appendChild(modal);
+        }
+
+        // המלצות להשוואה (זהה לקודם)
+        function getComparisonRecommendation(difference, scenario, percentDiff) {
+          if (difference > 50000) {
+            return `השינוי הזה מועיל מאוד! שיפור של ${Math.abs(percentDiff)}% בצבירה הסופית. מומלץ מאוד ליישם.`;
+          } else if (difference > 10000) {
+            return `השינוי הזה מועיל. שיפור של ${Math.abs(percentDiff)}% בצבירה. שקול ליישם אם האמצעים מאפשרים.`;
+          } else if (difference > -10000) {
+            return `השינוי הזה בעל השפעה מינורית. שקול היטב את היתרונות והחסרונות.`;
+          } else {
+            return `השינוי הזה פוגע בצבירה הסופית ב-${Math.abs(percentDiff)}%. לא מומלץ ליישם.`;
+          }
+        }
+
+
+        // 2. מבחן לחץ (מתוקן)
+        async function runStressTest() {
+          if (state.isRunning) return;
+
+          const stressScenarios = [
+            { name: '🔴 משבר 2008', marketShock: -40, duration: 2, recovery: 3 },
+            { name: '🟡 אינפלציה גבוהה', inflation: 8, duration: 5, recovery: 2 },
+            { name: '🟣 סטגפלציה', marketShock: -15, inflation: 6, duration: 3, recovery: 4 },
+            { name: '🔵 מיתון ממושך', marketShock: -25, duration: 4, recovery: 5 },
+            { name: '⚫ משבר מערכתי', marketShock: -50, inflation: 10, duration: 3, recovery: 6 }
+          ];
+
+          try {
+            state.isRunning = true;
+
+            // בדיקת null לפני שימוש באלמנטים
+            const stressTestBtn = $('stressTestBtn');
+            if (stressTestBtn) {
+              stressTestBtn.disabled = true;
+              stressTestBtn.textContent = 'מריץ מבחני לחץ...';
+            }
+
+            const baseParams = getSimulationParams();
+            const results = [];
+
+            for (const scenario of stressScenarios) {
+              const stressParams = { ...baseParams };
+
+              // הוספת אירועי לחץ
+              const crisisAge = baseParams.ageNow + 10; // משבר בעוד 10 שנים
+
+              if (scenario.marketShock) {
+                stressParams.events = [...stressParams.events, {
+                  type: 'market_shock',
+                  age: crisisAge,
+                  params: { shockPct: scenario.marketShock },
+                  id: Date.now() + results.length
+                }];
+              }
+
+              if (scenario.inflation) {
+                stressParams.inflation = scenario.inflation;
+              }
+
+              // הקטנת מספר סימולציות למהירות
+              stressParams.nSims = 300;
+
+              const engine = new EnhancedSimulationEngine(stressParams);
+              const result = await engine.runSimulation();
+
+              results.push({
+                scenario: scenario.name,
+                finalBalance: result.percentiles.p50[result.months],
+                p10: result.percentiles.p10[result.months],
+                p90: result.percentiles.p90[result.months]
+              });
+            }
+
+            // הוספת תרחיש בסיסי להשוואה
+            if (state.lastResults) {
+              results.unshift({
+                scenario: '🟢 תרחיש בסיסי',
+                finalBalance: state.lastResults.percentiles.p50[state.lastResults.months],
+                p10: state.lastResults.percentiles.p10[state.lastResults.months],
+                p90: state.lastResults.percentiles.p90[state.lastResults.months]
+              });
+            }
+
+            showStressTestResults(results);
+
+          } catch (error) {
+            console.error('שגיאה במבחן לחץ:', error);
+            alert('שגיאה בהרצת מבחן הלחץ');
+          } finally {
+            state.isRunning = false;
+
+            const stressTestBtn = $('stressTestBtn');
+            if (stressTestBtn) {
+              stressTestBtn.disabled = false;
+              stressTestBtn.textContent = '⚠️ מבחן לחץ';
+            }
+          }
+        }
+
+
+        // הצגת תוצאות מבחן לחץ
+        function showStressTestResults(results) {
+          const modal = document.createElement('div');
+          modal.className = 'fixed inset-0 bg-black/80 backdrop-blur-sm z-50';
+
+          const tableRows = results.map(result => `
+    <tr class="border-b border-gray-600">
+      <td class="p-3 font-semibold">${result.scenario}</td>
+      <td class="p-3 text-right">${fmtCurrency(result.finalBalance)}</td>
+      <td class="p-3 text-right text-red-400">${fmtCurrency(result.p10)}</td>
+      <td class="p-3 text-right text-blue-400">${fmtCurrency(result.p90)}</td>
+      <td class="p-3 text-center">
+        ${getStressTestGrade(result.finalBalance, results[0].finalBalance)}
+      </td>
+    </tr>
+  `).join('');
+
+          modal.innerHTML = `
+    <div class="flex items-center justify-center min-h-screen p-4">
+      <div class="glass-card max-w-6xl w-full rounded-2xl p-6 max-h-[90vh] overflow-y-auto">
+        <div class="flex justify-between items-center mb-6">
+          <h2 class="text-2xl font-bold text-red-400">⚠️ תוצאות מבחני לחץ</h2>
+          <button class="btn-secondary" onclick="this.closest('.fixed').remove()">✕</button>
+        </div>
+        
+        <div class="mb-6 glass-card p-4 rounded-lg bg-yellow-500/10 border border-yellow-500/30">
+          <p class="text-yellow-300 text-sm">
+            <strong>מטרת המבחן:</strong> לבדוק איך התיק מתמודד עם משברים כלכליים שונים.
+            התוצאות מבוססות על נתונים היסטוריים ועוזרות להבין את רמת הסיכון.
+          </p>
+        </div>
+        
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b-2 border-blue-500">
+                <th class="text-right p-3">תרחיש</th>
+                <th class="text-right p-3">יתרה סופית (חציון)</th>
+                <th class="text-right p-3">תרחיש גרוע (P10)</th>
+                <th class="text-right p-3">תרחיש טוב (P90)</th>
+                <th class="text-center p-3">ציון עמידות</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${tableRows}
+            </tbody>
+          </table>
+        </div>
+        
+        <div class="mt-6 grid md:grid-cols-2 gap-4">
+          <div class="glass-card p-4 rounded-lg bg-green-500/10">
+            <h4 class="font-semibold text-green-400 mb-2">✅ נקודות חוזק</h4>
+            <ul class="text-sm text-gray-300 space-y-1">
+              ${getStressTestStrengths(results)}
+            </ul>
+          </div>
+          <div class="glass-card p-4 rounded-lg bg-red-500/10">
+            <h4 class="font-semibold text-red-400 mb-2">⚠️ נקודות חולשה</h4>
+            <ul class="text-sm text-gray-300 space-y-1">
+              ${getStressTestWeaknesses(results)}
+            </ul>
+          </div>
+        </div>
+        
+        <div class="mt-4 glass-card p-4 rounded-lg bg-blue-500/10">
+          <h4 class="font-semibold text-blue-400 mb-2">💡 המלצות להתמודדות</h4>
+          <ul class="text-sm text-gray-300 space-y-1">
+            ${getStressTestRecommendations(results)}
+          </ul>
+        </div>
+      </div>
+    </div>
+  `;
+
+          document.body.appendChild(modal);
+        }
+
+        // ציון עמידות למבחן לחץ
+        function getStressTestGrade(scenarioBalance, baseBalance) {
+          const ratio = scenarioBalance / baseBalance;
+          if (ratio >= 0.9) return '<span class="text-green-400 font-bold">A</span>';
+          if (ratio >= 0.8) return '<span class="text-blue-400 font-bold">B</span>';
+          if (ratio >= 0.7) return '<span class="text-yellow-400 font-bold">C</span>';
+          if (ratio >= 0.6) return '<span class="text-orange-400 font-bold">D</span>';
+          return '<span class="text-red-400 font-bold">F</span>';
+        }
+
+        // נקודות חוזק במבחן לחץ
+        function getStressTestStrengths(results) {
+          const strengths = [];
+          const baseBalance = results[0].finalBalance;
+
+          let resilientCount = 0;
+          results.slice(1).forEach(result => {
+            if (result.finalBalance / baseBalance >= 0.8) resilientCount++;
+          });
+
+          if (resilientCount >= 3) {
+            strengths.push('<li>עמידות גבוהה במשברים כלכליים</li>');
+          }
+
+          const worstCase = Math.min(...results.slice(1).map(r => r.p10));
+          if (worstCase > 0) {
+            strengths.push('<li>גם במקרה הגרוע ביותר נותרת צבירה חיובית</li>');
+          }
+
+          strengths.push('<li>פיזור סיכונים מאפשר התאוששות</li>');
+
+          return strengths.join('');
+        }
+
+        // נקודות חולשה במבחן לחץ
+        function getStressTestWeaknesses(results) {
+          const weaknesses = [];
+          const baseBalance = results[0].finalBalance;
+
+          const worstScenario = results.slice(1).reduce((worst, current) =>
+            current.finalBalance < worst.finalBalance ? current : worst
+          );
+
+          const worstRatio = worstScenario.finalBalance / baseBalance;
+          if (worstRatio < 0.6) {
+            weaknesses.push(`<li>במשבר קיצוני (${worstScenario.scenario}) הצבירה יורדת ב-${((1 - worstRatio) * 100).toFixed(0)}%</li>`);
+          }
+
+          if (worstScenario.p10 < baseBalance * 0.3) {
+            weaknesses.push('<li>בתרחיש גרוע קיים סיכון לירידה חדה בצבירה</li>');
+          }
+
+          weaknesses.push('<li>תלות במשתנים מאקרו-כלכליים</li>');
+
+          return weaknesses.join('');
+        }
+
+        // המלצות להתמודדות עם לחץ
+        function getStressTestRecommendations(results) {
+          const recommendations = [];
+          const baseBalance = results[0].finalBalance;
+
+          const avgImpact = results.slice(1).reduce((sum, r) => sum + (1 - r.finalBalance / baseBalance), 0) / (results.length - 1);
+
+          if (avgImpact > 0.3) {
+            recommendations.push('<li>שקול הגדלת הפקדה חודשית כרפת ביטחון</li>');
+            recommendations.push('<li>בחן מעבר לקרן עם דמי ניהול נמוכים יותר</li>');
+          }
+
+          recommendations.push('<li>שמור על קרן חירום של 6-12 חודשי הוצאות מחוץ לפנסיה</li>');
+          recommendations.push('<li>בצע ביקורת שנתית ועדכן אסטרטגיה לפי תנאי שוק</li>');
+          recommendations.push('<li>שקול פיזור נוסף - נדל"ן, זהב, אג"ח מקומיות</li>');
+
+          return recommendations.join('');
+        }
+
+        // 3. פונקציות תרשימים (מתוקנות)
+        function toggleChartMode() {
+          const chart = state.charts?.pathChart;
+          if (!chart) {
+            alert('אין תרשים להצגה. הרץ תחילה סימולציה.');
+            return;
+          }
+
+          const isLinear = chart.options.scales.y.type !== 'logarithmic';
+
+          chart.options.scales.y.type = isLinear ? 'logarithmic' : 'linear';
+          chart.options.scales.y.title.text = isLinear ? 'צבירה (₪) - לוגריתמי' : 'צבירה (₪)';
+
+          chart.update();
+
+
+          const btn = $('chartModeToggle');
+          if (btn) {
+            btn.textContent = isLinear ? '📈 לינארי' : '📊 לוגריתמי';
+          }
+        }
+
+        function exportChart() {
+          const chart = state.charts?.pathChart;
+          if (!chart) {
+            alert('אין תרשים לייצוא. הרץ תחילה סימולציה.');
+            return;
+          }
+
+          try {
+            const link = document.createElement('a');
+            link.download = `retirement-chart-${new Date().getTime()}.png`;
+            link.href = chart.toBase64Image();
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+          } catch (error) {
+            console.error('שגיאה בייצוא תרשים:', error);
+            alert('שגיאה בייצוא התרשים');
+          }
+        }
+
+        // הוספת event listeners בצורה בטוחה
+        function addMissingEventListeners() {
+          // בדיקת קיום האלמנטים לפני הוספת event listeners
+          const compareBtn = $('compareBtn');
+          const stressTestBtn = $('stressTestBtn');
+          const chartModeToggle = $('chartModeToggle');
+          const chartExport = $('chartExport');
+          const compositionView = $('compositionView');
+
+          if (compareBtn) {
+            compareBtn.addEventListener('click', compareScenarios);
+          } else {
+            console.warn('compareBtn לא נמצא ב-DOM');
+          }
+
+          if (stressTestBtn) {
+            stressTestBtn.addEventListener('click', runStressTest);
+          } else {
+            console.warn('stressTestBtn לא נמצא ב-DOM');
+          }
+
+          if (chartModeToggle) {
+            chartModeToggle.addEventListener('click', toggleChartMode);
+          } else {
+            console.warn('chartModeToggle לא נמצא ב-DOM');
+          }
+
+          if (chartExport) {
+            chartExport.addEventListener('click', exportChart);
+          } else {
+            console.warn('chartExport לא נמצא ב-DOM');
+          }
+
+          if (compositionView) {
+            compositionView.addEventListener('change', ChartManager.handleCompositionViewChange);
+          } else {
+            console.warn('compositionView לא נמצא ב-DOM');
+          }
+        }
+
+        // עדכון בטוח של setupEventListeners
+        function updateSetupEventListeners() {
+          // שמירת הפונקציה המקורית אם היא קיימת
+          const originalSetup = window.setupEventListeners;
+
+          window.setupEventListeners = function () {
+            // הרצת הפונקציה המקורית אם קיימת
+            if (typeof originalSetup === 'function') {
+              try {
+                originalSetup();
+              } catch (e) {
+                console.error('שגיאה בהרצת setupEventListeners המקורית:', e);
+              }
+            }
+
+            // הוספת event listeners החדשים
+            try {
+              addMissingEventListeners();
+            } catch (e) {
+              console.error('שגיאה בהוספת event listeners חדשים:', e);
+            }
+          };
+        }
+
+        // הרצת העדכון
+        updateSetupEventListeners();
+
+        // עדכון בטוח של הAPI הגלובלי
+        if (window.RetirementRaceProComplete) {
+          window.RetirementRaceProComplete = {
+            ...window.RetirementRaceProComplete,
+            compareScenarios,
+            runStressTest,
+            toggleChartMode,
+            exportChart
+          };
+        } else {
+          // יצירת API אם לא קיים
+          window.RetirementRaceProComplete = {
+            compareScenarios,
+            runStressTest,
+            toggleChartMode,
+            exportChart
+          };
+        }
+
+        // הוספה לפונקציית setupEventListeners הקיימת
+        const originalSetupEventListeners = setupEventListeners;
+        setupEventListeners = function () {
+          originalSetupEventListeners();
+          addMissingEventListeners();
+        };
+
+        // עדכון הAPI הגלובלי
+        window.RetirementRaceProComplete = {
+          ...window.RetirementRaceProComplete,
+          compareScenarios,
+          runStressTest,
+          toggleChartMode,
+          exportChart
+        };
+
+        (function ensureSWRNListeners() {
+          function attach() {
+            if (els?.swrPct) {
+              els.swrPct.removeEventListener('input', onSWR);
+              els.swrPct.removeEventListener('change', onSWR);
+              els.swrPct.addEventListener('input', onSWR);
+              els.swrPct.addEventListener('change', onSWR);
+            }
+            if (els?.withdrawYearsN) {
+              els.withdrawYearsN.removeEventListener('input', onN);
+              els.withdrawYearsN.removeEventListener('change', onN);
+              els.withdrawYearsN.addEventListener('input', onN);
+              els.withdrawYearsN.addEventListener('change', onN);
+            }
+          }
+          function onSWR() { syncSWRandN('swr'); }
+          function onN() { syncSWRandN('n'); }
+
+          // חיבור ראשון
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', () => {
+              // יישור ראשוני N↔SWR כדי שהמספרים יהיו עקביים
+              if (els?.swrPct && els?.withdrawYearsN) syncSWRandN('swr', { triggerQuick: false });
+              attach();
+            });
+          } else {
+            if (els?.swrPct && els?.withdrawYearsN) syncSWRandN('swr', { triggerQuick: false });
+            attach();
+          }
+
+          // במידה ו-setupEventListeners מוחלף/נקרא שוב, נתחבר מחדש אחרי הקריאה אליו
+          const originalSetup = window.setupEventListeners;
+          window.setupEventListeners = function () {
+            if (typeof originalSetup === 'function') originalSetup();
+            attach();
+          };
+        })();
+
+
+        // Initialize Enhanced Application
+        function init() {
+          console.log('🚀 מאתחל מרוץ לפנסיה Pro עם פיצויים...');
+
+          setupTabs();
+          setupUserGuide();
+          setupEventListeners();
+          renderEventParams();
+
+          // Load default preset and update displays
+          setPreset('aggressive');
+          updateStatusDisplays();
+
+          // Auto-run initial simulation
+               setTimeout(() => {
+                runFullSimulation();
+              }, 1000); 
+
+          console.log('✅ מרוץ לפנסיה Pro עם פיצויים הושק בהצלחה!');
+        }
+
+
+        // Global API for external access
+        window.RetirementRaceProComplete = {
+          removeEvent,
+          setPreset,
+          runFullSimulation,
+          exportResults,
+          updateStatusDisplays
+        };
+
+        // Start the application when DOM is ready
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', init);
+        } else {
+          init();
+        }
+
+
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', notifyReady);
+        } else {
+          notifyReady();
+        }
+
+        // קריאה פעם אחת אחרי שה־DOM מוכן (או בתוך init/setupEventListeners שלך)
+        document.addEventListener('DOMContentLoaded', () => {
+
+          if (els.swrPct && els.withdrawYearsN) {
+            syncSWRandN('swr', { triggerQuick: false });
+          }
+
+          // (אופציונלי) מאזין לבחירה – פעם אחת:
+          document.getElementById('compositionView')
+            ?.addEventListener('change', ChartManager.handleCompositionViewChange);
+
+          // ===== Quick Run (מונע כפילויות ולופים) =====
+          let isQuickRunning = false;
+          const triggerQuick = debounce(() => {
+            if (isQuickRunning) return;
+            const quickBtn = document.getElementById('quickRunBtn');
+            if (quickBtn && typeof quickBtn.click === 'function') {
+              isQuickRunning = true;
+              quickBtn.click();
+              setTimeout(() => { isQuickRunning = false; }, 0);
+            }
+          }, 400);
+
+          // חיבור מאזינים – פעם אחת לכל שדה
+          ['retExpPct', 'retVolPct', 'inflPct'].forEach(id => {
+            const el = document.getElementById(id);
+            if (!el || el.dataset.bound === '1') return;
+            el.addEventListener('input', triggerQuick);
+            el.addEventListener('change', triggerQuick);
+            el.dataset.bound = '1';
+          });
+        });
+
+
+
+      })(); // End of RetirementRaceProComplete IIFE
+
+      console.log(`
+🎯 מרוץ לפנסיה Pro v2.2 - מוכן לשימוש עם פיצויים!
+
+✨ תכונות משודרגות:
+• חישוב מדויק של פיצויים (6% או 8.33%)
+• התחשבות מלאה בתקרת שכר פנסיוני
+• ניתוח נפרד של רכיב הפיצויים בצבירה
+• סימולציית Monte Carlo עם 5,000+ תרחישים
+• ניתוח סיכונים ומבחני לחץ מתקדמים
+• מנוע אופטימיזציה AI לאירועי חיים כולל פיצויים
+
+🛡️ אבטחה ופרטיות:
+• כל החישובים מתבצעים מקומית בדפדפן
+• אין שמירת נתונים אישיים
+• קוד פתוח ושקוף לביקורת
+
+💡 טיפים לשימוש מיטבי:
+• התחל עם פריסט מתאים לגילך ומצבך
+• שים לב להשפעת התקרה הפנסיונית על ההפקדות
+• בחר בחכמה בין פיצויים 6% ל-8.33%
+• עדכן נתונים אחת לשנה או בעת שינויים משמעותיים
+• בדוק תרחישי לחץ להערכת סיכונים
+• השתמש באופטימיזציה האוטומטית לשיפור המסלול
+
+📞 תמיכה: לשאלות או בעיות, פנה דרך לוח הבקרה
+  `);
+
+    </script>
+</body>
+
+</html>

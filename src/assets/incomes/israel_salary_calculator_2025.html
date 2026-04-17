@@ -1,0 +1,2344 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מחשבון תוספת שכר ישראלי 2025 - נטו מהתוספת</title>
+    
+    <!-- KaTeX Support for Mathematical Formulas -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    
+    <!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מחשבון תוספת שכר ישראלי 2025 - נטו מהתוספת</title>
+    
+    <!-- KaTeX Support for Mathematical Formulas -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    
+    <!-- Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    
+    <style>
+        /* === משתנים עיקריים === */
+        :root {
+            /* צבעים עיקריים */
+            --primary-color: #4a90e2;
+            --secondary-color: #f39c12;
+            --success-color: #27ae60;
+            --danger-color: #e74c3c;
+            --warning-color: #f39c12;
+            --info-color: #3498db;
+            
+            /* רקעים */
+            --bg-primary: #1a1a1a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --card-bg: #2d2d2d;
+            --input-bg: #3a3a3a;
+            
+            /* טקסט וגבולות */
+            --text-primary: #ffffff;
+            --text-secondary: #e2e8f0;
+            --border-color: rgba(99, 102, 241, 0.3);
+            
+            /* גרדיאנטים */
+            --grad-primary: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            --grad-success: linear-gradient(135deg, var(--success-color), #059669);
+            --grad-danger: linear-gradient(135deg, var(--danger-color), #dc2626);
+            --grad-warning: linear-gradient(135deg, var(--warning-color), #d97706);
+            --grad-card: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.9) 50%, rgba(71, 85, 105, 0.9) 100%);
+            --grad-header: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            
+            /* צללים */
+            --shadow-sm: 0 4px 20px rgba(0, 0, 0, 0.15);
+            --shadow-md: 0 8px 32px rgba(59, 130, 246, 0.15);
+            --shadow-lg: 0 16px 64px rgba(139, 92, 246, 0.2);
+            --shadow-glow: 0 0 20px rgba(59, 130, 246, 0.4);
+            
+            /* רדיוסים */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+        }
+
+        /* === איפוס בסיסי === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* === גוף הדף === */
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, #2c3e50 50%, #34495e 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            padding: 2rem;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* === מיכל ראשי === */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* === כותרת ראשית === */
+        .main-header {
+            background: var(--grad-card);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            padding: 3rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-sm), var(--shadow-md), var(--shadow-lg);
+            margin-bottom: 3rem;
+            animation: slideInDown 0.8s ease-out;
+        }
+
+        .main-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #3b82f6 0%, #6366f1 30%, #8b5cf6 70%, #a855f7 100%);
+            opacity: 0.1;
+            border-radius: var(--radius-xl);
+            z-index: -1;
+        }
+
+        .main-header h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #f8fafc 0%, #60a5fa 50%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+            position: relative;
+            z-index: 2;
+        }
+
+        .main-header p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            color: var(--text-secondary);
+            position: relative;
+            z-index: 2;
+        }
+
+        /* === כרטיסים === */
+        .card {
+            background: var(--grad-card);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-xl);
+            padding: 2.5rem;
+            margin-bottom: 2.5rem;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-sm), var(--shadow-md), var(--shadow-lg);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: slideInUp 0.6s ease-out;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #3b82f6 0%, #6366f1 30%, #8b5cf6 70%, #a855f7 100%);
+            opacity: 0.1;
+            border-radius: var(--radius-xl);
+            z-index: -1;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(139, 92, 246, 0.5);
+            box-shadow: 
+                var(--shadow-glow),
+                0 25px 50px -12px rgba(0, 0, 0, 0.7),
+                0 0 40px rgba(139, 92, 246, 0.3);
+        }
+
+        /* === כותרות כרטיסים === */
+        .card-header {
+            background: var(--grad-header);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            backdrop-filter: blur(20px);
+            position: relative;
+        }
+
+        .card-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #3b82f6 0%, #6366f1 30%, #8b5cf6 70%, #a855f7 100%);
+            opacity: 0.1;
+            border-radius: var(--radius-lg);
+            z-index: -1;
+        }
+
+        .card-header h2 {
+            font-size: 2.25rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f8fafc 0%, #60a5fa 50%, #10b981 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .card-header i {
+            filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.6));
+        }
+
+        /* === רשת קלטים === */
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+			margin-top: 1rem;
+        }
+
+        /* === קבוצות קלט === */
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .input-group label {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .input-group label i {
+            color: var(--primary-color);
+            filter: drop-shadow(0 0 8px rgba(74, 144, 226, 0.4));
+        }
+
+        /* === שדות קלט === */
+        .form-input {
+            padding: 1rem 1.25rem;
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(51, 65, 85, 0.8) 100%);
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            direction: rtl;
+        }
+
+        /* === תיקון SELECT ו-OPTION === */
+        select.form-input {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.9) 100%);
+            color: var(--text-primary);
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: left 12px center;
+            background-size: 16px;
+            padding-left: 40px;
+        }
+
+        select.form-input option {
+            background: rgba(30, 41, 59, 0.98);
+            color: var(--text-primary);
+            font-weight: 600;
+            padding: 8px 12px;
+            border: none;
+        }
+
+        select.form-input option:hover,
+        select.form-input option:focus,
+        select.form-input option:checked {
+            background: rgba(59, 130, 246, 0.8);
+            color: white;
+        }
+
+        /* תיקון נוסף לכרום ופיירפוקס */
+        select.form-input::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        select.form-input::-webkit-scrollbar-track {
+            background: rgba(30, 41, 59, 0.5);
+        }
+
+        select.form-input::-webkit-scrollbar-thumb {
+            background: rgba(59, 130, 246, 0.6);
+            border-radius: 4px;
+        }
+
+        select.form-input::-webkit-scrollbar-thumb:hover {
+            background: rgba(59, 130, 246, 0.8);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: rgba(59, 130, 246, 0.6);
+            box-shadow: 
+                0 0 0 3px rgba(59, 130, 246, 0.2),
+                var(--shadow-glow);
+            transform: translateY(-2px);
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(51, 65, 85, 0.9) 100%);
+        }
+
+        .form-input:hover {
+            border-color: rgba(59, 130, 246, 0.5);
+            transform: translateY(-1px);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+        }
+
+        /* === כפתורים === */
+        .btn {
+            background: var(--grad-primary);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: var(--radius-md);
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(74, 144, 226, 0.3);
+            border: 2px solid rgba(74, 144, 226, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                0 10px 25px rgba(74, 144, 226, 0.4),
+                0 0 30px rgba(243, 156, 18, 0.3);
+            border-color: rgba(74, 144, 226, 0.5);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-success {
+            background: var(--grad-success);
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+            border-color: rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-success:hover {
+            box-shadow: 
+                0 10px 25px rgba(16, 185, 129, 0.4),
+                0 0 30px rgba(16, 185, 129, 0.3);
+            border-color: rgba(16, 185, 129, 0.5);
+        }
+
+        .btn-danger {
+            background: var(--grad-danger);
+            box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+            border-color: rgba(231, 76, 60, 0.3);
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        .btn-danger:hover {
+            box-shadow: 
+                0 10px 25px rgba(231, 76, 60, 0.4),
+                0 0 30px rgba(231, 76, 60, 0.3);
+            border-color: rgba(231, 76, 60, 0.5);
+        }
+
+        /* === פריטי תוספות === */
+        .bonus-item {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr auto;
+            gap: 1rem;
+            align-items: center;
+            background: rgba(74, 144, 226, 0.08);
+            padding: 1.25rem;
+            border-radius: var(--radius-md);
+            margin-bottom: 1rem;
+            border: 2px solid rgba(74, 144, 226, 0.2);
+            transition: all 0.3s ease;
+            animation: fadeInRight 0.5s ease-out;
+        }
+
+        .bonus-item:hover {
+            background: rgba(74, 144, 226, 0.12);
+            border-color: rgba(74, 144, 226, 0.4);
+            transform: translateX(4px);
+        }
+
+        /* === תוצאות === */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(51, 65, 85, 0.8) 100%);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: 1.75rem;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .result-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at center, rgba(74, 144, 226, 0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .result-card:hover {
+            transform: scale(1.05);
+            border-color: var(--primary-color);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .result-card:hover::before {
+            opacity: 1;
+        }
+
+        .result-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 0.75rem;
+            text-shadow: 0 0 15px currentColor;
+        }
+
+        .result-label {
+            font-size: 1.1rem;
+            font-weight: 600;
+            opacity: 0.9;
+            color: var(--text-secondary);
+        }
+
+        .result-card.highlight {
+            border: 3px solid var(--success-color);
+            background: linear-gradient(135deg, rgba(39, 174, 96, 0.15) 0%, rgba(5, 150, 105, 0.1) 100%);
+        }
+
+        .result-card.negative .result-value {
+            color: var(--danger-color);
+        }
+
+        .result-card.positive .result-value {
+            color: var(--success-color);
+        }
+
+        .result-card.info .result-value {
+            color: var(--info-color);
+        }
+
+        /* === טבלאות === */
+        .table-container {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(51, 65, 85, 0.8) 100%);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            border: 2px solid var(--border-color);
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-sm), var(--shadow-md);
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        .modern-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: transparent;
+            color: var(--text-primary);
+        }
+
+        .modern-table thead th {
+            background: var(--grad-success);
+            color: white;
+            font-weight: 800;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 1.25rem 1rem;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+        }
+
+        .modern-table thead th:first-child {
+            border-top-right-radius: var(--radius-sm);
+            border-bottom-right-radius: var(--radius-sm);
+        }
+
+        .modern-table thead th:last-child {
+            border-top-left-radius: var(--radius-sm);
+            border-bottom-left-radius: var(--radius-sm);
+        }
+
+        .modern-table tbody tr {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(99, 102, 241, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .modern-table tbody tr:hover {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: rgba(139, 92, 246, 0.4);
+            transform: translateX(4px);
+            box-shadow: var(--shadow-sm), 0 0 25px rgba(59, 130, 246, 0.2);
+        }
+
+        .modern-table tbody td {
+            padding: 1rem;
+            border: none;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        /* === גרף === */
+        .chart-container {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.9) 0%, rgba(51, 65, 85, 0.8) 100%);
+            border-radius: var(--radius-lg);
+            border: 2px solid var(--border-color);
+            height: 450px;
+            position: relative;
+        }
+
+        .chart-container canvas {
+            max-height: 400px !important;
+        }
+
+        /* === בלוקי מידע === */
+        .info-block {
+            background: linear-gradient(135deg, rgba(74, 144, 226, 0.15) 0%, rgba(139, 92, 246, 0.1) 100%);
+            border: 2px solid rgba(74, 144, 226, 0.3);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .warning-block {
+            background: linear-gradient(135deg, rgba(243, 156, 18, 0.15) 0%, rgba(217, 119, 6, 0.1) 100%);
+            border-color: var(--warning-color);
+        }
+
+        .danger-block {
+            background: linear-gradient(135deg, rgba(231, 76, 60, 0.15) 0%, rgba(220, 38, 38, 0.1) 100%);
+            border-color: var(--danger-color);
+        }
+
+        .success-block {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(5, 150, 105, 0.1) 100%);
+            border-color: var(--success-color);
+        }
+
+        /* === נוסחאות מתמטיות === */
+        .formula-container {
+            background: rgba(74, 144, 226, 0.12);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: var(--radius-md);
+            border: 2px solid rgba(74, 144, 226, 0.3);
+            direction: ltr;
+            text-align: center;
+            position: relative;
+        }
+
+        .formula-container h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+            direction: rtl;
+            text-align: center;
+        }
+
+        /* === סיכום === */
+        .summary-section {
+            background: linear-gradient(135deg, rgba(236, 72, 153, 0.15) 0%, rgba(147, 51, 234, 0.15) 100%);
+            border: 3px solid rgba(236, 72, 153, 0.4);
+            border-radius: var(--radius-xl);
+            padding: 2.5rem;
+            margin: 2rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .summary-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #ec4899 0%, #9333ea 30%, #7c3aed 70%, #6366f1 100%);
+            opacity: 0.1;
+            border-radius: var(--radius-xl);
+            z-index: -1;
+        }
+
+        .summary-section h2 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ec4899 0%, #9333ea 50%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+        }
+
+        /* === אנימציות === */
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 20px rgba(74, 144, 226, 0.3);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(74, 144, 226, 0.5);
+            }
+        }
+
+        /* === עיצוב רספונסיבי === */
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .main-header {
+                padding: 2rem;
+            }
+            
+            .main-header h1 {
+                font-size: 2.25rem;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            .card-header {
+                flex-direction: column;
+                gap: 1rem;
+                text-align: center;
+            }
+            
+            .card-header h2 {
+                font-size: 1.75rem;
+            }
+            
+            .input-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .bonus-item {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .main-header h1 {
+                font-size: 1.75rem;
+            }
+            
+            .card-header h2 {
+                font-size: 1.5rem;
+            }
+            
+            .result-value {
+                font-size: 2rem;
+            }
+        }
+
+        /* === מצב הדפסה === */
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+            
+            .card,
+            .table-container,
+            .info-block {
+                background: white;
+                border: 1px solid #ccc;
+                box-shadow: none;
+            }
+            
+            .btn {
+                display: none;
+            }
+        }
+
+        /* === נגישות === */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+
+        @media (prefers-contrast: high) {
+            .card,
+            .table-container,
+            .info-block {
+                border-color: rgba(255, 255, 255, 0.5) !important;
+            }
+        }
+
+        /* === מצב מיקוד === */
+        .form-input:focus-visible,
+        .btn:focus-visible {
+            outline: 2px solid #60a5fa;
+            outline-offset: 2px;
+        }
+
+        /* === כיתות עזר === */
+        .text-success { color: var(--success-color) !important; }
+        .text-danger { color: var(--danger-color) !important; }
+        .text-warning { color: var(--warning-color) !important; }
+        .text-info { color: var(--info-color) !important; }
+        .text-primary { color: var(--primary-color) !important; }
+
+        .bg-success { background: var(--grad-success) !important; }
+        .bg-danger { background: var(--grad-danger) !important; }
+        .bg-warning { background: var(--grad-warning) !important; }
+
+        .hidden { display: none !important; }
+        .text-center { text-align: center; }
+        .text-right { text-align: right; }
+
+        .negative-number {
+            color: #ff6b6b;
+            font-weight: bold;
+            direction: ltr;
+            unicode-bidi: embed;
+        }
+
+        .latex-formula {
+            direction: ltr;
+            text-align: center;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- כותרת ראשית -->
+        <div class="main-header">
+            <h1><i class="bi bi-calculator-fill me-3"></i>מחשבון תוספת שכר ישראלי 2025</h1>
+            <p>חישוב מדויק של השכר נטו מתוספות לשכר</p>
+        </div>
+
+        <!-- מחשבון התוספת -->
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="bi bi-cash-stack"></i>מחשבון תוספת השכר</h2>
+            </div>
+            
+            <div class="input-group">
+                <label for="workStatus"><i class="bi bi-briefcase-fill"></i>סטטוס עבודה:</label>
+                <select id="workStatus" class="form-input" onchange="updateTaxStructure()">
+                    <option value="employee">שכיר</option>
+                    <option value="freelancer">עצמאי (ללא ח.פ)</option>
+                    <option value="business">בעל עסק (עם ח.פ)</option>
+                    <option value="mixed">מעורב (שכיר + עצמאי)</option>
+                </select>
+            </div>
+
+            <div class="input-grid">
+                <div class="input-group">
+                    <label for="currentSalary"><i class="bi bi-wallet2"></i>משכורת נוכחית (ברוטו חודשי):</label>
+                    <input type="number" id="currentSalary" class="form-input" placeholder="הכנס משכורת נוכחית" value="25000">
+                </div>
+                
+                <div class="input-group">
+                    <label for="creditPoints"><i class="bi bi-award-fill"></i>נקודות זכות:</label>
+                    <input type="number" id="creditPoints" class="form-input" step="0.25" value="2.25" min="0" max="10" placeholder="נקודות זכות">
+                </div>
+                
+                <div class="input-group">
+                    <label for="settlementType"><i class="bi bi-geo-alt-fill"></i>יישוב מוטב (הטבת מס):</label>
+                    <select id="settlementType" class="form-input" onchange="updateSettlementBenefit()">
+                        <option value="none">ללא הטבה</option>
+                        <option value="7_146640">7% עד 146,640 ש"ח שנתי</option>
+                        <option value="10_180000">10% עד 180,000 ש"ח שנתי</option>
+                        <option value="12_186000">12% עד 186,000 ש"ח שנתי</option>
+                        <option value="12_186600">12% עד 186,600 ש"ח שנתי</option>
+                        <option value="12_213240">12% עד 213,240 ש"ח שנתי</option>
+                        <option value="12_226560">12% עד 226,560 ש"ח שנתי</option>
+                        <option value="14_219960">14% עד 219,960 ש"ח שנתי</option>
+                        <option value="14_259920">14% עד 259,920 ש"ח שנתי</option>
+                        <option value="16_226560">16% עד 226,560 ש"ח שנתי</option>
+                        <option value="18_245400">18% עד 245,400 ש"ח שנתי</option>
+                        <option value="18_259920">18% עד 259,920 ש"ח שנתי</option>
+                        <option value="20_259920">20% עד 259,920 ש"ח שנתי</option>
+                        <option value="20_267840">20% עד 267,840 ש"ח שנתי</option>
+                        <option value="custom">הזן ידנית...</option>
+                    </select>
+                </div>
+
+                <div class="input-group hidden" id="customSettlementGroup">
+                    <label for="customSettlementRate"><i class="bi bi-percent"></i>שיעור הטבה (%):</label>
+                    <input type="number" id="customSettlementRate" class="form-input" min="0" max="25" step="1" placeholder="שיעור ההטבה באחוזים">
+                </div>
+
+                <div class="input-group hidden" id="customSettlementCeilingGroup">
+                    <label for="customSettlementCeiling"><i class="bi bi-ladder"></i>תקרת הטבה שנתית (ש"ח):</label>
+                    <input type="number" id="customSettlementCeiling" class="form-input" step="1000" placeholder="תקרת ההטבה בש״ח לשנה">
+                </div>
+       
+                <div class="input-group">
+                    <label for="exchangeRate"><i class="bi bi-currency-exchange"></i>שער חליפין (USD/ILS):</label>
+                    <input type="number" id="exchangeRate" class="form-input" step="0.01" value="3.42" placeholder="שער דולר לשקל">
+                </div>
+            </div>
+
+            <!-- תוספת ראשונית -->
+            <div style="margin: 30px 0;">
+                <h3 style="color: var(--primary-color); margin-bottom: 20px;"><i class="bi bi-target"></i>תוספת ראשונית</h3>
+                <div class="input-grid">
+                    <div class="input-group">
+                        <label for="bonusName"><i class="bi bi-tag-fill"></i>שם התוספת:</label>
+                        <input type="text" id="bonusName" class="form-input" placeholder="בונוס, העלאה, פרמיה..." value="תוספת עיקרית">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="bonusAmount"><i class="bi bi-cash"></i>סכום התוספת:</label>
+                        <input type="number" id="bonusAmount" class="form-input" placeholder="הכנס סכום" value="5000">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="bonusCurrency"><i class="bi bi-currency-dollar"></i>מטבע התוספת:</label>
+                        <select id="bonusCurrency" class="form-input">
+                            <option value="USD">דולר אמריקאי (USD)</option>
+                            <option value="ILS">שקל ישראלי (ILS)</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- תוספות נוספות -->
+            <div style="margin: 30px 0;">
+                <h3 style="color: var(--warning-color); margin-bottom: 20px;"><i class="bi bi-plus-circle"></i>תוספות נוספות</h3>
+                <div id="bonusesContainer" style="margin-bottom: 15px;">
+                    <!-- תוספות נוספות יתווספו כאן -->
+                </div>
+                <button type="button" onclick="addBonus()" class="btn btn-success">
+                    <i class="bi bi-plus-lg me-2"></i>הוסף תוספת נוספת
+                </button>
+            </div>
+            
+            <!-- שדות נוספים לעצמאים -->
+            <div id="freelancerFields" class="hidden" style="margin: 30px 0;">
+                <h3 style="color: var(--warning-color); margin-bottom: 20px;"><i class="bi bi-graph-up"></i>פרטי עצמאי</h3>
+                <div class="input-grid">
+                    <div class="input-group">
+                        <label for="annualIncome"><i class="bi bi-calendar-year"></i>הכנסה שנתית משוערת (ברוטו):</label>
+                        <input type="number" id="annualIncome" class="form-input" placeholder="הכנסה שנתית ברוטו" value="300000">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="quarterlyAdvance"><i class="bi bi-calendar-check"></i>מקדמות רבעוניות ששולמו השנה:</label>
+                        <input type="number" id="quarterlyAdvance" class="form-input" placeholder="סכום מקדמות שכבר שולמו" value="45000">
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="deductibleExpenses"><i class="bi bi-receipt"></i>הוצאות מוכרות:</label>
+                        <select id="deductibleExpenses" class="form-input">
+                            <option value="25">25% - הוצאות סטנדרטיות</option>
+                            <option value="35">35% - מקצועות חופשיים</option>
+                            <option value="40">40% - עבודות יצירה</option>
+                            <option value="custom">אחר (בהתאם להיווח בפועל)</option>
+                        </select>
+                    </div>
+                    
+                    <div class="input-group hidden" id="customExpensesGroup">
+                        <label for="customExpensesPercent"><i class="bi bi-calculator"></i>אחוז הוצאות מותאם אישית:</label>
+                        <input type="number" id="customExpensesPercent" class="form-input" min="0" max="100" step="1" placeholder="אחוז הוצאות">
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin: 30px 0;">
+                <button class="btn" onclick="calculateNetBonus()">
+                    <i class="bi bi-calculator me-2"></i>חשב שכר נטו מהתוספת
+                </button>
+            </div>
+        </div>
+
+        <!-- תוצאות מפורטות -->
+        <div class="card hidden" id="resultsSection">
+            <div class="card-header">
+                <h2><i class="bi bi-graph-up-arrow"></i>תוצאות מפורטות</h2>
+            </div>
+            
+            <div class="results-grid" id="results">
+                <!-- תוצאות יתמלאו כאן -->
+            </div>
+
+            <div class="chart-container">
+                <canvas id="taxBreakdownChart"></canvas>
+            </div>
+        </div>
+
+        <!-- פירוט מדרגות המס לישראל 2025 -->
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="bi bi-list-ol"></i>מדרגות מס הכנסה בישראל 2025</h2>
+            </div>
+            
+            <div class="warning-block">
+                <strong><i class="bi bi-exclamation-triangle-fill me-2"></i>עדכונים חשובים לשנת 2025:</strong><br>
+                • הקפאת מדרגות המס - לא יעודכנו לפי האינפלציה עד 2028<br>
+                • עליה בביטוח לאומי ובריאות: ביטוח לאומי +0.8%, מס בריאות +0.15%<br>
+                • מס יסף על הכנסות גון עלה ם-3% ל-5% למי שמרוויח מעל 721,560 ש"ח בשנה
+            </div>
+
+            <div class="table-container">
+                <table class="modern-table">
+                    <thead>
+                        <tr>
+                            <th>מדרגה</th>
+                            <th>טווח הכנסה חודשי</th>
+                            <th>טווח הכנסה שנתי</th>
+                            <th>שיעור מס</th>
+                            <th>מס מצטבר חודשי מקסימלי</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>עד 7,010 ש"ח</td>
+                            <td>עד 84,120 ש"ח</td>
+                            <td>10%</td>
+                            <td>עד 701 ש"ח</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>7,011 - 10,060 ש"ח</td>
+                            <td>84,121 - 120,720 ש"ח</td>
+                            <td>14%</td>
+                            <td>701 + 427 ש"ח</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>10,061 - 16,150 ש"ח</td>
+                            <td>120,721 - 193,800 ש"ח</td>
+                            <td>20%</td>
+                            <td>1,128 + 1,218 ש"ח</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>16,151 - 22,440 ש"ח</td>
+                            <td>193,801 - 269,280 ש"ח</td>
+                            <td>31%</td>
+                            <td>2,346 + 1,950 ש"ח</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>22,441 - 46,690 ש"ח</td>
+                            <td>269,281 - 560,280 ש"ח</td>
+                            <td>35%</td>
+                            <td>4,296 + 8,487 ש"ח</td>
+                        </tr>
+                        <tr style="background: rgba(231, 76, 60, 0.2);">
+                            <td>6</td>
+                            <td>46,691 - 60,130 ש"ח</td>
+                            <td>560,281 - 721,560 ש"ח</td>
+                            <td><strong>47%</strong></td>
+                            <td>12,783 + 6,316 ש"ח</td>
+                        </tr>
+                        <tr style="background: rgba(231, 76, 60, 0.3);">
+                            <td>7</td>
+                            <td>מעל 60,130 ש"ח</td>
+                            <td>מעל 721,560 ש"ח</td>
+                            <td><strong>50%*</strong></td>
+                            <td>19,099 + 50% נוספים</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="info-block">
+                <strong>* הערה:</strong> שיעור המס של 50% כולל מס יסף של 5% (שעלה מ-3% ב-2025) 
+                על הכנסות מעל 721,560 ש"ח בשנה (60,130 ש"ח בחודש).
+            </div>
+        </div>
+
+        <!-- פירוט מדרגות ביטוח לאומי ובריאות -->
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="bi bi-heart-pulse-fill"></i>מדרגות ביטוח לאומי ומס בריאות 2025</h2>
+            </div>
+            
+            <div class="table-container">
+                <table class="modern-table">
+                    <thead>
+                        <tr>
+                            <th>סוג ניכוי</th>
+                            <th>מדרגה 1 (עד 7,522 ש"ח)</th>
+                            <th>מדרגה 2 (7,523 - 50,695 ש"ח)</th>
+                            <th>מעל התקרה (50,695+ ש"ח)</th>
+                            <th>מקסימום חודשי</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>ביטוח לאומי</strong></td>
+                            <td>1.04%</td>
+                            <td>7%</td>
+                            <td>0%</td>
+                            <td>3,100 ש"ח</td>
+                        </tr>
+                        <tr>
+                            <td><strong>מס בריאות</strong></td>
+                            <td>3.23%</td>
+                            <td>5.16%</td>
+                            <td>0%</td>
+                            <td>2,467 ש"ח</td>
+                        </tr>
+                        <tr style="background: rgba(74, 144, 226, 0.1);">
+                            <td><strong>סה״כ מקסימום</strong></td>
+                            <td colspan="3">5,567 ש"ח חודשי | 66,804 ש"ח שנתי</td>
+                            <td><strong>5,567 ש"ח</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- פירוט נוסחאות החישוב המתוקן -->
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="bi bi-calculator-fill"></i>נוסחאות החישוב המתוקנות</h2>
+            </div>
+            
+            <div class="formula-container">
+                <h3>נוסחת חישוב מס הכנסה לפי מדרגות:</h3>
+                $\text{מס על תוספת} = \text{מס כולל עם תוספת} - \text{מס כולל ללא תוספת}$
+                <p style="margin-top: 10px; font-size: 0.9em; opacity: 0.8;">החישוב מתבצע לפי מדרגות המס בפועל ולא בשיעור קבוע</p>
+            </div>
+
+            <div class="formula-container">
+                <h3>נוסחאות ביטוח לאומי ובריאות (2025) - מדרגות נפרדות:</h3>
+                $\text{ביטוח לאומי} = \begin{cases}
+                \text{הכנסה} \times 0.0104 & \text{עד 7,522 ש"ח} \\
+                78 + (\text{הכנסה} - 7{,}522) \times 0.07 & \text{מעל 7,522 ש"ח}
+                \end{cases}$
+                
+                $\text{מס בריאות} = \begin{cases}
+                \text{הכנסה} \times 0.0323 & \text{עד 7,522 ש"ח} \\
+                243 + (\text{הכנסה} - 7{,}522) \times 0.0516 & \text{מעל 7,522 ש"ח}
+                \end{cases}$
+            </div>
+            
+            <div class="formula-container hidden" id="freelancerFormulas">
+                <h3>נוסחאות חישוב לעצמאי:</h3>
+                
+                $\text{הכנסה חייבת} = \text{הכנסה ברוטו} - \text{הוצאות מוכרות}$
+                
+                $\text{הוצאות מוכרות} = \text{הכנסה ברוטו} \times \frac{\text{אחוז הוצאות}}{100}$
+                
+                $\text{מס שנתי} = \text{מס חודשי על הכנסה חייבת} \times 12$
+                
+                $\text{יתרת מס} = \max(0, \text{מס שנתי} - \text{מקדמות ששולמו})$
+                
+                $\text{ביטוח לאומי לעצמאי} = \begin{cases}
+                \text{הכנסה} \times 0.0362 & \text{עד 7,522 ש"ח} \\
+                272 + (\text{הכנסה} - 7{,}522) \times 0.1222 & \text{מעל 7,522 ש"ח}
+                \end{cases}$
+                
+                $\text{מס בריאות לעצמאי} = \begin{cases}
+                \text{הכנסה} \times 0.031 & \text{עד 7,522 ש"ח} \\
+                233 + (\text{הכנסה} - 7{,}522) \times 0.05 & \text{מעל 7,522 ש"ח}
+                \end{cases}$
+            </div>
+
+            <div class="formula-container">
+                <h3>נוסחת השכר הנטו הנוסף:</h3>
+                $\text{נטו נוסף} = \text{תוספת} - \text{מס הכנסה} - \text{ביטוח לאומי} - \text{מס בריאות}$
+            </div>
+
+            <div class="warning-block">
+                <strong><i class="bi bi-info-circle-fill me-2"></i>חשוב לדעת:</strong><br>
+                • הנוסחאות מתבססות על נתוני 2025 העדכניים<br>
+                • תקרה משותפת לביטוח לאומי ובריאות: 50,695 ש"ח חודשי<br>
+                • שיעורים שונים לכל מדרגה בכל סוג ניכוי<br>
+                • החישוב מתבצע לפי מדרגות המס בפועל של כל אדם<br>
+                • לא כלוליים: פנסיה (עד 7%), השתלמות מקצועית, זכויות נוספות
+            </div>
+        </div>
+
+        <!-- המלצות אסטרטגיות -->
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="bi bi-lightbulb-fill"></i>המלצות אסטרטגיות</h2>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+                <div class="info-block">
+                    <h3><i class="bi bi-target"></i>אופטימיזציה פיננסית</h3>
+                    <ul style="text-align: right; margin-right: 20px;">
+                        <li>שקול העברת חלק מהתוספת לפנסיה (חיסכון במס)</li>
+                        <li>בדוק אפשרות לביטוח מנהלים במקום תוספת</li>
+                        <li>שקול קבלת רכב חברה במקום תוספת כספית</li>
+                    </ul>
+                </div>
+                
+                <div class="warning-block">
+                    <h3><i class="bi bi-exclamation-triangle-fill"></i>שיקולים חשובים</h3>
+                    <ul style="text-align: right; margin-right: 20px;">
+                        <li>התוספת תשפיע על חישוב דמי אבטלה עתידיים</li>
+                        <li>עליה בזכויות פנסיה וקרן השתלמות</li>
+                        <li>השפעה על זכאות לקצבאות ממשלתיות</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- תכנית מעקב -->
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="bi bi-calendar-check-fill"></i>תכנית מעקב ובקרה</h2>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                <div class="result-card info">
+                    <div class="result-value">חודשי</div>
+                    <div class="result-label">מעקב אחר שינויי שער החליפין</div>
+                </div>
+                
+                <div class="result-card info">
+                    <div class="result-value">רבעוני</div>
+                    <div class="result-label">בדיקת עדכוני מדרגות המס</div>
+                </div>
+                
+                <div class="result-card info">
+                    <div class="result-value">שנתי</div>
+                    <div class="result-label">יעוץ מקצועי עם רואה חשבון</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- שאלה חכמה לסיום -->
+        <div class="summary-section">
+            <h2><i class="bi bi-question-circle-fill me-3"></i>שאלה למחשבה</h2>
+            <p style="font-size: 1.2em; line-height: 1.6;">
+                האם שקלת לבדוק גם אפשרויות אלטרנטיביות לתוספת הכספית, 
+                כמו הטבות עבודה שיכולות להניב יותר ערך נטו? (רכב חברה, ביטוח, השתלמויות)
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Auto-render script for KaTeX
+        document.addEventListener("DOMContentLoaded", function() {
+            renderMathInElement(document.body, {
+                delimiters: [
+                   {left: "\\(", right: "\\)", display: false},
+                   {left: "\\[", right: "\\]", display: true},
+                   {left: "$", right: "$", display: true},
+                   {left: "$", right: "$", display: false}
+                ],
+                throwOnError: false,
+                errorColor: '#cc0000',
+                strict: false
+            });
+        });
+
+        // נתוני מדרגות המס הישראליות לשנת 2025 - מעודכן
+        const taxBrackets = [
+            { min: 0, max: 7010, rate: 0.10, label: "10%" },
+			{ min: 7010, max: 10060, rate: 0.14, label: "14%" },
+            { min: 10060, max: 16150, rate: 0.20, label: "20%" },
+            { min: 16150, max: 22440, rate: 0.31, label: "31%" },
+            { min: 22440, max: 46690, rate: 0.35, label: "35%" },
+            { min: 46690, max: 60130, rate: 0.47, label: "47%" },
+            { min: 60130, max: Infinity, rate: 0.50, label: "50%" }
+        ];
+
+        // שיעורי ביטוח לאומי ובריאות לשנת 2025 - מתוקן עם מדרגות נפרדות
+        const socialInsuranceRates = {
+            // ביטוח לאומי - שיעורים נפרדים
+            bituachLeumi: {
+                tier1Rate: 0.0104,  // 1.04% על 7,522 ש"ח הראשונים
+                tier2Rate: 0.07,    // 7% על היתר עד התקרה
+                tier1Ceiling: 7522
+            },
+            // מס בריאות - שיעורים נפרדים
+            bituachBriut: {
+                tier1Rate: 0.0323,  // 3.23% על 7,522 ש"ח הראשונים
+                tier2Rate: 0.0516,  // 5.16% על היתר עד התקרה
+                tier1Ceiling: 7522
+            },
+            ceiling: 50695  // תקרה חודשית משותפת
+        };
+        
+        // שיעורי ביטוח לעצמאים 2025
+        const freelancerInsuranceRates = {
+            bituachLeumi: {
+                tier1Rate: 0.0362,     // 3.62% עד 7,522 ש"ח
+                tier2Rate: 0.1222,     // 12.22% מעל 7,522 ש"ח
+                tier1Ceiling: 7522,    // תקרה ראשונה
+                maxCeiling: 50695      // תקרה עליונה
+            },
+            bituachBriut: {
+                tier1Rate: 0.031,      // 3.1% עד 7,522 ש"ח  
+                tier2Rate: 0.05,       // 5% מעל 7,522 ש"ח
+                tier1Ceiling: 7522,
+                maxCeiling: 50695
+            }
+        };
+        
+        // נתוני הטבות יישוב מזכה
+        const settlementBenefits = {
+            none: { rate: 0, ceiling: 0 },
+            "7_146640": { rate: 0.07, ceiling: 146640 },
+            "10_180000": { rate: 0.10, ceiling: 180000 },
+            "12_186000": { rate: 0.12, ceiling: 186000 },
+            "12_186600": { rate: 0.12, ceiling: 186600 },
+            "12_213240": { rate: 0.12, ceiling: 213240 },
+            "12_226560": { rate: 0.12, ceiling: 226560 },
+            "14_219960": { rate: 0.14, ceiling: 219960 },
+            "14_259920": { rate: 0.14, ceiling: 259920 },
+            "16_226560": { rate: 0.16, ceiling: 226560 },
+            "18_245400": { rate: 0.18, ceiling: 245400 },
+            "18_259920": { rate: 0.18, ceiling: 259920 },
+            "20_259920": { rate: 0.20, ceiling: 259920 },
+            "20_267840": { rate: 0.20, ceiling: 267840 },
+            custom: { rate: 0, ceiling: 0 }
+        };
+
+        // נקודת זכות מעודכנת לשנת 2025
+        const CREDIT_POINT_VALUE = 242; // ש"ח לחודש
+
+        // מס נוסף על הכנסות גבוהות - מעודכן לשנת 2025
+        const HIGH_INCOME_TAX = {
+            threshold: 60130, // ש"ח לחודש (721,560 ש"ח לשנה)
+            rate: 0.05 // 5% (עלה מ-3% בשנת 2025)
+        };
+
+        // פונקציה לעדכון הטבת יישוב מזכה
+        function updateSettlementBenefit() {
+            const settlementType = document.getElementById('settlementType').value;
+            const customGroup = document.getElementById('customSettlementGroup');
+            const customCeilingGroup = document.getElementById('customSettlementCeilingGroup');
+            
+            if (settlementType === 'custom') {
+                customGroup.classList.remove('hidden');
+                customCeilingGroup.classList.remove('hidden');
+            } else {
+                customGroup.classList.add('hidden');
+                customCeilingGroup.classList.add('hidden');
+            }
+            
+            // חישוב מיידי כשמשנים יישוב
+            if (document.getElementById('currentSalary').value) {
+                calculateNetBonus();
+            }
+        }
+
+        // פונקציה לחישוב הטבת יישוב מזכה
+        function calculateSettlementBenefit(taxableIncome, settlementType) {
+            let benefit = 0;
+            let benefitData = settlementBenefits[settlementType];
+            
+            if (settlementType === 'custom') {
+                const customRate = parseFloat(document.getElementById('customSettlementRate').value) || 0;
+                const customCeiling = parseFloat(document.getElementById('customSettlementCeiling').value) || 0;
+                benefitData = { rate: customRate / 100, ceiling: customCeiling };
+            }
+            
+            if (benefitData && benefitData.rate > 0) {
+                // הטבה חלה על הכנסה חייבת עד התקרה השנתית
+                const yearlyTaxableIncome = taxableIncome * 12;
+                const eligibleIncome = Math.min(yearlyTaxableIncome, benefitData.ceiling);
+                const yearlyBenefit = eligibleIncome * benefitData.rate;
+                benefit = yearlyBenefit / 12; // חזרה לחודשי
+            }
+            
+            return benefit;
+        }
+        
+        // הצגת/הסתרת נוסחאות לפי סטטוס
+        function updateFormulasVisibility() {
+            const workStatus = document.getElementById('workStatus').value;
+            const freelancerFormulas = document.getElementById('freelancerFormulas');
+            
+            if (workStatus === 'freelancer' || workStatus === 'business' || workStatus === 'mixed') {
+                freelancerFormulas.classList.remove('hidden');
+            } else {
+                freelancerFormulas.classList.add('hidden');
+            }
+        }
+
+        // פונקציה לעדכון מבנה המס לפי סטטוס העבודה
+        function updateTaxStructure() {
+            const workStatus = document.getElementById('workStatus').value;
+            const freelancerFields = document.getElementById('freelancerFields');
+            const currentSalaryGroup = document.querySelector('label[for="currentSalary"]').parentElement;
+            
+            if (workStatus === 'freelancer' || workStatus === 'business') {
+                freelancerFields.classList.remove('hidden');
+                currentSalaryGroup.querySelector('label').innerHTML = '<i class="bi bi-wallet2"></i>הכנסה חודשית ממוצעת (ברוטו):';
+                currentSalaryGroup.querySelector('input').placeholder = 'הכנסה חודשית ממוצעת';
+            } else if (workStatus === 'mixed') {
+                freelancerFields.classList.remove('hidden');
+                currentSalaryGroup.querySelector('label').innerHTML = '<i class="bi bi-wallet2"></i>משכורת משולבת (שכיר + עצמאי):';
+                currentSalaryGroup.querySelector('input').placeholder = 'הכנסה חודשית כוללת';
+            } else {
+                freelancerFields.classList.add('hidden');
+                currentSalaryGroup.querySelector('label').innerHTML = '<i class="bi bi-wallet2"></i>משכורת נוכחית (ברוטו חודשי):';
+                currentSalaryGroup.querySelector('input').placeholder = 'הכנס משכורת נוכחית';
+            }
+            
+            updateCustomExpensesVisibility();
+            updateFormulasVisibility();
+            
+            // הוספה חדשה - חישוב אוטומטי
+            calculateNetBonus();
+        }
+        
+        // חישוב בונוס לעצמאי
+        function calculateFreelancerBonus() {
+            const annualIncome = parseFloat(document.getElementById('annualIncome').value) || 0;
+            const quarterlyAdvance = parseFloat(document.getElementById('quarterlyAdvance').value) || 0;
+            const deductibleExpensesSelect = document.getElementById('deductibleExpenses').value;
+            const bonusAmount = parseFloat(document.getElementById('bonusAmount').value) || 0;
+            const bonusCurrency = document.getElementById('bonusCurrency').value;
+            const exchangeRate = parseFloat(document.getElementById('exchangeRate').value) || 3.42;
+            
+            // קביעת אחוז הוצאות
+            let deductibleRate;
+            if (deductibleExpensesSelect === 'custom') {
+                deductibleRate = parseFloat(document.getElementById('customExpensesPercent').value) || 25;
+            } else {
+                deductibleRate = parseFloat(deductibleExpensesSelect);
+            }
+            
+            // המרת בונוס לשקלים
+            const bonusInILS = bonusCurrency === 'USD' ? bonusAmount * exchangeRate : bonusAmount;
+            
+            // חישוב מס לעצמאי
+            const freelancerTaxData = calculateFreelancerTax(annualIncome + bonusInILS, deductibleRate, quarterlyAdvance);
+            const originalTaxData = calculateFreelancerTax(annualIncome, deductibleRate, quarterlyAdvance);
+            
+            // מס על הבונוס
+            const bonusTax = freelancerTaxData.annualTax - originalTaxData.annualTax;
+            
+            // ביטוח לאומי ובריאות לעצמאי על הבונוס
+            const monthlyBonusIncome = bonusInILS / 12;
+            const currentMonthlyIncome = annualIncome / 12;
+            const socialInsuranceData = calculateFreelancerSocialInsuranceOnBonus(currentMonthlyIncome, monthlyBonusIncome);
+            
+            // חישוב נטו
+            const totalDeductions = bonusTax + (socialInsuranceData.bituachLeumi * 12) + (socialInsuranceData.bituachBriut * 12);
+            const netBonus = bonusInILS - totalDeductions;
+            
+            // הצגת תוצאות
+            displayFreelancerResults({
+                bonusAmount,
+                currency: bonusCurrency,
+                bonusInILS,
+                annualIncome,
+                deductibleRate,
+                taxableIncome: freelancerTaxData.taxableIncome,
+                bonusTax,
+                bituachLeumi: socialInsuranceData.bituachLeumi * 12,
+                bituachBriut: socialInsuranceData.bituachBriut * 12,
+                totalDeductions,
+                netBonus,
+                quarterlyAdvance,
+                remainingTax: freelancerTaxData.remainingTax
+            });
+            
+            // גרף
+            createFreelancerTaxChart({
+                bonusTax,
+                bituachLeumi: socialInsuranceData.bituachLeumi * 12,
+                bituachBriut: socialInsuranceData.bituachBriut * 12,
+                netBonus
+            });
+            
+            document.getElementById('resultsSection').classList.remove('hidden');
+        }
+        
+        // גרף מותאם לעצמאי
+        function createFreelancerTaxChart(data) {
+            const ctx = document.getElementById('taxBreakdownChart').getContext('2d');
+            
+            if (window.taxChart) {
+                window.taxChart.destroy();
+            }
+            
+            window.taxChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['מס הכנסה נוסף', 'ביטוח לאומי (שנתי)', 'מס בריאות (שנתי)', 'נטו שנשאר'],
+                    datasets: [{
+                        data: [
+                            data.bonusTax,
+                            data.bituachLeumi,
+                            data.bituachBriut,
+                            data.netBonus
+                        ],
+                        backgroundColor: [
+                            '#e74c3c',  // אדום למס הכנסה
+                            '#f39c12',  // כתום לביטוח לאומי
+                            '#e67e22',  // כתום כהה למס בריאות
+                            '#27ae60'   // ירוק לנטו
+                        ],
+                        borderColor: '#ffffff',
+                        borderWidth: 3,
+                        hoverBorderWidth: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#ffffff',
+                                font: { size: 14, weight: 'bold' },
+                                padding: 20,
+                                usePointStyle: true,
+                                pointStyle: 'circle'
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'פילוח ניכויים מהתוספת - עצמאי',
+                            color: '#ffffff',
+                            font: { size: 18, weight: 'bold' },
+                            padding: 20
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0,0,0,0.8)',
+                            titleColor: '#ffffff',
+                            bodyColor: '#ffffff',
+                            borderColor: '#4a90e2',
+                            borderWidth: 2,
+                            cornerRadius: 10,
+                            displayColors: true,
+                            callbacks: {
+                                label: function(context) {
+                                    const value = context.parsed;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = ((value / total) * 100).toFixed(1);
+                                    return `${context.label}: ${value.toLocaleString('he-IL')} ₪ (${percentage}%)`;
+                                }
+                            }
+                        }
+                    },
+                    animation: {
+                        animateRotate: true,
+                        animateScale: true,
+                        duration: 1500,
+                        easing: 'easeInOutQuart'
+                    },
+                    cutout: '40%',
+                    radius: '90%'
+                }
+            });
+        }
+
+        // הצגת תוצאות לעצמאי
+        function displayFreelancerResults(data) {
+            const resultsDiv = document.getElementById('results');
+            const currencySymbol = data.currency === 'USD' ? '$' : '₪';
+            const deductionRate = ((data.totalDeductions / data.bonusInILS) * 100).toFixed(1);
+            const netRate = (100 - deductionRate).toFixed(1);
+            
+            resultsDiv.innerHTML = `
+                <div class="result-card warning-block" style="grid-column: 1 / -1;">
+                    <div class="result-label" style="font-size: 1.1em; font-weight: bold; margin-bottom: 10px;">
+                        <i class="bi bi-person-badge me-2"></i>סטטוס: עצמאי
+                    </div>
+                    <div style="text-align: right; line-height: 1.5;">
+                        הכנסה שנתית: ${Math.round(data.annualIncome).toLocaleString('he-IL')} ₪<br>
+                        הכנסה חייבת: ${Math.round(data.taxableIncome).toLocaleString('he-IL')} ₪ (אחרי ${data.deductibleRate}% הוצאות)<br>
+                        מקדמות ששולמו: ${Math.round(data.quarterlyAdvance).toLocaleString('he-IL')} ₪
+                    </div>
+                </div>
+                
+                <div class="result-card">
+                    <div class="result-value text-primary">
+                        ${Math.round(data.bonusAmount).toLocaleString('he-IL')} ${currencySymbol}
+                    </div>
+                    <div class="result-label">תוספת מקורית</div>
+                </div>
+                
+                <div class="result-card">
+                    <div class="result-value text-warning">
+                        ${Math.round(data.bonusInILS).toLocaleString('he-IL')} ₪
+                    </div>
+                    <div class="result-label">תוספת בשקלים</div>
+                </div>
+                
+                <div class="result-card negative">
+                    <div class="result-value negative-number">
+                        ‎−${Math.round(data.bonusTax).toLocaleString('he-IL')} ₪
+                    </div>
+                    <div class="result-label">מס הכנסה נוסף</div>
+                </div>
+                
+                <div class="result-card negative">
+                    <div class="result-value negative-number">
+                        ‎−${Math.round(data.bituachLeumi).toLocaleString('he-IL')} ₪
+                    </div>
+                    <div class="result-label">ביטוח לאומי (שנתי)</div>
+                </div>
+                
+                <div class="result-card negative">
+                    <div class="result-value negative-number">
+                        ‎−${Math.round(data.bituachBriut).toLocaleString('he-IL')} ₪
+                    </div>
+                    <div class="result-label">מס בריאות (שנתי)</div>
+                </div>
+                
+                <div class="result-card negative">
+                    <div class="result-value negative-number">
+                        ‎−${Math.round(data.totalDeductions).toLocaleString('he-IL')} ₪
+                    </div>
+                    <div class="result-label">סה״כ ניכויים</div>
+                </div>
+                
+                <div class="result-card highlight">
+                    <div class="result-value text-success" style="font-size: 2.5em;">
+                        ${Math.round(data.netBonus).toLocaleString('he-IL')} ₪
+                    </div>
+                    <div class="result-label" style="font-weight: bold; font-size: 1.2em;">נטו נוסף לעצמאי</div>
+                </div>
+                
+                <div class="result-card">
+                    <div class="result-value text-warning">
+                        ${deductionRate}%
+                    </div>
+                    <div class="result-label">אחוז ניכוי כולל</div>
+                </div>
+                
+                <div class="result-card">
+                    <div class="result-value text-primary">
+                        ${netRate}%
+                    </div>
+                    <div class="result-label">אחוז נטו שנשאר</div>
+                </div>
+                
+                <div class="result-card danger-block" style="grid-column: 1 / -1;">
+                    <div class="result-label" style="font-size: 1.1em; font-weight: bold; margin-bottom: 10px;">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>יתרת מס לתשלום השנה
+                    </div>
+                    <div style="text-align: right; line-height: 1.5;">
+                        <strong>${Math.round(data.remainingTax).toLocaleString('he-IL')} ₪</strong><br>
+                        <small>יתרת מס שנתית לתשלום אחרי התוספת (כולל מקדמות ששולמו)</small>
+                    </div>
+                </div>
+            `;
+        }
+
+        // חישוב ביטוח לאומי ובריאות לעצמאי על בונוס
+        function calculateFreelancerSocialInsuranceOnBonus(currentMonthlyIncome, bonusMonthlyIncome) {
+            const rates = freelancerInsuranceRates;
+            
+            // חישוב ביטוח על ההכנסה הכוללת החדשה
+            const totalIncome = currentMonthlyIncome + bonusMonthlyIncome;
+            const totalInsurance = calculateFreelancerSocialInsurance(totalIncome);
+            
+            // חישוב ביטוח על ההכנסה הנוכחית
+            const currentInsurance = calculateFreelancerSocialInsurance(currentMonthlyIncome);
+            
+            // ההפרש הוא הביטוח על הבונוס
+            return {
+                bituachLeumi: totalInsurance.bituachLeumi - currentInsurance.bituachLeumi,
+                bituachBriut: totalInsurance.bituachBriut - currentInsurance.bituachBriut
+            };
+        }
+
+        // השלמת הפונקציה calculateFreelancerSocialInsurance
+        function calculateFreelancerSocialInsurance(monthlyIncome) {
+            const rates = freelancerInsuranceRates;
+            let bituachLeumi = 0;
+            let bituachBriut = 0;
+            
+            const cappedIncome = Math.min(monthlyIncome, rates.bituachLeumi.maxCeiling);
+            
+            // ביטוח לאומי
+            if (cappedIncome <= rates.bituachLeumi.tier1Ceiling) {
+                bituachLeumi = cappedIncome * rates.bituachLeumi.tier1Rate;
+            } else {
+                const tier1Amount = rates.bituachLeumi.tier1Ceiling * rates.bituachLeumi.tier1Rate;
+                const tier2Amount = (cappedIncome - rates.bituachLeumi.tier1Ceiling) * rates.bituachLeumi.tier2Rate;
+                bituachLeumi = tier1Amount + tier2Amount;
+            }
+            
+            // ביטוח בריאות - החלק שחסר
+            if (cappedIncome <= rates.bituachBriut.tier1Ceiling) {
+                bituachBriut = cappedIncome * rates.bituachBriut.tier1Rate;
+            } else {
+                const tier1Amount = rates.bituachBriut.tier1Ceiling * rates.bituachBriut.tier1Rate;
+                const tier2Amount = (cappedIncome - rates.bituachBriut.tier1Ceiling) * rates.bituachBriut.tier2Rate;
+                bituachBriut = tier1Amount + tier2Amount;
+            }
+            
+            return { bituachLeumi, bituachBriut };
+        }
+                
+        // פונקציה להצגת/הסתרת שדה הוצאות מותאם אישית
+        function updateCustomExpensesVisibility() {
+            const deductibleExpenses = document.getElementById('deductibleExpenses').value;
+            const customGroup = document.getElementById('customExpensesGroup');
+            
+            if (deductibleExpenses === 'custom') {
+                customGroup.classList.remove('hidden');
+            } else {
+                customGroup.classList.add('hidden');
+            }
+        }
+
+        function calculateFreelancerTax(annualIncome, deductibleRate, quarterlyAdvance) {
+            // חישוב הכנסה חייבת
+            const deductibleExpenses = annualIncome * (deductibleRate / 100);
+            const taxableIncome = annualIncome - deductibleExpenses;
+            const monthlyTaxableIncome = taxableIncome / 12;
+            
+            // חישוב מס שנתי
+            const annualTax = calculateTotalTax(monthlyTaxableIncome) * 12;
+            
+            // חישוב יתרת מס לתשלום
+            const remainingTax = Math.max(0, annualTax - quarterlyAdvance);
+            
+            return {
+                taxableIncome,
+                annualTax,
+                quarterlyAdvance,
+                remainingTax,
+                monthlyTaxableIncome
+            };
+        }
+
+        // החלפת פונקציית החישוב של ביטוח לאומי ובריאות
+        function calculateSocialInsurance(currentSalary, bonusInILS) {
+            const totalSalary = currentSalary + bonusInILS;
+            const originalSalaryCapped = Math.min(currentSalary, socialInsuranceRates.ceiling);
+            const totalSalaryCapped = Math.min(totalSalary, socialInsuranceRates.ceiling);
+            const bonusForSocial = totalSalaryCapped - originalSalaryCapped;
+            
+            if (bonusForSocial <= 0) {
+                return { bituachLeumi: 0, bituachBriut: 0 };
+            }
+            
+            // חישוב ביטוח לאומי על התוספת
+            let bituachLeumi = 0;
+            const currentPosition = originalSalaryCapped;
+            
+            if (currentPosition < socialInsuranceRates.bituachLeumi.tier1Ceiling) {
+                const tier1Amount = Math.min(bonusForSocial, socialInsuranceRates.bituachLeumi.tier1Ceiling - currentPosition);
+                bituachLeumi += tier1Amount * socialInsuranceRates.bituachLeumi.tier1Rate;
+                
+                const remainingBonus = bonusForSocial - tier1Amount;
+                if (remainingBonus > 0) {
+                    bituachLeumi += remainingBonus * socialInsuranceRates.bituachLeumi.tier2Rate;
+                }
+            } else {
+                bituachLeumi = bonusForSocial * socialInsuranceRates.bituachLeumi.tier2Rate;
+            }
+            
+            // חישוב מס בריאות על התוספת
+            let bituachBriut = 0;
+            
+            if (currentPosition < socialInsuranceRates.bituachBriut.tier1Ceiling) {
+                const tier1Amount = Math.min(bonusForSocial, socialInsuranceRates.bituachBriut.tier1Ceiling - currentPosition);
+                bituachBriut += tier1Amount * socialInsuranceRates.bituachBriut.tier1Rate;
+                
+                const remainingBonus = bonusForSocial - tier1Amount;
+                if (remainingBonus > 0) {
+                    bituachBriut += remainingBonus * socialInsuranceRates.bituachBriut.tier2Rate;
+                }
+            } else {
+                bituachBriut = bonusForSocial * socialInsuranceRates.bituachBriut.tier2Rate;
+            }
+            
+            return { bituachLeumi, bituachBriut };
+        }
+        
+        let bonusCounter = 0;
+
+        function addBonus() {
+            bonusCounter++;
+            const container = document.getElementById('bonusesContainer');
+            
+            const bonusDiv = document.createElement('div');
+            bonusDiv.className = 'bonus-item';
+            bonusDiv.id = `bonus-${bonusCounter}`;
+            
+            bonusDiv.innerHTML = `
+                <input type="text" class="form-input" placeholder="שם התוספת (בונוס, העלאה, פרמיה...)" id="bonusName-${bonusCounter}">
+                <input type="number" class="form-input" placeholder="סכום" id="bonusAmount-${bonusCounter}" step="0.01">
+                <select class="form-input" id="bonusCurrency-${bonusCounter}">
+                    <option value="USD">דולר (USD)</option>
+                    <option value="ILS">שקל (ILS)</option>
+                </select>
+                <button type="button" class="btn btn-danger" onclick="removeBonus(${bonusCounter})">
+                    <i class="bi bi-trash-fill"></i>
+                </button>
+            `;
+            
+            container.appendChild(bonusDiv);
+        }
+
+        function removeBonus(id) {
+            const bonusDiv = document.getElementById(`bonus-${id}`);
+            if (bonusDiv) {
+                bonusDiv.remove();
+            }
+        }
+
+        function getAllBonuses() {
+            const bonuses = [];
+            const container = document.getElementById('bonusesContainer');
+            const bonusItems = container.querySelectorAll('.bonus-item');
+            
+            bonusItems.forEach(item => {
+                const id = item.id.split('-')[1];
+                const name = document.getElementById(`bonusName-${id}`)?.value || 'תוספת';
+                const amount = parseFloat(document.getElementById(`bonusAmount-${id}`)?.value) || 0;
+                const currency = document.getElementById(`bonusCurrency-${id}`)?.value || 'ILS';
+                
+                if (amount > 0) {
+                    bonuses.push({ name, amount, currency });
+                }
+            });
+            
+            return bonuses;
+        }
+        
+        function calculateMixedBonus() {
+            // זמנית - עד שנפתח את המעורב, נקרא לחישוב רגיל
+            alert('חישוב מעורב עדיין בפיתוח. נשתמש בחישוב שכיר רגיל.');
+            calculateNetBonus();
+        }
+
+       function calculateNetBonus() {
+            const workStatus = document.getElementById('workStatus').value;
+            if (workStatus === 'freelancer' || workStatus === 'business') {
+                calculateFreelancerBonus();
+                return;
+            } else if (workStatus === 'mixed') {
+                calculateMixedBonus();
+                return;
+            }
+            
+            const currentSalary = parseFloat(document.getElementById('currentSalary').value) || 0;
+            const bonusAmount = parseFloat(document.getElementById('bonusAmount').value) || 0;
+            const bonusCurrency = document.getElementById('bonusCurrency').value;
+            const exchangeRate = parseFloat(document.getElementById('exchangeRate').value) || 3.42;
+            const creditPoints = parseFloat(document.getElementById('creditPoints').value) || 2.25;
+
+            // איסוף כל התוספות
+            const additionalBonuses = getAllBonuses();
+            const mainBonusName = document.getElementById('bonusName').value || 'תוספת עיקרית';
+
+            // חישוב סה״כ תוספות + איסוף כל השמות
+            let totalBonusInILS = 0;
+            let allBonuses = [];
+
+            // תוספת ראשית
+            if (bonusAmount > 0) {
+                const bonusInILS = bonusCurrency === 'USD' ? bonusAmount * exchangeRate : bonusAmount;
+                totalBonusInILS += bonusInILS;
+                allBonuses.push({
+                    name: mainBonusName,
+                    amount: bonusAmount,
+                    currency: bonusCurrency,
+                    amountInILS: bonusInILS
+                });
+            }
+
+            // תוספות נוספות
+            additionalBonuses.forEach(bonus => {
+                const amountInILS = bonus.currency === 'USD' ? bonus.amount * exchangeRate : bonus.amount;
+                totalBonusInILS += amountInILS;
+                allBonuses.push({
+                    name: bonus.name,
+                    amount: bonus.amount,
+                    currency: bonus.currency,
+                    amountInILS: amountInILS
+                });
+            });
+
+            if (totalBonusInILS === 0) {
+                alert('אנא הכנס לפחות תוספת אחת');
+                return;
+            }
+
+            // חישוב מס הכנסה על התוספת לפי מדרגות המס בפועל
+            const incomeTax = calculateIncomeTaxOnBonus(currentSalary, totalBonusInILS);
+
+            // חישוב ביטוח לאומי ובריאות עם השיעורים הנכונים
+            const socialInsurance = calculateSocialInsurance(currentSalary, totalBonusInILS);
+            const bituachLeumi = socialInsurance.bituachLeumi;
+            const bituachBriut = socialInsurance.bituachBriut;
+
+            // סה״כ ניכויים
+            const totalDeductions = incomeTax + bituachLeumi + bituachBriut;
+            
+            // נטו נוסף
+            const netBonus = totalBonusInILS - totalDeductions;
+
+            // אחוז הניכוי הכולל
+            const totalDeductionRate = (totalDeductions / totalBonusInILS) * 100;
+
+            // הצגת התוצאות
+            displayResults({
+                bonusAmount,
+                currency: bonusCurrency,
+                bonusInILS: totalBonusInILS,
+                incomeTax,
+                bituachLeumi,
+                bituachBriut,
+                totalDeductions,
+                netBonus,
+                totalDeductionRate,
+                exchangeRate,
+                currentSalary,
+                creditPoints,
+                allBonuses
+            });
+
+            // הצגת גרף
+            createTaxBreakdownChart({
+                incomeTax,
+                bituachLeumi,
+                bituachBriut,
+                netBonus
+            });
+
+            // הצגת קטע התוצאות
+            document.getElementById('resultsSection').classList.remove('hidden');
+        }
+
+       function displayResults(data) {
+            const resultsDiv = document.getElementById('results');
+            const currencySymbol = data.currency === 'USD' ? '$' : '₪';
+            
+            // הוספה בסוף הפונקציה displayResults, לפני סגירת innerHTML
+            const creditNote = generateCreditNote(data.currentSalary || 25000, data.bonusInILS, data.creditPoints || 2.25);
+
+            // חישוב שיעור המס בפועל על התוספת
+            const effectiveTaxRate = ((data.incomeTax / data.bonusInILS) * 100).toFixed(1);
+            const effectiveBituachLeumiRate = data.bituachLeumi > 0 ? ((data.bituachLeumi / data.bonusInILS) * 100).toFixed(1) + "%" : "0%";
+            const effectiveBituachBriutRate = data.bituachBriut > 0 ? ((data.bituachBriut / data.bonusInILS) * 100).toFixed(1) + "%" : "0%";
+            
+            // יצירת פירוט תוספות אם יש יותר מאחת
+            let bonusBreakdown = '';
+            if (data.allBonuses && data.allBonuses.length > 1) {
+                bonusBreakdown = `
+                    <div class="result-card warning-block" style="grid-column: 1 / -1;">
+                        <div class="result-label" style="font-size: 1.1em; font-weight: bold; margin-bottom: 10px;">
+                            <i class="bi bi-list-ul me-2"></i>פירוט התוספות
+                        </div>
+                        <div style="text-align: right; line-height: 1.5;">
+                            ${data.allBonuses.map(bonus => 
+                                `• ${bonus.name}: ${Math.round(bonus.amount).toLocaleString('he-IL')} ${bonus.currency === 'USD' ? '$' : '₪'} 
+                                ${bonus.currency === 'USD' ? `(${Math.round(bonus.amountInILS).toLocaleString('he-IL')} ₪)` : ''}`
+                            ).join('<br>')}
+                            <br><strong>סה״כ: ${Math.round(data.bonusInILS).toLocaleString('he-IL')} ₪</strong>
+                        </div>
+                    </div>
+                `;
+            } else if (data.allBonuses && data.allBonuses.length === 1) {
+                // אם יש תוספת אחת עם שם
+                bonusBreakdown = `
+                    <div class="result-card warning-block" style="grid-column: 1 / -1;">
+                        <div class="result-label" style="font-size: 1.1em; font-weight: bold; margin-bottom: 10px;">
+                            <i class="bi bi-list-ul me-2"></i>פרטי התוספת
+                        </div>
+                        <div style="text-align: right; line-height: 1.5;">
+                            <strong>${data.allBonuses[0].name}</strong>: ${Math.round(data.allBonuses[0].amount).toLocaleString('he-IL')} ${data.allBonuses[0].currency === 'USD' ? '$' : '₪'}
+                            ${data.allBonuses[0].currency === 'USD' ? `<br>(${Math.round(data.allBonuses[0].amountInILS).toLocaleString('he-IL')} ₪ לפי שער ${data.exchangeRate || 3.42})` : ''}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            resultsDiv.innerHTML = `
+                <div class="result-card">
+                    <div class="result-value text-primary">
+                        ${Math.round(data.bonusAmount).toLocaleString('he-IL')} ${currencySymbol}
+                    </div>
+                    <div class="result-label">תוספת מקורית</div>
+                </div>
+                
+                <div class="result-card">
+                    <div class="result-value text-warning">
+                        ${Math.round(data.bonusInILS).toLocaleString('he-IL')} ₪
+                    </div>
+                    <div class="result-label">סה״כ תוספות בשקלים</div>
+                </div>
+                
+                <div class="result-card negative">
+                    <div class="result-value negative-number">
+                        ‎−${Math.round(data.incomeTax).toLocaleString('he-IL')} ₪
+                    </div>
+                    <div class="result-label">מס הכנסה (${effectiveTaxRate}%)</div>
+                </div>
+                
+                <div class="result-card negative">
+                    <div class="result-value negative-number">
+                        ‎−${Math.round(data.bituachLeumi).toLocaleString('he-IL')} ₪
+                    </div>
+                    <div class="result-label">ביטוח לאומי (${effectiveBituachLeumiRate})</div>
+                </div>
+                
+                <div class="result-card negative">
+                    <div class="result-value negative-number">
+                        ‎−${Math.round(data.bituachBriut).toLocaleString('he-IL')} ₪
+                    </div>
+                    <div class="result-label">מס בריאות (${effectiveBituachBriutRate})</div>
+                </div>
+                
+                <div class="result-card negative">
+                    <div class="result-value negative-number">
+                        ‎−${Math.round(data.totalDeductions).toLocaleString('he-IL')} ₪
+                    </div>
+                    <div class="result-label">סה״כ ניכויים</div>
+                </div>
+                
+                <div class="result-card highlight">
+                    <div class="result-value text-success" style="font-size: 2.5em;">
+                        ${Math.round(data.netBonus).toLocaleString('he-IL')} ₪
+                    </div>
+                    <div class="result-label" style="font-weight: bold; font-size: 1.2em;">שכר נטו נוסף</div>
+                </div>
+                
+                <div class="result-card">
+                    <div class="result-value text-warning">
+                        ${data.totalDeductionRate.toFixed(1)}%
+                    </div>
+                    <div class="result-label">אחוז ניכוי כולל</div>
+                </div>
+                
+                <div class="result-card">
+                    <div class="result-value text-primary">
+                        ${(100 - data.totalDeductionRate).toFixed(1)}%
+                    </div>
+                    <div class="result-label">אחוז נטו שנשאר</div>
+                </div>
+                
+                ${bonusBreakdown}
+                
+                <div class="result-card info-block" style="grid-column: 1 / -1;">
+                    <div class="result-label" style="font-size: 1.1em; font-weight: bold; margin-bottom: 10px;">
+                        <i class="bi bi-award-fill me-2"></i>נקודות זכות
+                    </div>
+                    <div style="text-align: right; line-height: 1.5;">
+                        ${creditNote}
+                    </div>
+                </div>
+            `;
+        }
+        
+        function calculateAvailableTaxCredits(currentSalary, bonusAmount) {
+            const basicCredits = 2.25; // נקודות זכות בסיסיות מינימליות
+            const creditValueMonthly = 242; // שווי נקודה לחודש 2025
+            
+            // חישוב מס לכאורה על המשכורת הנוכחית
+            const currentTax = calculateTotalTax(currentSalary);
+            
+            // מקסימום נקודות זכות שניתן לנצל
+            const maxCreditValue = basicCredits * creditValueMonthly;
+            
+            // האם יש עוד מקום לנקודות זכות?
+            const unusedCredits = Math.max(0, maxCreditValue - currentTax);
+            
+            return {
+                canUseCredits: unusedCredits > 0,
+                availableCredits: unusedCredits,
+                maxCreditValue: maxCreditValue,
+                currentTax: currentTax
+            };
+        }
+
+        // פונקציה מעודכנת ליצירת הערה על נקודות זכות
+        function generateCreditNote(salary, bonus, creditPoints = 2.25) {
+            const maxCreditValue = creditPoints * CREDIT_POINT_VALUE;
+            const currentTax = calculateTotalTax(salary);
+            const unusedCredits = Math.max(0, maxCreditValue - currentTax);
+            
+            if (unusedCredits <= 0) {
+                return `✅ במשכורת זו נקודות הזכות (${creditPoints} נקודות = ${Math.round(maxCreditValue)} ש"ח/חודש) כבר מנוצלות במלואן. התוספת תחויב במלוא שיעור המס.`;
+            } else {
+                const unusedAmount = Math.round(unusedCredits);
+                return `💡 יש לך עוד ${unusedAmount} ש"ח נקודות זכות לא מנוצלות שיכולות להפחית את המס. (מתוך ${Math.round(maxCreditValue)} ש"ח סה״כ נקודות זכות)`;
+            }
+        }
+                
+        // עדכון הצגת תוצאות עם הטבת יישוב מזכה
+        function displaySettlementBenefitInResults(settlementType) {
+            if (settlementType === 'none') return '';
+            
+            let benefitData = settlementBenefits[settlementType];
+            if (settlementType === 'custom') {
+                const customRate = parseFloat(document.getElementById('customSettlementRate').value) || 0;
+                const customCeiling = parseFloat(document.getElementById('customSettlementCeiling').value) || 0;
+                benefitData = { rate: customRate / 100, ceiling: customCeiling };
+            }
+            
+            if (benefitData && benefitData.rate > 0) {
+                return `
+                    <div class="result-card success-block" style="grid-column: 1 / -1;">
+                        <div class="result-label" style="font-size: 1.1em; font-weight: bold; margin-bottom: 10px;">
+                            <i class="bi bi-house-heart-fill me-2"></i>הטבת יישוב מזכה
+                        </div>
+                        <div style="text-align: right; line-height: 1.5;">
+                            שיעור הטבה: ${(benefitData.rate * 100).toFixed(0)}%<br>
+                            תקרת הטבה שנתית: ${benefitData.ceiling.toLocaleString('he-IL')} ש"ח<br>
+                            <small>ההטבה מופחתת ממס ההכנסה על ההכנסה החייבת עד התקרה</small>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            return '';
+        }
+
+        // פונקציה חדשה לחישוב מס הכנסה על התוספת לפי המדרגות
+        function calculateIncomeTaxOnBonus(currentSalary, bonusAmount) {
+           const totalSalaryBefore = currentSalary;
+           const totalSalaryAfter = currentSalary + bonusAmount;
+           
+           // חישוב מס על השכר הכולל עם התוספת
+           const taxAfter = calculateTotalTax(totalSalaryAfter);
+           
+           // חישוב מס על השכר ללא התוספת
+           const taxBefore = calculateTotalTax(totalSalaryBefore);
+           
+           // ההפרש הוא המס על התוספת
+           return taxAfter - taxBefore;
+        }
+
+        // החלף את הפונקציה calculateTotalTax הקיימת בזו:
+        function calculateTotalTax(salary) {
+            let tax = 0;
+            let remainingSalary = salary;
+            
+            // חישוב מס רגיל לפי מדרגות
+            for (let i = 0; i < taxBrackets.length; i++) {
+                const bracket = taxBrackets[i];
+                const bracketSize = bracket.max - bracket.min;
+                
+                if (remainingSalary <= 0) break;
+                
+                if (remainingSalary > bracketSize) {
+                    tax += bracketSize * bracket.rate;
+                    remainingSalary -= bracketSize;
+                } else {
+                    tax += remainingSalary * bracket.rate;
+                    break;
+                }
+            }
+            
+            // הוספת מס נוסף על הכנסות גבוהות (5% במקום 3%)
+            if (salary > HIGH_INCOME_TAX.threshold) {
+                const excessIncome = salary - HIGH_INCOME_TAX.threshold;
+                tax += excessIncome * HIGH_INCOME_TAX.rate;
+            }
+            
+            // הפחתת הטבת יישוב מזכה
+            const settlementType = document.getElementById('settlementType')?.value || 'none';
+            const settlementBenefit = calculateSettlementBenefit(salary, settlementType);
+            tax = Math.max(0, tax - settlementBenefit);
+            
+            return tax;
+        }
+                
+        function createTaxBreakdownChart(data) {
+            const ctx = document.getElementById('taxBreakdownChart').getContext('2d');
+            
+            // הריסת גרף קודם אם קיים
+            if (window.taxChart) {
+                window.taxChart.destroy();
+            }
+            
+            window.taxChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['מס הכנסה', 'ביטוח לאומי', 'מס בריאות', 'נטו שנשאר'],
+                    datasets: [{
+                        data: [
+                            data.incomeTax,
+                            data.bituachLeumi,
+                            data.bituachBriut,
+                            data.netBonus
+                        ],
+                        backgroundColor: [
+                            '#e74c3c',  // אדום למס הכנסה
+                            '#f39c12',  // כתום לביטוח לאומי
+                            '#e67e22',  // כתום כהה למס בריאות
+                            '#27ae60'   // ירוק לנטו
+                        ],
+                        borderColor: '#ffffff',
+                        borderWidth: 3,
+                        hoverBorderWidth: 5
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                color: '#ffffff',
+                                font: {
+                                    size: 14,
+                                    weight: 'bold'
+                                },
+                                padding: 20,
+                                usePointStyle: true,
+                                pointStyle: 'circle'
+                            }
+                        },
+                        title: {
+                            display: true,
+                            text: 'פילוח ניכויים מהתוספת',
+                            color: '#ffffff',
+                            font: {
+                                size: 18,
+                                weight: 'bold'
+                            },
+                            padding: 20
+                        },
+                        tooltip: {
+                            backgroundColor: 'rgba(0,0,0,0.8)',
+                            titleColor: '#ffffff',
+                            bodyColor: '#ffffff',
+                            borderColor: '#4a90e2',
+                            borderWidth: 2,
+                            cornerRadius: 10,
+                            displayColors: true,
+                            callbacks: {
+                                label: function(context) {
+                                    const value = context.parsed;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = ((value / total) * 100).toFixed(1);
+                                    return `${context.label}: ${value.toLocaleString('he-IL')} ₪ (${percentage}%)`;
+                                }
+                            }
+                        }
+                    },
+                    animation: {
+                        animateRotate: true,
+                        animateScale: true,
+                        duration: 1500,
+                        easing: 'easeInOutQuart'
+                    },
+                    cutout: '40%',
+                    radius: '90%'
+                }
+            });
+        }
+
+        // הפעלת החישוב בעת טעינת הדף עם ערכי ברירת המחדל
+        window.addEventListener('load', function() {
+            calculateNetBonus();
+        });
+
+        // הוספת אנימציות לקלט
+        document.querySelectorAll('input, select').forEach(element => {
+            element.addEventListener('focus', function() {
+                this.style.transform = 'scale(1.02)';
+            });
+            
+            element.addEventListener('blur', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+        
+        // החלף את ה-event listener הישן ל-currency עם זה:
+        document.getElementById('bonusCurrency').addEventListener('change', function() {
+            updateExchangeRateVisibility();
+        });
+        
+        // Event Listeners נוספים
+        document.getElementById('deductibleExpenses').addEventListener('change', updateCustomExpensesVisibility);
+
+        function updateExchangeRateVisibility() {
+            const mainCurrency = document.getElementById('bonusCurrency').value;
+            const exchangeRateInput = document.getElementById('exchangeRate');
+            
+            // אם התוספת הראשית בשקלים, בדוק אם יש תוספות נוספות בדולרים
+            const additionalBonuses = getAllBonuses();
+            const hasUSD = mainCurrency === 'USD' || additionalBonuses.some(bonus => bonus.currency === 'USD');
+            
+            if (hasUSD) {
+                exchangeRateInput.style.display = 'block';
+                exchangeRateInput.parentElement.style.display = 'block';
+            } else {
+                exchangeRateInput.style.display = 'none';
+                exchangeRateInput.parentElement.style.display = 'none';
+            }
+        }
+
+        // פונקציה לעדכון אוטומטי של התוצאות כאשר משתנה ערך
+        document.querySelectorAll('#currentSalary, #bonusAmount, #currency, #exchangeRate').forEach(element => {
+            element.addEventListener('input', function() {
+                // עיכוב קצר למניעת חישובים מיותרים
+                clearTimeout(window.calculateTimeout);
+                window.calculateTimeout = setTimeout(calculateNetBonus, 500);
+            });
+        });
+        
+        function sendHeight() {
+            try {
+              const h = Math.max(
+                document.body.scrollHeight,
+                document.documentElement.scrollHeight
+              );
+              window.parent.postMessage({ type: 'resize-calculate', height: h }, '*');
+            } catch (e) {}
+          }
+
+          // שליחה ראשונית
+          window.addEventListener('load', sendHeight);
+          // שליחה על כל שינוי גודל חלון
+          window.addEventListener('resize', sendHeight);
+          // שליחה חוזרת מדי כמה שניות לגיבוי
+          setInterval(sendHeight, 2000);
+    </script>
+</body>
+</html>
+            

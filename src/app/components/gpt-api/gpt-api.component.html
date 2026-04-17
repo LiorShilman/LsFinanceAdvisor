@@ -1,0 +1,126 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card text-white mb-3">
+        <div class="card-body alert alert-primary">
+          <div class="card-header fs-1 text-center blockquote fw-bold">
+            <i class="bi bi-robot me-3"></i>
+            OpenAI - מערכת AI חכמה
+            <i class="bi bi-stars ms-3"></i>
+          </div>
+          
+          <!-- Control Bar - יישור לימין -->
+          <div class="control-bar">
+            <div class="d-flex align-items-center gap-3">
+              <select class="bstyle fw-bold text-primary fs-5" [(ngModel)]="this.gptVersion">
+                <option selected>gpt-4o</option>
+                <option>gpt-4o mini</option>
+                <option>o3-mini</option>
+              </select>
+              
+              <button class="btn btn-primary" (click)="CheckResponse()">
+                <i class="bi bi-send me-2"></i>
+                שלח נתונים
+              </button>
+              
+              <button class="btn btn-primary" (click)="SaveFile()">
+                <i class="bi bi-download me-2"></i>
+                שמור לקובץ
+              </button>
+              
+              <button class="btn btn-primary" (click)="ReadFile()">
+                <i class="bi bi-upload me-2"></i>
+                העלה קובץ
+              </button>
+            </div>
+          </div>
+
+          <!-- Chat Container - ללא אזור הקלט -->
+          <div class="col-xl-12 d-flex justify-content-center">
+            <div class="frame-box" #frameBox>
+              <!-- Chat Messages בלבד -->
+              <div *ngFor="let item of this.chatConversation; let i = index" 
+                   style="background-color: transparent !important;">
+                
+                <!-- System Message -->
+                <div *ngIf="item.person == 'Role'" 
+                     class="talk-bubble-system system">
+                  <div class="talktext">
+                    <div class="d-flex align-items-center mb-2">
+                      <i class="bi bi-gear-fill me-2 text-info"></i>
+                      <strong>הגדרות מערכת</strong>
+                    </div>
+                    <pre [innerHTML]="item.response" 
+                         dir="rtl" 
+                         class="card-text padding"
+                         style="text-align: right; line-height: 30px; font-weight: bold;"
+                         [ngClass]="item.cssClass"></pre>
+                  </div>
+                </div>
+                
+                <!-- User Message -->
+                <div *ngIf="item.person == 'You'" 
+                     class="talk-bubble-user user">
+                  <div class="talktext">
+                    <div class="d-flex align-items-center mb-2 justify-content-end">
+                      <strong>אתה</strong>
+                      <i class="bi bi-person-fill ms-2 text-purple"></i>
+                    </div>
+                    <pre [innerHTML]="item.response" 
+                         dir="rtl" 
+                         class="card-text padding"
+                         style="text-align: right; line-height: 30px;" 
+                         [ngClass]="item.cssClass"></pre>
+                  </div>
+                  <img src="./assets/images/user-removebg-preview.png" 
+                       alt="User" 
+                       class="chat-icon user-icon">
+                </div>
+                
+                <!-- Assistant Message -->
+                <div *ngIf="item.person == 'Assistant'"
+                     class="talk-bubble-assistant assistant">
+                  <div class="talktext">
+                    <div class="d-flex align-items-center mb-2">
+                      <i class="bi bi-robot text-success me-2"></i>
+                      <strong>עוזר AI</strong>
+                    </div>
+                    <pre [innerHTML]="item.response" 
+                         dir="rtl" 
+                         class="card-text padding"
+                         style="text-align: right; line-height: 30px;" 
+                         [ngClass]="item.cssClass"></pre>
+                  </div>
+                  <img src="./assets/images/assistant-removebg-preview.png" 
+                       alt="Assistant"
+                       class="chat-icon assistant-icon">
+                </div>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Input Area - מחוץ לכל ה-card! -->
+  <div class="fixed-bottom-bar">
+    <div class="input-container">
+      <textarea class="gpt-textarea fs-3 form-control" 
+                [(ngModel)]="this.promptText" 
+                lang="he"
+                placeholder="כתוב כאן את השאלה שלך..."
+                (keydown)="handleKeydown($event)"
+                dir="rtl"></textarea>
+      
+      <div class="send-btn-container">
+        <button class="btn btn-primary" 
+                (click)="SendPrompt()">
+          <i class="bi bi-send-fill me-2"></i>
+          שלח הודעה
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

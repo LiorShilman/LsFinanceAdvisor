@@ -1,0 +1,60 @@
+<div class="bg-dark container-fluid" style="background-color: black;">
+  <div class="row" style="background-color: black;">
+    <div class="col-md-12" style="background-color: black;">
+      <div class="card text-white mb-3 " style="background-color: black;">
+        <div class="card-body alert alert-primary ">
+          <div class="card-header fs-1 text-center blockquote fw-bold">OpenAI - API
+            <div dir="ltr">
+              <!--               <input style="display: none;" #fileUpload [accept]="'.txt'" type="file" class="file-input" (change)="FileSelected($event)">-->
+              <select class="bstyle fw-bold text-primary fs-5"
+                style="vertical-align:middle;padding: 2px;margin-right: 10px;" [(ngModel)]="this.gptVersion">
+                <option>gpt-4</option>
+                <option selected>gpt-4o</option>
+                <option>gpt-4o mini</option>
+              </select>
+              <button class="btn btn-primary push-right align-middle" style="text-align: start;margin-right: 10px;"
+                (click)="CheckResponse()">שלח</button>
+              <button class="btn btn-primary push-right align-middle" style="text-align: start;margin-right: 10px;"
+                (click)="SaveFile()">שמור לקובץ</button>
+              <button class="btn btn-primary push-right align-middle" style="text-align: start;margin-right: 10px;"
+                (click)="ReadFile()">העלה קובץ</button>
+
+              <div class="col-xl-12">
+                <div class="frame-box">
+                  <div *ngFor="let item of chatConversation; let i = index">
+                    <div *ngIf="item.person == 'Role'"  class="talk-bubble-system tri-right round border left-top-system system">
+                      <div class="talktext">
+                        <pre innerHTML="
+{{item.response}}" class="fs-5  card-text padding" style="text-align: left;line-height: 30px;" [ngClass]="item.cssClass">
+                      </pre>
+                    </div>
+                  </div>
+                  <div *ngIf="item.person == 'You'" class="talk-bubble-user tri-right round border left-top user">
+                      <div class="talktext">
+                        <a class="delete" title="Delete" data-toggle="tooltip" (click)="DeleteMessage(i)"><i
+                          class="material-icons">&#xE872;</i></a>
+                        <pre innerHTML="
+{{item.response}}" class="fs-5  card-text padding" style="text-align: left;line-height: 30px;" [ngClass]="item.cssClass">
+                        </pre>
+                      </div>
+                    </div>
+                    <div *ngIf="item.person == 'Assistant'" class="talk-bubble-assistant tri-right round border right-top assistant">
+                      <div class="talktext">
+                        <pre innerHTML="
+{{item.response}}" class="fs-5  card-text padding" style="text-align: left;line-height: 30px;" [ngClass]="item.cssClass">
+                        </pre>
+                      </div>
+                    </div>
+                    </div>
+                    <br>
+                    <textarea row="3" cols="15" class="gpt-textarea fs-3 form-control" [(ngModel)]="promptText"
+                      placeholder="Start by asking what you are looking for" style="color: mediumspringgreen;font-weight: bold;"></textarea>
+                    <button class="btn btn-primary push-right mb-3" style="text-align: right;"
+                      (click)="SendPrompt()">שלח</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>

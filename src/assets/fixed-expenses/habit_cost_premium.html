@@ -1,0 +1,1491 @@
+
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>💸 מחיר ההרגל והמנויים - סימולטור פיננסי מקצועי</title>
+    
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <!-- KaTeX Support -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+    
+    <style>
+        :root {
+            --bg-primary: linear-gradient(135deg, #0a0f1c 0%, #1a1f2e 100%);
+            --bg-secondary: rgba(31, 41, 55, 0.8);
+            --bg-tertiary: rgba(55, 65, 81, 0.6);
+            --bg-card: linear-gradient(145deg, rgba(17, 24, 39, 0.9) 0%, rgba(31, 41, 55, 0.9) 100%);
+            --bg-input: linear-gradient(145deg, rgba(31, 41, 55, 0.9) 0%, rgba(55, 65, 81, 0.8) 100%);
+            --accent-primary: #60a5fa;
+            --accent-secondary: #34d399;
+            --accent-warning: #fbbf24;
+            --accent-danger: #f87171;
+            --text-primary: #f9fafb;
+            --text-secondary: #e5e7eb;
+            --text-muted: #9ca3af;
+            --border-primary: rgba(99, 179, 237, 0.2);
+            --border-secondary: rgba(255, 255, 255, 0.1);
+            --shadow-primary: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+            --shadow-secondary: 0 10px 25px -3px rgba(0, 0, 0, 0.3);
+            --shadow-inner: inset 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+            --glow-primary: 0 0 20px rgba(96, 165, 250, 0.3);
+            --glow-secondary: 0 0 20px rgba(52, 211, 153, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 20% 20%, rgba(96, 165, 250, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(52, 211, 153, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 60%, rgba(251, 191, 36, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1800px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 3rem 2rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-primary);
+            border-radius: 2rem;
+            box-shadow: var(--shadow-primary);
+            backdrop-filter: blur(20px);
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary), var(--accent-warning));
+            border-radius: 2rem 2rem 0 0;
+        }
+
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            letter-spacing: -0.02em;
+        }
+
+        .header p {
+            color: var(--text-secondary);
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 400;
+        }
+
+        .tab-container {
+            margin-bottom: 3rem;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 1rem;
+            background: var(--bg-secondary);
+            border-radius: 2rem;
+            border: 1px solid var(--border-secondary);
+            backdrop-filter: blur(10px);
+        }
+
+        .tab-button {
+            padding: 1rem 2rem;
+            background: transparent;
+            border: 1px solid var(--border-secondary);
+            border-radius: 1.5rem;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 600;
+            font-size: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tab-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .tab-button:hover::before {
+            left: 100%;
+        }
+
+        .tab-button:hover {
+            transform: translateY(-2px);
+            color: var(--text-primary);
+            border-color: var(--border-primary);
+        }
+
+        .tab-button.active {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            border-color: var(--accent-primary);
+            box-shadow: var(--glow-primary);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-primary);
+            border-radius: 2rem;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-primary);
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent-primary), transparent);
+        }
+
+        .card-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            position: relative;
+        }
+
+        .card-title::after {
+            content: '';
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent-primary) 0%, transparent 100%);
+            margin-left: 1rem;
+        }
+
+        .input-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            position: relative;
+        }
+
+        .input-label {
+            color: var(--text-secondary);
+            font-weight: 700;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .input-field,
+        .select-field {
+            padding: 1.25rem 1.5rem;
+            background: var(--bg-input);
+            border: 2px solid var(--border-secondary);
+            border-radius: 1.5rem;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            font-weight: 500;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-inner);
+            backdrop-filter: blur(10px);
+        }
+
+        .input-field:focus,
+        .select-field:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: var(--glow-primary), var(--shadow-inner);
+            transform: translateY(-2px);
+            background: rgba(55, 65, 81, 0.9);
+        }
+
+        .input-field:hover,
+        .select-field:hover {
+            border-color: var(--border-primary);
+            transform: translateY(-1px);
+        }
+
+        .select-field {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%239ca3af' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+            background-position: left 1rem center;
+            background-repeat: no-repeat;
+            background-size: 1.5em 1.5em;
+            padding-left: 3.5rem;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1.25rem 2.5rem;
+            border: none;
+            border-radius: 1.5rem;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.75rem;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            box-shadow: var(--glow-primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--glow-primary), var(--shadow-secondary);
+        }
+
+        .btn-secondary {
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            border: 2px solid var(--border-primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent-primary);
+            transform: translateY(-2px);
+            box-shadow: var(--glow-primary);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-primary);
+            border-radius: 2rem;
+            padding: 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            border-radius: 2rem 2rem 0 0;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.75rem;
+            font-variant-numeric: tabular-nums;
+            letter-spacing: -0.02em;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+
+        .chart-container {
+            background: var(--bg-card);
+            border: 1px solid var(--border-primary);
+            border-radius: 2rem;
+            padding: 2.5rem;
+            text-align: -webkit-center;
+            backdrop-filter: blur(20px);
+            margin-bottom: 2rem;
+        }
+
+        .chart-container canvas {
+            max-height: 450px;
+            border-radius: 1.5rem;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 1.5rem;
+            overflow: hidden;
+            box-shadow: var(--shadow-secondary);
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 1.25rem;
+            text-align: center;
+            border: none;
+            background: var(--bg-secondary);
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .comparison-table tr:nth-child(even) td {
+            background: rgba(55, 65, 81, 0.3);
+        }
+
+        .comparison-table tr:hover td {
+            background: rgba(96, 165, 250, 0.1);
+        }
+
+        .negative-number {
+            color: var(--accent-danger);
+            font-weight: bold;
+            direction: ltr;
+            unicode-bidi: embed;
+        }
+
+        .positive-number {
+            color: var(--accent-secondary);
+            font-weight: bold;
+        }
+
+        .formula-container {
+            background: linear-gradient(135deg, rgba(96, 165, 250, 0.1), rgba(52, 211, 153, 0.1));
+            padding: 2rem;
+            margin: 2rem 0;
+            border-radius: 1.5rem;
+            border: 1px solid var(--border-primary);
+            direction: ltr;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .insight-box {
+            background: linear-gradient(135deg, rgba(96, 165, 250, 0.1), rgba(52, 211, 153, 0.05));
+            border: 2px solid var(--border-primary);
+            border-radius: 2rem;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            backdrop-filter: blur(20px);
+        }
+
+        .insight-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--accent-primary);
+        }
+
+        /* Range Slider Styling */
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: var(--bg-tertiary);
+            outline: none;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            cursor: pointer;
+            box-shadow: var(--glow-primary);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            cursor: pointer;
+            border: none;
+            box-shadow: var(--glow-primary);
+        }
+
+        /* Usage Display */
+        #usageDisplay {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--accent-secondary);
+            margin-top: 0.5rem;
+            text-align: center;
+            padding: 0.5rem 1rem;
+            background: rgba(52, 211, 153, 0.1);
+            border-radius: 1rem;
+            border: 1px solid rgba(52, 211, 153, 0.2);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header h1 {
+                font-size: 2.5rem;
+            }
+
+            .input-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .tab-buttons {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .card {
+                padding: 1.5rem;
+            }
+
+            .btn {
+                padding: 1rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* Animation for elements */
+        .card {
+            animation: slideInUp 0.6s ease-out;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+            delimiters: [
+               {left: "\\(", right: "\\)", display: false},
+               {left: "\\[", right: "\\]", display: true},
+               {left: "$$", right: "$$", display: true},
+               {left: "$", right: "$", display: false}
+            ],
+            throwOnError: false,
+            errorColor: '#cc0000',
+            strict: false
+        });
+    });
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1>💸 מחיר ההרגל והמנויים</h1>
+            <p>סימולטור פיננסי מקצועי לחישוב העלות האמיתית של הרגלים ומנויים לאורך זמן</p>
+        </header>
+
+        <div class="tab-container">
+            <div class="tab-buttons">
+                <button class="tab-button active" data-tab="habits">🏃‍♂️ הרגלים יומיים</button>
+                <button class="tab-button" data-tab="subscriptions">📱 מנויים ושירותים</button>
+                <button class="tab-button" data-tab="combined">📊 השוואה משולבת</button>
+            </div>
+
+            <!-- הרגלים יומיים -->
+            <div class="tab-content active" id="habits">
+                <div class="main-grid">
+                    <div class="card">
+                        <h2 class="card-title">⚙️ הגדרות הרגל</h2>
+                        <div class="input-grid">
+                            <div class="input-group">
+                                <label class="input-label">🏷️ שם ההרגל</label>
+                                <input type="text" class="input-field" id="habitName" value="קפה בחוץ" placeholder="למשל: קפה בחוץ, סיגריות, מאפה">
+                            </div>
+                            
+                            <div class="input-group">
+                                <label class="input-label">💰 עלות לפעם (₪)</label>
+                                <input type="number" class="input-field" id="habitCost" value="15" step="0.1" min="0">
+                            </div>
+                            
+                            <div class="input-group">
+                                <label class="input-label">📅 תדירות</label>
+                                <select class="select-field" id="habitFrequency">
+                                    <option value="daily">יומי</option>
+                                    <option value="weekly">שבועי</option>
+                                    <option value="monthly">חודשי</option>
+                                    <option value="custom">מותאם אישית</option>
+                                </select>
+                            </div>
+                            
+                            <div class="input-group" id="customFrequencyGroup" style="display: none;">
+                                <label class="input-label">🔢 פעמים בשבוע</label>
+                                <input type="number" class="input-field" id="customFrequency" value="5" step="0.1" min="0">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h2 class="card-title">📈 פרמטרים כלכליים</h2>
+                        <div class="input-grid">
+                            <div class="input-group">
+                                <label class="input-label">📊 אינפלציה שנתית על ההרגל (%)</label>
+                                <input type="number" class="input-field" id="habitInflation" value="4" step="0.1" min="0">
+                            </div>
+                            
+                            <div class="input-group">
+                                <label class="input-label">💹 תשואת השקעה שנתית (%)</label>
+                                <input type="number" class="input-field" id="habitReturn" value="7" step="0.1" min="0">
+                            </div>
+                            
+                            <div class="input-group">
+                                <label class="input-label">⏱️ אופק זמן (שנים)</label>
+                                <input type="number" class="input-field" id="habitYears" value="10" min="1" max="50">
+                            </div>
+                            
+                            <div class="input-group">
+                                <label class="input-label">🎯 מדיניות השקעה</label>
+                                <select class="select-field" id="habitInvestmentPolicy">
+                                    <option value="growing">השקעה צומחת עם האינפלציה</option>
+                                    <option value="constant">השקעה קבועה</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="button-group">
+                            <button class="btn btn-primary" id="calculateHabit">🧮 חשב הרגל</button>
+                            <button class="btn btn-secondary" id="resetHabit">🔄 אפס</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- מנויים ושירותים -->
+            <div class="tab-content" id="subscriptions">
+                <div class="main-grid">
+                    <div class="card">
+                        <h2 class="card-title">📱 הגדרות מנוי</h2>
+                        <div class="input-grid">
+                            <div class="input-group">
+                                <label class="input-label">🏷️ שם המנוי</label>
+                                <input type="text" class="input-field" id="subscriptionName" value="Netflix" placeholder="למשל: Netflix, Spotify, חדר כושר">
+                            </div>
+                            
+                            <div class="input-group">
+                                <label class="input-label">💰 עלות מנוי (₪)</label>
+                                <input type="number" class="input-field" id="subscriptionCost" value="55" step="0.1" min="0">
+                            </div>
+                            
+                            <div class="input-group">
+                                <label class="input-label">📅 סוג מנוי</label>
+                                <select class="select-field" id="subscriptionType">
+                                    <option value="monthly">חודשי</option>
+                                    <option value="yearly">שנתי</option>
+                                    <option value="quarterly">רבעוני</option>
+                                    <option value="weekly">שבועי</option>
+                                </select>
+                            </div>
+                            
+                            <div class="input-group">
+                                <label class="input-label">⭐ דירוג השימוש (1-10)</label>
+                                <input type="range" class="input-field" id="usageRating" value="7" min="1" max="10" step="1">
+                                <div id="usageDisplay">7 - שימוש טוב</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <h2 class="card-title">💡 פרמטרים כלכליים</h2>
+                        <div class="input-grid">
+                            <div class="input-group">
+                                <label class="input-label">📊 עליית מחיר שנתית (%)</label>
+                                <input type="number" class="input-field" id="subscriptionInflation" value="8" step="0.1" min="0">
+                            </div>
+                            
+                            <div class="input-group">
+                                <label class="input-label">💹 תשואת השקעה חלופית (%)</label>
+                                <input type="number" class="input-field" id="subscriptionReturn" value="7" step="0.1" min="0">
+                            </div>
+                            
+                            <div class="input-group">
+                                <label class="input-label">⏱️ אופק זמן (שנים)</label>
+                                <input type="number" class="input-field" id="subscriptionYears" value="10" min="1" max="50">
+                            </div>
+                            
+                            <div class="input-group">
+                                <label class="input-label">🤔 שיקול ביטול</label>
+                                <select class="select-field" id="cancellationConsideration">
+                                    <option value="none">לא שוקל ביטול</option>
+                                    <option value="partial">שוקל ביטול חלקי</option>
+                                    <option value="full">שוקל ביטול מלא</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="button-group">
+                            <button class="btn btn-primary" id="calculateSubscription">🧮 חשב מנוי</button>
+                            <button class="btn btn-secondary" id="resetSubscription">🔄 אפס</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            
+			<div class="tab-content" id="combined"> 
+				<div class="card"> 
+					<h2 class="card-title">📊 השוואה משולבת</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 2rem; font-size: 1.2rem;">
+                        השוואה מקיפה בין ההרגל והמנוי שהגדרת, כולל ניתוח עלות-תועלת וחלופות השקעה
+                    </p>
+                    <div class="button-group">
+                        <button class="btn btn-primary" id="calculateCombined">📈 חשב השוואה משולבת</button>
+                        <button class="btn btn-secondary" id="generateReport">📄 צור דוח מפורט</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- תוצאות -->
+        <div id="results" class="stats-grid" style="display: none;">
+            <div class="stat-card">
+                <div class="stat-value" id="costPerYear">₪0</div>
+                <div class="stat-label">עלות שנתית נוכחית</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="costTotal">₪0</div>
+                <div class="stat-label">עלות מצטברת (כל התקופה)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="investmentValue">₪0</div>
+                <div class="stat-label">אם מושקע - ערך עתידי</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="opportunityCost">₪0</div>
+                <div class="stat-label">עלות הזדמנות</div>
+            </div>
+        </div>
+
+        <!-- גרפים -->
+        <div id="chartsSection" style="display: none;">
+            <div class="chart-container">
+                <h3 class="card-title">📊 השוואה ויזואלית</h3>
+                <canvas id="comparisonChart"></canvas>
+            </div>
+            
+            <div class="chart-container">
+                <h3 class="card-title">📈 התפתחות לאורך זמן</h3>
+                <canvas id="timelineChart"></canvas>
+            </div>
+        </div>
+
+        <!-- טבלת השוואה -->
+        <div id="comparisonSection" style="display: none;">
+            <div class="card">
+                <h3 class="card-title">📋 טבלת השוואה מפורטת</h3>
+                <div style="overflow-x: auto;">
+                    <table class="comparison-table" id="comparisonTable">
+                        <thead>
+                            <tr>
+                                <th>שנה</th>
+                                <th>עלות ההרגל/מנוי</th>
+                                <th>עלות מצטברת</th>
+                                <th>השקעה חלופית</th>
+                                <th>הפרש</th>
+                            </tr>
+                        </thead>
+                        <tbody id="comparisonTableBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- תובנות -->
+        <div id="insightsSection" style="display: none;">
+            <div class="insight-box">
+                <h3 class="insight-title">💡 תובנות כלכליות</h3>
+                <div id="insightsContent"></div>
+            </div>
+        </div>
+
+        <!-- נוסחאות -->
+        <div class="card" style="margin-top: 2rem;">
+            <h3 class="card-title">🧮 הנוסחאות הכלכליות</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 1.1rem;">
+                הסימולטור משתמש בנוסחאות כלכליות מתקדמות לחישוב מדויק של עלויות עתידיות וערכי השקעה:
+            </p>
+            
+            <div class="formula-container">
+                <h4 style="margin-bottom: 1rem; color: var(--accent-primary); font-size: 1.3rem;">עלות מצטברת עם אינפלציה:</h4>
+                $$FV_{cost} = PMT \times \frac{(1 + g)^n - 1}{g}$$
+                <p style="margin-top: 1rem; font-size: 1rem; color: var(--text-muted);">
+                    כאשר PMT = תשלום חודשי, g = אינפלציה חודשית, n = מספר חודשים
+                </p>
+            </div>
+            
+            <div class="formula-container">
+                <h4 style="margin-bottom: 1rem; color: var(--accent-secondary); font-size: 1.3rem;">ערך עתידי של השקעה חלופית:</h4>
+                $$FV_{investment} = PMT \times \frac{(1 + r)^n - (1 + g)^n}{r - g}$$
+                <p style="margin-top: 1rem; font-size: 1rem; color: var(--text-muted);">
+                    כאשר r = תשואה חודשית, במקרה של השקעה צומחת עם האינפלציה
+                </p>
+            </div>
+
+            <div class="formula-container">
+                <h4 style="margin-bottom: 1rem; color: var(--accent-warning); font-size: 1.3rem;">עלות הזדמנות:</h4>
+                $$OpportunityCost = FV_{investment} - FV_{cost}$$
+                <p style="margin-top: 1rem; font-size: 1rem; color: var(--text-muted);">
+                    ההפרש בין הערך העתידי של ההשקעה לבין העלות המצטברת של ההרגל/מנוי
+                </p>
+            </div>
+        </div>
+
+        <!-- מידע נוסף -->
+        <div class="card" style="margin-top: 2rem;">
+            <h3 class="card-title">ℹ️ הנחות ושיטת החישוב</h3>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+                <div>
+                    <h4 style="color: var(--accent-primary); margin-bottom: 1rem;">📊 עלויות והרגלים</h4>
+                    <ul style="color: var(--text-secondary); line-height: 1.8; padding-right: 1.5rem;">
+                        <li>העלות המצטברת לוקחת בחשבון עליית מחירים שנתית על ההרגל</li>
+                        <li>החישוב מבוסס על ממוצע של 30.44 ימים בחודש ו-4.33 שבועות בחודש</li>
+                        <li>ההרגלים מתואמים לאינפלציה ספציפית לקטגוריה</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: var(--accent-secondary); margin-bottom: 1rem;">💹 השקעות וחישובים</h4>
+                    <ul style="color: var(--text-secondary); line-height: 1.8; padding-right: 1.5rem;">
+                        <li>ההשקעה מבוססת על הפקדה חודשית של החיסכון מההרגל/מנוי</li>
+                        <li>מצב "צומחת" מעדכן את גובה ההפקדה לפי אותה אינפלציה</li>
+                        <li>חישוב ההשקעה נעשה חודשי עם ריבוי רבעוני</li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 style="color: var(--accent-warning); margin-bottom: 1rem;">⚠️ מגבלות הסימולטור</h4>
+                    <ul style="color: var(--text-secondary); line-height: 1.8; padding-right: 1.5rem;">
+                        <li>אין התחשבות במסים, עמלות ותזמון הפקדות בפועל</li>
+                        <li>זהו סימולטור תודעתי-רגשי למטרות חינוכיות</li>
+                        <li>התשואות המוצגות הן הערכות ולא הבטחות</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        class HabitCostCalculator {
+            constructor() {
+                this.initializeElements();
+                this.bindEvents();
+                this.charts = {};
+            }
+
+            initializeElements() {
+                // Habit elements
+                this.habitElements = {
+                    name: document.getElementById('habitName'),
+                    cost: document.getElementById('habitCost'),
+                    frequency: document.getElementById('habitFrequency'),
+                    customFrequency: document.getElementById('customFrequency'),
+                    customFrequencyGroup: document.getElementById('customFrequencyGroup'),
+                    inflation: document.getElementById('habitInflation'),
+                    return: document.getElementById('habitReturn'),
+                    years: document.getElementById('habitYears'),
+                    investmentPolicy: document.getElementById('habitInvestmentPolicy'),
+                    calculate: document.getElementById('calculateHabit'),
+                    reset: document.getElementById('resetHabit')
+                };
+
+                // Subscription elements
+                this.subscriptionElements = {
+                    name: document.getElementById('subscriptionName'),
+                    cost: document.getElementById('subscriptionCost'),
+                    type: document.getElementById('subscriptionType'),
+                    usageRating: document.getElementById('usageRating'),
+                    usageDisplay: document.getElementById('usageDisplay'),
+                    inflation: document.getElementById('subscriptionInflation'),
+                    return: document.getElementById('subscriptionReturn'),
+                    years: document.getElementById('subscriptionYears'),
+                    cancellation: document.getElementById('cancellationConsideration'),
+                    calculate: document.getElementById('calculateSubscription'),
+                    reset: document.getElementById('resetSubscription')
+                };
+
+                // Result elements
+                this.resultElements = {
+                    costPerYear: document.getElementById('costPerYear'),
+                    costTotal: document.getElementById('costTotal'),
+                    investmentValue: document.getElementById('investmentValue'),
+                    opportunityCost: document.getElementById('opportunityCost'),
+                    results: document.getElementById('results'),
+                    chartsSection: document.getElementById('chartsSection'),
+                    comparisonSection: document.getElementById('comparisonSection'),
+                    insightsSection: document.getElementById('insightsSection')
+				};
+
+                // Tab elements
+                this.tabButtons = document.querySelectorAll('.tab-button');
+                this.tabContents = document.querySelectorAll('.tab-content');
+
+                // Combined elements
+                this.combinedElements = {
+                    calculate: document.getElementById('calculateCombined'),
+                    generateReport: document.getElementById('generateReport')
+                };
+
+                // Storage for calculations
+                this.currentCalculation = null;
+                this.habitCalculation = null;
+                this.subscriptionCalculation = null;
+            }
+
+            bindEvents() {
+                // Tab switching
+                this.tabButtons.forEach(button => {
+                    button.addEventListener('click', () => this.switchTab(button.dataset.tab));
+                });
+
+                // Habit frequency change
+                this.habitElements.frequency.addEventListener('change', () => {
+                    this.toggleCustomFrequency();
+                });
+
+                // Usage rating display
+                this.subscriptionElements.usageRating.addEventListener('input', () => {
+                    this.updateUsageDisplay();
+                });
+
+                // Calculate buttons
+                this.habitElements.calculate.addEventListener('click', () => this.calculateHabit());
+                this.subscriptionElements.calculate.addEventListener('click', () => this.calculateSubscription());
+                this.combinedElements.calculate.addEventListener('click', () => this.calculateCombined());
+                this.combinedElements.generateReport.addEventListener('click', () => this.generateReport());
+
+                // Reset buttons
+                this.habitElements.reset.addEventListener('click', () => this.resetHabit());
+                this.subscriptionElements.reset.addEventListener('click', () => this.resetSubscription());
+
+                // Initialize display
+                this.toggleCustomFrequency();
+                this.updateUsageDisplay();
+            }
+
+            switchTab(tabName) {
+                this.tabButtons.forEach(button => {
+                    button.classList.toggle('active', button.dataset.tab === tabName);
+                });
+
+                this.tabContents.forEach(content => {
+                    content.classList.toggle('active', content.id === tabName);
+                });
+            }
+
+            toggleCustomFrequency() {
+                const isCustom = this.habitElements.frequency.value === 'custom';
+                this.habitElements.customFrequencyGroup.style.display = isCustom ? 'block' : 'none';
+            }
+					
+					
+			updateUsageDisplay() {
+                const rating = parseInt(this.subscriptionElements.usageRating.value);
+                const labels = {
+                    1: 'שימוש כמעט לא קיים',
+                    2: 'שימוש נמוך מאוד',
+                    3: 'שימוש נמוך',
+                    4: 'שימוש מתון-נמוך',
+                    5: 'שימוש בינוני',
+                    6: 'שימוש טוב-בינוני',
+                    7: 'שימוש טוב',
+                    8: 'שימוש טוב מאוד',
+                    9: 'שימוש אינטנסיבי',
+                    10: 'שימוש מקסימלי'
+                };
+                this.subscriptionElements.usageDisplay.textContent = `${rating} - ${labels[rating]}`;
+            }
+
+            getMonthlyAmount(type, cost, frequency = null) {
+                switch (type) {
+                    case 'daily':
+                        return cost * 30;
+                    case 'weekly':
+                        return cost * 4.33;
+                    case 'monthly':
+                        return cost;
+                    case 'yearly':
+                        return cost / 12;
+                    case 'quarterly':
+                        return cost / 3;
+                    case 'custom':
+                        return cost * frequency * 4.33;
+                    default:
+                        return cost;
+                }
+            }
+
+            calculateFutureValue(monthlyAmount, annualInflation, annualReturn, years, policy = 'growing') {
+                const monthlyInflation = annualInflation / 12 / 100;
+                const monthlyReturn = annualReturn / 12 / 100;
+                const months = years * 12;
+
+                // עלות מצטברת
+                let totalCost;
+                if (Math.abs(monthlyInflation) < 1e-12) {
+                    totalCost = monthlyAmount * months;
+                } else {
+                    totalCost = monthlyAmount * (Math.pow(1 + monthlyInflation, months) - 1) / monthlyInflation;
+                }
+
+                // ערך עתידי של השקעה
+                let investmentValue;
+                if (policy === 'growing') {
+                    if (Math.abs(monthlyReturn - monthlyInflation) < 1e-12) {
+                        investmentValue = monthlyAmount * months * Math.pow(1 + monthlyReturn, months);
+                    } else {
+                        investmentValue = monthlyAmount * (Math.pow(1 + monthlyReturn, months) - Math.pow(1 + monthlyInflation, months)) / (monthlyReturn - monthlyInflation);
+                    }
+                } else {
+                    if (Math.abs(monthlyReturn) < 1e-12) {
+                        investmentValue = monthlyAmount * months;
+                    } else {
+                        investmentValue = monthlyAmount * (Math.pow(1 + monthlyReturn, months) - 1) / monthlyReturn;
+                    }
+                }
+
+                return {
+                    totalCost: totalCost,
+                    investmentValue: investmentValue,
+                    opportunityCost: investmentValue - totalCost,
+                    yearlyDetails: this.generateYearlyDetails(monthlyAmount, annualInflation, annualReturn, years, policy)
+                };
+            }
+
+            generateYearlyDetails(monthlyAmount, annualInflation, annualReturn, years, policy) {
+                const details = [];
+                const monthlyInflation = annualInflation / 12 / 100;
+                const monthlyReturn = annualReturn / 12 / 100;
+
+                for (let year = 1; year <= years; year++) {
+                    const months = year * 12;
+                    
+                    // עלות מצטברת עד השנה הנוכחית
+                    let cumulativeCost;
+                    if (Math.abs(monthlyInflation) < 1e-12) {
+                        cumulativeCost = monthlyAmount * months;
+                    } else {
+                        cumulativeCost = monthlyAmount * (Math.pow(1 + monthlyInflation, months) - 1) / monthlyInflation;
+                    }
+
+                    // השקעה מצטברת עד השנה הנוכחית
+                    let cumulativeInvestment;
+                    if (policy === 'growing') {
+                        if (Math.abs(monthlyReturn - monthlyInflation) < 1e-12) {
+                            cumulativeInvestment = monthlyAmount * months * Math.pow(1 + monthlyReturn, months);
+                        } else {
+                            cumulativeInvestment = monthlyAmount * (Math.pow(1 + monthlyReturn, months) - Math.pow(1 + monthlyInflation, months)) / (monthlyReturn - monthlyInflation);
+                        }
+                    } else {
+                        if (Math.abs(monthlyReturn) < 1e-12) {
+                            cumulativeInvestment = monthlyAmount * months;
+                        } else {
+                            cumulativeInvestment = monthlyAmount * (Math.pow(1 + monthlyReturn, months) - 1) / monthlyReturn;
+                        }
+                    }
+
+                    // עלות שנתית (השנה הנוכחית בלבד)
+                    const currentYearInflation = Math.pow(1 + annualInflation / 100, year - 1);
+                    const yearlyCost = monthlyAmount * 12 * currentYearInflation;
+
+                    details.push({
+                        year: year,
+                        yearlyCost: yearlyCost,
+                        cumulativeCost: cumulativeCost,
+                        cumulativeInvestment: cumulativeInvestment,
+                        difference: cumulativeInvestment - cumulativeCost
+                    });
+                }
+
+                return details;
+            }
+
+            calculateHabit() {
+                const name = this.habitElements.name.value || 'הרגל';
+                const cost = parseFloat(this.habitElements.cost.value) || 0;
+                const frequency = this.habitElements.frequency.value;
+                const customFreq = parseFloat(this.habitElements.customFrequency.value) || 5;
+                const inflation = parseFloat(this.habitElements.inflation.value) || 0;
+                const returnRate = parseFloat(this.habitElements.return.value) || 0;
+                const years = parseInt(this.habitElements.years.value) || 10;
+                const policy = this.habitElements.investmentPolicy.value;
+
+                const monthlyAmount = this.getMonthlyAmount(frequency, cost, customFreq);
+                const results = this.calculateFutureValue(monthlyAmount, inflation, returnRate, years, policy);
+
+                this.displayResults(results, name, 'habit');
+                this.currentCalculation = { type: 'habit', name, results, monthlyAmount, inflation, returnRate, years, policy };
+            }
+
+            calculateSubscription() {
+                const name = this.subscriptionElements.name.value || 'מנוי';
+                const cost = parseFloat(this.subscriptionElements.cost.value) || 0;
+                const type = this.subscriptionElements.type.value;
+                const usageRating = parseInt(this.subscriptionElements.usageRating.value);
+                const inflation = parseFloat(this.subscriptionElements.inflation.value) || 0;
+                const returnRate = parseFloat(this.subscriptionElements.return.value) || 0;
+                const years = parseInt(this.subscriptionElements.years.value) || 10;
+
+                const monthlyAmount = this.getMonthlyAmount(type, cost);
+                const results = this.calculateFutureValue(monthlyAmount, inflation, returnRate, years, 'growing');
+
+                // התאמה לפי דירוג שימוש
+                const utilizationFactor = usageRating / 10;
+                const adjustedResults = {
+                    ...results,
+                    effectiveValue: results.investmentValue * utilizationFactor,
+                    wastedCost: results.totalCost * (1 - utilizationFactor)
+                };
+
+                this.displayResults(adjustedResults, name, 'subscription', usageRating);
+                this.currentCalculation = { type: 'subscription', name, results: adjustedResults, monthlyAmount, inflation, returnRate, years, usageRating };
+            }
+
+            displayResults(results, name, type, usageRating = null) {
+                const yearlyAverage = results.totalCost / parseInt(this.habitElements.years.value || this.subscriptionElements.years.value);
+
+                this.resultElements.costPerYear.textContent = `₪${this.formatNumber(yearlyAverage)}`;
+                this.resultElements.costTotal.textContent = `₪${this.formatNumber(results.totalCost)}`;
+                this.resultElements.investmentValue.textContent = `₪${this.formatNumber(results.investmentValue)}`;
+                this.resultElements.opportunityCost.textContent = `₪${this.formatNumber(results.opportunityCost)}`;
+
+                // הצגת תוצאות
+                this.resultElements.results.style.display = 'grid';
+                this.resultElements.chartsSection.style.display = 'block';
+                this.resultElements.comparisonSection.style.display = 'block';
+                this.resultElements.insightsSection.style.display = 'block';
+
+                // יצירת גרפים
+                this.createComparisonChart(results, name);
+                this.createTimelineChart(results.yearlyDetails, name);
+                this.createComparisonTable(results.yearlyDetails);
+                this.generateInsights(results, name, type, usageRating);
+            }
+
+            createComparisonChart(results, name) {
+                const ctx = document.getElementById('comparisonChart');
+                
+                if (this.charts.comparison) {
+                    this.charts.comparison.destroy();
+                }
+
+                this.charts.comparison = new Chart(ctx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: [`עלות ${name}`, 'השקעה חלופית', 'עלות הזדמנות'],
+                        datasets: [{
+                            data: [
+                                results.totalCost,
+                                results.investmentValue,
+                                Math.abs(results.opportunityCost)
+                            ],
+                            backgroundColor: [
+                                '#ef4444',
+                                '#10b981', 
+                                '#f59e0b'
+                            ],
+                            borderWidth: 2,
+                            borderColor: '#1f2937'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                position: 'bottom',
+                                labels: {
+                                    color: '#f9fafb',
+                                    padding: 20,
+                                    font: { size: 14, weight: '600' }
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(17, 24, 39, 0.9)',
+                                titleColor: '#f9fafb',
+                                bodyColor: '#f9fafb',
+                                borderColor: '#3b82f6',
+                                borderWidth: 1,
+                                callbacks: {
+                                    label: (context) => {
+                                        return `${context.label}: ₪${this.formatNumber(context.raw)}`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            createTimelineChart(yearlyDetails, name) {
+                const ctx = document.getElementById('timelineChart');
+                
+                if (this.charts.timeline) {
+                    this.charts.timeline.destroy();
+                }
+
+                const years = yearlyDetails.map(d => `שנה ${d.year}`);
+                const costs = yearlyDetails.map(d => d.cumulativeCost);
+                const investments = yearlyDetails.map(d => d.cumulativeInvestment);
+
+                this.charts.timeline = new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: years,
+                        datasets: [
+                            {
+                                label: `עלות מצטברת - ${name}`,
+                                data: costs,
+                                borderColor: '#ef4444',
+                                backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                                borderWidth: 3,
+                                fill: true,
+                                tension: 0.4
+                            },
+                            {
+                                label: 'השקעה חלופית',
+                                data: investments,
+                                borderColor: '#10b981',
+                                backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                                borderWidth: 3,
+                                fill: true,
+                                tension: 0.4
+                            }
+                        ]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true,
+                                ticks: {
+                                    color: '#9ca3af',
+                                    callback: function(value) {
+                                        return '₪' + value.toLocaleString('he-IL');
+                                    }
+                                },
+                                grid: {
+                                    color: 'rgba(255, 255, 255, 0.1)'
+                                }
+                            },
+                            x: {
+                                ticks: { color: '#9ca3af' },
+                                grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                            }
+                        },
+                        plugins: {
+                            legend: {
+                                labels: {
+                                    color: '#f9fafb',
+                                    font: { size: 14, weight: '600' }
+                                }
+                            },
+                            tooltip: {
+                                backgroundColor: 'rgba(17, 24, 39, 0.9)',
+                                titleColor: '#f9fafb',
+                                bodyColor: '#f9fafb',
+                                borderColor: '#3b82f6',
+                                borderWidth: 1,
+                                callbacks: {
+                                    label: (context) => {
+                                        return `${context.dataset.label}: ₪${this.formatNumber(context.raw)}`;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+
+            createComparisonTable(yearlyDetails) {
+                const tbody = document.getElementById('comparisonTableBody');
+                tbody.innerHTML = '';
+
+                yearlyDetails.forEach(detail => {
+                    const row = tbody.insertRow();
+                    const differenceClass = detail.difference >= 0 ? 'positive-number' : 'negative-number';
+                    
+                    row.innerHTML = `
+                        <td>${detail.year}</td>
+                        <td>₪${this.formatNumber(detail.yearlyCost)}</td>
+                        <td>₪${this.formatNumber(detail.cumulativeCost)}</td>
+                        <td>₪${this.formatNumber(detail.cumulativeInvestment)}</td>
+                        <td class="${differenceClass}">₪${this.formatNumber(Math.abs(detail.difference))}</td>
+                    `;
+                });
+            }
+
+            generateInsights(results, name, type, usageRating = null) {
+                const insightsContent = document.getElementById('insightsContent');
+                const years = parseInt(this.habitElements.years.value || this.subscriptionElements.years.value);
+                const monthlyOpportunityCost = results.opportunityCost / (years * 12);
+                
+                let insights = [`
+                    <p><strong>💰 עלות הזדמנות חודשית:</strong> ₪${this.formatNumber(monthlyOpportunityCost)} - זה הסכום שמפסיד חודש עקב אי-השקעה.</p>
+                    <p><strong>📈 פוטנציאל צמיחה:</strong> תוך ${years} שנים, ההשקעה החלופית יכולה לצמוח ב-${this.formatNumber(((results.investmentValue / results.totalCost - 1) * 100))}% מהעלות המקורית.</p>
+                    <p><strong>⏰ שווה ערך זמן:</strong> כל שקל שמושקע היום שווה ₪${this.formatNumber(results.investmentValue / results.totalCost)} בעוד ${years} שנים.</p>
+                `];
+
+                if (type === 'subscription' && usageRating) {
+                    const efficiencyScore = (usageRating * 10);
+                    insights.push(`
+                        <p><strong>📊 ציון יעילות השימוש:</strong> ${efficiencyScore}% - ${usageRating >= 7 ? 'המנוי מצדיק את עצמו' : usageRating >= 4 ? 'יעילות בינונית, שקול אופטימיזציה' : 'המנוי לא יעיל - שקול ביטול'}.</p>
+                    `);
+                    
+                    if ('wastedCost' in results) {
+                        insights.push(`
+                            <p><strong>💸 עלות בזבוז:</strong> ₪${this.formatNumber(results.wastedCost)} - הסכום המושקע על שימוש לא מיטבי.</p>
+                        `);
+                    }
+                }
+
+                if (results.opportunityCost > results.totalCost * 0.5) {
+                    insights.push(`
+                        <p><strong>🚨 המלצה דחופה:</strong> עלות הזדמנות גבוהה מאוד! שקול באמצעיות לחפש חלופות זולות יותר או לוותר על ${name}.</p>
+                    `);
+                }
+
+                insightsContent.innerHTML = insights.join('');
+            }
+
+            calculateCombined() {
+                if (!this.currentCalculation) {
+                    alert('אנא חשב תחילה הרגל או מנוי');
+                    return;
+                }
+
+                // הצגת השוואה משולבת
+                const combinedInsights = document.getElementById('insightsContent');
+                combinedInsights.innerHTML = `
+                    <h4>📊 ניתוח משולב</h4>
+                    <p>הניתוח המשולב יתווסף בקרוב עם יכולות השוואה מתקדמות בין מספר הרגלים ומנויים.</p>
+                    <p><strong>הרגל/מנוי נוכחי:</strong> ${this.currentCalculation.name}</p>
+                    <p><strong>עלות הזדמנות:</strong> ₪${this.formatNumber(this.currentCalculation.results.opportunityCost)}</p>
+                `;
+            }
+
+            generateReport() {
+                if (!this.currentCalculation) {
+                    alert('אנא חשב תחילה הרגל או מנוי');
+                    return;
+                }
+
+                // יצירת דוח PDF או הורדת נתונים - יתווסף בהמשך
+                alert('יכולת יצירת דוח מפורט תתווסף בקרוב');
+            }
+
+            resetHabit() {
+                this.habitElements.name.value = 'קפה בחוץ';
+                this.habitElements.cost.value = '15';
+                this.habitElements.frequency.value = 'daily';
+                this.habitElements.customFrequency.value = '5';
+                this.habitElements.inflation.value = '4';
+                this.habitElements.return.value = '7';
+                this.habitElements.years.value = '10';
+                this.habitElements.investmentPolicy.value = 'growing';
+                this.toggleCustomFrequency();
+                this.hideResults();
+            }
+
+            resetSubscription() {
+                this.subscriptionElements.name.value = 'Netflix';
+                this.subscriptionElements.cost.value = '55';
+                this.subscriptionElements.type.value = 'monthly';
+                this.subscriptionElements.usageRating.value = '7';
+                this.subscriptionElements.inflation.value = '8';
+                this.subscriptionElements.return.value = '7';
+                this.subscriptionElements.years.value = '10';
+                this.subscriptionElements.cancellation.value = 'none';
+                this.updateUsageDisplay();
+                this.hideResults();
+            }
+
+            hideResults() {
+                this.resultElements.results.style.display = 'none';
+                this.resultElements.chartsSection.style.display = 'none';
+                this.resultElements.comparisonSection.style.display = 'none';
+                this.resultElements.insightsSection.style.display = 'none';
+            }
+
+            formatNumber(num) {
+                return Math.round(num).toLocaleString('he-IL');
+            }
+        }
+
+        // התחלת האפליקציה
+        document.addEventListener('DOMContentLoaded', () => {
+            new HabitCostCalculator();
+        });
+
+        
+		 function sendHeight() {
+            try {
+              const h = Math.max(
+                document.body.scrollHeight,
+                document.documentElement.scrollHeight
+              );
+              window.parent.postMessage({ type: 'resize-fixed-expenses', height: h }, '*');
+            } catch (e) {}
+          }
+
+          // שליחה ראשונית
+          window.addEventListener('load', sendHeight);
+          // שליחה על כל שינוי גודל חלון
+          window.addEventListener('resize', sendHeight);
+          // שליחה חוזרת מדי כמה שניות לגיבוי
+          setInterval(sendHeight, 2000);
+		  
+
+    </script>
+</body>
+</html>

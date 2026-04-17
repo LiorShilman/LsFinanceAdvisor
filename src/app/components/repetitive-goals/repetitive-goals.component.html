@@ -1,0 +1,140 @@
+<!-- repetitive-goals.component.html - Enhanced Modern Design -->
+<div class="container-fluid" dir="rtl">
+  
+  <!-- Main Repetitive Goals Section -->
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card text-white mb-3">
+        <div class="card-body alert alert-primary">
+          <div class="card-header">
+            <span>
+              <i class="bi bi-arrow-repeat me-3"></i>
+              יעדים שחוזרים על עצמם
+            </span>
+            <i class="fs-1 text-success fa fa-plus" (click)="AddRow()"></i>
+          </div>
+          
+          <!-- Goals Table Section -->
+          <div class="table-responsive table-striped">
+            <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-center text-success col-md-4 blockquote fw-bold fs-5">
+                    <i class="bi bi-bullseye me-2"></i>
+                    שם היעד
+                  </th>
+                  <th scope="col" class="text-center text-success col-md-2 blockquote fw-bold fs-5">
+                    <i class="bi bi-calendar-range me-2"></i>
+                    כל כמה שנים מתרחש?
+                  </th>
+                  <th scope="col" class="text-center text-success col-md-2 blockquote fw-bold fs-5">
+                    <i class="bi bi-currency-dollar me-2"></i>
+                    עלות היעד
+                  </th>
+                  <th scope="col" 
+                      class="text-center text-success col-md-2 blockquote fw-bold fs-5"
+                      data-bs-toggle="tooltip" 
+                      data-bs-custom-class="custom-tooltip" 
+                      autocomplete="off"
+                      data-bs-title="סכום החיסכון החודשי הנדרש לכל הוצאה והוצאה." 
+                      data-bs-placement="right">
+                    <i class="bi bi-piggy-bank me-2"></i>
+                    חיסכון חודשי נדרש ליעד
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor='let income of this.generalInfoService.AllInfo.RepetitiveGoalsViewInfo.RepetitiveGoalsRows; let i = index'>
+                  <tr>
+                    <td>
+                      <input type="text" 
+                             name="goal-name{{i+1}}" 
+                             numbersOnly 
+                             autocomplete="off"
+                             class="form-control fw-bold fs-5 text-info goal-name-input" 
+                             id="goal-name{{i+1}}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.RepetitiveGoalsViewInfo.RepetitiveGoalsRows[i].NameOfGoal"
+                             placeholder="שם היעד">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="years-frequency{{i+1}}" 
+                             numbersOnly 
+                             autocomplete="off"
+                             class="form-control fw-bold fs-5 text-primary text-center years-frequency-input"
+                             id="years-frequency{{i+1}}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.RepetitiveGoalsViewInfo.RepetitiveGoalsRows[i].EveryFewYears"
+                             placeholder="מספר שנים">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="goal-cost{{i+1}}" 
+                             numbersOnly 
+                             autocomplete="off"
+                             class="form-control fw-bold fs-5 text-primary text-center cost-input"
+                             id="goal-cost{{i+1}}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.RepetitiveGoalsViewInfo.RepetitiveGoalsRows[i].Cost"
+                             placeholder="עלות">
+                    </td>
+                    <td>
+                      <input type="text" 
+                             name="monthly-savings-required{{i+1}}" 
+                             disabled 
+                             class="form-control fw-bold text-black text-center fs-5 monthly-savings-display" 
+                             id="monthly-savings-required{{i+1}}"
+                             [value]="this.generalInfoService.AllInfo.RepetitiveGoalsViewInfo.RepetitiveGoalsRows[i].CalcMonthlySavingsRequired() | currency:'ILS':'symbol':'.0'"
+                             [ngClass]="this.generalInfoService.AllInfo.RepetitiveGoalsViewInfo.RepetitiveGoalsRows[i].MonthlySavingsRequired > 0 ? 'bg-lim-success' : this.generalInfoService.AllInfo.RepetitiveGoalsViewInfo.RepetitiveGoalsRows[i].MonthlySavingsRequired == 0 ? 'bg-dark' : 'custom-red-bg'">
+                    </td>
+                  </tr>
+                </ng-container>
+                
+                <!-- Summary Row -->
+                <tr>
+                  <td>
+                    <input type="text" 
+                           name="summary-label" 
+                           disabled 
+                           class="form-control fw-bold text-black  fw-bold fs-5 summary-input"
+                           id="summary-label"
+                           value="סיכום ביניים">
+                  </td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <input dir="ltr" 
+                           type="text" 
+                           name="total-monthly-savings" 
+                           class="form-control fw-bold text-center fs-5 summary-input"
+                           id="total-monthly-savings" 
+                           disabled
+                           [value]="CalcMonthlySavingsRequired() | currency:'ILS':'symbol':'.0'">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          
+          <!-- Additional Information Section -->
+          <div class="row mt-4">
+            <div class="col-md-12">
+              <div class="alert alert-info text-center">
+                <h5 class="text-white mb-3">
+                  <i class="bi bi-info-circle me-2"></i>
+                  מידע חשוב על יעדים חוזרים
+                </h5>
+                <p class="text-white mb-2">
+                  <i class="bi bi-lightbulb me-2"></i>
+                  יעדים חוזרים הם הוצאות שחוזרות על עצמן במחזורים קבועים
+                </p>
+                <p class="text-white mb-0">
+                  <i class="bi bi-calculator me-2"></i>
+                  החישוב מבוסס על חלוקת העלות על פני תקופת החזרה בשנים
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

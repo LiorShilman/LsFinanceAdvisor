@@ -1,0 +1,398 @@
+<!-- mortgage.component.html - Enhanced Modern Design -->
+<div class="container-fluid" dir="rtl">
+  <!-- Main Mortgage Section -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="card text-white mb-4">
+        <div class="card-body alert alert-primary">
+          <div class="card-header">
+            <span>
+              <i class="bi bi-house-fill me-3"></i>
+              משכנתאות
+            </span>
+            <i class="fs-1 text-success fa fa-plus" (click)="AddRow()" title="הוסף משכנתה חדשה"></i>
+          </div>
+          
+          <div class="table-responsive table-striped">
+            <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <th scope="col" class="text-center text-success col-xl-2 blockquote fw-bold fs-5">
+                    <i class="bi bi-house-door me-2"></i>
+                    שם המשכנתה
+                  </th>
+                  <th scope="col" class="text-center text-success col-xl-1 blockquote fw-bold fs-5">
+                    <i class="bi bi-signpost me-2"></i>
+                    מסלול
+                  </th>
+                  <th scope="col" class="text-center text-success col-xl-1 blockquote fw-bold fs-5">
+                    <i class="bi bi-cash-stack me-2"></i>
+                    סכום מקורי
+                  </th>
+                  <th scope="col" class="text-center text-success col-xl-1 blockquote fw-bold fs-5">
+                    <i class="bi bi-currency-dollar me-2"></i>
+                    סכום הקרן היום
+                  </th>
+                  <th scope="col" class="text-center text-success col-xl-1 blockquote fw-bold fs-5">
+                    <i class="bi bi-percent me-2"></i>
+                    % ריבית
+                  </th>
+                  <th scope="col" class="text-center text-success col-xl-1 blockquote fw-bold fs-5">
+                    <i class="bi bi-calendar-check me-2"></i>
+                    חודשים לסיום
+                  </th>
+                  <th scope="col" class="text-center text-success col-xl-1 blockquote fw-bold fs-5">
+                    <i class="bi bi-graph-up me-2"></i>
+                    מדד
+                  </th>
+                  <th scope="col" class="text-center text-success col-xl-1 blockquote fw-bold fs-5">
+                    <i class="bi bi-arrow-repeat me-2"></i>
+                    תשלום חודשי
+                  </th>
+                  <th scope="col" class="text-center text-success col-xl-1 blockquote fw-bold fs-5">
+                    <i class="bi bi-arrow-up-circle me-2"></i>
+                    תשלום מקסימלי
+                  </th>
+                  <th scope="col" class="text-center text-success col-xl-1 blockquote fw-bold fs-5">
+                    <i class="bi bi-calculator me-2"></i>
+                    סך קרן וריבית שנשארו
+                  </th>
+                  <th scope="col" class="text-center text-success col-xl-1 blockquote fw-bold fs-5"
+                      data-bs-toggle="tooltip" 
+                      data-bs-custom-class="custom-tooltip" 
+                      autocomplete="off"
+                      data-bs-title="הריבית שתשולם על המשכנתה" 
+                      data-bs-placement="right">
+                    <i class="bi bi-exclamation-triangle me-2 mx-1"></i>
+                    עלות המימון
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor='let mortgage of this.generalInfoService.AllInfo.MortgagesViewInfo.MortgagesRows; let i = index'>
+                  <tr>
+                    <!-- Mortgage Name -->
+                    <td>
+                      <input type="text" 
+                             name="mortgage-name-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold fs-5 text-info" 
+                             id="mortgage-name-{{i+1}}"
+                             [(ngModel)]="this.generalInfoService.AllInfo.MortgagesViewInfo.MortgagesRows[i].Name"
+                             placeholder="שם המשכנתה">
+                    </td>
+                    
+                    <!-- Route -->
+                    <td>
+                      <input type="text" 
+                             name="mortgage-route-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-center fs-5 custom-red-text" 
+                             id="mortgage-route-{{i+1}}"
+                             style="color: limegreen"
+                             [(ngModel)]="this.generalInfoService.AllInfo.MortgagesViewInfo.MortgagesRows[i].Route"
+                             placeholder="מסלול">
+                    </td>
+                    
+                    <!-- Original Amount -->
+                    <td>
+                      <input type="text" 
+                             name="mortgage-original-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-center fs-5 custom-red-text" 
+                             numbersOnly
+                             id="mortgage-original-{{i+1}}"
+                             style="color: limegreen"
+                             [(ngModel)]="this.generalInfoService.AllInfo.MortgagesViewInfo.MortgagesRows[i].OriginalAmount"
+                             placeholder="0">
+                    </td>
+                    
+                    <!-- Current Amount -->
+                    <td>
+                      <input type="text" 
+                             name="mortgage-current-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-center fs-5 custom-red-text" 
+                             numbersOnly
+                             id="mortgage-current-{{i+1}}"
+                             style="color: limegreen"
+                             [(ngModel)]="this.generalInfoService.AllInfo.MortgagesViewInfo.MortgagesRows[i].CurrAmount"
+                             placeholder="0">
+                    </td>
+                    
+                    <!-- Interest Rate -->
+                    <td>
+                      <input type="text" 
+                             name="mortgage-interest-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-center fs-5 custom-red-text" 
+                             numbersOnly
+                             id="mortgage-interest-{{i+1}}"
+                             style="color: limegreen"
+                             [(ngModel)]="this.generalInfoService.AllInfo.MortgagesViewInfo.MortgagesRows[i].Interest"
+                             placeholder="0">
+                    </td>
+                    
+                    <!-- Months to End -->
+                    <td>
+                      <input type="text" 
+                             name="mortgage-months-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-center fs-5 custom-red-text" 
+                             numbersOnly
+                             id="mortgage-months-{{i+1}}"
+                             style="color: limegreen"
+                             [(ngModel)]="this.generalInfoService.AllInfo.MortgagesViewInfo.MortgagesRows[i].YearToEnd"
+                             placeholder="0">
+                    </td>
+                    
+                    <!-- Index Linkage -->
+                    <td>
+                      <input type="text" 
+                             name="mortgage-linkage-{{i+1}}" 
+                             autocomplete="off"
+                             class="form-control fw-bold text-center fs-5 custom-red-text" 
+                             numbersOnly
+                             id="mortgage-linkage-{{i+1}}"
+                             style="color: limegreen"
+                             [(ngModel)]="this.generalInfoService.AllInfo.MortgagesViewInfo.MortgagesRows[i].Linkage"
+                             placeholder="0">
+                    </td>
+                    
+                    <!-- Monthly Payment (Calculated) -->
+                    <td>
+                      <input type="text" 
+                             name="mortgage-monthly-payment-{{i+1}}" 
+                             autocomplete="off" 
+                             disabled
+                             class="form-control fw-bold custom-red-bg text-white text-center fs-6"
+                             style="color: limegreen"
+                             [value]="this.generalInfoService.AllInfo.MortgagesViewInfo.MortgagesRows[i].calculateLoanDetails().monthlyPayment | currency:'ILS':'symbol':'.0'">
+                    </td>
+                    
+                    <!-- Max Monthly Payment (Calculated) -->
+                    <td>
+                      <input type="text" 
+                             name="mortgage-max-payment-{{i+1}}" 
+                             autocomplete="off" 
+                             disabled
+                             class="form-control fw-bold custom-red-bg text-white text-center fs-6"
+                             style="color: limegreen"
+                             [value]="this.generalInfoService.AllInfo.MortgagesViewInfo.MortgagesRows[i].calculateLoanDetails().maxMonthlyPayment | currency:'ILS':'symbol':'.0'">
+                    </td>
+                    
+                    <!-- Total Principal with Linkage (Calculated) -->
+                    <td>
+                      <input type="text" 
+                             name="mortgage-total-principal-{{i+1}}" 
+                             autocomplete="off" 
+                             disabled
+                             class="form-control fw-bold custom-red-bg text-white text-center fs-6"
+                             [value]="this.generalInfoService.AllInfo.MortgagesViewInfo.MortgagesRows[i].calculateLoanDetails().totalPrincipalWithLinkage | currency:'ILS':'symbol':'.0'">
+                    </td>
+                    
+                    <!-- Financing Cost (Calculated) -->
+                    <td>
+                      <input type="text" 
+                             name="mortgage-financing-cost-{{i+1}}" 
+                             autocomplete="off" 
+                             disabled
+                             class="form-control fw-bold custom-red-bg text-white text-center fs-6"
+                             [value]="this.generalInfoService.AllInfo.MortgagesViewInfo.MortgagesRows[i].calculateLoanDetails().financingCost | currency:'ILS':'symbol':'.0'">
+                    </td>
+                  </tr>
+                </ng-container>
+                
+                <!-- Summary Row -->
+                <tr class="summary-row">
+                  <td>
+                    <input type="text" 
+                           disabled 
+                           class="form-control fw-bold text-white  fw-bold fs-6"
+                           value="סיכום ביניים"
+                           style="background-color: red; color: white;">
+                  </td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <input type="text" 
+                           disabled
+                           class="form-control fw-bold text-center fs-6"
+                           style="background-color: red; color: white;"
+                           [value]="CalcCurrAmounts() | currency:'ILS':'symbol':'.0'">
+                  </td>
+                  <td></td>
+                  <td></td>
+                  <td></td>
+                  <td>
+                    <input type="text" 
+                           disabled
+                           class="form-control fw-bold text-center fs-6"
+                           style="background-color: red; color: white;"
+                           [value]="CalcMonthlyPayments() | currency:'ILS':'symbol':'.0'">
+                  </td>
+                  <td>
+                    <input type="text" 
+                           disabled
+                           class="form-control fw-bold text-center fs-6"
+                           style="background-color: red; color: white;"
+                           [value]="CalcMaxMonthlyPayments() | currency:'ILS':'symbol':'.0'">
+                  </td>
+                  <td>
+                    <input type="text" 
+                           disabled
+                           class="form-control fw-bold text-center fs-6"
+                           style="background-color: red; color: white;"
+                           [value]="CalcRemainingMortgages() | currency:'ILS':'symbol':'.0'">
+                  </td>
+                  <td>
+                    <input type="text" 
+                           disabled
+                           class="form-control fw-bold text-center fs-6"
+                           style="background-color: red; color: white;"
+                           [value]="CalcCostOfFinancings() | currency:'ILS':'symbol':'.0'">
+                  </td>
+                </tr>
+                
+                <!-- Chart Row -->
+                <tr class="chart-row">
+                  <th class="fw-bold col-xl-2 text-white fs-1 align-middle"></th>
+                  <td colspan="10">
+                    <div class="chart-container">
+                      <highcharts-chart 
+                        [Highcharts]="highcharts" 
+                        [(update)]="updateFlag" 
+                        style="width: 100%; height: 400px; display: block;"
+                        [options]="chartOptions">
+                      </highcharts-chart>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary Sections -->
+  <div class="row">
+    <div class="col-xl-12">
+      <div class="summary-section">
+        <h1 class="summary-title">
+          <i class="bi bi-house-fill me-3"></i>
+          סיכום משכנתאות
+        </h1>
+        
+        <!-- Additional Info Cards -->
+        <div class="info-cards-grid">
+          <div class="info-card-small">
+            <div class="info-icon mortgage-icon">
+              <i class="bi bi-house-door"></i>
+            </div>
+            <div class="info-content">
+              <h4>סה"כ משכנתה</h4>
+              <p class="mortgage-amount">{{CalcSumMortgages() | currency:'ILS':'symbol':'.0'}}</p>
+            </div>
+          </div>
+          
+          <div class="info-card-small">
+            <div class="info-icon payment-icon">
+              <i class="bi bi-arrow-repeat"></i>
+            </div>
+            <div class="info-content">
+              <h4>תשלום חודשי</h4>
+              <p class="payment-amount">{{CalcMonthlyPayments() | currency:'ILS':'symbol':'.0'}}</p>
+            </div>
+          </div>
+          
+          <div class="info-card-small">
+            <div class="info-icon payment-icon">
+              <i class="bi bi-arrow-up-circle"></i>
+            </div>
+            <div class="info-content">
+              <h4>תשלום מקסימלי</h4>
+              <p class="payment-amount">{{CalcMaxMonthlyPayments() | currency:'ILS':'symbol':'.0'}}</p>
+            </div>
+          </div>
+          
+          <div class="info-card-small">
+            <div class="info-icon cost-icon">
+              <i class="bi bi-exclamation-triangle"></i>
+            </div>
+            <div class="info-content">
+              <h4>עלות מימון</h4>
+              <p class="cost-amount">{{CalcCostOfFinancings() | currency:'ILS':'symbol':'.0'}}</p>
+            </div>
+          </div>
+          
+          <div class="info-card-small">
+            <div class="info-icon mortgage-icon">
+              <i class="bi bi-calculator"></i>
+            </div>
+            <div class="info-content">
+              <h4>קרן נוכחית</h4>
+              <p class="mortgage-amount">{{CalcCurrAmounts() | currency:'ILS':'symbol':'.0'}}</p>
+            </div>
+          </div>
+          
+          <div class="info-card-small">
+            <div class="info-icon mortgage-icon">
+              <i class="bi bi-currency-exchange"></i>
+            </div>
+            <div class="info-content">
+              <h4>החזר לשקל</h4>
+              <p class="mortgage-amount">{{CalcReturn2Shekel()}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Individual Summary Cards -->
+  <div class="row">
+    <div class="col-xl-6 col-md-6">
+      <div class="summary-section">
+        <h3 class="input-title">
+          <i class="bi bi-house-fill me-3"></i>
+          סה"כ משכנתה
+        </h3>
+        <div class="summary-value">
+          <input type="text" 
+                 name="total-mortgage" 
+                 class="summary-input"
+                 disabled
+                 [value]="CalcSumMortgages() | currency:'ILS':'symbol':'.0'">
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-xl-6 col-md-6">
+      <div class="summary-section">
+        <h3 class="input-title">
+          <i class="bi bi-currency-exchange me-3"></i>
+          החזר לשקל
+        </h3>
+        <div class="summary-value">
+          <input type="text" 
+                 name="return-to-shekel" 
+                 class="summary-input"
+                 disabled
+                 [value]="CalcReturn2Shekel()">
+        </div>
+      </div>
+    </div>
+
+      
+    <div class="panel">
+      <h2>🏠 מדריך מקיף: מבצעי קבלן 10-90 , 15-85 ו 20-80</h2>
+      <app-mortgage-embed 
+        srcPath="/LsFinanceAdvisor/assets/mortgage/property_financing_deals_guide.html">
+      </app-mortgage-embed>
+    </div>
+
+
+  </div>
+</div>

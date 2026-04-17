@@ -1,0 +1,3 @@
+cinematic realistic wide shot, family holiday table, divorced parents and two sons together, no drama, warm emotional atmosphere, slow motion feeling, cinematic film grain --ar 16:9
+--cref URL_FATHER URL_MOTHER URL_SON_19 URL_SON_16
+--sref URL_STYLE
