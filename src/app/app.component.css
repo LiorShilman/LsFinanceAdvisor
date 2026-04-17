@@ -134,7 +134,22 @@
     transform: translateY(-2px);
     box-shadow: 0 8px 28px var(--shadow);
   }
-  
+
+  /* ===== Sidebar Container ===== */
+  .sidebar-container {
+    background: linear-gradient(180deg, rgba(15, 23, 42, 0.98) 0%, rgba(30, 41, 59, 0.95) 40%, rgba(49, 46, 129, 0.25) 100%) !important;
+    border-left: 1px solid rgba(99, 102, 241, 0.2);
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+    min-height: 100vh;
+  }
+
+  /* ===== Content Area ===== */
+  .content-area {
+    background: linear-gradient(180deg, rgba(2, 6, 23, 0.95) 0%, rgba(15, 23, 42, 0.9) 50%, rgba(30, 41, 59, 0.85) 100%) !important;
+    min-height: 100vh;
+  }
+
   /* ===========================
      📱 רספונסיביות
      =========================== */

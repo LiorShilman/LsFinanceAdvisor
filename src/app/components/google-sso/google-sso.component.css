@@ -2,12 +2,12 @@
 
 /* ===== Hidden Google Button (used for auth flow only) ===== */
 .hidden-google-btn {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    opacity: 0;
-    pointer-events: none;
+    position: fixed;
+    left: -9999px;
+    top: -9999px;
+    width: 300px;
+    height: 50px;
+    opacity: 0.01;
   }
 
 /* ===== Container Styling ===== */

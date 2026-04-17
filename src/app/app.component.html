@@ -15,7 +15,7 @@
 <div class="container-fluid">
   <div class="row flex-nowrap">
     <!-- שים לב: בלי this. בתבנית -->
-    <div *ngIf="generalInfoService.WithoutSidebar == false" class="col-lg-2 col-md-4 px-sm-2 px-0" style="background-color: black;">
+    <div *ngIf="generalInfoService.WithoutSidebar == false" class="col-lg-2 col-md-4 px-sm-2 px-0 sidebar-container">
       <div *ngIf="generalInfoService.AfterLogin == true" class="d-flex flex-column align-items-center align-items-sm-start pt-2 text-white">
 
         <ul class="nav nav-pills flex-column align-items-stretch w-100 px-2" id="menu">
@@ -52,7 +52,7 @@
                class="nav-link w-100 px-0 align-middle"
                [class.SubCategoryActive]="isInSection(['/Incomes','/FixedExpenses','/VariableExpenses','/Saving','/CurrentFlow','/SalaryCalculator'])"
                [attr.aria-expanded]="isInSection(['/Incomes','/FixedExpenses','/VariableExpenses','/Saving','/CurrentFlow','/SalaryCalculator']) ? 'true' : 'false'">
-              <i class="fs-5 bi-speedometer2 mx-3"></i>
+              <i class="fs-5 bi bi-cash-stack mx-3"></i>
               <span class="ms-1 d-none d-sm-inline fs-3 fw-bold blockquote">תזרים חודשי</span>
             </a>
             <ul class="collapse nav flex-column ms-1 w-100" id="submenu2"
@@ -97,7 +97,7 @@
                class="nav-link w-100 px-0 align-middle"
                [class.SubCategoryActive]="isInSection(['/RealEstate','/Vehicles','/FinancialAssets'])"
                [attr.aria-expanded]="isInSection(['/RealEstate','/Vehicles','/FinancialAssets']) ? 'true' : 'false'">
-              <i class="fs-5 bi-speedometer2 mx-3"></i>
+              <i class="fs-5 bi bi-gem mx-3"></i>
               <span class="ms-1 d-none d-sm-inline fs-3 fw-bold blockquote">נכסים</span>
             </a>
             <ul class="collapse nav flex-column ms-1 w-100" id="submenu3"
@@ -124,7 +124,7 @@
           <li>
             <a routerLink="/Commitments" class="nav-link w-100 px-0 align-middle"
                routerLinkActive="active SubCategoryActive" [routerLinkActiveOptions]="{ exact: true }">
-              <i class="fs-5 bi-table mx-3"></i>
+              <i class="fs-5 bi bi-credit-card-2-back mx-3"></i>
               <span class="ms-1 d-none d-sm-inline fs-3 fw-bold blockquote">חובות</span>
             </a>
           </li>
@@ -133,7 +133,7 @@
           <li>
             <a routerLink="/Mortgage" class="nav-link w-100 px-0 align-middle"
                routerLinkActive="active SubCategoryActive" [routerLinkActiveOptions]="{ exact: true }">
-              <i class="fs-5 bi-table mx-3"></i>
+              <i class="fs-5 bi bi-building mx-3"></i>
               <span class="ms-1 d-none d-sm-inline fs-3 fw-bold blockquote">משכנתה</span>
             </a>
           </li>
@@ -144,7 +144,7 @@
                class="nav-link w-100 px-0 align-middle"
                [class.SubCategoryActive]="isInSection(['/LifeInsurance','/LossOfWorkingCapacity','/LongTermCareInsurance','/HealthInsurance'])"
                [attr.aria-expanded]="isInSection(['/LifeInsurance','/LossOfWorkingCapacity','/LongTermCareInsurance','/HealthInsurance']) ? 'true' : 'false'">
-              <i class="fs-5 bi-speedometer2 mx-3"></i>
+              <i class="fs-5 bi bi-shield-check mx-3"></i>
               <span class="ms-1 d-none d-sm-inline fs-3 fw-bold blockquote">ביטוחים</span>
             </a>
             <ul class="collapse nav flex-column ms-1 w-100" id="submenu4"
@@ -178,7 +178,7 @@
                class="nav-link w-100 px-0 align-middle"
                [class.SubCategoryActive]="isInSection(['/Pension','/Pension2','/PensionJoint'])"
                [attr.aria-expanded]="isInSection(['/Pension','/Pension2','/PensionJoint']) ? 'true' : 'false'">
-              <i class="fs-5 bi-speedometer2 mx-3"></i>
+              <i class="fs-5 bi bi-piggy-bank mx-3"></i>
               <span class="ms-1 d-none d-sm-inline fs-3 fw-bold blockquote">פנסיה</span>
             </a>
             <ul class="collapse nav flex-column ms-1 w-100" id="submenu5"
@@ -239,7 +239,7 @@
           <li>
             <a routerLink="/NotesInsights" class="nav-link w-100 px-0 align-middle"
                routerLinkActive="active SubCategoryActive" [routerLinkActiveOptions]="{ exact: true }">
-              <i class="fs-5 bi-table mx-3"></i>
+              <i class="fs-5 bi bi-journal-text mx-3"></i>
               <span class="ms-1 d-none d-sm-inline fs-3 fw-bold blockquote">הערות ותובנות</span>
             </a>
           </li>
@@ -248,7 +248,7 @@
           <li>
             <a routerLink="/Nomerology" class="nav-link w-100 px-0 align-middle"
                routerLinkActive="active SubCategoryActive" [routerLinkActiveOptions]="{ exact: true }">
-              <i class="fs-5 bi-table mx-3"></i>
+              <i class="fs-5 bi bi-stars mx-3"></i>
               <span class="ms-1 d-none d-sm-inline fs-3 fw-bold blockquote">נומרולוגיה</span>
             </a>
           </li>
@@ -257,7 +257,7 @@
           <li>
             <a routerLink="/GptApi" class="nav-link w-100 px-0 align-middle"
                routerLinkActive="active SubCategoryActive" [routerLinkActiveOptions]="{ exact: true }">
-              <i class="fs-5 bi-table mx-3"></i>
+              <i class="fs-5 bi bi-robot mx-3"></i>
               <span class="ms-1 d-none d-sm-inline fs-3 fw-bold blockquote">בינה מלאכותית</span>
             </a>
           </li>
@@ -297,7 +297,7 @@
     <div data-bs-spy="scroll" data-bs-target="#navbar-example3" data-bs-offset="0" tabindex="0"
          class="col-lg-10 container-fluid align-items-center"
          [ngClass]="generalInfoService.WithoutSidebar == false ? 'col-md-8' : 'col-md-10'"
-         style="background-color: black;">
+         class="content-area">
       <router-outlet></router-outlet>
     </div>
   </div>

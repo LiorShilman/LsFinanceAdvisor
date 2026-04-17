@@ -112,8 +112,11 @@ export class GoogleSsoComponent implements OnInit, OnDestroy {
             this.hiddenGoogleBtn.nativeElement,
             { type: 'standard', theme: 'outline', size: 'large', width: 300 }
           );
+          console.log('Google renderButton called on hidden element');
+        } else {
+          console.warn('hiddenGoogleBtn not available yet');
         }
-      }, 100);
+      }, 300);
 
       console.log('Google Identity Services initialized successfully');
     } catch (error) {
@@ -128,16 +131,38 @@ export class GoogleSsoComponent implements OnInit, OnDestroy {
 
     const hiddenBtn = this.hiddenGoogleBtn?.nativeElement;
     if (hiddenBtn) {
-      const innerBtn = hiddenBtn.querySelector('[role="button"]') || hiddenBtn.querySelector('div[style]');
+      // Try multiple selectors to find the rendered Google button
+      const innerBtn = hiddenBtn.querySelector('[role="button"]')
+        || hiddenBtn.querySelector('div[aria-labelledby]')
+        || hiddenBtn.querySelector('iframe');
       if (innerBtn) {
-        innerBtn.click();
+        console.log('Clicking hidden Google button element');
+        (innerBtn as HTMLElement).click();
         return;
+      } else {
+        console.warn('No inner button found in hidden container, children:', hiddenBtn.innerHTML?.substring(0, 200));
       }
     }
 
-    // Fallback: use prompt
+    // Fallback: use prompt (works when FedCM is available)
+    console.log('Using google.accounts.id.prompt() as fallback');
     try {
-      google.accounts.id.prompt();
+      google.accounts.id.prompt((notification: any) => {
+        console.log('Prompt notification:', notification?.getMomentType?.(), notification?.getSkippedReason?.(), notification?.getDismissedReason?.());
+        if (notification?.isSkippedMoment?.() || notification?.isDismissedMoment?.()) {
+          // If prompt was skipped/dismissed, try re-rendering and clicking
+          if (hiddenBtn) {
+            google.accounts.id.renderButton(
+              hiddenBtn,
+              { type: 'standard', theme: 'outline', size: 'large', width: 300 }
+            );
+            setTimeout(() => {
+              const btn = hiddenBtn.querySelector('[role="button"]') || hiddenBtn.querySelector('div[aria-labelledby]');
+              if (btn) (btn as HTMLElement).click();
+            }, 500);
+          }
+        }
+      });
     } catch (error) {
       console.error('Google Sign-In failed:', error);
       this.handleError('שגיאה בהתחברות עם Google');
