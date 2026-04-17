@@ -1,10 +1,9 @@
-// google-sso.component.ts - Google Identity Services with custom styled button
+// google-sso.component.ts - Custom styled button with transparent Google overlay
 
 import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
 
-// Interfaces
 interface SSOResponse {
   success: boolean;
   message?: string;
@@ -46,11 +45,8 @@ export class GoogleSsoComponent implements OnInit, OnDestroy {
   @Input() showTitle: boolean = true;
   @Input() buttonText: string = 'התחבר עם Google';
   @Input() buttonSize: 'sm' | 'md' | 'lg' = 'md';
-  @Input() buttonVariant: 'primary' | 'outline' | 'light' = 'outline';
-  @Input() showIcon: boolean = true;
-  @Input() fullWidth: boolean = false;
 
-  @ViewChild('hiddenGoogleBtn') hiddenGoogleBtn!: ElementRef;
+  @ViewChild('googleBtnContainer') googleBtnContainer!: ElementRef;
 
   @Output() onSuccess = new EventEmitter<SSOResponse>();
   @Output() onError = new EventEmitter<string>();
@@ -59,7 +55,6 @@ export class GoogleSsoComponent implements OnInit, OnDestroy {
   isLoading: boolean = false;
   errorMessage: string = '';
   isGoogleLoaded: boolean = false;
-  isButtonDisabled: boolean = false;
 
   private destroy$ = new Subject<void>();
 
@@ -98,74 +93,31 @@ export class GoogleSsoComponent implements OnInit, OnDestroy {
         client_id: this.googleClientId,
         callback: (response: GoogleCredentialResponse) => this.handleGoogleResponse(response),
         auto_select: false,
-        cancel_on_tap_outside: true,
-        use_fedcm_for_prompt: false
+        cancel_on_tap_outside: true
       });
 
       this.isGoogleLoaded = true;
-      this.isButtonDisabled = false;
 
-      // Render hidden Google button for click delegation
+      // Render real Google button inside the overlay (transparent, on top of custom button)
       setTimeout(() => {
-        if (this.hiddenGoogleBtn?.nativeElement) {
+        if (this.googleBtnContainer?.nativeElement) {
           google.accounts.id.renderButton(
-            this.hiddenGoogleBtn.nativeElement,
-            { type: 'standard', theme: 'outline', size: 'large', width: 300 }
+            this.googleBtnContainer.nativeElement,
+            {
+              type: 'standard',
+              theme: 'outline',
+              size: 'large',
+              width: 400,
+              text: 'continue_with',
+              locale: 'he'
+            }
           );
-          console.log('Google renderButton called on hidden element');
-        } else {
-          console.warn('hiddenGoogleBtn not available yet');
         }
-      }, 300);
+      }, 200);
 
-      console.log('Google Identity Services initialized successfully');
     } catch (error) {
       console.error('Google Identity Services initialization failed:', error);
       this.handleError('אתחול שירותי Google נכשל');
-    }
-  }
-
-  // Custom button click -> trigger hidden Google button
-  startGoogleSignIn(): void {
-    if (!this.isGoogleLoaded || this.isButtonDisabled || this.isLoading) return;
-
-    const hiddenBtn = this.hiddenGoogleBtn?.nativeElement;
-    if (hiddenBtn) {
-      // Try multiple selectors to find the rendered Google button
-      const innerBtn = hiddenBtn.querySelector('[role="button"]')
-        || hiddenBtn.querySelector('div[aria-labelledby]')
-        || hiddenBtn.querySelector('iframe');
-      if (innerBtn) {
-        console.log('Clicking hidden Google button element');
-        (innerBtn as HTMLElement).click();
-        return;
-      } else {
-        console.warn('No inner button found in hidden container, children:', hiddenBtn.innerHTML?.substring(0, 200));
-      }
-    }
-
-    // Fallback: use prompt (works when FedCM is available)
-    console.log('Using google.accounts.id.prompt() as fallback');
-    try {
-      google.accounts.id.prompt((notification: any) => {
-        console.log('Prompt notification:', notification?.getMomentType?.(), notification?.getSkippedReason?.(), notification?.getDismissedReason?.());
-        if (notification?.isSkippedMoment?.() || notification?.isDismissedMoment?.()) {
-          // If prompt was skipped/dismissed, try re-rendering and clicking
-          if (hiddenBtn) {
-            google.accounts.id.renderButton(
-              hiddenBtn,
-              { type: 'standard', theme: 'outline', size: 'large', width: 300 }
-            );
-            setTimeout(() => {
-              const btn = hiddenBtn.querySelector('[role="button"]') || hiddenBtn.querySelector('div[aria-labelledby]');
-              if (btn) (btn as HTMLElement).click();
-            }, 500);
-          }
-        }
-      });
-    } catch (error) {
-      console.error('Google Sign-In failed:', error);
-      this.handleError('שגיאה בהתחברות עם Google');
     }
   }
 
@@ -201,10 +153,8 @@ export class GoogleSsoComponent implements OnInit, OnDestroy {
 
       this.setLoading(false);
       this.onSuccess.emit(result);
-      console.log(`התחברות הצליחה: ${result.user?.firstName}`);
     } catch (error) {
       this.setLoading(false);
-      console.error('Error processing Google response:', error);
       this.handleError('שגיאה בעיבוד מידע המשתמש');
     }
   }
@@ -218,14 +168,12 @@ export class GoogleSsoComponent implements OnInit, OnDestroy {
       );
       return JSON.parse(jsonPayload);
     } catch (error) {
-      console.error('JWT parsing error:', error);
       return null;
     }
   }
 
   private setLoading(loading: boolean): void {
     this.isLoading = loading;
-    this.isButtonDisabled = loading;
     this.onLoading.emit(loading);
   }
 
@@ -234,27 +182,8 @@ export class GoogleSsoComponent implements OnInit, OnDestroy {
   }
 
   private handleError(message: string): void {
-    console.error('Google SSO Error:', message);
     this.errorMessage = message;
     this.isLoading = false;
-    this.isButtonDisabled = false;
     this.onError.emit(message);
-  }
-
-  public retryAuthentication(): void {
-    this.clearError();
-    this.startGoogleSignIn();
-  }
-
-  public get buttonClasses(): string {
-    const baseClasses = ['google-sso-btn'];
-    if (this.buttonSize === 'sm') baseClasses.push('btn-sm');
-    if (this.buttonSize === 'lg') baseClasses.push('btn-lg');
-    if (this.buttonVariant === 'primary') baseClasses.push('btn-primary');
-    if (this.buttonVariant === 'outline') baseClasses.push('btn-outline-primary');
-    if (this.buttonVariant === 'light') baseClasses.push('btn-light');
-    if (this.fullWidth) baseClasses.push('w-100');
-    if (this.isLoading) baseClasses.push('loading');
-    return baseClasses.join(' ');
   }
 }
