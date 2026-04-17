@@ -11101,6 +11101,219 @@ export class NumerologyComponent {
     return html;
   }
 
+  // ===== Visual Enhancement Methods =====
+
+  /**
+   * Generates an enhanced visual 3x3 Pythagorean Square grid with color-coded cells (inline styles)
+   */
+  generateVisualPythagorasGrid(data: number[][], squareOfPythagoras: SquareOfPythagorasCell[]): string {
+    const isAllEmpty = (arr: any[]): boolean => arr.every(el => el === 0);
+    const isAllNotEmpty = (arr: any[]): boolean => arr.every(el => el !== 0);
+
+    const wrapperStyle = 'margin:1.5rem 0;padding:1.5rem;background:linear-gradient(135deg,rgba(15,23,42,0.6) 0%,rgba(30,41,59,0.4) 100%);border:1px solid rgba(59,130,246,0.15);border-radius:14px;';
+    const titleStyle = 'text-align:center;color:#60a5fa;font-weight:700;font-size:0.9rem;margin-bottom:1rem;text-transform:uppercase;letter-spacing:1px;text-shadow:0 0 8px rgba(96,165,250,0.3);';
+    const gridStyle = 'display:grid;grid-template-columns:repeat(3,1fr);gap:12px;max-width:420px;margin:0 auto;direction:rtl;';
+
+    let cellsHtml = '';
+    for (let i = 0; i < 3; i++) {
+      for (let j = 2; j >= 0; j--) {
+        const number = data[i][j];
+        const hasValue = number !== 0;
+        const cell = squareOfPythagoras.find(c => c.row === (i + 1) && c.column === (3 - j));
+        const label = cell ? cell.value : '';
+        const cellNum = cell ? cell.number : '';
+
+        const isColFull = isAllNotEmpty(data.map(row => row[j]));
+        const isRowFull = isAllNotEmpty(data[i]);
+        const isDiag1Full = i === j ? isAllNotEmpty(data.map((row, idx) => row[idx])) : false;
+        const isDiag2Full = (i + j === 2) ? isAllNotEmpty(data.map((row, idx) => row[2 - idx])) : false;
+        const isPartOfCompleteLine = isColFull || isRowFull || isDiag1Full || isDiag2Full;
+
+        let cellStyle = 'aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;border-radius:14px;min-height:100px;position:relative;overflow:hidden;transition:all 0.4s ease;';
+        let numColor = '';
+        let displayValue = '';
+
+        if (hasValue && isPartOfCompleteLine) {
+          cellStyle += 'border:2px solid rgba(124,58,237,0.5);box-shadow:0 0 25px rgba(124,58,237,0.3),inset 0 0 25px rgba(124,58,237,0.08);background:linear-gradient(135deg,rgba(15,23,42,0.9) 0%,rgba(30,41,59,0.7) 100%);';
+          numColor = 'color:#a78bfa;text-shadow:0 0 12px rgba(167,139,250,0.5);';
+          displayValue = number.toString();
+        } else if (hasValue) {
+          cellStyle += 'border:2px solid rgba(16,185,129,0.5);box-shadow:0 0 20px rgba(16,185,129,0.2),inset 0 0 20px rgba(16,185,129,0.05);background:linear-gradient(135deg,rgba(15,23,42,0.9) 0%,rgba(30,41,59,0.7) 100%);';
+          numColor = 'color:#10b981;text-shadow:0 0 12px rgba(16,185,129,0.5);';
+          displayValue = number.toString();
+        } else {
+          cellStyle += 'border:2px solid rgba(239,68,68,0.3);box-shadow:0 0 15px rgba(239,68,68,0.1);background:linear-gradient(135deg,rgba(15,23,42,0.9) 0%,rgba(30,41,59,0.7) 100%);';
+          numColor = 'color:#ef4444;text-shadow:0 0 8px rgba(239,68,68,0.4);';
+          displayValue = isAllEmpty(data[i]) || isAllEmpty(data.map(row => row[j])) ? '?' : '-';
+        }
+
+        cellsHtml += `
+          <div style="${cellStyle}">
+            <span style="font-size:2rem;font-weight:800;line-height:1;${numColor}">${displayValue}</span>
+            <span style="font-size:0.7rem;color:#94a3b8;margin-top:4px;text-align:center;font-weight:600;">${cellNum} - ${label}</span>
+          </div>`;
+      }
+    }
+
+    const legendStyle = 'display:flex;justify-content:center;gap:1.5rem;margin-top:1rem;flex-wrap:wrap;';
+    const legendItemStyle = 'display:flex;align-items:center;gap:6px;font-size:0.8rem;color:#94a3b8;font-weight:600;';
+    const dotBase = 'width:10px;height:10px;border-radius:50%;display:inline-block;';
+
+    return `
+      <div style="${wrapperStyle}">
+        <div style="${titleStyle}">מפת ריבוע פיתגורס</div>
+        <div style="${gridStyle}">${cellsHtml}</div>
+        <div style="${legendStyle}">
+          <span style="${legendItemStyle}"><span style="${dotBase}background:#a78bfa;box-shadow:0 0 6px rgba(167,139,250,0.5);"></span>ציר מלא</span>
+          <span style="${legendItemStyle}"><span style="${dotBase}background:#10b981;box-shadow:0 0 6px rgba(16,185,129,0.5);"></span>פעיל</span>
+          <span style="${legendItemStyle}"><span style="${dotBase}background:#ef4444;box-shadow:0 0 6px rgba(239,68,68,0.5);"></span>חסר</span>
+        </div>
+      </div>`;
+  }
+
+  /**
+   * Generates a visual 1-9 grid showing missing vs present vs optimal numbers (inline styles)
+   */
+  generateVisualMissingNumbersGrid(missingNumbers: number[], optimalNumbers: number[]): string {
+    const wrapperStyle = 'margin:1.5rem 0;padding:1.5rem;background:linear-gradient(135deg,rgba(15,23,42,0.6) 0%,rgba(30,41,59,0.4) 100%);border:1px solid rgba(59,130,246,0.15);border-radius:14px;';
+    const titleStyle = 'text-align:center;color:#60a5fa;font-weight:700;font-size:0.9rem;margin-bottom:1rem;text-transform:uppercase;letter-spacing:1px;text-shadow:0 0 8px rgba(96,165,250,0.3);';
+    const gridStyle = 'display:grid;grid-template-columns:repeat(9,1fr);gap:8px;max-width:600px;margin:0 auto;';
+    const cellBase = 'aspect-ratio:1;display:flex;align-items:center;justify-content:center;border-radius:12px;font-size:1.5rem;font-weight:800;min-height:50px;transition:all 0.4s ease;';
+
+    let cellsHtml = '';
+    for (let n = 1; n <= 9; n++) {
+      const isMissing = missingNumbers.includes(n);
+      const isOptimal = optimalNumbers.includes(n);
+      let cellStyle = cellBase;
+      if (isMissing) {
+        cellStyle += 'background:linear-gradient(135deg,rgba(239,68,68,0.1) 0%,rgba(220,38,38,0.05) 100%);border:2px dashed rgba(239,68,68,0.3);color:rgba(239,68,68,0.5);text-shadow:0 0 8px rgba(239,68,68,0.2);';
+      } else if (isOptimal) {
+        cellStyle += 'background:linear-gradient(135deg,rgba(250,204,21,0.15) 0%,rgba(234,179,8,0.1) 100%);border:2px solid rgba(250,204,21,0.5);color:#fbbf24;text-shadow:0 0 10px rgba(250,204,21,0.4);box-shadow:0 0 15px rgba(250,204,21,0.2);';
+      } else {
+        cellStyle += 'background:linear-gradient(135deg,rgba(16,185,129,0.15) 0%,rgba(5,150,105,0.1) 100%);border:2px solid rgba(16,185,129,0.4);color:#10b981;text-shadow:0 0 10px rgba(16,185,129,0.4);';
+      }
+      cellsHtml += `<div style="${cellStyle}">${n}</div>`;
+    }
+
+    const legendStyle = 'display:flex;justify-content:center;gap:1.5rem;margin-top:1rem;flex-wrap:wrap;';
+    const legendItemStyle = 'display:flex;align-items:center;gap:6px;font-size:0.8rem;color:#94a3b8;font-weight:600;';
+    const dotBase = 'width:10px;height:10px;border-radius:50%;display:inline-block;';
+
+    return `
+      <div style="${wrapperStyle}">
+        <div style="${titleStyle}">מפת מספרים 1-9</div>
+        <div style="${gridStyle}">${cellsHtml}</div>
+        <div style="${legendStyle}">
+          <span style="${legendItemStyle}"><span style="${dotBase}background:#10b981;box-shadow:0 0 6px rgba(16,185,129,0.5);"></span>קיים</span>
+          <span style="${legendItemStyle}"><span style="${dotBase}background:#fbbf24;box-shadow:0 0 6px rgba(250,204,21,0.5);"></span>מיטיב (x3)</span>
+          <span style="${legendItemStyle}"><span style="${dotBase}background:#ef4444;box-shadow:0 0 6px rgba(239,68,68,0.5);"></span>חסר</span>
+        </div>
+      </div>`;
+  }
+
+  /**
+   * Generates a visual pyramid for summits and challenges (inline styles)
+   */
+  generateVisualSummitPyramid(
+    summitValues: number[],
+    challengeValues: number[]
+  ): string {
+    const wrapperStyle = 'margin:1.5rem 0;padding:1.5rem;background:linear-gradient(135deg,rgba(15,23,42,0.6) 0%,rgba(30,41,59,0.4) 100%);border:1px solid rgba(59,130,246,0.15);border-radius:14px;';
+    const titleStyle = 'text-align:center;color:#60a5fa;font-weight:700;font-size:0.9rem;margin-bottom:1rem;text-transform:uppercase;letter-spacing:1px;text-shadow:0 0 8px rgba(96,165,250,0.3);';
+    const rowStyle = 'display:flex;gap:16px;justify-content:center;flex-wrap:wrap;direction:rtl;';
+    const pairStyle = 'display:flex;flex-direction:column;align-items:center;gap:6px;';
+    const connectorStyle = 'width:2px;height:20px;background:linear-gradient(to bottom,rgba(59,130,246,0.3),rgba(249,115,22,0.3));margin:0 auto;';
+
+    const summitLabels = ['פסגה 1', 'פסגה 2', 'פסגה 3', 'פסגה 4'];
+    const challengeLabels = ['אתגר 1', 'אתגר 2', 'אתגר 3', 'אתגר 4'];
+
+    const summitNodeStyle = 'display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px 20px;border-radius:14px;min-width:120px;background:linear-gradient(135deg,rgba(59,130,246,0.15) 0%,rgba(37,99,235,0.1) 100%);border:2px solid rgba(59,130,246,0.4);box-shadow:0 4px 15px rgba(59,130,246,0.15);transition:all 0.4s ease;';
+    const challengeNodeStyle = 'display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px 20px;border-radius:14px;min-width:120px;background:linear-gradient(135deg,rgba(249,115,22,0.12) 0%,rgba(234,88,12,0.08) 100%);border:2px solid rgba(249,115,22,0.4);box-shadow:0 4px 15px rgba(249,115,22,0.1);transition:all 0.4s ease;';
+
+    let pairsHtml = '';
+    for (let i = 0; i < 4; i++) {
+      pairsHtml += `
+        <div style="${pairStyle}">
+          <div style="${summitNodeStyle}">
+            <span style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;color:#60a5fa;">${summitLabels[i]}</span>
+            <span style="font-size:1.8rem;font-weight:800;line-height:1;color:#93c5fd;text-shadow:0 0 12px rgba(59,130,246,0.4);">${summitValues[i]}</span>
+          </div>
+          <div style="${connectorStyle}"></div>
+          <div style="${challengeNodeStyle}">
+            <span style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:4px;color:#fb923c;">${challengeLabels[i]}</span>
+            <span style="font-size:1.8rem;font-weight:800;line-height:1;color:#fdba74;text-shadow:0 0 12px rgba(249,115,22,0.4);">${challengeValues[i]}</span>
+          </div>
+        </div>`;
+    }
+
+    return `
+      <div style="${wrapperStyle}">
+        <div style="${titleStyle}">מפת פסגות ואתגרים</div>
+        <div style="${rowStyle}">${pairsHtml}</div>
+      </div>`;
+  }
+
+  /**
+   * Generates a visual timeline for the 3 life periods (inline styles)
+   */
+  generateVisualPeriodsTimeline(
+    period1Heb: number, period1Int: number,
+    period2Heb: number, period2Int: number,
+    period3Heb: number, period3Int: number
+  ): string {
+    const wrapperStyle = 'margin:1.5rem 0;padding:1.5rem;background:linear-gradient(135deg,rgba(15,23,42,0.6) 0%,rgba(30,41,59,0.4) 100%);border:1px solid rgba(59,130,246,0.15);border-radius:14px;';
+    const titleStyle = 'text-align:center;color:#60a5fa;font-weight:700;font-size:0.9rem;margin-bottom:1rem;text-transform:uppercase;letter-spacing:1px;text-shadow:0 0 8px rgba(96,165,250,0.3);';
+    const timelineStyle = 'display:flex;align-items:stretch;gap:0;margin:0 auto;max-width:700px;position:relative;direction:rtl;';
+    const segmentStyle = 'flex:1;display:flex;flex-direction:column;align-items:center;position:relative;z-index:1;padding:0 8px;';
+    const cardStyle = 'background:linear-gradient(135deg,rgba(15,23,42,0.9) 0%,rgba(30,41,59,0.7) 100%);border-radius:12px;padding:12px;text-align:center;width:100%;transition:all 0.3s ease;';
+
+    const periods = [
+      { title: 'תקופה ראשונה', heb: period1Heb, int: period1Int, markerBg: 'linear-gradient(135deg,#3b82f6,#2563eb)', shadow: '0 0 20px rgba(59,130,246,0.4)', titleColor: '#60a5fa', borderColor: 'rgba(59,130,246,0.3)' },
+      { title: 'תקופה שנייה', heb: period2Heb, int: period2Int, markerBg: 'linear-gradient(135deg,#8b5cf6,#7c3aed)', shadow: '0 0 20px rgba(139,92,246,0.4)', titleColor: '#a78bfa', borderColor: 'rgba(139,92,246,0.3)' },
+      { title: 'תקופה שלישית', heb: period3Heb, int: period3Int, markerBg: 'linear-gradient(135deg,#ec4899,#db2777)', shadow: '0 0 20px rgba(236,72,153,0.4)', titleColor: '#f472b6', borderColor: 'rgba(236,72,153,0.3)' }
+    ];
+
+    let segmentsHtml = '';
+    periods.forEach((p, idx) => {
+      const markerStyle = `width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:800;margin-bottom:12px;color:white;background:${p.markerBg};box-shadow:${p.shadow};transition:all 0.4s ease;`;
+      segmentsHtml += `
+        <div style="${segmentStyle}">
+          <div style="${markerStyle}">${idx + 1}</div>
+          <div style="${cardStyle}border:2px solid ${p.borderColor};">
+            <div style="font-size:0.85rem;font-weight:700;margin-bottom:6px;color:${p.titleColor};">${p.title}</div>
+            <div style="font-size:1.5rem;font-weight:800;color:#f8fafc;text-shadow:0 0 10px rgba(255,255,255,0.2);">${p.heb}</div>
+            <div style="font-size:0.7rem;color:#64748b;font-weight:600;margin-top:4px;">עברי</div>
+            <div style="font-size:1.1rem;font-weight:800;color:#f8fafc;margin-top:6px;">${p.int}</div>
+            <div style="font-size:0.7rem;color:#64748b;font-weight:600;margin-top:4px;">בינלאומי</div>
+          </div>
+        </div>`;
+    });
+
+    // Gradient line behind timeline
+    const lineStyle = 'position:absolute;top:24px;left:5%;right:5%;height:3px;background:linear-gradient(to left,#3b82f6,#8b5cf6,#ec4899);border-radius:2px;z-index:0;';
+
+    return `
+      <div style="${wrapperStyle}">
+        <div style="${titleStyle}">ציר זמן - תקופות בחיים</div>
+        <div style="${timelineStyle}">
+          <div style="${lineStyle}"></div>
+          ${segmentsHtml}
+        </div>
+      </div>`;
+  }
+
+  /**
+   * Helper: appends raw HTML string to parent element
+   */
+  appendHtmlToParent(parentElementId: string, html: string): void {
+    const parentElement = document.getElementById(parentElementId);
+    if (parentElement) {
+      const wrapper = document.createElement('div');
+      wrapper.innerHTML = html;
+      parentElement.appendChild(wrapper);
+    }
+  }
+
   getSelectedSex(): string | null {
     if (this.selectedGender === 'male') {
       return 'זכר';
@@ -17021,6 +17234,10 @@ ${element.Char} - ${element.Characteristics}
       ]
     });
 
+    // === Visual Enhancement: Missing/Optimal Numbers Grid ===
+    this.appendHtmlToParent('ResultNomorologicMap',
+      this.generateVisualMissingNumbersGrid(missingNumbersFullFullNameValue, optimalNumbersInfoFullFullNameValue));
+
     const excessesNumbersInfoFullFullNameValue: number[] = this.getFullDigitsOccurringOverThreeTimes(this.fullName);
 
     let excessesNumbersInfo: FullResult = {};
@@ -17369,6 +17586,13 @@ ${element.Char} - ${element.Characteristics}
         { key: "הצגת דרך פתרון - אתגר רביעי", value: summitAndChallenge.CalculationProcessChallenge4 }
       ]
     });
+
+    // === Visual Enhancement: Summit/Challenge Pyramid ===
+    this.appendHtmlToParent('ResultNomorologicMap',
+      this.generateVisualSummitPyramid(
+        [summit1Value.totalOneDigit, summit2Value.totalOneDigit, summit3Value.totalOneDigit, summit4Value.totalOneDigit],
+        [challenge1Value.totalOneDigit, challenge2Value.totalOneDigit, challenge3Value.totalOneDigit, challenge4Value.totalOneDigit]
+      ));
 
     let _summit1YearValue = 27 - lifeLessonBirthdayValue.totalOneDigit;
     const summit1YearValue = this.calculateNumerologyNumber(_summit1YearValue);
@@ -18269,11 +18493,13 @@ ${element.Char} - ${element.Characteristics}
         { key: "תיאור", value: squareOfPythagorasDateAndFullName.Description },
         { key: "ריבוע פיתגורס", value: squareOfPythagorasDateAndFullName.DescriptionHTMLSquareOfPythagoras },
         { key: "ריבוע פיתגורס - תאריך", value: squareOfPythagorasDateAndFullName.DescriptionHTMLSquareOfPythagorasDate },
-        { key: "ריבוע פיתגורס - שם לידה מלא", value: squareOfPythagorasDateAndFullName.DescriptionHTMLSquareOfPythagorasFullName }     
+        { key: "ריבוע פיתגורס - שם לידה מלא", value: squareOfPythagorasDateAndFullName.DescriptionHTMLSquareOfPythagorasFullName }
       ]
     });
 
-
+    // === Visual Enhancement: Pythagorean Square Grid (Date of Birth) ===
+    this.appendHtmlToParent('ResultNomorologicMap',
+      this.generateVisualPythagorasGrid(result.filteredPythagoreanTableDateOfBirth.data, squareOfPythagoras));
 
     // Get the attribution date
     const attributionDate = new Date(this.attributionDate);
@@ -18505,8 +18731,15 @@ ${element.Char} - ${element.Characteristics}
       ]
     });
 
+    // === Visual Enhancement: Life Periods Timeline ===
+    this.appendHtmlToParent('ResultNomorologicMap',
+      this.generateVisualPeriodsTimeline(
+        period1HebNumber, period1Number,
+        period2HebNumber, period2Number,
+        period3HebNumber, period3Number
+      ));
 
- 
+
       let nickNameInfo: FullResult = {};
 
       nickNameInfo.Input = `${this.nickName}`;
